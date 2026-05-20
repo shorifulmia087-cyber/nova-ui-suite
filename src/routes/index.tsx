@@ -15,9 +15,11 @@ function useVerified() {
     read();
     window.addEventListener("storage", read);
     window.addEventListener("focus", read);
+    window.addEventListener("ness:verified", read);
     return () => {
       window.removeEventListener("storage", read);
       window.removeEventListener("focus", read);
+      window.removeEventListener("ness:verified", read);
     };
   }, []);
   return v;
