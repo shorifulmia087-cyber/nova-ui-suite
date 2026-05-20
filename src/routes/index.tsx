@@ -152,14 +152,12 @@ function RecentActivity() {
     <div className="px-5">
       <div className="rounded-md bg-card border border-border shadow-card overflow-hidden">
         {items.map((t, i) => (
-              <div key={t.id}>
-                {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
-                <TxRow tx={t} />
-              </div>
-            ))}
+          <div key={t.id}>
+            {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
+            <TxRow tx={t} />
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }
