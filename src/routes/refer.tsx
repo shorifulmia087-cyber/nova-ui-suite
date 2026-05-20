@@ -59,7 +59,7 @@ function Refer() {
         <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`$${(user.referrals * 25).toFixed(0)}`} tone="success" />
       </div>
 
-      <h2 className="px-5 pt-6 pb-3 text-sm font-bold tracking-tight">How it works</h2>
+      <h2 className="text-section-title px-5 pt-6 pb-3">How it works</h2>
       <div className="px-5 space-y-2">
         {[
           { n: 1, t: "Share your code", d: "Send it to friends via any app." },
