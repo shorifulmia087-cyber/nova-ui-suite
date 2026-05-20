@@ -19,7 +19,13 @@ function useVerified() {
     const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
     read();
     window.addEventListener("storage", read);
-    return () => window.removeEventListener("storage", read);
+    window.addEventListener("focus", read);
+    window.addEventListener("ness:verified", read);
+    return () => {
+      window.removeEventListener("storage", read);
+      window.removeEventListener("focus", read);
+      window.removeEventListener("ness:verified", read);
+    };
   }, []);
   return v;
 }
