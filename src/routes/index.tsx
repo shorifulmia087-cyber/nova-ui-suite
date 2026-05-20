@@ -150,10 +150,10 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="rounded-md bg-card shadow-card overflow-hidden">
+      <div className="bg-card rounded-3xl overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
+            {i > 0 && <div className="mx-4 h-px bg-border" />}
             <TxRow tx={t} />
           </div>
         ))}
@@ -265,11 +265,11 @@ function PromoBanners() {
 import type { Tx } from "@/lib/mock";
 function TxRow({ tx }: { tx: Tx }) {
   const iconTone: Record<Tx["category"], string> = {
-    earn: "text-[color:var(--success)] bg-[color:var(--success)]/8",
+    earn: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
     deposit: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
-    withdraw: "text-foreground bg-muted",
+    withdraw: "text-foreground bg-foreground/5",
     task: "text-[color:var(--warning)] bg-[color:var(--warning)]/10",
-    referral: "text-primary bg-primary/8",
+    referral: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
   };
   const Icons: Record<Tx["category"], React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
     earn: Sparkles, deposit: ArrowDownToLine, withdraw: ArrowUpFromLine, task: ClipboardList, referral: Gift,
@@ -282,32 +282,31 @@ function TxRow({ tx }: { tx: Tx }) {
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
-        <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
+    <div className="px-4 py-4 flex items-center gap-4">
+      <div className={`h-12 w-12 rounded-full flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-6 w-6" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-label text-foreground truncate">{tx.title}</p>
-        <div className="text-caption mt-0.5 flex items-center gap-1.5">
-          <span>{subtitle[tx.category]}</span>
-          <span className="text-border">•</span>
-          <span>{time}</span>
+        <h3 className="text-label text-foreground truncate">{tx.title}</h3>
+        <div className="mt-0.5 flex items-center gap-2">
+          <p className="text-body-secondary">
+            {subtitle[tx.category]} • {time}
+          </p>
           {tx.status !== "completed" && (
-            <>
-              <span className="text-border">•</span>
-              <span
-                className={`capitalize ${
-                  tx.status === "pending" ? "text-[color:var(--warning)]" : "text-destructive"
-                }`}
-              >
-                {tx.status}
-              </span>
-            </>
+            <span
+              className={`px-1.5 py-0.5 rounded-full text-caption font-bold uppercase tracking-wider ${
+                tx.status === "pending"
+                  ? "bg-[color:var(--warning)]/10 text-[color:var(--warning)]"
+                  : "bg-destructive/10 text-destructive"
+              }`}
+            >
+              {tx.status}
+            </span>
           )}
         </div>
       </div>
       <div className="text-right shrink-0">
-        <p className="text-label text-foreground tabular-nums">
+        <p className={`text-button tabular-nums ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
           {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </p>
       </div>
