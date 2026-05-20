@@ -96,7 +96,7 @@ function Home() {
             >
               <I className="h-5 w-5" strokeWidth={2.4} />
             </div>
-            <span className="text-[12px] font-medium text-foreground">{label}</span>
+            <span className="text-tab text-foreground">{label}</span>
           </Link>
         ))}
       </div>
