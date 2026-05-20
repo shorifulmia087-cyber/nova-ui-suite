@@ -21,20 +21,20 @@ function Withdraw() {
 
       <div className="px-5">
         <Card className="p-6 text-center bg-gradient-soft">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest">You withdraw</p>
+          <p className="text-caption uppercase tracking-widest">You withdraw</p>
           <div className="mt-2 flex items-center justify-center gap-1">
-            <span className="text-3xl font-bold text-muted-foreground">$</span>
+            <span className="text-stat text-muted-foreground">$</span>
             <input
               type="number"
               value={amt}
               onChange={(e) => setAmt(Number(e.target.value || 0))}
-              className="w-40 text-5xl font-extrabold text-center bg-transparent outline-none"
+              className="text-display w-40 text-center bg-transparent outline-none"
             />
           </div>
-          <div className="mt-3 flex items-center justify-between text-xs text-muted-foreground">
+          <div className="mt-3 flex items-center justify-between text-caption">
             <span>Fee 0.5%</span><span>-${fee}</span>
           </div>
-          <div className="mt-1 flex items-center justify-between text-sm font-bold">
+          <div className="mt-1 flex items-center justify-between text-label">
             <span>You receive</span><span className="text-[color:var(--success)]">${receive}</span>
           </div>
         </Card>
@@ -45,7 +45,7 @@ function Withdraw() {
           <button
             key={p}
             onClick={() => setAmt(Math.round((user.balance * p) / 100))}
-            className="flex-1 h-10 rounded-md bg-muted text-sm font-bold hover:bg-muted/70"
+            className="text-label flex-1 h-10 rounded-md bg-muted hover:bg-muted/70"
           >
             {p}%
           </button>
@@ -64,15 +64,15 @@ function Withdraw() {
               <m.Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">
-              <p className="text-sm font-bold">{m.t}</p>
-              {m.d && <p className="text-xs text-muted-foreground">{m.d}</p>}
+              <p className="text-label">{m.t}</p>
+              {m.d && <p className="text-caption">{m.d}</p>}
             </div>
           </Card>
         ))}
       </div>
 
       <div className="px-5 mt-5">
-        <div className="rounded-md bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/30 p-3 flex items-start gap-2 text-xs text-[color:var(--warning)]">
+        <div className="rounded-md bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/30 p-3 flex items-start gap-2 text-caption text-[color:var(--warning)]">
           <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
           <p>Withdrawals typically process within 1-2 business days.</p>
         </div>

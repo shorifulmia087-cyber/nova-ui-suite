@@ -59,10 +59,10 @@ function Home() {
             )}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-[10.5px] font-semibold text-muted-foreground leading-none tracking-[0.08em] uppercase">
+            <span className="text-eyebrow leading-none">
               Good morning
             </span>
-            <h1 className="mt-1.5 text-[17px] font-bold text-foreground tracking-tight leading-none truncate">
+            <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
               {user.name}
             </h1>
           </div>
@@ -96,7 +96,7 @@ function Home() {
             >
               <I className="h-5 w-5" strokeWidth={2.4} />
             </div>
-            <span className="text-[12px] font-medium text-foreground">{label}</span>
+            <span className="text-tab text-foreground">{label}</span>
           </Link>
         ))}
       </div>
@@ -110,13 +110,13 @@ function Home() {
               <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-warning/15 flex items-center justify-center">
                 <ClipboardList className="h-5 w-5 text-warning" strokeWidth={2.4} />
               </div>
-              <p className="flex-1 text-[15px] font-semibold leading-snug pt-0.5">
+              <p className="flex-1 text-label pt-0.5">
                 Verification required. Please verify your identity.
               </p>
             </div>
             <Link
               to="/verify"
-              className="mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground text-base font-bold active:scale-[0.98] transition-transform"
+              className="text-button mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground active:scale-[0.98] transition-transform"
             >
               Submit
             </Link>
@@ -133,7 +133,7 @@ function Home() {
       {/* Recent activity */}
       <SectionLabel
         action={
-          <Link to="/transactions" className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-muted-foreground hover:text-foreground transition-colors">
+          <Link to="/transactions" className="text-label inline-flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors">
             View all
             <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
           </Link>
@@ -233,14 +233,14 @@ function PromoBanners() {
             />
             <div className="absolute inset-0" style={{ background: b.overlay }} />
             <div className="relative p-5 h-full flex flex-col justify-between">
-              <span className="self-start inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+              <span className="text-caption text-white self-start inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
                 {b.eyebrow}
               </span>
               <div>
-                <p className="text-base font-bold leading-tight tracking-tight max-w-[70%]">
+                <p className="text-card-title text-white max-w-[70%]">
                   {b.title}
                 </p>
-                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold" style={{ color: b.accent }}>
+                <div className="text-label mt-2 inline-flex items-center gap-1.5" style={{ color: b.accent }}>
                   {b.cta}
                   <ChevronRight className="h-3.5 w-3.5" />
                 </div>
@@ -287,8 +287,8 @@ function TxRow({ tx }: { tx: Tx }) {
         <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</p>
-        <div className="mt-0.5 flex items-center gap-1.5 text-[11.5px] text-muted-foreground">
+        <p className="text-label text-foreground truncate">{tx.title}</p>
+        <div className="text-caption mt-0.5 flex items-center gap-1.5">
           <span>{subtitle[tx.category]}</span>
           <span className="text-border">•</span>
           <span>{time}</span>
@@ -296,7 +296,7 @@ function TxRow({ tx }: { tx: Tx }) {
             <>
               <span className="text-border">•</span>
               <span
-                className={`font-semibold capitalize ${
+                className={`capitalize ${
                   tx.status === "pending" ? "text-[color:var(--warning)]" : "text-destructive"
                 }`}
               >
@@ -307,11 +307,7 @@ function TxRow({ tx }: { tx: Tx }) {
         </div>
       </div>
       <div className="text-right shrink-0">
-        <p
-          className={`text-[14px] font-bold tabular-nums tracking-tight ${
-            positive ? "text-foreground" : "text-foreground"
-          }`}
-        >
+        <p className="text-label text-foreground tabular-nums">
           {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </p>
       </div>

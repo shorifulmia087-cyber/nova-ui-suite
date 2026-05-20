@@ -15,11 +15,11 @@ function NotFoundComponent() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-7xl font-bold">404</h1>
-        <p className="mt-2 text-sm text-muted-foreground">This page doesn't exist.</p>
+        <h1 className="text-display">404</h1>
+        <p className="text-body-secondary mt-2">This page doesn't exist.</p>
         <Link
           to="/"
-          className="mt-6 inline-flex items-center justify-center rounded-md bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+          className="text-button mt-6 inline-flex items-center justify-center rounded-md bg-gradient-brand px-5 py-3 text-primary-foreground shadow-glow"
         >
           Back to home
         </Link>
@@ -34,11 +34,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
-        <h1 className="text-xl font-semibold">Something went wrong</h1>
-        <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
+        <h1 className="text-section-title">Something went wrong</h1>
+        <p className="text-body-secondary mt-2">{error.message}</p>
         <button
           onClick={() => { router.invalidate(); reset(); }}
-          className="mt-6 rounded-md bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+          className="text-button mt-6 rounded-md bg-gradient-brand px-5 py-3 text-primary-foreground shadow-glow"
         >
           Try again
         </button>

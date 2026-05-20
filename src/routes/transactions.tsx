@@ -35,7 +35,7 @@ function TxList() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search activity"
-            className="w-full h-11 pl-9 pr-3 rounded-md bg-card border border-border text-sm outline-none focus:border-[color:var(--accent)]"
+            className="text-input w-full h-11 pl-9 pr-3 rounded-md bg-card border border-border outline-none focus:border-[color:var(--accent)]"
           />
         </div>
       </div>
@@ -45,7 +45,7 @@ function TxList() {
           <button
             key={x}
             onClick={() => setF(x)}
-            className={`shrink-0 h-9 px-3.5 rounded-full text-xs font-bold transition ${f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
+            className={`text-label shrink-0 h-9 px-3.5 rounded-full transition ${f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
           >
             {x}
           </button>
@@ -55,7 +55,7 @@ function TxList() {
       <div className="px-5 mt-4 space-y-2">
         {list.map((t) => <Row key={t.id} tx={t} />)}
         {!list.length && (
-          <Card className="p-8 text-center text-sm text-muted-foreground">No transactions found.</Card>
+          <Card className="p-8 text-center text-body-secondary">No transactions found.</Card>
         )}
       </div>
     </div>
@@ -83,12 +83,12 @@ function Row({ tx }: { tx: Tx }) {
         <Icon className="h-5 w-5" />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold truncate">{tx.title}</p>
-        <p className="text-[11px] text-muted-foreground">
-          {tx.date} · <span className={`font-semibold ${statusTone}`}>{tx.status}</span>
+        <p className="text-label truncate">{tx.title}</p>
+        <p className="text-caption">
+          {tx.date} · <span className={`${statusTone}`}>{tx.status}</span>
         </p>
       </div>
-      <p className={`text-sm font-bold ${tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
+      <p className={`text-label ${tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
         {tx.amount >= 0 ? "+" : ""}${Math.abs(tx.amount).toFixed(2)}
       </p>
     </Card>

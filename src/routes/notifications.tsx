@@ -31,10 +31,10 @@ function Notifs() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between gap-2">
-                  <p className="text-sm font-bold truncate">{n.title}</p>
-                  <span className="text-[10px] text-muted-foreground shrink-0">{n.time}</span>
+                  <p className="text-label truncate">{n.title}</p>
+                  <span className="text-caption shrink-0">{n.time}</span>
                 </div>
-                <p className="text-xs text-muted-foreground mt-0.5">{n.body}</p>
+                <p className="text-body-secondary mt-0.5">{n.body}</p>
               </div>
             </Card>
           );

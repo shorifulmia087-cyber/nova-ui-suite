@@ -52,17 +52,17 @@ function Verify() {
             <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
               <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
             </div>
-            <h2 className="text-lg font-extrabold flex items-center justify-center gap-1.5">
+            <h2 className="text-section-title flex items-center justify-center gap-1.5">
               You're verified
               <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />
             </h2>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-body-secondary mt-1">
               Your NID has been submitted and your account is marked as verified.
             </p>
             <div className="mt-5 grid gap-2">
               <button
                 onClick={() => navigate({ to: "/profile" })}
-                className="h-12 rounded-md bg-gradient-brand text-primary-foreground font-semibold shadow-glow active:scale-[0.98] transition"
+                className="text-button h-12 rounded-md bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition"
               >
                 Back to profile
               </button>
@@ -74,7 +74,7 @@ function Verify() {
                   setFullName(""); setNidNumber("");
                   setFrontFile(null); setBackFile(null); setSelfieFile(null);
                 }}
-                className="h-10 rounded-md text-xs font-semibold text-muted-foreground"
+                className="text-caption h-10 rounded-md"
               >
                 Reset (testing)
               </button>
@@ -93,7 +93,7 @@ function Verify() {
           <div className="h-10 w-10 rounded-md bg-[color:var(--accent)]/15 flex items-center justify-center text-[color:var(--accent)]">
             <IdCard className="h-5 w-5" />
           </div>
-          <div className="text-xs text-muted-foreground leading-relaxed">
+          <div className="text-body-secondary leading-relaxed">
             Submit your National ID details to unlock full account features. This is a UI demo — no data is sent.
           </div>
         </Card>
@@ -104,7 +104,7 @@ function Verify() {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="As shown on your NID"
-              className="w-full h-11 rounded-md bg-muted px-3 text-sm outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+              className="text-input w-full h-11 rounded-md bg-muted px-3 outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
             />
           </Field>
           <Field label="NID number">
@@ -113,13 +113,13 @@ function Verify() {
               onChange={(e) => setNidNumber(e.target.value.replace(/[^0-9]/g, ""))}
               inputMode="numeric"
               placeholder="e.g. 1234567890"
-              className="w-full h-11 rounded-md bg-muted px-3 text-sm tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+              className="text-input w-full h-11 rounded-md bg-muted px-3 tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
             />
           </Field>
         </Card>
 
         <Card className="p-4 border-0 space-y-3">
-          <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Documents</p>
+          <p className="text-eyebrow">Documents</p>
           <FileBox label="NID front" file={frontFile} onPick={setFrontFile} icon={Upload} />
           <FileBox label="NID back" file={backFile} onPick={setBackFile} icon={Upload} />
           <FileBox label="Selfie with NID" file={selfieFile} onPick={setSelfieFile} icon={Camera} capture />
@@ -128,7 +128,7 @@ function Verify() {
         <button
           type="submit"
           disabled={!canSubmit}
-          className="w-full h-12 rounded-md bg-gradient-brand text-primary-foreground font-semibold shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
+          className="text-button w-full h-12 rounded-md bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
         >
           {status === "submitting" ? (
             <><Loader2 className="h-4 w-4 animate-spin" /> Submitting…</>
@@ -144,7 +144,7 @@ function Verify() {
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <label className="block">
-      <span className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5">{label}</span>
+      <span className="block text-label mb-1.5">{label}</span>
       {children}
     </label>
   );
@@ -162,8 +162,8 @@ function FileBox({
         {file ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold">{label}</p>
-        <p className="text-[11px] text-muted-foreground truncate">
+        <p className="text-label">{label}</p>
+        <p className="text-caption truncate">
           {file ? file.name : "Tap to upload"}
         </p>
       </div>

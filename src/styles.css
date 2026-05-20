@@ -2,13 +2,13 @@
 @source "../src";
 @import "tw-animate-css";
 
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -134,11 +134,19 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
-  h1, h2, h3, h4, h5 {
-    font-family: var(--font-display);
-    letter-spacing: -0.02em;
+  /* Headings inherit Inter; specific size/weight comes from semantic tokens */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+  button, input, textarea, select {
+    font-family: var(--font-sans);
   }
 }
 
@@ -160,34 +168,113 @@
     border: 1px solid rgba(255,255,255,0.14);
   }
 
-  /* ---------- Typography tokens (world-class scale) ---------- */
-  /* Screen / page title — H1 on sub-pages */
-  .text-page-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;        /* 24px */
-    line-height: 1.2;
+  /* ============================================================
+     TYPOGRAPHY TOKEN SYSTEM — single source of truth
+     Family: Inter. Weights: 400 / 500 / 600 / 700 only.
+     Use these classes. Do NOT use ad-hoc text-* / font-* values.
+     ============================================================ */
+  .text-display,
+  .text-screen-title,
+  .text-section-title,
+  .text-card-title,
+  .text-body,
+  .text-body-secondary,
+  .text-label,
+  .text-button,
+  .text-caption,
+  .text-tab,
+  .text-input,
+  .text-stat {
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Display — splash / onboarding hero */
+  .text-display {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    font-weight: 700;
   }
-  /* Section heading — H2 inside a page */
+  /* Screen / page titles */
+  .text-screen-title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  /* Section headers */
   .text-section-title {
-    font-family: var(--font-display);
-    font-size: 1.1875rem;     /* 19px */
-    line-height: 1.25;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
     letter-spacing: -0.015em;
-    font-weight: 700;
   }
-  /* Section subtitle / lead paragraph */
-  .text-section-subtitle {
-    font-size: 0.875rem;      /* 14px */
-    line-height: 1.45;
+  /* Card / list important titles */
+  .text-card-title {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  /* Primary readable body content */
+  .text-body {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  /* Secondary / helper / support text */
+  .text-body-secondary {
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 400;
     color: var(--color-muted-foreground);
   }
+  /* Form labels */
+  .text-label {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+  /* Buttons */
+  .text-button {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  /* Small metadata / timestamps / badges */
+  .text-caption {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: var(--color-muted-foreground);
+  }
+  /* Bottom navigation labels */
+  .text-tab {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+  /* Input typed text */
+  .text-input {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  /* Balances / earnings / key metrics */
+  .text-stat {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
   /* Eyebrow / overline (uppercase mini-label above groups) */
   .text-eyebrow {
-    font-size: 0.75rem;       /* 12px */
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 16px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 600;

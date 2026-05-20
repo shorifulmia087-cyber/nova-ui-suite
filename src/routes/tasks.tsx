@@ -19,12 +19,12 @@ function Tasks() {
 
       <div className="px-5">
         <Card className="p-4 bg-gradient-brand text-white border-0 shadow-glow">
-          <p className="text-xs text-white/70 uppercase tracking-widest">Available rewards</p>
+          <p className="text-caption text-white/70 uppercase tracking-widest">Available rewards</p>
           <div className="mt-1 flex items-end justify-between">
-            <p className="text-3xl font-extrabold">${totalReward.toFixed(2)}</p>
+            <p className="text-stat">${totalReward.toFixed(2)}</p>
             <div className="text-right">
-              <p className="text-xs text-white/70">Completed</p>
-              <p className="font-bold">{completed} / {tasks.length}</p>
+              <p className="text-caption text-white/70">Completed</p>
+              <p className="text-label">{completed} / {tasks.length}</p>
             </div>
           </div>
           <div className="mt-3 h-1.5 w-full rounded-full bg-white/15 overflow-hidden">
@@ -48,12 +48,12 @@ function Tasks() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
-                    <p className="text-sm font-semibold truncate">{t.title}</p>
-                    <span className="text-xs font-bold text-[color:var(--success)] inline-flex items-center gap-1">
+                    <p className="text-label truncate">{t.title}</p>
+                    <span className="text-label text-[color:var(--success)] inline-flex items-center gap-1">
                       <Sparkles className="h-3 w-3" /> ${t.reward.toFixed(2)}
                     </span>
                   </div>
-                  <p className="text-[11px] text-muted-foreground mt-0.5">{t.type} · {t.progress}/{t.total}</p>
+                  <p className="text-caption mt-0.5">{t.type} · {t.progress}/{t.total}</p>
                   <div className="mt-2 h-1 w-full rounded-full bg-muted overflow-hidden">
                     <div className="h-full rounded-full bg-gradient-mint" style={{ width: `${pct}%` }} />
                   </div>

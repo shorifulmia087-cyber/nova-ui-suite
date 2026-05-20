@@ -30,17 +30,17 @@ function Refer() {
             <div className="mx-auto h-14 w-14 rounded-md bg-white/15 flex items-center justify-center">
               <Sparkles className="h-7 w-7" />
             </div>
-            <p className="mt-4 text-2xl font-extrabold leading-tight">Earn $25<br />for every friend</p>
-            <p className="mt-2 text-xs text-white/75">Your friend gets $10 when they sign up with your code.</p>
+            <p className="mt-4 text-screen-title">Earn $25<br />for every friend</p>
+            <p className="mt-2 text-body-secondary text-white/75">Your friend gets $10 when they sign up with your code.</p>
 
             <div className="mt-5 rounded-md bg-white/10 border border-white/20 p-3 flex items-center justify-between">
               <div className="text-left pl-2">
-                <p className="text-[10px] uppercase tracking-widest text-white/70">Your code</p>
-                <p className="font-extrabold text-lg tracking-wider">{code}</p>
+                <p className="text-caption text-white/70 uppercase tracking-widest">Your code</p>
+                <p className="text-card-title tracking-wider">{code}</p>
               </div>
               <button
                 onClick={copy}
-                className="h-10 px-3 rounded-md bg-white text-primary font-semibold text-xs inline-flex items-center gap-1.5"
+                className="text-label h-10 px-3 rounded-md bg-white text-primary inline-flex items-center gap-1.5"
               >
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 {copied ? "Copied" : "Copy"}
@@ -67,12 +67,12 @@ function Refer() {
           { n: 3, t: "Both earn rewards", d: "You get $25, they get $10 instantly." },
         ].map((s) => (
           <Card key={s.n} className="p-4 flex items-center gap-3">
-            <div className="h-10 w-10 rounded-full bg-gradient-mint flex items-center justify-center text-white font-bold shadow-glow">
+            <div className="text-card-title h-10 w-10 rounded-full bg-gradient-mint flex items-center justify-center text-white shadow-glow">
               {s.n}
             </div>
             <div>
-              <p className="text-sm font-bold">{s.t}</p>
-              <p className="text-xs text-muted-foreground">{s.d}</p>
+              <p className="text-label">{s.t}</p>
+              <p className="text-body-secondary">{s.d}</p>
             </div>
           </Card>
         ))}
