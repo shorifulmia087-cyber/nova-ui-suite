@@ -79,14 +79,18 @@ function Home() {
 
 
       {/* Quick actions — circular icon buttons */}
-      <div className="px-0 mt-5 grid grid-cols-4 gap-0">
+      <div className="px-0 mt-5 grid grid-cols-4 gap-y-5">
         {[
           { to: "/deposit", icon: Plus, label: "Add money", primary: true },
           { to: "/withdraw", icon: Minus, label: "Withdraw" },
           { to: "/tasks", icon: ClipboardList, label: "Task" },
           { to: "/refer", icon: Gift, label: "Refer" },
+          { to: "/farm", icon: Sprout, label: "Farm" },
+          { to: "/transactions", icon: TrendingUp, label: "History" },
+          { to: "/verify", icon: ShieldCheck, label: "Verify" },
+          { to: "/notifications", icon: Sparkles, label: "Rewards" },
         ].map(({ to, icon: I, label, primary }) => (
-          <Link key={to} to={to} className="flex flex-col items-center gap-2 group">
+          <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
             <div
               className={`h-14 w-14 rounded-full flex items-center justify-center transition-all active:scale-95 ${
                 primary
