@@ -47,7 +47,7 @@ function Deposit() {
         ))}
       </div>
 
-      <h3 className="px-5 pt-6 pb-3 text-sm font-bold">Payment method</h3>
+      <h2 className="px-5 pt-6 pb-3 text-sm font-bold tracking-tight">Payment method</h2>
       <div className="px-5 space-y-2">
         {[
           { id: "card", Icon: CreditCard, t: "Visa ••8821", d: "Instant · no fee" },
