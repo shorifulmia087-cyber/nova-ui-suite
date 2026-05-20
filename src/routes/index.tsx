@@ -110,13 +110,13 @@ function Home() {
               <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-warning/15 flex items-center justify-center">
                 <ClipboardList className="h-5 w-5 text-warning" strokeWidth={2.4} />
               </div>
-              <p className="flex-1 text-[15px] font-semibold leading-snug pt-0.5">
+              <p className="flex-1 text-body pt-0.5" style={{ fontWeight: 500 }}>
                 Verification required. Please verify your identity.
               </p>
             </div>
             <Link
               to="/verify"
-              className="mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground text-base font-bold active:scale-[0.98] transition-transform"
+              className="text-button mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground active:scale-[0.98] transition-transform"
             >
               Submit
             </Link>
