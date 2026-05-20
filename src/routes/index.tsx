@@ -21,8 +21,9 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
+  const toBn = (s: string) => s.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[+d]);
   const fmt = (n: number) =>
-    hidden ? "••••••" : n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    hidden ? "••••••" : `৳${toBn(n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 
   return (
     <div>
@@ -56,11 +57,11 @@ function Home() {
           <div className="absolute -right-20 bottom-0 h-32 w-32 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative">
             <div className="flex items-center justify-between">
-              <p className="text-[11px] uppercase tracking-widest text-white/70">Total balance</p>
+              <p className="text-[11px] uppercase tracking-widest text-white/70">মোট ব্যালেন্স</p>
               <button
                 onClick={() => setHidden((v) => !v)}
                 className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center"
-                aria-label="Toggle balance"
+                aria-label="ব্যালেন্স টগল"
               >
                 {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -69,7 +70,7 @@ function Home() {
             <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs">
               <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
               <span className="font-semibold">+{fmt(user.earnings)}</span>
-              <span className="text-white/70">this month</span>
+              <span className="text-white/70">এই মাসে</span>
             </div>
           </div>
         </Card>
