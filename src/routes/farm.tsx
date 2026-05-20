@@ -22,17 +22,17 @@ function Farm() {
           <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative flex items-center justify-between">
             <div>
-              <p className="text-xs uppercase tracking-widest text-white/70">Total staked</p>
-              <p className="mt-1 text-3xl font-extrabold">${totalStaked.toLocaleString()}</p>
+              <p className="text-caption text-white/70 uppercase tracking-widest">Total staked</p>
+              <p className="mt-1 text-stat">${totalStaked.toLocaleString()}</p>
             </div>
             <div className="h-12 w-12 rounded-md bg-white/15 flex items-center justify-center">
               <Sprout className="h-6 w-6" />
             </div>
           </div>
-          <div className="relative mt-4 flex items-center justify-between text-sm">
-            <div className="inline-flex items-center gap-1.5">
+          <div className="relative mt-4 flex items-center justify-between">
+            <div className="text-label inline-flex items-center gap-1.5">
               <TrendingUp className="h-4 w-4 text-[color:var(--success)]" />
-              <span className="font-bold">+${dailyYield.toFixed(2)}</span>
+              <span>+${dailyYield.toFixed(2)}</span>
               <span className="text-white/70">/ day</span>
             </div>
             <ActionButton variant="mint" size="sm" className="!text-primary">Harvest all</ActionButton>
@@ -55,18 +55,18 @@ function Farm() {
               </div>
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
-                  <p className="text-sm font-bold">{p.name}</p>
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${p.status === "Ready" ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
+                  <p className="text-label">{p.name}</p>
+                  <span className={`text-caption px-2 py-0.5 rounded-full ${p.status === "Ready" ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
                     {p.status}
                   </span>
                 </div>
-                <p className="text-[11px] text-muted-foreground">${p.staked.toLocaleString()} staked · APR {p.apr}%</p>
+                <p className="text-caption">${p.staked.toLocaleString()} staked · APR {p.apr}%</p>
               </div>
             </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
               <div>
-                <p className="text-[11px] text-muted-foreground">Daily yield</p>
-                <p className="text-sm font-bold text-[color:var(--success)]">+${p.yieldDay.toFixed(2)}</p>
+                <p className="text-caption">Daily yield</p>
+                <p className="text-label text-[color:var(--success)]">+${p.yieldDay.toFixed(2)}</p>
               </div>
               <div className="flex gap-2">
                 <ActionButton size="sm" variant="outline">Add</ActionButton>

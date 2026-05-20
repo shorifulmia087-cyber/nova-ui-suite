@@ -44,12 +44,12 @@ function Profile() {
               <img src={avatarUser} alt={user.name} width={64} height={64} className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-base font-bold flex items-center gap-1.5">
+              <p className="text-card-title flex items-center gap-1.5">
                 {user.name}
                 {verified && <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />}
               </p>
-              <p className="text-xs text-muted-foreground">{user.handle}</p>
-              <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[color:var(--warning)]/15 text-[color:var(--warning)]">
+              <p className="text-body-secondary">{user.handle}</p>
+              <span className="inline-flex items-center gap-1 mt-1 text-caption px-2 py-0.5 rounded-full bg-[color:var(--warning)]/15 text-[color:var(--warning)]">
                 {user.level}
               </span>
             </div>
@@ -80,11 +80,11 @@ function Profile() {
       </Section>
 
       <div className="px-5 mt-4 mb-2">
-        <button className="w-full h-12 rounded-md bg-destructive/10 text-destructive font-semibold inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
+        <button className="text-button w-full h-12 rounded-md bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
           <LogOut className="h-4 w-4" /> Log out
         </button>
       </div>
-      <p className="text-center text-[10px] text-muted-foreground pb-2">Ness · v1.0.0</p>
+      <p className="text-caption text-center pb-2">Ness · v1.0.0</p>
     </div>
   );
 }
@@ -109,9 +109,9 @@ function Row({
       <div className="h-9 w-9 rounded-md bg-muted flex items-center justify-center text-foreground">
         <Icon className="h-4.5 w-4.5" />
       </div>
-      <span className="flex-1 text-sm font-medium">{label}</span>
+      <span className="text-label flex-1">{label}</span>
       {hint && (
-        <span className={`text-xs font-semibold ${tone === "success" ? "text-[color:var(--success)]" : "text-muted-foreground"}`}>
+        <span className={`text-caption ${tone === "success" ? "text-[color:var(--success)] font-medium" : ""}`}>
           {hint}
         </span>
       )}

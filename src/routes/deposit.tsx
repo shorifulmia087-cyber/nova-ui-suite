@@ -21,17 +21,17 @@ function Deposit() {
 
       <div className="px-5">
         <Card className="p-6 text-center bg-gradient-soft">
-          <p className="text-xs text-muted-foreground uppercase tracking-widest">Amount</p>
+          <p className="text-caption uppercase tracking-widest">Amount</p>
           <div className="mt-2 flex items-center justify-center gap-1">
-            <span className="text-3xl font-bold text-muted-foreground">$</span>
+            <span className="text-stat text-muted-foreground">$</span>
             <input
               type="number"
               value={amt}
               onChange={(e) => setAmt(Number(e.target.value || 0))}
-              className="w-40 text-5xl font-extrabold text-center bg-transparent outline-none"
+              className="text-display w-40 text-center bg-transparent outline-none"
             />
           </div>
-          <p className="text-xs text-muted-foreground mt-1">No fees · instant</p>
+          <p className="text-caption mt-1">No fees · instant</p>
         </Card>
       </div>
 
@@ -40,7 +40,7 @@ function Deposit() {
           <button
             key={p}
             onClick={() => setAmt(p)}
-            className={`h-11 rounded-md text-sm font-bold transition border ${amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
+            className={`text-label h-11 rounded-md transition border ${amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
           >
             ${p}
           </button>
@@ -65,8 +65,8 @@ function Deposit() {
                 <m.Icon className="h-5 w-5" />
               </div>
               <div className="flex-1">
-                <p className="text-sm font-bold">{m.t}</p>
-                <p className="text-xs text-muted-foreground">{m.d}</p>
+                <p className="text-label">{m.t}</p>
+                <p className="text-caption">{m.d}</p>
               </div>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
