@@ -132,15 +132,45 @@ function Home() {
 
       {/* Recent activity */}
       <SectionLabel
-        action={<Link to="/transactions" className="text-xs font-semibold text-[color:var(--accent)]">View all</Link>}
+        action={
+          <Link to="/transactions" className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            View all
+            <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </Link>
+        }
       >
         Recent activity
       </SectionLabel>
-      <div className="px-5 space-y-2">
-        {transactions.slice(0, 4).map((t) => (
-          <TxRow key={t.id} tx={t} />
-        ))}
-      </div>
+      <RecentActivity />
+    </div>
+  );
+}
+
+function RecentActivity() {
+  const items = transactions.slice(0, 5);
+  const groups = items.reduce<Record<string, Tx[]>>((acc, t) => {
+    const key = t.date.split(" · ")[0];
+    (acc[key] ||= []).push(t);
+    return acc;
+  }, {});
+
+  return (
+    <div className="px-5 space-y-4">
+      {Object.entries(groups).map(([label, rows]) => (
+        <div key={label}>
+          <p className="px-1 pb-1.5 text-[10.5px] font-semibold tracking-[0.08em] uppercase text-muted-foreground">
+            {label}
+          </p>
+          <div className="rounded-md bg-card border border-border shadow-card overflow-hidden">
+            {rows.map((t, i) => (
+              <div key={t.id}>
+                {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
+                <TxRow tx={t} />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
