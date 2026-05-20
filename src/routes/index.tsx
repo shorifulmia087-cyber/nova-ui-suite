@@ -78,10 +78,10 @@ function Home() {
       {(
 
         <div className="px-5 mt-6">
-          <div className="rounded-2xl bg-[#475569] text-white p-4 shadow-navy">
+          <div className="rounded-2xl bg-primary text-primary-foreground p-4 shadow-navy">
             <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-[#FFF1E6] flex items-center justify-center">
-                <ClipboardList className="h-5 w-5 text-[#EA580C]" strokeWidth={2.4} />
+              <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-warning/15 flex items-center justify-center">
+                <ClipboardList className="h-5 w-5 text-warning" strokeWidth={2.4} />
               </div>
               <p className="flex-1 text-[15px] font-semibold leading-snug pt-0.5">
                 Verification required. Please verify your identity.
@@ -89,7 +89,7 @@ function Home() {
             </div>
             <Link
               to="/verify"
-              className="mt-4 flex items-center justify-center h-12 rounded-full bg-white text-foreground text-base font-bold active:scale-[0.98] transition-transform"
+              className="mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground text-base font-bold active:scale-[0.98] transition-transform"
             >
               Submit
             </Link>
