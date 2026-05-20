@@ -233,14 +233,14 @@ function PromoBanners() {
             />
             <div className="absolute inset-0" style={{ background: b.overlay }} />
             <div className="relative p-5 h-full flex flex-col justify-between">
-              <span className="self-start inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+              <span className="text-caption text-white self-start inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
                 {b.eyebrow}
               </span>
               <div>
-                <p className="text-base font-bold leading-tight tracking-tight max-w-[70%]">
+                <p className="text-card-title text-white max-w-[70%]">
                   {b.title}
                 </p>
-                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold" style={{ color: b.accent }}>
+                <div className="text-label mt-2 inline-flex items-center gap-1.5" style={{ color: b.accent }}>
                   {b.cta}
                   <ChevronRight className="h-3.5 w-3.5" />
                 </div>
