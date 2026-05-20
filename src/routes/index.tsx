@@ -51,7 +51,7 @@ function Home() {
 
 
       {/* Quick actions — circular icon buttons */}
-      <div className="px-5 mt-6 grid grid-cols-4 gap-2">
+      <div className="mt-6 grid grid-cols-4 gap-2">
         {[
           { to: "/deposit", icon: Plus, label: "Deposit", primary: true },
           { to: "/withdraw", icon: Minus, label: "Withdraw" },
