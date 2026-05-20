@@ -4,9 +4,26 @@ import {
   ClipboardList, Gift, ChevronRight, ChevronDown, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight, Plus, Minus, ArrowRight, MoreHorizontal,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
+
+function useVerified() {
+  const [v, setV] = useState(user.verified);
+  useEffect(() => {
+    const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
+    read();
+    window.addEventListener("storage", read);
+    window.addEventListener("focus", read);
+    window.addEventListener("ness:verified", read);
+    return () => {
+      window.removeEventListener("storage", read);
+      window.removeEventListener("focus", read);
+      window.removeEventListener("ness:verified", read);
+    };
+  }, []);
+  return v;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -21,6 +38,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
+  const verified = useVerified();
   const fmt = (n: number) =>
     hidden ? "••••••" : `৳${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
@@ -41,7 +59,7 @@ function Home() {
               <h1 className="text-xl font-extrabold text-foreground tracking-tight">
                 {user.name}
               </h1>
-              {user.verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
+              {verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
             </div>
           </div>
         </div>
@@ -80,8 +98,7 @@ function Home() {
       </div>
 
       {/* Verification — dark card with submit */}
-      {/* Verification — dark card with submit */}
-      {(
+      {!verified && (
 
         <div className="px-5 mt-6">
           <div className="rounded-2xl bg-primary text-primary-foreground p-4 shadow-navy">

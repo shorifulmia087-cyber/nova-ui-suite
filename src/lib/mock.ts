@@ -3,7 +3,7 @@ export const user = {
   handle: "@alexmorgan",
   avatar: "AM",
   level: "Gold Farmer",
-  verified: true,
+  verified: false,
   balance: 12480.42,
   earnings: 1284.7,
   pending: 312.5,

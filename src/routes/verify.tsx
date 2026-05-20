@@ -38,6 +38,7 @@ function Verify() {
     setStatus("submitting");
     setTimeout(() => {
       localStorage.setItem("nessVerified", "1");
+      window.dispatchEvent(new Event("ness:verified"));
       setStatus("verified");
     }, 1400);
   };
@@ -68,6 +69,7 @@ function Verify() {
               <button
                 onClick={() => {
                   localStorage.removeItem("nessVerified");
+                  window.dispatchEvent(new Event("ness:verified"));
                   setStatus("idle");
                   setFullName(""); setNidNumber("");
                   setFrontFile(null); setBackFile(null); setSelfieFile(null);
