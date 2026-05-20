@@ -98,8 +98,6 @@ function Home() {
           </Link>
         ))}
       </div>
-        ))}
-      </div>
 
       {/* Verify banner */}
       {!user.verified ? null : (
