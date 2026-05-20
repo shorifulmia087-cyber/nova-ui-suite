@@ -52,7 +52,7 @@ function Withdraw() {
         ))}
       </div>
 
-      <h3 className="px-5 pt-6 pb-3 text-sm font-bold">Withdraw to</h3>
+      <h2 className="px-5 pt-6 pb-3 text-sm font-bold tracking-tight">Withdraw to</h2>
       <div className="px-5 space-y-2">
         {[
           { Icon: Building2, t: "Bank ••4421", d: "Wells Fargo · USD", active: true },
