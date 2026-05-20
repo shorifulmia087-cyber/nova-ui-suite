@@ -69,6 +69,7 @@ function Verify() {
               <button
                 onClick={() => {
                   localStorage.removeItem("nessVerified");
+                  window.dispatchEvent(new Event("ness:verified"));
                   setStatus("idle");
                   setFullName(""); setNidNumber("");
                   setFrontFile(null); setBackFile(null); setSelfieFile(null);
