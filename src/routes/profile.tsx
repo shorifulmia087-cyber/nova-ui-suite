@@ -111,7 +111,7 @@ function Row({
       </div>
       <span className="text-label flex-1">{label}</span>
       {hint && (
-        <span className={`text-caption ${tone === "success" ? "text-[color:var(--success)] font-medium" : ""}`}>
+        <span className={tone === "success" ? "text-label text-[color:var(--success)]" : "text-caption"}>
           {hint}
         </span>
       )}
