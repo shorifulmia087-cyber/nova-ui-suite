@@ -254,7 +254,7 @@ function TxRow({ tx }: { tx: Tx }) {
   };
   const Icon = Icons[tx.category];
   return (
-    <Card className="p-3 flex items-center gap-3">
+    <Card className="p-3 flex items-center gap-3 border-0">
       <div className={`h-10 w-10 rounded-md flex items-center justify-center ${colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>
