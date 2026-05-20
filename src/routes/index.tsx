@@ -132,15 +132,45 @@ function Home() {
 
       {/* Recent activity */}
       <SectionLabel
-        action={<Link to="/transactions" className="text-xs font-semibold text-[color:var(--accent)]">View all</Link>}
+        action={
+          <Link to="/transactions" className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-muted-foreground hover:text-foreground transition-colors">
+            View all
+            <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
+          </Link>
+        }
       >
         Recent activity
       </SectionLabel>
-      <div className="px-5 space-y-2">
-        {transactions.slice(0, 4).map((t) => (
-          <TxRow key={t.id} tx={t} />
-        ))}
-      </div>
+      <RecentActivity />
+    </div>
+  );
+}
+
+function RecentActivity() {
+  const items = transactions.slice(0, 5);
+  const groups = items.reduce<Record<string, Tx[]>>((acc, t) => {
+    const key = t.date.split(" · ")[0];
+    (acc[key] ||= []).push(t);
+    return acc;
+  }, {});
+
+  return (
+    <div className="px-5 space-y-4">
+      {Object.entries(groups).map(([label, rows]) => (
+        <div key={label}>
+          <p className="px-1 pb-1.5 text-[10.5px] font-semibold tracking-[0.08em] uppercase text-muted-foreground">
+            {label}
+          </p>
+          <div className="rounded-md bg-card border border-border shadow-card overflow-hidden">
+            {rows.map((t, i) => (
+              <div key={t.id}>
+                {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
+                <TxRow tx={t} />
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -247,29 +277,58 @@ function PromoBanners() {
 
 import type { Tx } from "@/lib/mock";
 function TxRow({ tx }: { tx: Tx }) {
-  const colors: Record<Tx["category"], string> = {
-    earn: "bg-[color:var(--success)]/12 text-[color:var(--success)]",
-    deposit: "bg-[color:var(--accent)]/15 text-[color:var(--accent)]",
-    withdraw: "bg-destructive/12 text-destructive",
-    task: "bg-[color:var(--warning)]/15 text-[color:var(--warning)]",
-    referral: "bg-primary/10 text-primary",
+  const iconTone: Record<Tx["category"], string> = {
+    earn: "text-[color:var(--success)] bg-[color:var(--success)]/8",
+    deposit: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
+    withdraw: "text-foreground bg-muted",
+    task: "text-[color:var(--warning)] bg-[color:var(--warning)]/10",
+    referral: "text-primary bg-primary/8",
   };
-  const Icons: Record<Tx["category"], React.ComponentType<{ className?: string }>> = {
+  const Icons: Record<Tx["category"], React.ComponentType<{ className?: string; strokeWidth?: number }>> = {
     earn: Sparkles, deposit: ArrowDownToLine, withdraw: ArrowUpFromLine, task: ClipboardList, referral: Gift,
   };
+  const subtitle: Record<Tx["category"], string> = {
+    earn: "Yield", deposit: "Deposit", withdraw: "Withdrawal", task: "Task reward", referral: "Referral",
+  };
   const Icon = Icons[tx.category];
+  const time = tx.date.includes(" · ") ? tx.date.split(" · ")[1] : tx.date;
+  const positive = tx.amount >= 0;
+
   return (
-    <Card className="p-3 flex items-center gap-3 border-0">
-      <div className={`h-10 w-10 rounded-md flex items-center justify-center ${colors[tx.category]}`}>
-        <Icon className="h-5 w-5" />
+    <div className="px-4 py-3 flex items-center gap-3">
+      <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold truncate">{tx.title}</p>
-        <p className="text-[11px] text-muted-foreground">{tx.date} · {tx.status}</p>
+        <p className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</p>
+        <div className="mt-0.5 flex items-center gap-1.5 text-[11.5px] text-muted-foreground">
+          <span>{subtitle[tx.category]}</span>
+          <span className="text-border">•</span>
+          <span>{time}</span>
+          {tx.status !== "completed" && (
+            <>
+              <span className="text-border">•</span>
+              <span
+                className={`font-semibold capitalize ${
+                  tx.status === "pending" ? "text-[color:var(--warning)]" : "text-destructive"
+                }`}
+              >
+                {tx.status}
+              </span>
+            </>
+          )}
+        </div>
       </div>
-      <p className={`text-sm font-bold ${tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
-        {tx.amount >= 0 ? "+" : ""}${Math.abs(tx.amount).toFixed(2)}
-      </p>
-    </Card>
+      <div className="text-right shrink-0">
+        <p
+          className={`text-[14px] font-bold tabular-nums tracking-tight ${
+            positive ? "text-foreground" : "text-foreground"
+          }`}
+        >
+          {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+        </p>
+      </div>
+    </div>
   );
 }
+
