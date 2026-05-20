@@ -20,12 +20,35 @@ export function MobileShell() {
   );
   const count = tabs.length;
 
-  // Preload every bottom-nav route on mount so taps feel instant
+  // Preload only the most likely next routes when the browser is idle,
+  // and only once per session — avoids fetching every tab up front.
+  const preloadedRef = useRef(false);
   useEffect(() => {
-    tabs.forEach((t) => {
-      router.preloadRoute({ to: t.to }).catch(() => {});
-    });
-  }, [router]);
+    if (preloadedRef.current) return;
+    preloadedRef.current = true;
+
+    // Neighbours of the currently active tab are the most likely next taps
+    const neighbours = new Set<string>();
+    if (activeIndex > 0) neighbours.add(tabs[activeIndex - 1].to);
+    if (activeIndex < tabs.length - 1) neighbours.add(tabs[activeIndex + 1].to);
+
+    const run = () => {
+      neighbours.forEach((to) => {
+        router.preloadRoute({ to }).catch(() => {});
+      });
+    };
+
+    const ric = (window as typeof window & {
+      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
+    }).requestIdleCallback;
+
+    if (typeof ric === "function") {
+      ric(run, { timeout: 2000 });
+    } else {
+      const id = window.setTimeout(run, 1200);
+      return () => window.clearTimeout(id);
+    }
+  }, [router, activeIndex]);
 
   return (
     <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
