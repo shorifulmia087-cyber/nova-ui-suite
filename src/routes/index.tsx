@@ -80,7 +80,7 @@ function Home() {
 
       {/* Quick actions — circular icon buttons */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-3xl px-0 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-sm shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/deposit", icon: Plus, label: "Add money", primary: true },
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
