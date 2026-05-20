@@ -37,7 +37,7 @@ function Verify() {
       <div className="px-5 mt-5 space-y-2">
         {steps.map((s, i) => (
           <Card key={i} className="p-4 flex items-center gap-3">
-            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${s.done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
+            <div className={`h-10 w-10 rounded-md flex items-center justify-center ${s.done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
               <s.Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">

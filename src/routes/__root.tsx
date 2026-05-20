@@ -19,7 +19,7 @@ function NotFoundComponent() {
         <p className="mt-2 text-sm text-muted-foreground">This page doesn't exist.</p>
         <Link
           to="/"
-          className="mt-6 inline-flex items-center justify-center rounded-xl bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+          className="mt-6 inline-flex items-center justify-center rounded-md bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
         >
           Back to home
         </Link>
@@ -38,7 +38,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <p className="mt-2 text-sm text-muted-foreground">{error.message}</p>
         <button
           onClick={() => { router.invalidate(); reset(); }}
-          className="mt-6 rounded-xl bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
+          className="mt-6 rounded-md bg-gradient-brand px-5 py-3 text-sm font-semibold text-primary-foreground shadow-glow"
         >
           Try again
         </button>

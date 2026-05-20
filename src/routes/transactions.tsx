@@ -35,7 +35,7 @@ function TxList() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search activity"
-            className="w-full h-11 pl-9 pr-3 rounded-xl bg-card border border-border text-sm outline-none focus:border-[color:var(--accent)]"
+            className="w-full h-11 pl-9 pr-3 rounded-md bg-card border border-border text-sm outline-none focus:border-[color:var(--accent)]"
           />
         </div>
       </div>
@@ -79,7 +79,7 @@ function Row({ tx }: { tx: Tx }) {
                                 "text-destructive";
   return (
     <Card className="p-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${colors[tx.category]}`}>
+      <div className={`h-10 w-10 rounded-md flex items-center justify-center ${colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>
       <div className="flex-1 min-w-0">
