@@ -287,8 +287,8 @@ function TxRow({ tx }: { tx: Tx }) {
         <Icon className="h-[18px] w-[18px]" strokeWidth={2.2} />
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</p>
-        <div className="mt-0.5 flex items-center gap-1.5 text-[11.5px] text-muted-foreground">
+        <p className="text-label text-foreground truncate">{tx.title}</p>
+        <div className="text-caption mt-0.5 flex items-center gap-1.5">
           <span>{subtitle[tx.category]}</span>
           <span className="text-border">•</span>
           <span>{time}</span>
@@ -296,9 +296,10 @@ function TxRow({ tx }: { tx: Tx }) {
             <>
               <span className="text-border">•</span>
               <span
-                className={`font-semibold capitalize ${
+                className={`capitalize ${
                   tx.status === "pending" ? "text-[color:var(--warning)]" : "text-destructive"
                 }`}
+                style={{ fontWeight: 500 }}
               >
                 {tx.status}
               </span>
@@ -307,11 +308,7 @@ function TxRow({ tx }: { tx: Tx }) {
         </div>
       </div>
       <div className="text-right shrink-0">
-        <p
-          className={`text-[14px] font-bold tabular-nums tracking-tight ${
-            positive ? "text-foreground" : "text-foreground"
-          }`}
-        >
+        <p className="text-label text-foreground tabular-nums">
           {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
         </p>
       </div>
