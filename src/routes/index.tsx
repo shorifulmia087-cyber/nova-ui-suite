@@ -21,8 +21,9 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
+  const toBn = (s: string) => s.replace(/\d/g, (d) => "০১২৩৪৫৬৭৮৯"[+d]);
   const fmt = (n: number) =>
-    hidden ? "••••••" : n.toLocaleString("en-US", { style: "currency", currency: "USD" });
+    hidden ? "••••••" : `৳${toBn(n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 }))}`;
 
   return (
     <div>
