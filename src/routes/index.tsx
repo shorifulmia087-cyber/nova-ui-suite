@@ -48,48 +48,47 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance hero */}
+      {/* Balance hero — minimal */}
       <div className="px-5 mt-5 animate-slide-up">
-        <Card className="relative overflow-hidden p-5 bg-gradient-card text-white border-0">
-          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute -right-20 bottom-0 h-32 w-32 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              <p className="text-xs uppercase tracking-widest text-white/70">Total balance</p>
-              <button
-                onClick={() => setHidden((v) => !v)}
-                className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center"
-                aria-label="Toggle balance"
-              >
-                {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
-            </div>
-            <p className="mt-1 text-4xl font-extrabold tracking-tight">{fmt(user.balance)}</p>
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs">
-              <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
-              <span className="font-semibold">+{fmt(user.earnings)}</span>
-              <span className="text-white/70">this month</span>
-            </div>
-
-            <div className="mt-5 grid grid-cols-4 gap-2">
-              {[
-                { to: "/deposit", icon: ArrowDownToLine, label: "Add" },
-                { to: "/withdraw", icon: ArrowUpFromLine, label: "Withdraw" },
-                { to: "/farm", icon: Sprout, label: "Farm" },
-                { to: "/tasks", icon: ListChecks, label: "Tasks" },
-              ].map(({ to, icon: I, label }) => (
-                <Link
-                  key={to}
-                  to={to}
-                  className="flex flex-col items-center gap-1.5 rounded-md bg-white/10 hover:bg-white/15 transition py-3 text-[11px] font-semibold"
-                >
-                  <I className="h-5 w-5" />
-                  {label}
-                </Link>
-              ))}
-            </div>
+        <Card className="p-5">
+          <div className="flex items-center justify-between">
+            <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Total balance</p>
+            <button
+              onClick={() => setHidden((v) => !v)}
+              className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground"
+              aria-label="Toggle balance"
+            >
+              {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+            </button>
+          </div>
+          <p className="mt-1 text-4xl font-extrabold tracking-tight text-foreground">{fmt(user.balance)}</p>
+          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[color:var(--success)]/10 px-2.5 py-1 text-xs">
+            <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
+            <span className="font-semibold text-[color:var(--success)]">+{fmt(user.earnings)}</span>
+            <span className="text-muted-foreground">this month</span>
           </div>
         </Card>
+      </div>
+
+      {/* Quick actions — separate sections */}
+      <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
+        {[
+          { to: "/tasks", icon: ListChecks, label: "Tasks", tone: "bg-[color:var(--warning)]/15 text-[color:var(--warning)]" },
+          { to: "/deposit", icon: ArrowDownToLine, label: "Add", tone: "bg-[color:var(--accent)]/15 text-[color:var(--accent)]" },
+          { to: "/withdraw", icon: ArrowUpFromLine, label: "Withdraw", tone: "bg-destructive/12 text-destructive" },
+          { to: "/farm", icon: Sprout, label: "Farm", tone: "bg-[color:var(--success)]/15 text-[color:var(--success)]" },
+        ].map(({ to, icon: I, label, tone }) => (
+          <Link
+            key={to}
+            to={to}
+            className="flex flex-col items-center gap-2 rounded-md bg-card border border-border shadow-card p-3 hover:bg-muted/40 transition active:scale-[0.97]"
+          >
+            <div className={`h-10 w-10 rounded-full flex items-center justify-center ${tone}`}>
+              <I className="h-5 w-5" />
+            </div>
+            <span className="text-[11px] font-semibold">{label}</span>
+          </Link>
+        ))}
       </div>
 
       {/* Stats */}
