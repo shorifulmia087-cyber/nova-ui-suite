@@ -12,12 +12,20 @@ const tabs = [
 ] as const;
 
 export function MobileShell() {
+  const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeIndex = Math.max(
     0,
     tabs.findIndex((t) => t.to === pathname),
   );
   const count = tabs.length;
+
+  // Preload every bottom-nav route on mount so taps feel instant
+  useEffect(() => {
+    tabs.forEach((t) => {
+      router.preloadRoute({ to: t.to }).catch(() => {});
+    });
+  }, [router]);
 
   return (
     <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
