@@ -1,61 +1,177 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
-import { Card, ActionButton } from "@/components/mobile/Primitives";
-import { CheckCircle2, Circle, ShieldCheck, IdCard, ScanFace, MapPin } from "lucide-react";
+import { Card } from "@/components/mobile/Primitives";
+import { ShieldCheck, Upload, Camera, CheckCircle2, IdCard, Loader2 } from "lucide-react";
 
 export const Route = createFileRoute("/verify")({
-  head: () => ({ meta: [{ title: "Verify account — Ness" }] }),
+  head: () => ({ meta: [{ title: "Verify identity — Ness" }, { name: "description", content: "Submit your NID to verify your account." }] }),
   component: Verify,
 });
 
-const steps = [
-  { Icon: IdCard, title: "Personal information", desc: "Name, DOB, contact", done: true },
-  { Icon: ScanFace, title: "ID document", desc: "Passport or driver's license", done: true },
-  { Icon: MapPin, title: "Proof of address", desc: "Utility bill or statement", done: false },
-  { Icon: ShieldCheck, title: "Selfie verification", desc: "Quick liveness check", done: false },
-];
+type Status = "idle" | "submitting" | "verified";
 
 function Verify() {
-  const completed = steps.filter((s) => s.done).length;
-  const pct = (completed / steps.length) * 100;
+  const navigate = useNavigate();
+  const [fullName, setFullName] = useState("");
+  const [nidNumber, setNidNumber] = useState("");
+  const [frontFile, setFrontFile] = useState<File | null>(null);
+  const [backFile, setBackFile] = useState<File | null>(null);
+  const [selfieFile, setSelfieFile] = useState<File | null>(null);
+  const [status, setStatus] = useState<Status>("idle");
+
+  useEffect(() => {
+    if (localStorage.getItem("nessVerified") === "1") setStatus("verified");
+  }, []);
+
+  const canSubmit =
+    fullName.trim().length > 2 &&
+    nidNumber.trim().length >= 6 &&
+    frontFile &&
+    backFile &&
+    selfieFile &&
+    status === "idle";
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!canSubmit) return;
+    setStatus("submitting");
+    setTimeout(() => {
+      localStorage.setItem("nessVerified", "1");
+      setStatus("verified");
+    }, 1400);
+  };
+
+  if (status === "verified") {
+    return (
+      <div>
+        <ScreenHeader title="Verification" />
+        <div className="px-5">
+          <Card className="p-6 text-center border-0 bg-gradient-soft">
+            <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
+              <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
+            </div>
+            <h2 className="text-lg font-extrabold flex items-center justify-center gap-1.5">
+              You're verified
+              <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              Your NID has been submitted and your account is marked as verified.
+            </p>
+            <div className="mt-5 grid gap-2">
+              <button
+                onClick={() => navigate({ to: "/profile" })}
+                className="h-12 rounded-md bg-gradient-brand text-primary-foreground font-semibold shadow-glow active:scale-[0.98] transition"
+              >
+                Back to profile
+              </button>
+              <button
+                onClick={() => {
+                  localStorage.removeItem("nessVerified");
+                  setStatus("idle");
+                  setFullName(""); setNidNumber("");
+                  setFrontFile(null); setBackFile(null); setSelfieFile(null);
+                }}
+                className="h-10 rounded-md text-xs font-semibold text-muted-foreground"
+              >
+                Reset (testing)
+              </button>
+            </div>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <ScreenHeader title="Account verification" subtitle="Unlock higher limits" />
-
-      <div className="px-5">
-        <Card className="p-5 bg-gradient-card text-white border-0 relative overflow-hidden">
-          <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[color:var(--accent)]/30 blur-2xl" />
-          <p className="relative text-xs uppercase tracking-widest text-white/70">Verification level</p>
-          <p className="relative mt-1 text-2xl font-extrabold">Level 2 of 3</p>
-          <div className="relative mt-4 h-2 w-full rounded-full bg-white/15 overflow-hidden">
-            <div className="h-full rounded-full bg-[color:var(--accent)]" style={{ width: `${pct}%` }} />
+      <ScreenHeader title="Verify identity" />
+      <form onSubmit={submit} className="px-5 pb-8 space-y-5">
+        <Card className="p-4 border-0 bg-gradient-soft flex items-start gap-3">
+          <div className="h-10 w-10 rounded-md bg-[color:var(--accent)]/15 flex items-center justify-center text-[color:var(--accent)]">
+            <IdCard className="h-5 w-5" />
           </div>
-          <p className="relative mt-2 text-xs text-white/75">{completed} of {steps.length} steps completed</p>
+          <div className="text-xs text-muted-foreground leading-relaxed">
+            Submit your National ID details to unlock full account features. This is a UI demo — no data is sent.
+          </div>
         </Card>
-      </div>
 
-      <div className="px-5 mt-5 space-y-2">
-        {steps.map((s, i) => (
-          <Card key={i} className="p-4 flex items-center gap-3">
-            <div className={`h-10 w-10 rounded-md flex items-center justify-center ${s.done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
-              <s.Icon className="h-5 w-5" />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-semibold">{s.title}</p>
-              <p className="text-xs text-muted-foreground">{s.desc}</p>
-            </div>
-            {s.done ? (
-              <CheckCircle2 className="h-5 w-5 text-[color:var(--success)]" />
-            ) : (
-              <Circle className="h-5 w-5 text-muted-foreground" />
-            )}
-          </Card>
-        ))}
-      </div>
+        <Card className="p-4 border-0 space-y-3">
+          <Field label="Full legal name">
+            <input
+              value={fullName}
+              onChange={(e) => setFullName(e.target.value)}
+              placeholder="As shown on your NID"
+              className="w-full h-11 rounded-md bg-muted px-3 text-sm outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+            />
+          </Field>
+          <Field label="NID number">
+            <input
+              value={nidNumber}
+              onChange={(e) => setNidNumber(e.target.value.replace(/[^0-9]/g, ""))}
+              inputMode="numeric"
+              placeholder="e.g. 1234567890"
+              className="w-full h-11 rounded-md bg-muted px-3 text-sm tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+            />
+          </Field>
+        </Card>
 
-      <div className="px-5 mt-6">
-        <ActionButton variant="brand" size="lg" className="w-full">Continue verification</ActionButton>
-      </div>
+        <Card className="p-4 border-0 space-y-3">
+          <p className="text-[11px] uppercase tracking-widest text-muted-foreground font-bold">Documents</p>
+          <FileBox label="NID front" file={frontFile} onPick={setFrontFile} icon={Upload} />
+          <FileBox label="NID back" file={backFile} onPick={setBackFile} icon={Upload} />
+          <FileBox label="Selfie with NID" file={selfieFile} onPick={setSelfieFile} icon={Camera} capture />
+        </Card>
+
+        <button
+          type="submit"
+          disabled={!canSubmit}
+          className="w-full h-12 rounded-md bg-gradient-brand text-primary-foreground font-semibold shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
+        >
+          {status === "submitting" ? (
+            <><Loader2 className="h-4 w-4 animate-spin" /> Submitting…</>
+          ) : (
+            <><ShieldCheck className="h-4 w-4" /> Submit for verification</>
+          )}
+        </button>
+      </form>
     </div>
+  );
+}
+
+function Field({ label, children }: { label: string; children: React.ReactNode }) {
+  return (
+    <label className="block">
+      <span className="block text-[11px] font-bold uppercase tracking-widest text-muted-foreground mb-1.5">{label}</span>
+      {children}
+    </label>
+  );
+}
+
+function FileBox({
+  label, file, onPick, icon: Icon, capture,
+}: {
+  label: string; file: File | null; onPick: (f: File | null) => void;
+  icon: React.ComponentType<{ className?: string }>; capture?: boolean;
+}) {
+  return (
+    <label className="flex items-center gap-3 p-3 rounded-md bg-muted/60 cursor-pointer hover:bg-muted transition">
+      <div className={`h-10 w-10 rounded-md flex items-center justify-center ${file ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-background text-muted-foreground"}`}>
+        {file ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-semibold">{label}</p>
+        <p className="text-[11px] text-muted-foreground truncate">
+          {file ? file.name : "Tap to upload"}
+        </p>
+      </div>
+      <input
+        type="file"
+        accept="image/*"
+        {...(capture ? { capture: "user" as const } : {})}
+        className="hidden"
+        onChange={(e) => onPick(e.target.files?.[0] ?? null)}
+      />
+    </label>
   );
 }
