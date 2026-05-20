@@ -102,29 +102,6 @@ function Home() {
 
 
 
-      {/* My Cards */}
-      <SectionLabel
-        action={<Link to="/transactions" className="text-xs font-semibold text-[color:var(--accent)]">See all</Link>}
-      >
-        My cards
-      </SectionLabel>
-      <div className="px-5 flex gap-3 overflow-x-auto no-scrollbar -mx-1 pb-1">
-        {cards.map((c) => (
-          <div
-            key={c.id}
-            className={`relative shrink-0 w-[230px] h-[140px] rounded-md p-4 text-white overflow-hidden shadow-navy ${c.gradient}`}
-          >
-            <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/15 blur-xl" />
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold">{c.label}</span>
-              <span className="font-bold tracking-wide">NESS</span>
-            </div>
-            <p className="mt-6 text-xs text-white/70">Balance</p>
-            <p className="text-xl font-extrabold">${c.balance.toLocaleString()}</p>
-            <p className="mt-1 text-xs tracking-widest text-white/80">{c.number}</p>
-          </div>
-        ))}
-      </div>
 
       {/* Recent activity */}
       <SectionLabel
