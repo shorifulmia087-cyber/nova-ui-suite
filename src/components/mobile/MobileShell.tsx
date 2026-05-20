@@ -12,37 +12,73 @@ const tabs = [
 
 export function MobileShell() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
+  const activeIndex = Math.max(
+    0,
+    tabs.findIndex((t) => t.to === pathname),
+  );
+  const count = tabs.length;
 
   return (
     <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
       <div className="relative w-full max-w-md min-h-screen bg-background shadow-navy overflow-hidden flex flex-col">
-        <main className="flex-1 pb-24 animate-fade-in">
+        <main className="flex-1 pb-28">
           <Outlet />
         </main>
 
         <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-4 pt-2 z-50">
-          <div className="rounded-full bg-card border border-border shadow-card px-2 py-2 flex items-center justify-between">
-            {tabs.map(({ to, label, icon: Icon }) => {
-              const active = pathname === to;
-              return (
-                <Link
-                  key={to}
-                  to={to}
-                  className={cn(
-                    "relative flex-1 flex flex-col items-center justify-center gap-1 py-2 rounded-full transition-all duration-300",
-                    active ? "text-primary-foreground" : "text-muted-foreground hover:text-foreground",
-                  )}
-                >
-                  {active && (
-                    <span className="absolute inset-0 rounded-full bg-gradient-brand shadow-glow" />
-                  )}
-                  <Icon className={cn("relative h-5 w-5", active && "scale-110")} strokeWidth={active ? 2.4 : 2} />
-                  <span className={cn("relative text-[10px] font-semibold tracking-wide", !active && "opacity-80")}>
-                    {label}
-                  </span>
-                </Link>
-              );
-            })}
+          {/* Liquid glass container */}
+          <div className="relative rounded-full p-1.5 border border-white/20 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden">
+            {/* Specular highlight */}
+            <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+
+            {/* Sliding liquid pill */}
+            <span
+              aria-hidden
+              className="absolute top-1.5 bottom-1.5 rounded-full bg-gradient-brand shadow-glow will-change-transform"
+              style={{
+                width: `calc((100% - 0.75rem) / ${count})`,
+                left: "0.375rem",
+                transform: `translateX(calc(${activeIndex} * 100%))`,
+                transition:
+                  "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+              }}
+            />
+
+            <div className="relative flex items-center">
+              {tabs.map(({ to, label, icon: Icon }, i) => {
+                const active = i === activeIndex;
+                return (
+                  <Link
+                    key={to}
+                    to={to}
+                    preload="intent"
+                    className={cn(
+                      "relative flex-1 flex flex-col items-center justify-center gap-0.5 py-2 rounded-full select-none",
+                      "transition-colors duration-300",
+                      active
+                        ? "text-primary-foreground"
+                        : "text-muted-foreground active:text-foreground",
+                    )}
+                  >
+                    <Icon
+                      className={cn(
+                        "h-[18px] w-[18px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                        active ? "scale-110 -translate-y-0.5" : "scale-100",
+                      )}
+                      strokeWidth={active ? 2.4 : 2}
+                    />
+                    <span
+                      className={cn(
+                        "text-[10px] font-semibold tracking-wide transition-all duration-300",
+                        active ? "opacity-100" : "opacity-70",
+                      )}
+                    >
+                      {label}
+                    </span>
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </nav>
       </div>
