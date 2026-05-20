@@ -45,7 +45,7 @@ function Farm() {
         <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Avg APR" value={`${(farmPlots.reduce((s,p)=>s+p.apr,0)/farmPlots.length).toFixed(1)}%`} tone="success" />
       </div>
 
-      <h3 className="px-5 pt-6 pb-3 text-sm font-bold">Your plots</h3>
+      <h2 className="px-5 pt-6 pb-3 text-sm font-bold tracking-tight">Your plots</h2>
       <div className="px-5 space-y-2">
         {farmPlots.map((p) => (
           <Card key={p.id} className="p-4">
