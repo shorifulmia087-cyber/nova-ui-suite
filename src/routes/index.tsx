@@ -57,7 +57,7 @@ function Home() {
               <h1 className="text-xl font-extrabold text-foreground tracking-tight">
                 {user.name}
               </h1>
-              {user.verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
+              {verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
             </div>
           </div>
         </div>
