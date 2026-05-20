@@ -49,26 +49,6 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance — flat, left-aligned */}
-      <div className="px-5 mt-6 animate-slide-up">
-        <button className="flex items-center gap-1.5 text-muted-foreground">
-          <span className="text-sm">Est. total amount</span>
-          <ChevronDown className="h-4 w-4" />
-          <button
-            onClick={(e) => { e.stopPropagation(); setHidden((v) => !v); }}
-            className="ml-1 inline-flex"
-            aria-label="Toggle balance"
-          >
-            {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-          </button>
-        </button>
-        <div className="mt-1 flex items-baseline gap-2">
-          <p className="text-5xl font-extrabold tracking-tight text-foreground">
-            {hidden ? "••••" : user.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </p>
-          <span className="text-sm font-semibold text-muted-foreground tracking-wide">USD</span>
-        </div>
-      </div>
 
       {/* Quick actions — circular icon buttons */}
       <div className="px-5 mt-6 grid grid-cols-4 gap-2">
