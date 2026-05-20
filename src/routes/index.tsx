@@ -49,79 +49,75 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance hero — gradient */}
-      <div className="px-5 mt-5 animate-slide-up">
-        <Card className="relative overflow-hidden p-5 bg-gradient-card text-white border-0 shadow-navy">
-          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
-          <div className="absolute -right-20 bottom-0 h-32 w-32 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
-          <div className="relative">
-            <div className="flex items-center justify-between">
-              <p className="text-[11px] uppercase tracking-widest text-white/70">Total balance</p>
-              <button
-                onClick={() => setHidden((v) => !v)}
-                className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center"
-                aria-label="Toggle balance"
-              >
-                {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-              </button>
-            </div>
-            <p className="mt-1 text-4xl font-extrabold tracking-tight">{fmt(user.balance)}</p>
-          </div>
-        </Card>
+      {/* Balance — flat, left-aligned */}
+      <div className="px-5 mt-6 animate-slide-up">
+        <button className="flex items-center gap-1.5 text-muted-foreground">
+          <span className="text-sm">Est. total amount</span>
+          <ChevronDown className="h-4 w-4" />
+          <button
+            onClick={(e) => { e.stopPropagation(); setHidden((v) => !v); }}
+            className="ml-1 inline-flex"
+            aria-label="Toggle balance"
+          >
+            {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+          </button>
+        </button>
+        <div className="mt-1 flex items-baseline gap-2">
+          <p className="text-5xl font-extrabold tracking-tight text-foreground">
+            {hidden ? "••••" : user.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </p>
+          <span className="text-sm font-semibold text-muted-foreground tracking-wide">USD</span>
+        </div>
       </div>
 
-      {/* Promo banner carousel */}
-      <PromoBanners />
-
-
-
-      {/* Verify banner — minimal trust, enterprise */}
-      {!user.verified ? null : (
-        <div className="px-5 mt-4">
-          <div className="relative overflow-hidden bg-card rounded-md border border-border shadow-card p-4 flex items-center gap-3">
-            <div className="flex-shrink-0 h-11 w-11 rounded-md bg-[color:var(--accent)]/10 ring-1 ring-[color:var(--accent)]/20 flex items-center justify-center text-[color:var(--accent)]">
-              <ShieldCheck className="h-5 w-5" />
+      {/* Quick actions — circular icon buttons */}
+      <div className="px-5 mt-6 grid grid-cols-4 gap-2">
+        {[
+          { to: "/deposit", icon: Plus, label: "Deposit", primary: true },
+          { to: "/withdraw", icon: Minus, label: "Withdraw" },
+          { to: "/send", icon: ArrowRight, label: "Send" },
+          { to: "/more", icon: MoreHorizontal, label: "More" },
+        ].map(({ to, icon: I, label, primary }) => (
+          <Link key={to} to={to} className="flex flex-col items-center gap-2 group">
+            <div
+              className={`h-14 w-14 rounded-full flex items-center justify-center transition-all active:scale-95 ${
+                primary
+                  ? "bg-foreground text-background shadow-navy"
+                  : "bg-muted text-foreground"
+              }`}
+            >
+              <I className="h-5 w-5" strokeWidth={2.4} />
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-bold tracking-tight">Verify your identity</p>
-              <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">
-                Complete KYC to secure your account &amp; unlock higher limits.
+            <span className="text-[12px] font-medium text-foreground">{label}</span>
+          </Link>
+        ))}
+      </div>
+
+      {/* Verification — dark card with submit */}
+      {user.verified ? null : (
+        <div className="px-5 mt-6">
+          <div className="rounded-2xl bg-[#475569] text-white p-4 shadow-navy">
+            <div className="flex items-start gap-3">
+              <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-[#FFF1E6] flex items-center justify-center">
+                <ClipboardList className="h-5 w-5 text-[#EA580C]" strokeWidth={2.4} />
+              </div>
+              <p className="flex-1 text-[15px] font-semibold leading-snug pt-0.5">
+                Verification required. Please verify your identity.
               </p>
             </div>
             <Link
               to="/verify"
-              className="flex-shrink-0 inline-flex items-center h-9 px-3.5 rounded-md bg-gradient-mint text-white text-xs font-bold shadow-glow active:scale-95 transition-all"
+              className="mt-4 flex items-center justify-center h-12 rounded-full bg-white text-foreground text-base font-bold active:scale-[0.98] transition-transform"
             >
-              Verify
+              Submit
             </Link>
-            <div className="pointer-events-none absolute -right-6 -bottom-6 h-20 w-20 rounded-full bg-[color:var(--accent)]/10 blur-2xl" />
           </div>
         </div>
       )}
 
-      {/* Quick actions — premium refined soft */}
-      <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
-        {[
-          { to: "/tasks", icon: ClipboardList, label: "Tasks", color: "#F59E0B", hover: "hover:border-[#F59E0B]/30", grad: "linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0.06) 100%)" },
-          { to: "/deposit", icon: PlusCircle, label: "Add", color: "#14B8A6", hover: "hover:border-[#14B8A6]/30", grad: "linear-gradient(135deg, rgba(20,184,166,0.18) 0%, rgba(20,184,166,0.06) 100%)" },
-          { to: "/withdraw", icon: ArrowUpRight, label: "Withdraw", color: "#EF4444", hover: "hover:border-[#EF4444]/30", grad: "linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%)" },
-          { to: "/farm", icon: Sprout, label: "Farm", color: "#10B981", hover: "hover:border-[#10B981]/30", grad: "linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(16,185,129,0.06) 100%)" },
-        ].map(({ to, icon: I, label, color, hover, grad }) => (
-          <Link
-            key={to}
-            to={to}
-            className={`group flex flex-col items-center justify-center bg-card border border-border rounded-md py-4 px-2 shadow-card hover:shadow-navy ${hover} transition-all duration-200 active:scale-95`}
-          >
-            <div
-              className="mb-2.5 h-11 w-11 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-              style={{ background: grad }}
-            >
-              <I className="h-5 w-5" style={{ color }} strokeWidth={2.2} />
-            </div>
-            <span className="text-[12px] font-semibold tracking-tight">{label}</span>
-          </Link>
-        ))}
-      </div>
+      {/* Promo banner carousel */}
+      <PromoBanners />
+
 
 
       {/* My Cards */}
