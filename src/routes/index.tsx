@@ -148,21 +148,10 @@ function Home() {
 
 function RecentActivity() {
   const items = transactions.slice(0, 5);
-  const groups = items.reduce<Record<string, Tx[]>>((acc, t) => {
-    const key = t.date.split(" · ")[0];
-    (acc[key] ||= []).push(t);
-    return acc;
-  }, {});
-
   return (
-    <div className="px-5 space-y-4">
-      {Object.entries(groups).map(([label, rows]) => (
-        <div key={label}>
-          <p className="px-1 pb-1.5 text-[10.5px] font-semibold tracking-[0.08em] uppercase text-muted-foreground">
-            {label}
-          </p>
-          <div className="rounded-md bg-card border border-border shadow-card overflow-hidden">
-            {rows.map((t, i) => (
+    <div className="px-5">
+      <div className="rounded-md bg-card border border-border shadow-card overflow-hidden">
+        {items.map((t, i) => (
               <div key={t.id}>
                 {i > 0 && <div className="ml-[60px] h-px bg-border/70" />}
                 <TxRow tx={t} />
