@@ -54,7 +54,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1, viewport-fit=cover" },
       { title: "Ness — Premium Earning App" },
       { name: "description", content: "Ness is a premium fintech earning app. Grow your money with farms, tasks, and rewards." },
-      { name: "theme-color", content: "#0F172A" },
+      { name: "theme-color", content: "#FFFFFF" },
       { property: "og:title", content: "Ness — Premium Earning App" },
       { property: "og:description", content: "Grow your money with farms, tasks, and rewards." },
       { property: "og:type", content: "website" },
