@@ -180,7 +180,7 @@ function TxRow({ tx }: { tx: Tx }) {
     referral: "bg-primary/10 text-primary",
   };
   const Icons: Record<Tx["category"], React.ComponentType<{ className?: string }>> = {
-    earn: Sparkles, deposit: ArrowDownToLine, withdraw: ArrowUpFromLine, task: ListChecks, referral: Gift,
+    earn: Sparkles, deposit: ArrowDownToLine, withdraw: ArrowUpFromLine, task: ClipboardList, referral: Gift,
   };
   const Icon = Icons[tx.category];
   return (
