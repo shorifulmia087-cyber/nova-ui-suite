@@ -59,10 +59,10 @@ function Home() {
             )}
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-[10.5px] font-semibold text-muted-foreground leading-none tracking-[0.08em] uppercase">
+            <span className="text-eyebrow leading-none">
               Good morning
             </span>
-            <h1 className="mt-1.5 text-[17px] font-bold text-foreground tracking-tight leading-none truncate">
+            <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
               {user.name}
             </h1>
           </div>
