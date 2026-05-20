@@ -94,21 +94,30 @@ function Home() {
         ))}
       </div>
 
-      {/* Verify banner */}
+      {/* Verify banner — minimal trust, enterprise */}
       {!user.verified ? null : (
-        <Link to="/verify" className="block px-5 mt-4">
-          <Card className="p-4 flex items-center gap-3 bg-gradient-soft">
-            <div className="h-10 w-10 rounded-md bg-gradient-mint flex items-center justify-center text-white shadow-glow">
+        <div className="px-5 mt-4">
+          <div className="relative overflow-hidden bg-card rounded-md border border-border shadow-card p-4 flex items-center gap-3">
+            <div className="flex-shrink-0 h-11 w-11 rounded-md bg-[color:var(--accent)]/10 ring-1 ring-[color:var(--accent)]/20 flex items-center justify-center text-[color:var(--accent)]">
               <ShieldCheck className="h-5 w-5" />
             </div>
-            <div className="flex-1">
-              <p className="text-sm font-bold">Boost your limits</p>
-              <p className="text-xs text-muted-foreground">Verify your account to unlock $10k/day withdrawals.</p>
+            <div className="flex-1 min-w-0">
+              <p className="text-sm font-bold tracking-tight">Verify your identity</p>
+              <p className="text-[11px] text-muted-foreground mt-0.5 leading-snug">
+                Complete KYC to secure your account &amp; unlock higher limits.
+              </p>
             </div>
-            <ChevronRight className="h-4 w-4 text-muted-foreground" />
-          </Card>
-        </Link>
+            <Link
+              to="/verify"
+              className="flex-shrink-0 inline-flex items-center h-9 px-3.5 rounded-md bg-gradient-mint text-white text-xs font-bold shadow-glow active:scale-95 transition-all"
+            >
+              Verify
+            </Link>
+            <div className="pointer-events-none absolute -right-6 -bottom-6 h-20 w-20 rounded-full bg-[color:var(--accent)]/10 blur-2xl" />
+          </div>
+        </div>
       )}
+
 
       {/* My Cards */}
       <SectionLabel
