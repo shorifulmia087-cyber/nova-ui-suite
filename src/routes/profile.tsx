@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import {
@@ -11,6 +12,17 @@ export const Route = createFileRoute("/profile")({
   head: () => ({ meta: [{ title: "Profile — Ness" }, { name: "description", content: "Manage your account, security, and preferences." }] }),
   component: Profile,
 });
+
+function useVerified() {
+  const [v, setV] = useState(user.verified);
+  useEffect(() => {
+    const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
+    read();
+    window.addEventListener("storage", read);
+    return () => window.removeEventListener("storage", read);
+  }, []);
+  return v;
+}
 
 function Profile() {
   return (
