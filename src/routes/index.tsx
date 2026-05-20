@@ -7,6 +7,7 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
+import avatarUser from "@/assets/avatar-user.jpg";
 
 function useVerified() {
   const [v, setV] = useState(user.verified);
