@@ -96,8 +96,7 @@ function Home() {
       </div>
 
       {/* Verification — dark card with submit */}
-      {/* Verification — dark card with submit */}
-      {(
+      {!verified && (
 
         <div className="px-5 mt-6">
           <div className="rounded-2xl bg-primary text-primary-foreground p-4 shadow-navy">
