@@ -36,6 +36,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
+  const verified = useVerified();
   const fmt = (n: number) =>
     hidden ? "••••••" : `৳${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
