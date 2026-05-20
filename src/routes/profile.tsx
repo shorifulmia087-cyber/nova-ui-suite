@@ -91,7 +91,7 @@ function Profile() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mt-5">
-      <h3 className="px-5 pb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{title}</h3>
+      <h2 className="px-5 pb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{title}</h2>
       <div className="px-5"><Card className="overflow-hidden divide-y divide-border border-0">{children}</Card></div>
     </div>
   );
