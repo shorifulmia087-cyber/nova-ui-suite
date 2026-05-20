@@ -48,24 +48,28 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance hero — minimal */}
+      {/* Balance hero — gradient */}
       <div className="px-5 mt-5 animate-slide-up">
-        <Card className="p-5">
-          <div className="flex items-center justify-between">
-            <p className="text-[11px] uppercase tracking-widest text-muted-foreground">Total balance</p>
-            <button
-              onClick={() => setHidden((v) => !v)}
-              className="h-8 w-8 rounded-full bg-muted flex items-center justify-center text-muted-foreground"
-              aria-label="Toggle balance"
-            >
-              {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-            </button>
-          </div>
-          <p className="mt-1 text-4xl font-extrabold tracking-tight text-foreground">{fmt(user.balance)}</p>
-          <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-[color:var(--success)]/10 px-2.5 py-1 text-xs">
-            <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
-            <span className="font-semibold text-[color:var(--success)]">+{fmt(user.earnings)}</span>
-            <span className="text-muted-foreground">this month</span>
+        <Card className="relative overflow-hidden p-5 bg-gradient-card text-white border-0 shadow-navy">
+          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+          <div className="absolute -right-20 bottom-0 h-32 w-32 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              <p className="text-[11px] uppercase tracking-widest text-white/70">Total balance</p>
+              <button
+                onClick={() => setHidden((v) => !v)}
+                className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center"
+                aria-label="Toggle balance"
+              >
+                {hidden ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+            <p className="mt-1 text-4xl font-extrabold tracking-tight">{fmt(user.balance)}</p>
+            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs">
+              <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
+              <span className="font-semibold">+{fmt(user.earnings)}</span>
+              <span className="text-white/70">this month</span>
+            </div>
           </div>
         </Card>
       </div>
@@ -89,12 +93,6 @@ function Home() {
             <span className="text-[11px] font-semibold">{label}</span>
           </Link>
         ))}
-      </div>
-
-      {/* Stats */}
-      <div className="px-5 mt-4 flex gap-3 animate-slide-up">
-        <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earnings" value={fmt(user.earnings)} tone="success" />
-        <StatPill icon={<TrendingUp className="h-3.5 w-3.5" />} label="Pending" value={fmt(user.pending)} tone="warning" />
       </div>
 
       {/* Verify banner */}
