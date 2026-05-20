@@ -43,7 +43,7 @@ function Tasks() {
           return (
             <Card key={t.id} className="p-4">
               <div className="flex items-start gap-3">
-                <div className={`h-9 w-9 rounded-xl flex items-center justify-center ${done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
+                <div className={`h-9 w-9 rounded-md flex items-center justify-center ${done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
                   {done ? <CheckCircle2 className="h-5 w-5" /> : <Circle className="h-5 w-5" />}
                 </div>
                 <div className="flex-1 min-w-0">

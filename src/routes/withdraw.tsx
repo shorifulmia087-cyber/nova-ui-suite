@@ -45,7 +45,7 @@ function Withdraw() {
           <button
             key={p}
             onClick={() => setAmt(Math.round((user.balance * p) / 100))}
-            className="flex-1 h-10 rounded-xl bg-muted text-sm font-bold hover:bg-muted/70"
+            className="flex-1 h-10 rounded-md bg-muted text-sm font-bold hover:bg-muted/70"
           >
             {p}%
           </button>
@@ -60,7 +60,7 @@ function Withdraw() {
           { Icon: Wallet, t: "Add new method" },
         ].map((m, i) => (
           <Card key={i} className={`p-4 flex items-center gap-3 ${m.active ? "border-[color:var(--accent)]" : ""}`}>
-            <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
+            <div className={`h-10 w-10 rounded-md flex items-center justify-center ${m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
               <m.Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -72,7 +72,7 @@ function Withdraw() {
       </div>
 
       <div className="px-5 mt-5">
-        <div className="rounded-xl bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/30 p-3 flex items-start gap-2 text-xs text-[color:var(--warning)]">
+        <div className="rounded-md bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/30 p-3 flex items-start gap-2 text-xs text-[color:var(--warning)]">
           <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
           <p>Withdrawals typically process within 1-2 business days.</p>
         </div>

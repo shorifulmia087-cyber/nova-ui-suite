@@ -81,7 +81,7 @@ function Home() {
                 <Link
                   key={to}
                   to={to}
-                  className="flex flex-col items-center gap-1.5 rounded-xl bg-white/10 hover:bg-white/15 transition py-3 text-[11px] font-semibold"
+                  className="flex flex-col items-center gap-1.5 rounded-md bg-white/10 hover:bg-white/15 transition py-3 text-[11px] font-semibold"
                 >
                   <I className="h-5 w-5" />
                   {label}
@@ -102,7 +102,7 @@ function Home() {
       {!user.verified ? null : (
         <Link to="/verify" className="block px-5 mt-4">
           <Card className="p-4 flex items-center gap-3 bg-gradient-soft">
-            <div className="h-10 w-10 rounded-xl bg-gradient-mint flex items-center justify-center text-white shadow-glow">
+            <div className="h-10 w-10 rounded-md bg-gradient-mint flex items-center justify-center text-white shadow-glow">
               <ShieldCheck className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -124,7 +124,7 @@ function Home() {
         {cards.map((c) => (
           <div
             key={c.id}
-            className={`relative shrink-0 w-[230px] h-[140px] rounded-2xl p-4 text-white overflow-hidden shadow-navy ${c.gradient}`}
+            className={`relative shrink-0 w-[230px] h-[140px] rounded-md p-4 text-white overflow-hidden shadow-navy ${c.gradient}`}
           >
             <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-white/15 blur-xl" />
             <div className="flex items-center justify-between text-xs">
@@ -154,7 +154,7 @@ function Home() {
       <div className="px-5 mt-6">
         <Link to="/refer">
           <Card className="p-4 flex items-center gap-3 bg-gradient-brand text-white border-0 shadow-glow">
-            <div className="h-11 w-11 rounded-xl bg-white/15 flex items-center justify-center">
+            <div className="h-11 w-11 rounded-md bg-white/15 flex items-center justify-center">
               <Gift className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -184,7 +184,7 @@ function TxRow({ tx }: { tx: Tx }) {
   const Icon = Icons[tx.category];
   return (
     <Card className="p-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-xl flex items-center justify-center ${colors[tx.category]}`}>
+      <div className={`h-10 w-10 rounded-md flex items-center justify-center ${colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>
       <div className="flex-1 min-w-0">
