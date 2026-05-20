@@ -72,35 +72,6 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance — minimal & premium */}
-      <div className="px-5 mt-8">
-        <div className="flex items-center justify-between">
-          <p className="text-[12px] font-medium text-muted-foreground">
-            Available balance
-          </p>
-          <button
-            onClick={() => setHidden((h) => !h)}
-            aria-label={hidden ? "Show balance" : "Hide balance"}
-            className="h-7 w-7 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
-          >
-            {hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-          </button>
-        </div>
-
-        <div className="mt-2 flex items-baseline gap-1">
-          <span className="text-lg font-medium text-muted-foreground">৳</span>
-          <h2 className="text-[40px] leading-none font-semibold tracking-tight text-foreground tabular-nums">
-            {hidden ? "••••••" : user.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-          </h2>
-        </div>
-
-        <div className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium text-[color:var(--success)]">
-          <TrendingUp className="h-3 w-3" />
-          +৳{user.earnings.toFixed(2)} today
-        </div>
-
-        <div className="mt-5 h-px bg-border" />
-      </div>
 
       {/* Quick actions — circular icon buttons */}
       <div className="px-5 mt-5 grid grid-cols-4 gap-2">
