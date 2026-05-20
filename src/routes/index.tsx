@@ -72,7 +72,33 @@ function Home() {
         </Link>
       </div>
 
-
+      {/* Balance — minimal */}
+      <div className="px-5 mt-7">
+        <div className="flex items-end justify-between">
+          <div>
+            <p className="text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
+              Available balance
+            </p>
+            <div className="mt-1.5 flex items-baseline gap-2">
+              <h2 className="text-[34px] leading-none font-extrabold tracking-tight text-foreground tabular-nums">
+                {fmt(user.balance)}
+              </h2>
+              <button
+                onClick={() => setHidden((h) => !h)}
+                aria-label={hidden ? "Show balance" : "Hide balance"}
+                className="h-7 w-7 rounded-full flex items-center justify-center text-muted-foreground hover:bg-muted transition-colors"
+              >
+                {hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+              </button>
+            </div>
+          </div>
+          <div className="inline-flex items-center gap-1 text-[12px] font-semibold text-[color:var(--success)]">
+            <TrendingUp className="h-3.5 w-3.5" />
+            +৳{user.earnings.toFixed(2)}
+          </div>
+        </div>
+        <div className="mt-4 h-px bg-border" />
+      </div>
 
       {/* Quick actions — circular icon buttons */}
       <div className="mt-6 grid grid-cols-4 gap-2">
