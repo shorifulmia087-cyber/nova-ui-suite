@@ -7,6 +7,7 @@ import {
   HelpCircle, FileText, LogOut, Moon, Globe, Wallet,
 } from "lucide-react";
 import { user } from "@/lib/mock";
+import avatarUser from "@/assets/avatar-user.jpg";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({ meta: [{ title: "Profile — Ness" }, { name: "description", content: "Manage your account, security, and preferences." }] }),
@@ -39,8 +40,8 @@ function Profile() {
       <div className="px-5">
         <Card className="p-5 bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-md bg-gradient-brand text-primary-foreground flex items-center justify-center text-xl font-extrabold shadow-glow">
-              {user.avatar}
+            <div className="h-16 w-16 rounded-md overflow-hidden bg-muted shadow-glow">
+              <img src={avatarUser} alt={user.name} width={64} height={64} className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-base font-bold flex items-center gap-1.5">
