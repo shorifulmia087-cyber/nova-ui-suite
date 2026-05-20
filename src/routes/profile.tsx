@@ -25,6 +25,7 @@ function useVerified() {
 }
 
 function Profile() {
+  const verified = useVerified();
   return (
     <div>
       <ScreenHeader title="Profile" back={false} />
@@ -38,7 +39,7 @@ function Profile() {
             <div className="flex-1 min-w-0">
               <p className="text-base font-bold flex items-center gap-1.5">
                 {user.name}
-                {user.verified && <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />}
+                {verified && <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />}
               </p>
               <p className="text-xs text-muted-foreground">{user.handle}</p>
               <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[color:var(--warning)]/15 text-[color:var(--warning)]">
@@ -50,7 +51,7 @@ function Profile() {
       </div>
 
       <Section title="Account">
-        <Row to="/verify" icon={ShieldCheck} label="Verify identity" hint="Active" tone="success" />
+        <Row to="/verify" icon={ShieldCheck} label="Verify identity" hint={verified ? "Verified" : "Required"} tone={verified ? "success" : "default"} />
         <Row to="/deposit" icon={Wallet} label="Payment methods" hint="3 cards" />
         <Row to="/transactions" icon={FileText} label="Transaction history" />
       </Section>
