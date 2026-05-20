@@ -4,7 +4,7 @@ import {
   ClipboardList, Gift, ChevronRight, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
 
