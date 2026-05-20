@@ -87,8 +87,9 @@ export function StatPill({
 export function SectionLabel({ children, action }: { children: ReactNode; action?: ReactNode }) {
   return (
     <div className="flex items-center justify-between px-5 pt-6 pb-3">
-      <h3 className="text-sm font-bold tracking-tight">{children}</h3>
+      <h2 className="text-sm font-bold tracking-tight">{children}</h2>
       {action}
     </div>
   );
 }
+
