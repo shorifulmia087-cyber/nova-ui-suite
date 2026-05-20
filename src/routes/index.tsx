@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Bell, ShieldCheck, ArrowDownToLine, ArrowUpFromLine, Sprout,
-  ListChecks, Gift, ChevronRight, Eye, EyeOff, TrendingUp, Sparkles,
+  ClipboardList, Gift, ChevronRight, Eye, EyeOff, TrendingUp, Sparkles,
+  PlusCircle, ArrowUpRight,
 } from "lucide-react";
 import { useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
