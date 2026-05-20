@@ -27,7 +27,6 @@ export function MobileShell() {
     if (preloadedRef.current) return;
     preloadedRef.current = true;
 
-    // Neighbours of the currently active tab are the most likely next taps
     const neighbours = new Set<string>();
     if (activeIndex > 0) neighbours.add(tabs[activeIndex - 1].to);
     if (activeIndex < tabs.length - 1) neighbours.add(tabs[activeIndex + 1].to);
@@ -58,12 +57,9 @@ export function MobileShell() {
         </main>
 
         <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-4 pt-2 z-50">
-          {/* Liquid glass container */}
           <div className="relative rounded-full p-1.5 border border-white/20 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden">
-            {/* Specular highlight */}
             <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
 
-            {/* Sliding liquid pill */}
             <span
               aria-hidden
               className="absolute top-1.5 bottom-1.5 rounded-full bg-gradient-brand shadow-glow will-change-transform"
@@ -101,7 +97,7 @@ export function MobileShell() {
                     />
                     <span
                       className={cn(
-                        "text-[11.5px] font-semibold tracking-wide leading-none transition-all duration-300",
+                        "text-tab leading-none transition-all duration-300",
                         active ? "opacity-100" : "opacity-70",
                       )}
                     >

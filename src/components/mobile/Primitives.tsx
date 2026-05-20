@@ -30,9 +30,9 @@ export function ActionButton({
   ...rest
 }: PrimaryBtnProps) {
   const sizes = {
-    sm: "h-9 px-4 text-xs",
-    md: "h-12 px-5 text-sm",
-    lg: "h-14 px-6 text-base",
+    sm: "h-9 px-4",
+    md: "h-12 px-5",
+    lg: "h-14 px-6",
   } as const;
   const variants = {
     brand: "bg-gradient-brand text-primary-foreground shadow-glow hover:opacity-95",
@@ -44,7 +44,7 @@ export function ActionButton({
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-all duration-200 active:scale-[0.98] disabled:opacity-50",
+        "text-button inline-flex items-center justify-center gap-2 rounded-md transition-all duration-200 active:scale-[0.98] disabled:opacity-50",
         sizes[size],
         variants[variant],
         className,
@@ -75,11 +75,11 @@ export function StatPill({
   } as const;
   return (
     <div className="flex-1 rounded-md bg-card border border-border p-3 shadow-card">
-      <div className="flex items-center gap-2 text-muted-foreground text-[11px] font-medium">
+      <div className="text-caption flex items-center gap-2">
         {icon}
         <span>{label}</span>
       </div>
-      <div className={cn("mt-1 font-bold text-lg font-[var(--font-display)]", tones[tone])}>{value}</div>
+      <div className={cn("mt-1 text-card-title", tones[tone])}>{value}</div>
     </div>
   );
 }
@@ -92,5 +92,3 @@ export function SectionLabel({ children, action }: { children: ReactNode; action
     </div>
   );
 }
-
-
