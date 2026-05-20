@@ -70,6 +70,11 @@ function Home() {
         </Card>
       </div>
 
+      {/* Promo banner carousel */}
+      <PromoBanners />
+
+
+
       {/* Quick actions — premium refined soft */}
       <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
         {[
