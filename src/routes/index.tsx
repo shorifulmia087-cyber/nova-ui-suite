@@ -137,7 +137,7 @@ function Home() {
           <TxRow key={t.id} tx={t} />
         ))}
       </div>
-
+    </div>
   );
 }
 
