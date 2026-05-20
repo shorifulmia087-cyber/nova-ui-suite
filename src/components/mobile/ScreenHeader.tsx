@@ -26,9 +26,10 @@ export function ScreenHeader({
         </button>
       )}
       <div className="flex-1 min-w-0">
-        <h1 className="text-xl font-bold leading-tight truncate">{title}</h1>
-        {subtitle && <p className="text-xs text-muted-foreground mt-0.5">{subtitle}</p>}
+        <h1 className="text-page-title truncate">{title}</h1>
+        {subtitle && <p className="text-section-subtitle mt-1">{subtitle}</p>}
       </div>
+
       {right}
     </header>
   );
