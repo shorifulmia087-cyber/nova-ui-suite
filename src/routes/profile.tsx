@@ -1,0 +1,102 @@
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { ScreenHeader } from "@/components/mobile/ScreenHeader";
+import { Card } from "@/components/mobile/Primitives";
+import {
+  ShieldCheck, ChevronRight, CreditCard, Lock, Bell,
+  HelpCircle, FileText, LogOut, Moon, Globe, Wallet,
+} from "lucide-react";
+import { user } from "@/lib/mock";
+
+export const Route = createFileRoute("/profile")({
+  head: () => ({ meta: [{ title: "Profile — Ness" }, { name: "description", content: "Manage your account, security, and preferences." }] }),
+  component: Profile,
+});
+
+function Profile() {
+  return (
+    <div>
+      <ScreenHeader title="Profile" back={false} />
+
+      <div className="px-5">
+        <Card className="p-5 bg-gradient-soft">
+          <div className="flex items-center gap-4">
+            <div className="h-16 w-16 rounded-2xl bg-gradient-brand text-primary-foreground flex items-center justify-center text-xl font-extrabold shadow-glow">
+              {user.avatar}
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-base font-bold flex items-center gap-1.5">
+                {user.name}
+                {user.verified && <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />}
+              </p>
+              <p className="text-xs text-muted-foreground">{user.handle}</p>
+              <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-[color:var(--warning)]/15 text-[color:var(--warning)]">
+                {user.level}
+              </span>
+            </div>
+          </div>
+        </Card>
+      </div>
+
+      <Section title="Account">
+        <Row to="/verify" icon={ShieldCheck} label="Verify identity" hint="Active" tone="success" />
+        <Row to="/deposit" icon={Wallet} label="Payment methods" hint="3 cards" />
+        <Row to="/transactions" icon={FileText} label="Transaction history" />
+      </Section>
+
+      <Section title="Preferences">
+        <Row to="/notifications" icon={Bell} label="Notifications" hint="On" />
+        <Row icon={Moon} label="Appearance" hint="System" />
+        <Row icon={Globe} label="Language" hint="English" />
+      </Section>
+
+      <Section title="Security">
+        <Row icon={Lock} label="Change passcode" />
+        <Row icon={CreditCard} label="Connected cards" />
+      </Section>
+
+      <Section title="Support">
+        <Row icon={HelpCircle} label="Help center" />
+        <Row icon={FileText} label="Terms & privacy" />
+      </Section>
+
+      <div className="px-5 mt-4 mb-2">
+        <button className="w-full h-12 rounded-2xl bg-destructive/10 text-destructive font-semibold inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
+          <LogOut className="h-4 w-4" /> Log out
+        </button>
+      </div>
+      <p className="text-center text-[10px] text-muted-foreground pb-2">Ness · v1.0.0</p>
+    </div>
+  );
+}
+
+function Section({ title, children }: { title: string; children: React.ReactNode }) {
+  return (
+    <div className="mt-5">
+      <h3 className="px-5 pb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{title}</h3>
+      <div className="px-5"><Card className="overflow-hidden divide-y divide-border">{children}</Card></div>
+    </div>
+  );
+}
+
+function Row({
+  to, icon: Icon, label, hint, tone = "default",
+}: {
+  to?: string; icon: React.ComponentType<{ className?: string }>;
+  label: string; hint?: string; tone?: "default" | "success";
+}) {
+  const inner = (
+    <div className="flex items-center gap-3 px-4 py-3.5 hover:bg-muted/50 transition">
+      <div className="h-9 w-9 rounded-xl bg-muted flex items-center justify-center text-foreground">
+        <Icon className="h-4.5 w-4.5" />
+      </div>
+      <span className="flex-1 text-sm font-medium">{label}</span>
+      {hint && (
+        <span className={`text-xs font-semibold ${tone === "success" ? "text-[color:var(--success)]" : "text-muted-foreground"}`}>
+          {hint}
+        </span>
+      )}
+      <ChevronRight className="h-4 w-4 text-muted-foreground" />
+    </div>
+  );
+  return to ? <Link to={to}>{inner}</Link> : <button className="w-full text-left">{inner}</button>;
+}
