@@ -18,7 +18,7 @@ function Profile() {
       <ScreenHeader title="Profile" back={false} />
 
       <div className="px-5">
-        <Card className="p-5 bg-gradient-soft">
+        <Card className="p-5 bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-md bg-gradient-brand text-primary-foreground flex items-center justify-center text-xl font-extrabold shadow-glow">
               {user.avatar}
@@ -73,7 +73,7 @@ function Section({ title, children }: { title: string; children: React.ReactNode
   return (
     <div className="mt-5">
       <h3 className="px-5 pb-2 text-[11px] uppercase tracking-widest text-muted-foreground font-bold">{title}</h3>
-      <div className="px-5"><Card className="overflow-hidden divide-y divide-border">{children}</Card></div>
+      <div className="px-5"><Card className="overflow-hidden divide-y divide-border border-0">{children}</Card></div>
     </div>
   );
 }
