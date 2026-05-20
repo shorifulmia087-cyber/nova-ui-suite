@@ -179,6 +179,10 @@ function Home() {
   );
 }
 
+import bannerFarm from "@/assets/banner-farm.jpg";
+import bannerRefer from "@/assets/banner-refer.jpg";
+import bannerTasks from "@/assets/banner-tasks.jpg";
+
 const banners = [
   {
     id: "b1",
@@ -186,7 +190,8 @@ const banners = [
     title: "Earn 18% APR on Farm Plots",
     cta: "Start farming",
     to: "/farm",
-    bg: "linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)",
+    image: bannerFarm,
+    overlay: "linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.55) 55%, rgba(15,23,42,0.1) 100%)",
     accent: "#5EEAD4",
   },
   {
@@ -195,7 +200,8 @@ const banners = [
     title: "Refer a friend & get ৳2,500",
     cta: "Invite now",
     to: "/refer",
-    bg: "linear-gradient(135deg, #1E1B4B 0%, #4338CA 55%, #6366F1 100%)",
+    image: bannerRefer,
+    overlay: "linear-gradient(90deg, rgba(30,27,75,0.92) 0%, rgba(30,27,75,0.55) 55%, rgba(30,27,75,0.1) 100%)",
     accent: "#C7D2FE",
   },
   {
@@ -204,7 +210,8 @@ const banners = [
     title: "Complete tasks. Earn daily.",
     cta: "View tasks",
     to: "/tasks",
-    bg: "linear-gradient(135deg, #7C2D12 0%, #C2410C 55%, #F59E0B 100%)",
+    image: bannerTasks,
+    overlay: "linear-gradient(90deg, rgba(67,20,7,0.92) 0%, rgba(67,20,7,0.5) 55%, rgba(67,20,7,0.1) 100%)",
     accent: "#FED7AA",
   },
 ];
@@ -231,26 +238,35 @@ function PromoBanners() {
           <Link
             key={b.id}
             to={b.to}
-            className="snap-center shrink-0 w-full relative overflow-hidden rounded-md p-5 text-white shadow-navy"
-            style={{ background: b.bg }}
+            className="snap-center shrink-0 w-full relative overflow-hidden rounded-md text-white shadow-navy h-[128px]"
           >
-            <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
-            <div className="absolute -right-2 bottom-0 h-24 w-24 rounded-full blur-3xl" style={{ background: `${b.accent}40` }} />
-            <div className="relative">
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+            <img
+              src={b.image}
+              alt=""
+              loading="lazy"
+              width={800}
+              height={512}
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+            <div className="absolute inset-0" style={{ background: b.overlay }} />
+            <div className="relative p-5 h-full flex flex-col justify-between">
+              <span className="self-start inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/15 backdrop-blur-sm">
                 {b.eyebrow}
               </span>
-              <p className="mt-2 text-base font-bold leading-tight tracking-tight max-w-[75%]">
-                {b.title}
-              </p>
-              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold" style={{ color: b.accent }}>
-                {b.cta}
-                <ChevronRight className="h-3.5 w-3.5" />
+              <div>
+                <p className="text-base font-bold leading-tight tracking-tight max-w-[70%]">
+                  {b.title}
+                </p>
+                <div className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold" style={{ color: b.accent }}>
+                  {b.cta}
+                  <ChevronRight className="h-3.5 w-3.5" />
+                </div>
               </div>
             </div>
           </Link>
         ))}
       </div>
+
       <div className="flex items-center justify-center gap-1.5 mt-3">
         {banners.map((_, i) => (
           <span
