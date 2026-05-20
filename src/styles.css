@@ -160,34 +160,113 @@
     border: 1px solid rgba(255,255,255,0.14);
   }
 
-  /* ---------- Typography tokens (world-class scale) ---------- */
-  /* Screen / page title — H1 on sub-pages */
-  .text-page-title {
-    font-family: var(--font-display);
-    font-size: 1.5rem;        /* 24px */
-    line-height: 1.2;
+  /* ============================================================
+     TYPOGRAPHY TOKEN SYSTEM — single source of truth
+     Family: Inter. Weights: 400 / 500 / 600 / 700 only.
+     Use these classes. Do NOT use ad-hoc text-* / font-* values.
+     ============================================================ */
+  .text-display,
+  .text-screen-title,
+  .text-section-title,
+  .text-card-title,
+  .text-body,
+  .text-body-secondary,
+  .text-label,
+  .text-button,
+  .text-caption,
+  .text-tab,
+  .text-input,
+  .text-stat {
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Display — splash / onboarding hero */
+  .text-display {
+    font-size: 32px;
+    line-height: 40px;
+    font-weight: 700;
     letter-spacing: -0.02em;
-    font-weight: 700;
   }
-  /* Section heading — H2 inside a page */
+  /* Screen / page titles */
+  .text-screen-title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  /* Section headers */
   .text-section-title {
-    font-family: var(--font-display);
-    font-size: 1.1875rem;     /* 19px */
-    line-height: 1.25;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
     letter-spacing: -0.015em;
-    font-weight: 700;
   }
-  /* Section subtitle / lead paragraph */
-  .text-section-subtitle {
-    font-size: 0.875rem;      /* 14px */
-    line-height: 1.45;
+  /* Card / list important titles */
+  .text-card-title {
+    font-size: 18px;
+    line-height: 26px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  /* Primary readable body content */
+  .text-body {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  /* Secondary / helper / support text */
+  .text-body-secondary {
+    font-size: 14px;
+    line-height: 20px;
     font-weight: 400;
     color: var(--color-muted-foreground);
   }
+  /* Form labels */
+  .text-label {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+  }
+  /* Buttons */
+  .text-button {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+  }
+  /* Small metadata / timestamps / badges */
+  .text-caption {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 400;
+    color: var(--color-muted-foreground);
+  }
+  /* Bottom navigation labels */
+  .text-tab {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+  }
+  /* Input typed text */
+  .text-input {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+  /* Balances / earnings / key metrics */
+  .text-stat {
+    font-size: 28px;
+    line-height: 36px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+  }
+
   /* Eyebrow / overline (uppercase mini-label above groups) */
   .text-eyebrow {
-    font-size: 0.75rem;       /* 12px */
-    line-height: 1.4;
+    font-size: 12px;
+    line-height: 16px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
     font-weight: 600;
