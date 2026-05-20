@@ -28,26 +28,32 @@ function Home() {
     <div>
       {/* Top bar */}
       <div className="px-5 pt-6 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="h-10 w-10 rounded-full bg-gradient-brand text-primary-foreground flex items-center justify-center font-bold shadow-glow">
-            {user.avatar}
+        <div className="flex items-center gap-4">
+          <div className="relative">
+            <div className="absolute inset-0 bg-[color:var(--accent)] blur-md opacity-20 rounded-full" />
+            <div className="relative h-14 w-14 rounded-full bg-[color:var(--accent)] text-accent-foreground flex items-center justify-center font-bold text-lg tracking-tight border-2 border-background shadow-card">
+              {user.avatar}
+            </div>
           </div>
-          <div>
-            <p className="text-[11px] text-muted-foreground">Good morning</p>
-            <p className="text-sm font-bold flex items-center gap-1">
-              {user.name}
-              {user.verified && <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--accent)]" />}
-            </p>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-foreground/60 leading-none mb-1">Good morning</span>
+            <div className="flex items-center gap-1.5">
+              <h1 className="text-xl font-extrabold text-foreground tracking-tight">
+                {user.name}
+              </h1>
+              {user.verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
+            </div>
           </div>
         </div>
         <Link
           to="/notifications"
-          className="relative h-10 w-10 rounded-full bg-card border border-border shadow-card flex items-center justify-center"
+          className="relative h-12 w-12 rounded-2xl bg-card border border-border shadow-card flex items-center justify-center hover:bg-muted transition-colors"
         >
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-2 right-2 h-2 w-2 rounded-full bg-destructive" />
+          <Bell className="h-6 w-6 text-foreground" />
+          <span className="absolute top-3 right-3 h-3 w-3 rounded-full bg-destructive border-2 border-background" />
         </Link>
       </div>
+
 
 
       {/* Quick actions — circular icon buttons */}
