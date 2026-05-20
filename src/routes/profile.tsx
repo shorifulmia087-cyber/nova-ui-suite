@@ -7,6 +7,7 @@ import {
   HelpCircle, FileText, LogOut, Moon, Globe, Wallet,
 } from "lucide-react";
 import { user } from "@/lib/mock";
+import avatarUser from "@/assets/avatar-user.jpg";
 
 export const Route = createFileRoute("/profile")({
   head: () => ({ meta: [{ title: "Profile — Ness" }, { name: "description", content: "Manage your account, security, and preferences." }] }),
