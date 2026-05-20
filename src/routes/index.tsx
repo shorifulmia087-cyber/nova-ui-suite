@@ -72,50 +72,34 @@ function Home() {
         </Link>
       </div>
 
-      {/* Balance — refined card */}
-      <div className="px-5 mt-6">
-        <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-5 shadow-navy">
-          {/* decorative glow */}
-          <div className="pointer-events-none absolute -top-16 -right-16 h-44 w-44 rounded-full bg-[color:var(--accent)]/25 blur-3xl" />
-          <div className="pointer-events-none absolute -bottom-20 -left-10 h-40 w-40 rounded-full bg-white/5 blur-3xl" />
-
-          <div className="relative flex items-center justify-between">
-            <div className="inline-flex items-center gap-2">
-              <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--success)] shadow-[0_0_8px_var(--success)]" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-primary-foreground/70">
-                Available balance
-              </p>
-            </div>
-            <button
-              onClick={() => setHidden((h) => !h)}
-              aria-label={hidden ? "Show balance" : "Hide balance"}
-              className="h-8 w-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/15 text-primary-foreground transition-colors"
-            >
-              {hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-            </button>
-          </div>
-
-          <div className="relative mt-3 flex items-baseline gap-1.5">
-            <span className="text-xl font-semibold text-primary-foreground/70">৳</span>
-            <h2 className="text-[38px] leading-none font-extrabold tracking-tight tabular-nums">
-              {hidden ? "••••••" : user.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-            </h2>
-          </div>
-
-          <div className="relative mt-4 flex items-center justify-between">
-            <div className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--success)]/15 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--success)] ring-1 ring-[color:var(--success)]/25">
-              <TrendingUp className="h-3 w-3" />
-              +৳{user.earnings.toFixed(2)} today
-            </div>
-            <Link
-              to="/deposit"
-              className="inline-flex items-center gap-1 text-[12px] font-semibold text-primary-foreground/85 hover:text-primary-foreground"
-            >
-              Top up
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </Link>
-          </div>
+      {/* Balance — minimal & premium */}
+      <div className="px-5 mt-8">
+        <div className="flex items-center justify-between">
+          <p className="text-[12px] font-medium text-muted-foreground">
+            Available balance
+          </p>
+          <button
+            onClick={() => setHidden((h) => !h)}
+            aria-label={hidden ? "Show balance" : "Hide balance"}
+            className="h-7 w-7 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
+          >
+            {hidden ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
+          </button>
         </div>
+
+        <div className="mt-2 flex items-baseline gap-1">
+          <span className="text-lg font-medium text-muted-foreground">৳</span>
+          <h2 className="text-[40px] leading-none font-semibold tracking-tight text-foreground tabular-nums">
+            {hidden ? "••••••" : user.balance.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          </h2>
+        </div>
+
+        <div className="mt-3 inline-flex items-center gap-1 text-[12px] font-medium text-[color:var(--success)]">
+          <TrendingUp className="h-3 w-3" />
+          +৳{user.earnings.toFixed(2)} today
+        </div>
+
+        <div className="mt-5 h-px bg-border" />
       </div>
 
       {/* Quick actions — circular icon buttons */}
