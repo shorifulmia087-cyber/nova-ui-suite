@@ -66,11 +66,6 @@ function Home() {
               </button>
             </div>
             <p className="mt-1 text-4xl font-extrabold tracking-tight">{fmt(user.balance)}</p>
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/10 px-2.5 py-1 text-xs">
-              <TrendingUp className="h-3.5 w-3.5 text-[color:var(--success)]" />
-              <span className="font-semibold">+{fmt(user.earnings)}</span>
-              <span className="text-white/70">this month</span>
-            </div>
           </div>
         </Card>
       </div>
