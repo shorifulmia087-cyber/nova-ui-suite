@@ -45,32 +45,36 @@ function Home() {
   return (
     <div>
       {/* Top bar */}
-      <div className="px-5 pt-6 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative">
-            <div className="absolute inset-0 bg-[color:var(--accent)] blur-md opacity-20 rounded-full" />
-            <div className="relative h-14 w-14 rounded-full bg-[color:var(--accent)] text-accent-foreground flex items-center justify-center font-bold text-lg tracking-tight border-2 border-background shadow-card">
+      <header className="px-5 pt-5 pb-1 flex items-center justify-between">
+        <Link to="/profile" className="flex items-center gap-3 min-w-0">
+          <div className="relative shrink-0">
+            <div className="h-11 w-11 rounded-full bg-[color:var(--accent)] text-accent-foreground flex items-center justify-center font-bold text-[15px] tracking-tight shadow-card ring-2 ring-background">
               {user.avatar}
             </div>
+            {verified && (
+              <span className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center">
+                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3} />
+              </span>
+            )}
           </div>
-          <div className="flex flex-col">
-            <span className="text-sm font-medium text-foreground/60 leading-none mb-1">Good morning</span>
-            <div className="flex items-center gap-1.5">
-              <h1 className="text-xl font-extrabold text-foreground tracking-tight">
-                {user.name}
-              </h1>
-              {verified && <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />}
-            </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-[10.5px] font-semibold text-muted-foreground leading-none tracking-[0.08em] uppercase">
+              Good morning
+            </span>
+            <h1 className="mt-1.5 text-[17px] font-bold text-foreground tracking-tight leading-none truncate">
+              {user.name}
+            </h1>
           </div>
-        </div>
+        </Link>
         <Link
           to="/notifications"
-          className="relative h-12 w-12 rounded-2xl bg-card border border-border shadow-card flex items-center justify-center hover:bg-muted transition-colors"
+          aria-label="Notifications"
+          className="relative h-11 w-11 rounded-full bg-card border border-border shadow-card flex items-center justify-center hover:bg-muted transition-colors active:scale-95 shrink-0"
         >
-          <Bell className="h-6 w-6 text-foreground" />
-          <span className="absolute top-3 right-3 h-3 w-3 rounded-full bg-destructive border-2 border-background" />
+          <Bell className="h-[18px] w-[18px] text-foreground" strokeWidth={2.2} />
+          <span className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-destructive ring-2 ring-card" />
         </Link>
-      </div>
+      </header>
 
 
       {/* Quick actions — circular icon buttons */}
