@@ -299,7 +299,6 @@ function TxRow({ tx }: { tx: Tx }) {
                 className={`capitalize ${
                   tx.status === "pending" ? "text-[color:var(--warning)]" : "text-destructive"
                 }`}
-                style={{ fontWeight: 500 }}
               >
                 {tx.status}
               </span>
