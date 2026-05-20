@@ -4,7 +4,7 @@ import {
   ClipboardList, Gift, ChevronRight, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight,
 } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
 
@@ -69,6 +69,11 @@ function Home() {
           </div>
         </Card>
       </div>
+
+      {/* Promo banner carousel */}
+      <PromoBanners />
+
+
 
       {/* Quick actions — premium refined soft */}
       <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
@@ -169,6 +174,90 @@ function Home() {
             <ChevronRight className="h-4 w-4" />
           </Card>
         </Link>
+      </div>
+    </div>
+  );
+}
+
+const banners = [
+  {
+    id: "b1",
+    eyebrow: "Limited offer",
+    title: "Earn 18% APR on Farm Plots",
+    cta: "Start farming",
+    to: "/farm",
+    bg: "linear-gradient(135deg, #0F172A 0%, #134E4A 60%, #0D9488 100%)",
+    accent: "#5EEAD4",
+  },
+  {
+    id: "b2",
+    eyebrow: "Bonus",
+    title: "Refer a friend & get ৳2,500",
+    cta: "Invite now",
+    to: "/refer",
+    bg: "linear-gradient(135deg, #1E1B4B 0%, #4338CA 55%, #6366F1 100%)",
+    accent: "#C7D2FE",
+  },
+  {
+    id: "b3",
+    eyebrow: "New tasks",
+    title: "Complete tasks. Earn daily.",
+    cta: "View tasks",
+    to: "/tasks",
+    bg: "linear-gradient(135deg, #7C2D12 0%, #C2410C 55%, #F59E0B 100%)",
+    accent: "#FED7AA",
+  },
+];
+
+function PromoBanners() {
+  const scrollerRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const onScroll = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const idx = Math.round(el.scrollLeft / el.clientWidth);
+    if (idx !== active) setActive(idx);
+  };
+
+  return (
+    <div className="mt-4">
+      <div
+        ref={scrollerRef}
+        onScroll={onScroll}
+        className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth px-5 gap-3"
+      >
+        {banners.map((b) => (
+          <Link
+            key={b.id}
+            to={b.to}
+            className="snap-center shrink-0 w-full relative overflow-hidden rounded-md p-5 text-white shadow-navy"
+            style={{ background: b.bg }}
+          >
+            <div className="absolute -right-8 -top-8 h-28 w-28 rounded-full bg-white/15 blur-2xl" />
+            <div className="absolute -right-2 bottom-0 h-24 w-24 rounded-full blur-3xl" style={{ background: `${b.accent}40` }} />
+            <div className="relative">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+                {b.eyebrow}
+              </span>
+              <p className="mt-2 text-base font-bold leading-tight tracking-tight max-w-[75%]">
+                {b.title}
+              </p>
+              <div className="mt-3 inline-flex items-center gap-1.5 text-xs font-bold" style={{ color: b.accent }}>
+                {b.cta}
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
+      <div className="flex items-center justify-center gap-1.5 mt-3">
+        {banners.map((_, i) => (
+          <span
+            key={i}
+            className={`h-1.5 rounded-full transition-all ${i === active ? "w-5 bg-[color:var(--accent)]" : "w-1.5 bg-border"}`}
+          />
+        ))}
       </div>
     </div>
   );
