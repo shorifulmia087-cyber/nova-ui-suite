@@ -11,7 +11,7 @@
 import { type ElementType, type HTMLAttributes, createElement } from "react";
 import { cn } from "@/lib/utils";
 
-export const FONT_FAMILY = '"DM Sans", system-ui, sans-serif' as const;
+export const FONT_FAMILY = '"Google Sans", "DM Sans", system-ui, sans-serif' as const;
 
 export const FONT_WEIGHT = {
   regular: 400,
