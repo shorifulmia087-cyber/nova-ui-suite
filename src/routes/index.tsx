@@ -49,8 +49,8 @@ function Home() {
       <header className="px-5 pt-5 pb-1 flex items-center justify-between">
         <Link to="/profile" className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
-            <div className="h-11 w-11 rounded-full bg-[color:var(--accent)] text-accent-foreground flex items-center justify-center font-bold text-[15px] tracking-tight shadow-card ring-2 ring-background">
-              {user.avatar}
+            <div className="h-11 w-11 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
+              <img src={avatarUser} alt={user.name} width={44} height={44} className="h-full w-full object-cover" />
             </div>
             {verified && (
               <span className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center">
