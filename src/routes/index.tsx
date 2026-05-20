@@ -138,22 +138,6 @@ function Home() {
         ))}
       </div>
 
-      {/* Refer */}
-      <div className="px-5 mt-6">
-        <Link to="/refer">
-          <Card className="p-4 flex items-center gap-3 bg-gradient-brand text-white border-0 shadow-glow">
-            <div className="h-11 w-11 rounded-md bg-white/15 flex items-center justify-center">
-              <Gift className="h-5 w-5" />
-            </div>
-            <div className="flex-1">
-              <p className="text-sm font-bold">Earn $25 per friend</p>
-              <p className="text-xs text-white/75">Share your code and grow together.</p>
-            </div>
-            <ChevronRight className="h-4 w-4" />
-          </Card>
-        </Link>
-      </div>
-    </div>
   );
 }
 
