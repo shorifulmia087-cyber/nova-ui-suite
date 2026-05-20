@@ -1,11 +1,10 @@
 import { Outlet, Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { Home, ListChecks, Sprout, Gift, User } from "lucide-react";
+import { Home, Sprout, Gift, User } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
   { to: "/", label: "Home", icon: Home },
-  { to: "/tasks", label: "Tasks", icon: ListChecks },
   { to: "/farm", label: "Farm", icon: Sprout },
   { to: "/refer", label: "Refer", icon: Gift },
   { to: "/profile", label: "Profile", icon: User },
