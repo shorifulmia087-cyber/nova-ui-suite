@@ -1,5 +1,6 @@
-import { Outlet, Link, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, useRouter, useRouterState } from "@tanstack/react-router";
 import { Home, ListChecks, Sprout, Gift, User } from "lucide-react";
+import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const tabs = [
