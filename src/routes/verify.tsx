@@ -38,6 +38,7 @@ function Verify() {
     setStatus("submitting");
     setTimeout(() => {
       localStorage.setItem("nessVerified", "1");
+      window.dispatchEvent(new Event("ness:verified"));
       setStatus("verified");
     }, 1400);
   };
