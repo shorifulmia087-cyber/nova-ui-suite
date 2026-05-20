@@ -133,7 +133,7 @@ function Home() {
       {/* Recent activity */}
       <SectionLabel
         action={
-          <Link to="/transactions" className="inline-flex items-center gap-0.5 text-[12px] font-semibold text-muted-foreground hover:text-foreground transition-colors">
+          <Link to="/transactions" className="text-label inline-flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors">
             View all
             <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
           </Link>
