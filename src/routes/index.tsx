@@ -94,7 +94,9 @@ function Home() {
       </div>
 
       {/* Verification — dark card with submit */}
-      {user.verified ? null : (
+      {/* Verification — dark card with submit */}
+      {(
+
         <div className="px-5 mt-6">
           <div className="rounded-2xl bg-[#475569] text-white p-4 shadow-navy">
             <div className="flex items-start gap-3">
