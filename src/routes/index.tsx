@@ -75,30 +75,6 @@ function Home() {
 
 
 
-      {/* Quick actions — premium refined soft */}
-      <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
-        {[
-          { to: "/tasks", icon: ClipboardList, label: "Tasks", color: "#F59E0B", hover: "hover:border-[#F59E0B]/30", grad: "linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0.06) 100%)" },
-          { to: "/deposit", icon: PlusCircle, label: "Add", color: "#14B8A6", hover: "hover:border-[#14B8A6]/30", grad: "linear-gradient(135deg, rgba(20,184,166,0.18) 0%, rgba(20,184,166,0.06) 100%)" },
-          { to: "/withdraw", icon: ArrowUpRight, label: "Withdraw", color: "#EF4444", hover: "hover:border-[#EF4444]/30", grad: "linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%)" },
-          { to: "/farm", icon: Sprout, label: "Farm", color: "#10B981", hover: "hover:border-[#10B981]/30", grad: "linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(16,185,129,0.06) 100%)" },
-        ].map(({ to, icon: I, label, color, hover, grad }) => (
-          <Link
-            key={to}
-            to={to}
-            className={`group flex flex-col items-center justify-center bg-card border border-border rounded-md py-4 px-2 shadow-card hover:shadow-navy ${hover} transition-all duration-200 active:scale-95`}
-          >
-            <div
-              className="mb-2.5 h-11 w-11 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-              style={{ background: grad }}
-            >
-              <I className="h-5 w-5" style={{ color }} strokeWidth={2.2} />
-            </div>
-            <span className="text-[12px] font-semibold tracking-tight">{label}</span>
-          </Link>
-        ))}
-      </div>
-
       {/* Verify banner — minimal trust, enterprise */}
       {!user.verified ? null : (
         <div className="px-5 mt-4">
@@ -122,6 +98,30 @@ function Home() {
           </div>
         </div>
       )}
+
+      {/* Quick actions — premium refined soft */}
+      <div className="px-5 mt-4 grid grid-cols-4 gap-3 animate-slide-up">
+        {[
+          { to: "/tasks", icon: ClipboardList, label: "Tasks", color: "#F59E0B", hover: "hover:border-[#F59E0B]/30", grad: "linear-gradient(135deg, rgba(245,158,11,0.18) 0%, rgba(245,158,11,0.06) 100%)" },
+          { to: "/deposit", icon: PlusCircle, label: "Add", color: "#14B8A6", hover: "hover:border-[#14B8A6]/30", grad: "linear-gradient(135deg, rgba(20,184,166,0.18) 0%, rgba(20,184,166,0.06) 100%)" },
+          { to: "/withdraw", icon: ArrowUpRight, label: "Withdraw", color: "#EF4444", hover: "hover:border-[#EF4444]/30", grad: "linear-gradient(135deg, rgba(239,68,68,0.18) 0%, rgba(239,68,68,0.06) 100%)" },
+          { to: "/farm", icon: Sprout, label: "Farm", color: "#10B981", hover: "hover:border-[#10B981]/30", grad: "linear-gradient(135deg, rgba(16,185,129,0.18) 0%, rgba(16,185,129,0.06) 100%)" },
+        ].map(({ to, icon: I, label, color, hover, grad }) => (
+          <Link
+            key={to}
+            to={to}
+            className={`group flex flex-col items-center justify-center bg-card border border-border rounded-md py-4 px-2 shadow-card hover:shadow-navy ${hover} transition-all duration-200 active:scale-95`}
+          >
+            <div
+              className="mb-2.5 h-11 w-11 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
+              style={{ background: grad }}
+            >
+              <I className="h-5 w-5" style={{ color }} strokeWidth={2.2} />
+            </div>
+            <span className="text-[12px] font-semibold tracking-tight">{label}</span>
+          </Link>
+        ))}
+      </div>
 
 
       {/* My Cards */}
