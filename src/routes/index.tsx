@@ -4,7 +4,7 @@ import {
   ListChecks, Gift, ChevronRight, Eye, EyeOff, TrendingUp, Sparkles,
 } from "lucide-react";
 import { useState } from "react";
-import { Card, SectionLabel, StatPill } from "@/components/mobile/Primitives";
+import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
 
 export const Route = createFileRoute("/")({
