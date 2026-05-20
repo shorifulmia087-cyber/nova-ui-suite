@@ -4,9 +4,24 @@ import {
   ClipboardList, Gift, ChevronRight, ChevronDown, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight, Plus, Minus, ArrowRight, MoreHorizontal,
 } from "lucide-react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { user, transactions, cards } from "@/lib/mock";
+
+function useVerified() {
+  const [v, setV] = useState(user.verified);
+  useEffect(() => {
+    const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
+    read();
+    window.addEventListener("storage", read);
+    window.addEventListener("focus", read);
+    return () => {
+      window.removeEventListener("storage", read);
+      window.removeEventListener("focus", read);
+    };
+  }, []);
+  return v;
+}
 
 export const Route = createFileRoute("/")({
   head: () => ({
