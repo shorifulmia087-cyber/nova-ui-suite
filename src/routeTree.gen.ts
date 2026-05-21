@@ -13,9 +13,11 @@ import { Route as WithdrawRouteImport } from './routes/withdraw'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReferRouteImport } from './routes/refer'
 import { Route as ProfileRouteImport } from './routes/profile'
 import { Route as NotificationsRouteImport } from './routes/notifications'
+import { Route as LoginRouteImport } from './routes/login'
 import { Route as FarmRouteImport } from './routes/farm'
 import { Route as DepositRouteImport } from './routes/deposit'
 import { Route as IndexRouteImport } from './routes/index'
@@ -40,6 +42,11 @@ const TasksRoute = TasksRouteImport.update({
   path: '/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SignupRoute = SignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReferRoute = ReferRouteImport.update({
   id: '/refer',
   path: '/refer',
@@ -53,6 +60,11 @@ const ProfileRoute = ProfileRouteImport.update({
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FarmRoute = FarmRouteImport.update({
@@ -75,9 +87,11 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/deposit': typeof DepositRoute
   '/farm': typeof FarmRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
+  '/signup': typeof SignupRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -87,9 +101,11 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/deposit': typeof DepositRoute
   '/farm': typeof FarmRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
+  '/signup': typeof SignupRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -100,9 +116,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/deposit': typeof DepositRoute
   '/farm': typeof FarmRoute
+  '/login': typeof LoginRoute
   '/notifications': typeof NotificationsRoute
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
+  '/signup': typeof SignupRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -114,9 +132,11 @@ export interface FileRouteTypes {
     | '/'
     | '/deposit'
     | '/farm'
+    | '/login'
     | '/notifications'
     | '/profile'
     | '/refer'
+    | '/signup'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -126,9 +146,11 @@ export interface FileRouteTypes {
     | '/'
     | '/deposit'
     | '/farm'
+    | '/login'
     | '/notifications'
     | '/profile'
     | '/refer'
+    | '/signup'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -138,9 +160,11 @@ export interface FileRouteTypes {
     | '/'
     | '/deposit'
     | '/farm'
+    | '/login'
     | '/notifications'
     | '/profile'
     | '/refer'
+    | '/signup'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -151,9 +175,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DepositRoute: typeof DepositRoute
   FarmRoute: typeof FarmRoute
+  LoginRoute: typeof LoginRoute
   NotificationsRoute: typeof NotificationsRoute
   ProfileRoute: typeof ProfileRoute
   ReferRoute: typeof ReferRoute
+  SignupRoute: typeof SignupRoute
   TasksRoute: typeof TasksRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
@@ -190,6 +216,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/signup': {
+      id: '/signup'
+      path: '/signup'
+      fullPath: '/signup'
+      preLoaderRoute: typeof SignupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/refer': {
       id: '/refer'
       path: '/refer'
@@ -209,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/farm': {
@@ -239,9 +279,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DepositRoute: DepositRoute,
   FarmRoute: FarmRoute,
+  LoginRoute: LoginRoute,
   NotificationsRoute: NotificationsRoute,
   ProfileRoute: ProfileRoute,
   ReferRoute: ReferRoute,
+  SignupRoute: SignupRoute,
   TasksRoute: TasksRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
