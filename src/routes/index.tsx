@@ -67,14 +67,21 @@ function Home() {
             </h1>
           </div>
         </Link>
-        <Link
-          to="/notifications"
-          aria-label="Notifications"
-          className="relative h-11 w-11 rounded-full bg-card border border-border shadow-card flex items-center justify-center hover:bg-muted transition-colors active:scale-95 shrink-0"
+        <button
+          onClick={() => setHidden((h) => !h)}
+          aria-label={hidden ? "Show balance" : "Hide balance"}
+          className="flex items-center gap-2 h-11 px-3 rounded-full bg-card border border-border shadow-card hover:bg-muted transition-colors active:scale-95 shrink-0"
         >
-          <Bell className="h-[18px] w-[18px] text-foreground" strokeWidth={2.2} />
-          <span className="absolute top-2.5 right-2.5 h-2 w-2 rounded-full bg-destructive ring-2 ring-card" />
-        </Link>
+          <span className="flex flex-col items-end leading-none">
+            <span className="text-eyebrow">Balance</span>
+            <span className="mt-1 text-label text-foreground tabular-nums">{fmt(user.balance)}</span>
+          </span>
+          {hidden ? (
+            <EyeOff className="h-4 w-4 text-muted-foreground" strokeWidth={2.2} />
+          ) : (
+            <Eye className="h-4 w-4 text-muted-foreground" strokeWidth={2.2} />
+          )}
+        </button>
       </header>
 
 
