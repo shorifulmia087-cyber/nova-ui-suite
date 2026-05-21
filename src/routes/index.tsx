@@ -67,9 +67,8 @@ function Home() {
             </h1>
           </div>
         </Link>
-        <div className="flex flex-col items-end leading-none shrink-0">
-          <span className="text-eyebrow">Balance</span>
-          <span className="mt-1.5 text-card-title text-foreground tabular-nums">{fmt(user.balance)}</span>
+        <div className="shrink-0 inline-flex items-center h-9 px-4 rounded-full bg-card border border-border shadow-card">
+          <span className="text-label text-foreground tabular-nums leading-none">{fmt(user.balance)}</span>
         </div>
       </header>
 
