@@ -32,7 +32,7 @@ function Farm() {
           <div className="relative mt-4 flex items-center justify-between">
             <div className="text-label inline-flex items-center gap-1.5">
               <TrendingUp className="h-4 w-4 text-[color:var(--success)]" />
-              <span>+${dailyYield.toFixed(2)}</span>
+              <span>+৳{dailyYield.toFixed(2)}</span>
               <span className="text-white/70">/ day</span>
             </div>
             <ActionButton variant="mint" size="sm" className="!text-primary">Harvest all</ActionButton>
@@ -66,7 +66,7 @@ function Farm() {
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
               <div>
                 <p className="text-caption">Daily yield</p>
-                <p className="text-label text-[color:var(--success)]">+${p.yieldDay.toFixed(2)}</p>
+                <p className="text-label text-[color:var(--success)]">+৳{p.yieldDay.toFixed(2)}</p>
               </div>
               <div className="flex gap-2">
                 <ActionButton size="sm" variant="outline">Add</ActionButton>

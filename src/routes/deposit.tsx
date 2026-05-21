@@ -52,7 +52,7 @@ function Deposit() {
         {[
           { id: "card", Icon: CreditCard, t: "Visa ••8821", d: "Instant · no fee" },
           { id: "bank", Icon: Building2, t: "Bank transfer", d: "1-2 business days" },
-          { id: "crypto", Icon: Bitcoin, t: "Crypto (USDT)", d: "Network: TRC-20" },
+          { id: "crypto", Icon: Bitcoin, t: "bKash / Nagad", d: "Mobile wallet" },
         ].map((m) => {
           const active = method === m.id;
           return (

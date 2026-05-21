@@ -89,7 +89,7 @@ function Row({ tx }: { tx: Tx }) {
         </p>
       </div>
       <p className={`text-label ৳{tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
-        {tx.amount >= 0 ? "+" : ""}${Math.abs(tx.amount).toFixed(2)}
+        {tx.amount >= 0 ? "+" : ""}৳{Math.abs(tx.amount).toFixed(2)}
       </p>
     </Card>
   );
