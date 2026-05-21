@@ -67,21 +67,10 @@ function Home() {
             </h1>
           </div>
         </Link>
-        <button
-          onClick={() => setHidden((h) => !h)}
-          aria-label={hidden ? "Show balance" : "Hide balance"}
-          className="flex items-center gap-2 h-11 px-3 rounded-full bg-card border border-border shadow-card hover:bg-muted transition-colors active:scale-95 shrink-0"
-        >
-          <span className="flex flex-col items-end leading-none">
-            <span className="text-eyebrow">Balance</span>
-            <span className="mt-1 text-label text-foreground tabular-nums">{fmt(user.balance)}</span>
-          </span>
-          {hidden ? (
-            <EyeOff className="h-4 w-4 text-muted-foreground" strokeWidth={2.2} />
-          ) : (
-            <Eye className="h-4 w-4 text-muted-foreground" strokeWidth={2.2} />
-          )}
-        </button>
+        <div className="flex flex-col items-end leading-none shrink-0">
+          <span className="text-eyebrow">Balance</span>
+          <span className="mt-1.5 text-card-title text-foreground tabular-nums">{fmt(user.balance)}</span>
+        </div>
       </header>
 
 
