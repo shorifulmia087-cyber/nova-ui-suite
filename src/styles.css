@@ -129,7 +129,7 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
+  * { border-color: var(--color-border); font-family: var(--font-sans); }
   html, body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -139,7 +139,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
-  /* Headings inherit DM Sans; specific size/weight comes from semantic tokens */
+  /* Headings inherit Prompt; specific size/weight comes from semantic tokens */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     font-weight: 600;
