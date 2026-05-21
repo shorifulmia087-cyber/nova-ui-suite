@@ -27,7 +27,7 @@ export const transactions: Tx[] = [
   { id: "t5", title: "Deposit · Visa ••8821", category: "deposit", amount: 500, date: "May 18", status: "completed" },
   { id: "t6", title: "Farm Yield · Plot #3", category: "earn", amount: 18.04, date: "May 18", status: "completed" },
   { id: "t7", title: "Task: Video Watch", category: "task", amount: 3.2, date: "May 17", status: "completed" },
-  { id: "t8", title: "Withdraw to USDT", category: "withdraw", amount: -120, date: "May 16", status: "failed" },
+  { id: "t8", title: "Withdraw to bKash", category: "withdraw", amount: -120, date: "May 16", status: "failed" },
 ];
 
 export const tasks = [
