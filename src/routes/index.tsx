@@ -95,7 +95,7 @@ function Home() {
               >
                 <I className="h-5 w-5" strokeWidth={2.4} />
               </div>
-              <span className="text-foreground font-medium" style={{ fontSize: 16, lineHeight: "22px" }}>{label}</span>
+              <span className="text-foreground font-medium" style={{ fontSize: 14, lineHeight: "20px" }}>{label}</span>
             </Link>
           ))}
         </div>
