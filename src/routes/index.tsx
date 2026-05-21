@@ -67,9 +67,8 @@ function Home() {
             </h1>
           </div>
         </Link>
-        <div className="shrink-0 inline-flex items-center h-9 px-4 rounded-full bg-card border border-border shadow-card">
-          <span className="text-label text-foreground tabular-nums leading-none">{fmt(user.balance)}</span>
-        </div>
+        <BalancePill value={user.balance} hidden={hidden} />
+
       </header>
 
 
@@ -147,7 +146,50 @@ function Home() {
   );
 }
 
+function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
+  const [display, setDisplay] = useState(value);
+  const [pulse, setPulse] = useState(false);
+  const prevRef = useRef(value);
+
+  useEffect(() => {
+    const from = prevRef.current;
+    const to = value;
+    if (from === to) return;
+    prevRef.current = to;
+    setPulse(true);
+    const duration = 600;
+    const start = performance.now();
+    let raf = 0;
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplay(from + (to - from) * eased);
+      if (t < 1) raf = requestAnimationFrame(tick);
+      else setTimeout(() => setPulse(false), 200);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [value]);
+
+  const text = hidden
+    ? "••••••"
+    : `৳${display.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+  return (
+    <div
+      className={`shrink-0 inline-flex items-center h-9 px-4 rounded-full bg-card border border-border shadow-card transition-all duration-300 ${
+        pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
+      }`}
+    >
+      <span className="text-label text-foreground tabular-nums leading-none transition-colors duration-300">
+        {text}
+      </span>
+    </div>
+  );
+}
+
 function RecentActivity() {
+
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
