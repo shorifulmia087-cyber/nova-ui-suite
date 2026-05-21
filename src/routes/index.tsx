@@ -156,10 +156,10 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="bg-card rounded-3xl overflow-hidden">
+      <div className="bg-card rounded-2xl shadow-card overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="mx-4 h-px bg-border" />}
+            {i > 0 && <div className="ml-[72px] mr-4 h-px bg-border" />}
             <TxRow tx={t} />
           </div>
         ))}
