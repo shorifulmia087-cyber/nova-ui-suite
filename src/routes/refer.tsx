@@ -6,7 +6,7 @@ import { useState } from "react";
 import { user } from "@/lib/mock";
 
 export const Route = createFileRoute("/refer")({
-  head: () => ({ meta: [{ title: "Refer & Earn — Ness" }, { name: "description", content: "Invite friends and earn $25 each." }] }),
+  head: () => ({ meta: [{ title: "Refer & Earn — Ness" }, { name: "description", content: "Invite friends and earn ৳25 each." }] }),
   component: Refer,
 });
 
@@ -30,8 +30,8 @@ function Refer() {
             <div className="mx-auto h-14 w-14 rounded-md bg-white/15 flex items-center justify-center">
               <Sparkles className="h-7 w-7" />
             </div>
-            <p className="mt-4 text-screen-title">Earn $25<br />for every friend</p>
-            <p className="mt-2 text-body-secondary text-white/75">Your friend gets $10 when they sign up with your code.</p>
+            <p className="mt-4 text-screen-title">Earn ৳25<br />for every friend</p>
+            <p className="mt-2 text-body-secondary text-white/75">Your friend gets ৳10 when they sign up with your code.</p>
 
             <div className="mt-5 rounded-md bg-white/10 border border-white/20 p-3 flex items-center justify-between">
               <div className="text-left pl-2">
@@ -56,7 +56,7 @@ function Refer() {
 
       <div className="px-5 mt-4 flex gap-3">
         <StatPill icon={<Users className="h-3.5 w-3.5" />} label="Friends joined" value={String(user.referrals)} />
-        <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`$${(user.referrals * 25).toFixed(0)}`} tone="success" />
+        <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`৳${(user.referrals * 25).toFixed(0)}`} tone="success" />
       </div>
 
       <h2 className="text-section-title px-5 pt-6 pb-3">How it works</h2>
@@ -64,7 +64,7 @@ function Refer() {
         {[
           { n: 1, t: "Share your code", d: "Send it to friends via any app." },
           { n: 2, t: "Friend signs up", d: "They enter your code at registration." },
-          { n: 3, t: "Both earn rewards", d: "You get $25, they get $10 instantly." },
+          { n: 3, t: "Both earn rewards", d: "You get ৳25, they get ৳10 instantly." },
         ].map((s) => (
           <Card key={s.n} className="p-4 flex items-center gap-3">
             <div className="text-card-title h-10 w-10 rounded-full bg-gradient-mint flex items-center justify-center text-white shadow-glow">

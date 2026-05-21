@@ -17,13 +17,13 @@ function Withdraw() {
 
   return (
     <div>
-      <ScreenHeader title="Withdraw" subtitle={`Available · $${user.balance.toLocaleString()}`} />
+      <ScreenHeader title="Withdraw" subtitle={`Available · ৳${user.balance.toLocaleString()}`} />
 
       <div className="px-5">
         <Card className="p-6 text-center bg-gradient-soft">
           <p className="text-caption uppercase tracking-widest">You withdraw</p>
           <div className="mt-2 flex items-center justify-center gap-1">
-            <span className="text-stat text-muted-foreground">$</span>
+            <span className="text-stat text-muted-foreground">৳</span>
             <input
               type="number"
               value={amt}
@@ -32,10 +32,10 @@ function Withdraw() {
             />
           </div>
           <div className="mt-3 flex items-center justify-between text-caption">
-            <span>Fee 0.5%</span><span>-${fee}</span>
+            <span>Fee 0.5%</span><span>-৳{fee}</span>
           </div>
           <div className="mt-1 flex items-center justify-between text-label">
-            <span>You receive</span><span className="text-[color:var(--success)]">${receive}</span>
+            <span>You receive</span><span className="text-[color:var(--success)]">৳{receive}</span>
           </div>
         </Card>
       </div>
@@ -55,12 +55,12 @@ function Withdraw() {
       <h2 className="text-section-title px-5 pt-6 pb-3">Withdraw to</h2>
       <div className="px-5 space-y-2">
         {[
-          { Icon: Building2, t: "Bank ••4421", d: "Wells Fargo · USD", active: true },
-          { Icon: Bitcoin, t: "USDT Wallet", d: "TRC-20 network" },
+          { Icon: Building2, t: "Bank ••4421", d: "Dhaka Bank · BDT", active: true },
+          { Icon: Bitcoin, t: "bKash Wallet", d: "Mobile wallet" },
           { Icon: Wallet, t: "Add new method" },
         ].map((m, i) => (
-          <Card key={i} className={`p-4 flex items-center gap-3 ${m.active ? "border-[color:var(--accent)]" : ""}`}>
-            <div className={`h-10 w-10 rounded-md flex items-center justify-center ${m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
+          <Card key={i} className={`p-4 flex items-center gap-3 ৳{m.active ? "border-[color:var(--accent)]" : ""}`}>
+            <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
               <m.Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">

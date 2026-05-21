@@ -45,7 +45,7 @@ function TxList() {
           <button
             key={x}
             onClick={() => setF(x)}
-            className={`text-label shrink-0 h-9 px-3.5 rounded-full transition ${f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
+            className={`text-label shrink-0 h-9 px-3.5 rounded-full transition ৳{f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
           >
             {x}
           </button>
@@ -79,7 +79,7 @@ function Row({ tx }: { tx: Tx }) {
                                 "text-destructive";
   return (
     <Card className="p-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-md flex items-center justify-center ${colors[tx.category]}`}>
+      <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>
       <div className="flex-1 min-w-0">
@@ -88,8 +88,8 @@ function Row({ tx }: { tx: Tx }) {
           {tx.date} · <span className={`${statusTone}`}>{tx.status}</span>
         </p>
       </div>
-      <p className={`text-label ${tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
-        {tx.amount >= 0 ? "+" : ""}${Math.abs(tx.amount).toFixed(2)}
+      <p className={`text-label ৳{tx.amount >= 0 ? "text-[color:var(--success)]" : "text-destructive"}`}>
+        {tx.amount >= 0 ? "+" : ""}৳{Math.abs(tx.amount).toFixed(2)}
       </p>
     </Card>
   );

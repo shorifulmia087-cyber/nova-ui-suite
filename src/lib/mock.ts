@@ -27,7 +27,7 @@ export const transactions: Tx[] = [
   { id: "t5", title: "Deposit · Visa ••8821", category: "deposit", amount: 500, date: "May 18", status: "completed" },
   { id: "t6", title: "Farm Yield · Plot #3", category: "earn", amount: 18.04, date: "May 18", status: "completed" },
   { id: "t7", title: "Task: Video Watch", category: "task", amount: 3.2, date: "May 17", status: "completed" },
-  { id: "t8", title: "Withdraw to USDT", category: "withdraw", amount: -120, date: "May 16", status: "failed" },
+  { id: "t8", title: "Withdraw to bKash", category: "withdraw", amount: -120, date: "May 16", status: "failed" },
 ];
 
 export const tasks = [
@@ -35,7 +35,7 @@ export const tasks = [
   { id: 2, title: "Invite 3 friends this week", reward: 30, progress: 1, total: 3, type: "Social" },
   { id: 3, title: "Watch sponsored video", reward: 1.2, progress: 0, total: 1, type: "Quick" },
   { id: 4, title: "Complete survey: Spending habits", reward: 8.5, progress: 0, total: 1, type: "Survey" },
-  { id: 5, title: "Hold balance > $1,000 for 7 days", reward: 25, progress: 4, total: 7, type: "Hold" },
+  { id: 5, title: "Hold balance > ৳1,000 for 7 days", reward: 25, progress: 4, total: 7, type: "Hold" },
   { id: 6, title: "Verify identity (KYC)", reward: 15, progress: 0, total: 1, type: "Account" },
 ];
 
@@ -53,9 +53,9 @@ export const cards = [
 ];
 
 export const notifications = [
-  { id: 1, title: "Yield harvested", body: "Plot Nimbus paid out $2.10 to your wallet.", time: "2m", type: "earn" },
-  { id: 2, title: "Withdrawal pending", body: "$250 to Bank ••4421 is being processed.", time: "1h", type: "withdraw" },
-  { id: 3, title: "New task available", body: "Survey: Spending habits · $8.50 reward.", time: "3h", type: "task" },
+  { id: 1, title: "Yield harvested", body: "Plot Nimbus paid out ৳2.10 to your wallet.", time: "2m", type: "earn" },
+  { id: 2, title: "Withdrawal pending", body: "৳250 to Bank ••4421 is being processed.", time: "1h", type: "withdraw" },
+  { id: 3, title: "New task available", body: "Survey: Spending habits · ৳8.50 reward.", time: "3h", type: "task" },
   { id: 4, title: "Referral joined", body: "Sarah K. signed up using your code.", time: "1d", type: "referral" },
-  { id: 5, title: "Verify your identity", body: "Unlock withdrawals up to $10,000 / day.", time: "2d", type: "system" },
+  { id: 5, title: "Verify your identity", body: "Unlock withdrawals up to ৳10,000 / day.", time: "2d", type: "system" },
 ];
