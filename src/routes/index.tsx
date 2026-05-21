@@ -156,10 +156,10 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="bg-card rounded-3xl overflow-hidden">
+      <div className="bg-card rounded-2xl shadow-card overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="mx-4 h-px bg-border" />}
+            {i > 0 && <div className="ml-[72px] mr-4 h-px bg-border" />}
             <TxRow tx={t} />
           </div>
         ))}
@@ -273,7 +273,7 @@ function TxRow({ tx }: { tx: Tx }) {
   const iconTone: Record<Tx["category"], string> = {
     earn: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
     deposit: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
-    withdraw: "text-foreground bg-foreground/5",
+    withdraw: "text-foreground bg-muted",
     task: "text-[color:var(--warning)] bg-[color:var(--warning)]/10",
     referral: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
   };
@@ -281,17 +281,16 @@ function TxRow({ tx }: { tx: Tx }) {
     earn: Sparkles, deposit: ArrowDownToLine, withdraw: ArrowUpFromLine, task: ClipboardList, referral: Gift,
   };
   const Icon = Icons[tx.category];
-  const time = tx.date.includes(" · ") ? tx.date.split(" · ")[1] : tx.date;
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-full flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+    <div className="px-4 py-3.5 flex items-center gap-3">
+      <div className={`h-11 w-11 rounded-full flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
         <Icon className="h-5 w-5" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
         <h3 className="text-label text-foreground truncate">{tx.title}</h3>
-        <p className="text-body-secondary mt-0.5">{time}</p>
+        <p className="text-caption text-muted-foreground mt-1">{tx.date}</p>
       </div>
       <p className={`text-button tabular-nums shrink-0 ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
