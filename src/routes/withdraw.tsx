@@ -17,7 +17,7 @@ function Withdraw() {
 
   return (
     <div>
-      <ScreenHeader title="Withdraw" subtitle={`Available · $${user.balance.toLocaleString()}`} />
+      <ScreenHeader title="Withdraw" subtitle={`Available · ৳${user.balance.toLocaleString()}`} />
 
       <div className="px-5">
         <Card className="p-6 text-center bg-gradient-soft">
