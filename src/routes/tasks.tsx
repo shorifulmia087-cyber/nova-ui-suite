@@ -21,7 +21,7 @@ function Tasks() {
         <Card className="p-4 bg-gradient-brand text-white border-0 shadow-glow">
           <p className="text-caption text-white/70 uppercase tracking-widest">Available rewards</p>
           <div className="mt-1 flex items-end justify-between">
-            <p className="text-stat">${totalReward.toFixed(2)}</p>
+            <p className="text-stat">৳{totalReward.toFixed(2)}</p>
             <div className="text-right">
               <p className="text-caption text-white/70">Completed</p>
               <p className="text-label">{completed} / {tasks.length}</p>
@@ -43,14 +43,14 @@ function Tasks() {
           return (
             <Card key={t.id} className="p-4">
               <div className="flex items-start gap-3">
-                <div className={`h-9 w-9 rounded-md flex items-center justify-center ${done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
+                <div className={`h-9 w-9 rounded-md flex items-center justify-center ৳{done ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
                   {done ? <CheckCircle2 className="h-5 w-5" /> : <Circle className="h-5 w-5" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between gap-2">
                     <p className="text-label truncate">{t.title}</p>
                     <span className="text-label text-[color:var(--success)] inline-flex items-center gap-1">
-                      <Sparkles className="h-3 w-3" /> ${t.reward.toFixed(2)}
+                      <Sparkles className="h-3 w-3" /> ৳{t.reward.toFixed(2)}
                     </span>
                   </div>
                   <p className="text-caption mt-0.5">{t.type} · {t.progress}/{t.total}</p>

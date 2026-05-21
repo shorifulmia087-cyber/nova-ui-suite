@@ -23,7 +23,7 @@ function Withdraw() {
         <Card className="p-6 text-center bg-gradient-soft">
           <p className="text-caption uppercase tracking-widest">You withdraw</p>
           <div className="mt-2 flex items-center justify-center gap-1">
-            <span className="text-stat text-muted-foreground">$</span>
+            <span className="text-stat text-muted-foreground">৳</span>
             <input
               type="number"
               value={amt}
@@ -35,7 +35,7 @@ function Withdraw() {
             <span>Fee 0.5%</span><span>-${fee}</span>
           </div>
           <div className="mt-1 flex items-center justify-between text-label">
-            <span>You receive</span><span className="text-[color:var(--success)]">${receive}</span>
+            <span>You receive</span><span className="text-[color:var(--success)]">৳{receive}</span>
           </div>
         </Card>
       </div>
@@ -59,8 +59,8 @@ function Withdraw() {
           { Icon: Bitcoin, t: "USDT Wallet", d: "TRC-20 network" },
           { Icon: Wallet, t: "Add new method" },
         ].map((m, i) => (
-          <Card key={i} className={`p-4 flex items-center gap-3 ${m.active ? "border-[color:var(--accent)]" : ""}`}>
-            <div className={`h-10 w-10 rounded-md flex items-center justify-center ${m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
+          <Card key={i} className={`p-4 flex items-center gap-3 ৳{m.active ? "border-[color:var(--accent)]" : ""}`}>
+            <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{m.active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted"}`}>
               <m.Icon className="h-5 w-5" />
             </div>
             <div className="flex-1">

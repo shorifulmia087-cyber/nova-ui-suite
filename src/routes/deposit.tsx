@@ -23,7 +23,7 @@ function Deposit() {
         <Card className="p-6 text-center bg-gradient-soft">
           <p className="text-caption uppercase tracking-widest">Amount</p>
           <div className="mt-2 flex items-center justify-center gap-1">
-            <span className="text-stat text-muted-foreground">$</span>
+            <span className="text-stat text-muted-foreground">৳</span>
             <input
               type="number"
               value={amt}
@@ -40,9 +40,9 @@ function Deposit() {
           <button
             key={p}
             onClick={() => setAmt(p)}
-            className={`text-label h-11 rounded-md transition border ${amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
+            className={`text-label h-11 rounded-md transition border ৳{amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
           >
-            ${p}
+            ৳{p}
           </button>
         ))}
       </div>
@@ -59,9 +59,9 @@ function Deposit() {
             <button
               key={m.id}
               onClick={() => setMethod(m.id)}
-              className={`w-full text-left rounded-md border p-4 flex items-center gap-3 transition ${active ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 shadow-card" : "border-border bg-card"}`}
+              className={`w-full text-left rounded-md border p-4 flex items-center gap-3 transition ৳{active ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 shadow-card" : "border-border bg-card"}`}
             >
-              <div className={`h-10 w-10 rounded-md flex items-center justify-center ${active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted text-foreground"}`}>
+              <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted text-foreground"}`}>
                 <m.Icon className="h-5 w-5" />
               </div>
               <div className="flex-1">
@@ -76,7 +76,7 @@ function Deposit() {
 
       <div className="px-5 mt-6">
         <ActionButton variant="brand" size="lg" className="w-full">
-          Add ${amt.toLocaleString()}
+          Add ৳{amt.toLocaleString()}
         </ActionButton>
       </div>
     </div>

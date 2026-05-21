@@ -23,7 +23,7 @@ function Farm() {
           <div className="relative flex items-center justify-between">
             <div>
               <p className="text-caption text-white/70 uppercase tracking-widest">Total staked</p>
-              <p className="mt-1 text-stat">${totalStaked.toLocaleString()}</p>
+              <p className="mt-1 text-stat">৳{totalStaked.toLocaleString()}</p>
             </div>
             <div className="h-12 w-12 rounded-md bg-white/15 flex items-center justify-center">
               <Sprout className="h-6 w-6" />
@@ -56,11 +56,11 @@ function Farm() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center justify-between">
                   <p className="text-label">{p.name}</p>
-                  <span className={`text-caption px-2 py-0.5 rounded-full ${p.status === "Ready" ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
+                  <span className={`text-caption px-2 py-0.5 rounded-full ৳{p.status === "Ready" ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-muted text-muted-foreground"}`}>
                     {p.status}
                   </span>
                 </div>
-                <p className="text-caption">${p.staked.toLocaleString()} staked · APR {p.apr}%</p>
+                <p className="text-caption">৳{p.staked.toLocaleString()} staked · APR {p.apr}%</p>
               </div>
             </div>
             <div className="mt-3 flex items-center justify-between border-t border-border pt-3">
