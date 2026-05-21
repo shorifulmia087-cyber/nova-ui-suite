@@ -67,9 +67,8 @@ function Home() {
             </h1>
           </div>
         </Link>
-        <div className="shrink-0 inline-flex items-center h-9 px-4 rounded-full bg-card border border-border shadow-card">
-          <span className="text-label text-foreground tabular-nums leading-none">{fmt(user.balance)}</span>
-        </div>
+        <BalancePill value={user.balance} hidden={hidden} />
+
       </header>
 
 
