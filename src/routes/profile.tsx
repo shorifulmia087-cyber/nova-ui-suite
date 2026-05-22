@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
@@ -6,7 +6,8 @@ import {
   ShieldCheck, ChevronRight, CreditCard, Lock, Bell,
   HelpCircle, FileText, LogOut, Moon, Globe, Wallet,
 } from "lucide-react";
-import { user } from "@/lib/mock";
+import { useProfile } from "@/lib/use-profile";
+import { useAuth } from "@/lib/auth-context";
 import avatarUser from "@/assets/avatar-user.jpg";
 
 export const Route = createFileRoute("/profile")({
@@ -14,10 +15,10 @@ export const Route = createFileRoute("/profile")({
   component: Profile,
 });
 
-function useVerified() {
-  const [v, setV] = useState(user.verified);
+function useVerified(serverVerified: boolean) {
+  const [v, setV] = useState(serverVerified);
   useEffect(() => {
-    const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
+    const read = () => setV(localStorage.getItem("nessVerified") === "1" || serverVerified);
     read();
     window.addEventListener("storage", read);
     window.addEventListener("focus", read);
@@ -27,12 +28,21 @@ function useVerified() {
       window.removeEventListener("focus", read);
       window.removeEventListener("ness:verified", read);
     };
-  }, []);
+  }, [serverVerified]);
   return v;
 }
 
 function Profile() {
-  const verified = useVerified();
+  const { profile } = useProfile();
+  const { signOut } = useAuth();
+  const navigate = useNavigate();
+  const verified = useVerified(!!profile?.is_verified);
+  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "Account";
+  const handle = profile?.mobile_number || profile?.email || "";
+  const handleLogout = async () => {
+    await signOut();
+    navigate({ to: "/login", replace: true });
+  };
   return (
     <div>
       <ScreenHeader title="Profile" back={false} />
@@ -41,16 +51,16 @@ function Profile() {
         <Card className="p-5 bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-lg overflow-hidden bg-muted shadow-glow">
-              <img src={avatarUser} alt={user.name} width={64} height={64} className="h-full w-full object-cover" />
+              <img src={avatarUser} alt={displayName} width={64} height={64} className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-card-title flex items-center gap-1.5">
-                {user.name}
+                {displayName}
                 {verified && <ShieldCheck className="h-4 w-4 text-[color:var(--accent)]" />}
               </p>
-              <p className="text-body-secondary">{user.handle}</p>
+              <p className="text-body-secondary truncate">{handle}</p>
               <span className="inline-flex items-center gap-1 mt-1 text-caption px-2 py-0.5 rounded-full bg-[color:var(--warning)]/15 text-[color:var(--warning)]">
-                {user.level}
+                {verified ? "Verified" : "Unverified"}
               </span>
             </div>
           </div>
