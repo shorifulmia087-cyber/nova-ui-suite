@@ -1,7 +1,8 @@
-import { Outlet, Link, useRouter, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, useRouter, useRouterState, useNavigate } from "@tanstack/react-router";
 import { Home, Sprout, Gift, User } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth-context";
 
 const tabs = [
   { to: "/", label: "Home", icon: Home },
