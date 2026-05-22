@@ -189,7 +189,7 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
   );
 }
 
-const INTRO_VIDEO_ID = "dQw4w9WgXcQ"; // TODO: replace with actual tutorial video ID
+const INTRO_VIDEO_ID = "OoSBR0Vm_uw";
 
 function IntroVideoBanner() {
   const [open, setOpen] = useState(false);
