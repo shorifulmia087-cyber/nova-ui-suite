@@ -80,7 +80,6 @@ function Home() {
       <div className="px-4 mt-5">
         <div className="bg-card rounded-lg shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
           {[
-            { to: "/deposit", icon: Plus, label: "Add money", primary: true },
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/tasks", icon: ClipboardList, label: "Task" },
             { to: "/refer", icon: Gift, label: "Refer" },
@@ -88,15 +87,9 @@ function Home() {
             { to: "/transactions", icon: TrendingUp, label: "History" },
             { to: "/verify", icon: ShieldCheck, label: "Verify" },
             { to: "/notifications", icon: Sparkles, label: "Rewards" },
-          ].map(({ to, icon: I, label, primary }) => (
+          ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div
-                className={`h-14 w-14 rounded-full flex items-center justify-center transition-all active:scale-95 ${
-                  primary
-                    ? "bg-foreground text-background shadow-navy"
-                    : "bg-muted text-foreground"
-                }`}
-              >
+              <div className="h-14 w-14 rounded-full flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground">
                 <I className="h-5 w-5" strokeWidth={2.4} />
               </div>
               <span className="text-foreground font-medium" style={{ fontSize: 14, lineHeight: "20px" }}>{label}</span>
