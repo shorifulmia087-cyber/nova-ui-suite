@@ -64,7 +64,7 @@ function SignupPage() {
   return (
     <div className="min-h-screen px-6 pt-10 pb-10 flex flex-col">
       <div className="mb-8">
-        <div className="h-12 w-12 rounded-sm bg-primary flex items-center justify-center shadow-card mb-5">
+        <div className="h-12 w-12 rounded-md bg-primary flex items-center justify-center shadow-card mb-5">
           <Sparkles className="h-6 w-6 text-primary-foreground" />
         </div>
         <h1 className="text-display mb-2">Create account</h1>
@@ -119,7 +119,7 @@ function SignupPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full rounded-sm bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
+          className="w-full rounded-md bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
           style={{ height: 52 }}
         >
           {submitting ? "Creating account..." : "Create account"}

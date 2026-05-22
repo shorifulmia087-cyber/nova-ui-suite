@@ -28,7 +28,7 @@ export const PremiumField = forwardRef<HTMLInputElement, PremiumFieldProps>(
       <div className="block">
         <div
           className={cn(
-            "relative rounded-sm border bg-card transition-all duration-200",
+            "relative rounded-md border bg-card transition-all duration-200",
             "shadow-[0_1px_2px_rgba(15,23,42,0.04)]",
             focused
               ? "border-primary/40 ring-4 ring-primary/10"
@@ -92,7 +92,7 @@ export const PremiumField = forwardRef<HTMLInputElement, PremiumFieldProps>(
             <button
               type="button"
               onClick={() => setShowPwd((v) => !v)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-sm text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              className="absolute right-3 top-1/2 -translate-y-1/2 p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
               tabIndex={-1}
               aria-label={showPwd ? "Hide password" : "Show password"}
             >

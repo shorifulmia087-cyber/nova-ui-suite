@@ -47,7 +47,7 @@ function LoginPage() {
   return (
     <div className="min-h-screen px-6 pt-12 pb-10 flex flex-col">
       <div className="mb-10">
-        <div className="h-12 w-12 rounded-sm bg-primary flex items-center justify-center shadow-card mb-5">
+        <div className="h-12 w-12 rounded-md bg-primary flex items-center justify-center shadow-card mb-5">
           <ShieldCheck className="h-6 w-6 text-primary-foreground" />
         </div>
         <h1 className="text-display mb-2">Welcome back</h1>
@@ -76,7 +76,7 @@ function LoginPage() {
         <button
           type="submit"
           disabled={submitting}
-          className="w-full h-13 mt-2 rounded-sm bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
+          className="w-full h-13 mt-2 rounded-md bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
           style={{ height: 52 }}
         >
           {submitting ? "Signing in..." : "Sign in"}
