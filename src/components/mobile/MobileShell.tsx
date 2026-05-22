@@ -33,19 +33,16 @@ export function MobileShell() {
     }
   }, [loading, user, isPublic, navigate]);
 
-  // Preload only the most likely next routes when the browser is idle,
-  // and only once per session — avoids fetching every tab up front.
+  // Preload ALL tab routes once the browser is idle so tab switches
+  // never trigger a network fetch (which is what causes the browser's
+  // top loading bar to appear).
   const preloadedRef = useRef(false);
   useEffect(() => {
-    if (preloadedRef.current) return;
+    if (preloadedRef.current || !user) return;
     preloadedRef.current = true;
 
-    const neighbours = new Set<string>();
-    if (activeIndex > 0) neighbours.add(tabs[activeIndex - 1].to);
-    if (activeIndex < tabs.length - 1) neighbours.add(tabs[activeIndex + 1].to);
-
     const run = () => {
-      neighbours.forEach((to) => {
+      tabs.forEach(({ to }) => {
         router.preloadRoute({ to }).catch(() => {});
       });
     };
@@ -57,10 +54,10 @@ export function MobileShell() {
     if (typeof ric === "function") {
       ric(run, { timeout: 2000 });
     } else {
-      const id = window.setTimeout(run, 1200);
+      const id = window.setTimeout(run, 800);
       return () => window.clearTimeout(id);
     }
-  }, [router, activeIndex]);
+  }, [router, user]);
 
   if (loading && !isPublic) {
     return <div className="min-h-screen w-full bg-gradient-soft" />;
