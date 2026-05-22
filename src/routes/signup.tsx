@@ -128,7 +128,7 @@ function SignupPage() {
 
       <p className="text-label mt-8 text-center text-muted-foreground">
         Already have an account?{" "}
-        <Link to="/login" className="text-primary font-semibold">
+        <Link to="/login" preload="render" className="text-primary font-semibold">
           Sign in
         </Link>
       </p>
