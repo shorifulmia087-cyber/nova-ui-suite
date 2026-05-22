@@ -294,7 +294,7 @@ function RecentActivity() {
       <div className="bg-card rounded-2xl shadow-card border border-border/60 overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
+            {i > 0 && <div className="ml-[60px] mr-4 h-px bg-border/70" />}
             <TxRow tx={t} />
           </div>
         ))}
