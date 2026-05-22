@@ -195,7 +195,7 @@ function IntroVideoBanner() {
   const [open, setOpen] = useState(false);
   const videoId =
     (typeof window !== "undefined" && localStorage.getItem("nessIntroVideoId")) || INTRO_VIDEO_ID;
-  const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+  const thumb = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   useEffect(() => {
     if (!open) return;
