@@ -88,8 +88,9 @@ export const completeTask = createServerFn({ method: "POST" })
     return { success: true, reward, newBalance, taskTitle: task.title };
   });
 
-// ----- ADMIN: list all tasks -----
-async function ensureAdmin(supabase: ReturnType<typeof createServerFn> extends never ? never : any, userId: string) {
+// ----- ADMIN helpers -----
+type SupaClient = { rpc: (fn: string, args: Record<string, unknown>) => Promise<{ data: unknown; error: { message: string } | null }> };
+async function ensureAdmin(supabase: SupaClient, userId: string) {
   const { data, error } = await supabase.rpc("has_role", { _user_id: userId, _role: "admin" });
   if (error) throw new Error(error.message);
   if (!data) throw new Error("Forbidden: admin only");
