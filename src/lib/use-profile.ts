@@ -74,5 +74,25 @@ export function useProfile() {
     };
   }, [user]);
 
-  return { profile, loading };
+  return {
+    profile,
+    loading,
+    refreshProfile: () => (user ? fetchProfile(user.id) : Promise.resolve(null)),
+  };
+}
+
+// Force-refresh the cached profile from the server. UI updates instantly
+// via listeners — no flicker because old data stays visible until new arrives.
+export function invalidateProfile(userId: string) {
+  inflight.delete(userId);
+  return fetchProfile(userId);
+}
+
+// Optimistically patch the cached profile and notify all subscribers.
+// Use right after a successful mutation for zero-latency UI updates.
+export function setCachedProfile(userId: string, patch: Partial<Profile>) {
+  const current = cache.get(userId);
+  if (!current) return;
+  cache.set(userId, { ...current, ...patch });
+  notify();
 }
