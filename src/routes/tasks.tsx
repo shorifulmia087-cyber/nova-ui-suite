@@ -7,7 +7,14 @@ import { Card, ActionButton } from "@/components/mobile/Primitives";
 import { listTasks, completeTask, isCurrentUserAdmin } from "@/lib/tasks.functions";
 import { invalidateProfile } from "@/lib/use-profile";
 import { useAuth } from "@/lib/auth-context";
-import { CheckCircle2, Circle, Sparkles, ExternalLink, Settings } from "lucide-react";
+import { CheckCircle2, Sparkles, ExternalLink, Settings, Share2, Play, Gift, Target, Loader2 } from "lucide-react";
+
+const ICON_PALETTE = [
+  { bg: "bg-emerald-500/10", text: "text-emerald-400", Icon: Play },
+  { bg: "bg-teal-500/10", text: "text-teal-400", Icon: Share2 },
+  { bg: "bg-amber-500/10", text: "text-amber-400", Icon: Gift },
+  { bg: "bg-sky-500/10", text: "text-sky-400", Icon: Target },
+] as const;
 
 export const Route = createFileRoute("/tasks")({
   head: () => ({
