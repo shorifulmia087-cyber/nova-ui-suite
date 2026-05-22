@@ -1,4 +1,4 @@
-import { Outlet, Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Outlet, Link, useRouterState, useNavigate, useRouter } from "@tanstack/react-router";
 import { Home, Sprout, Gift, User } from "lucide-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
@@ -15,6 +15,7 @@ const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
 
 export function MobileShell() {
   const navigate = useNavigate();
+  const router = useRouter();
   const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeIndex = Math.max(
@@ -31,6 +32,23 @@ export function MobileShell() {
       navigate({ to: "/login", replace: true });
     }
   }, [loading, user, isPublic, navigate]);
+
+  // Preload all main route chunks in the background once authenticated.
+  // This avoids a blank flash and browser progress bar when tapping tabs,
+  // since the JS chunks are already in memory before navigation.
+  useEffect(() => {
+    if (!user) return;
+    const idle = (cb: () => void) =>
+      typeof window !== "undefined" && "requestIdleCallback" in window
+        ? (window as any).requestIdleCallback(cb)
+        : setTimeout(cb, 200);
+    idle(() => {
+      ["/", "/farm", "/refer", "/profile", "/tasks", "/withdraw", "/deposit", "/notifications", "/verify", "/transactions"].forEach((to) => {
+        router.preloadRoute({ to }).catch(() => {});
+      });
+    });
+  }, [user, router]);
+
 
   if (loading && !isPublic) {
     return <div className="min-h-screen w-full bg-gradient-soft" />;
