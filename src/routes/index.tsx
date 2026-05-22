@@ -86,19 +86,12 @@ function Home() {
 
 
 
-      {/* Primary CTA — Deposit */}
-      <div className="px-5 mt-5">
-        <Link
-          to="/deposit"
-          className="flex items-center justify-center gap-2 h-13 py-3.5 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow text-button active:scale-[0.98] transition-transform"
-        >
-          <Plus className="h-[18px] w-[18px]" strokeWidth={2.5} />
-          Deposit money
-        </Link>
-      </div>
+      {/* Info banner — intro video */}
+      <IntroVideoBanner />
+
 
       {/* Quick actions — refined card */}
-      <div className="px-4 mt-4">
+      <div className="px-4 mt-5">
         <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
@@ -107,7 +100,7 @@ function Home() {
             { to: "/transactions", icon: TrendingUp, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-card text-[color:var(--accent)] ring-1 ring-border/70 shadow-card group-active:bg-muted/40">
+              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
                 <I className="h-[22px] w-[22px]" strokeWidth={2} />
               </div>
               <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
@@ -115,9 +108,6 @@ function Home() {
           ))}
         </div>
       </div>
-
-      {/* Info strip — intro video (demoted) */}
-      <IntroVideoBanner />
 
       {/* Verification — dark card with submit */}
       {!verified && (
@@ -228,30 +218,35 @@ function IntroVideoBanner() {
 
   return (
     <>
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="w-full flex items-center gap-3 h-16 px-3 rounded-lg bg-card border border-border/60 shadow-card active:scale-[0.99] transition-transform text-left"
+          className="block w-full relative overflow-hidden rounded-2xl shadow-card ring-1 ring-border/60 aspect-video active:scale-[0.99] transition-transform"
         >
-          <div className="relative h-12 w-[72px] shrink-0 overflow-hidden rounded-md bg-muted">
-            <img src={thumb} alt="" className="absolute inset-0 w-full h-full object-cover" />
-            <div className="absolute inset-0 bg-black/30" />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="h-6 w-6 rounded-full bg-white/95 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="h-3 w-3 ml-[1px] text-[color:var(--primary)] fill-current">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
+          <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 60%, rgba(15,23,42,0.9) 100%)" }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy ring-1 ring-white/40">
+              <svg viewBox="0 0 24 24" className="h-6 w-6 ml-1 text-[color:var(--primary)] fill-current">
+                <path d="M8 5v14l11-7z" />
+              </svg>
             </div>
           </div>
-          <div className="flex-1 min-w-0">
-            <p className="text-[13px] font-bold text-foreground leading-tight truncate">
-              কিভাবে কাজ করবেন — পরিচিতি ভিডিও
+          <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.12em" }}>
+              পরিচিতি ভিডিও
+            </span>
+            <p className="text-[15px] font-bold text-white leading-snug mt-2 tracking-tight">
+              এই ওয়েবসাইটে কিভাবে কাজ করবেন
             </p>
-            <p className="text-[11px] text-muted-foreground mt-0.5 font-medium">ভিডিও দেখতে ট্যাপ করুন</p>
+            <p className="text-[12px] text-white/85 mt-0.5 font-medium">
+              বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
+            </p>
           </div>
-          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" strokeWidth={2.4} />
         </button>
       </div>
 
@@ -294,7 +289,7 @@ function RecentActivity() {
       <div className="bg-card rounded-2xl shadow-card border border-border/60 overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="ml-[60px] mr-4 h-px bg-border/70" />}
+            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
             <TxRow tx={t} />
           </div>
         ))}
@@ -309,7 +304,7 @@ function TxRow({ tx }: { tx: Tx }) {
   const iconTone: Record<Tx["category"], string> = {
     earn: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
     deposit: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
-    withdraw: "text-destructive bg-destructive/10",
+    withdraw: "text-foreground bg-muted",
     task: "text-[color:var(--warning)] bg-[color:var(--warning)]/10",
     referral: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
   };
@@ -320,15 +315,15 @@ function TxRow({ tx }: { tx: Tx }) {
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-3 flex items-center gap-3">
-      <div className={`h-9 w-9 rounded-lg flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
-        <Icon className="h-[16px] w-[16px]" strokeWidth={2} />
+    <div className="px-4 py-4 flex items-center gap-3">
+      <div className={`h-11 w-11 rounded-xl flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-[13.5px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
-        <p className="text-[11px] text-muted-foreground mt-0.5 font-medium">{tx.date}</p>
+        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
+        <p className="text-[11px] text-muted-foreground mt-1 font-medium">{tx.date}</p>
       </div>
-      <p className={`text-[14px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-destructive"}`}>
+      <p className={`text-[15px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </p>
     </div>
