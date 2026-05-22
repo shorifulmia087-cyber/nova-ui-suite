@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { User, Phone, Mail, Gift, Lock, Sparkles } from "lucide-react";
 import { signupSchema, type SignupInput } from "@/lib/auth-schemas";
 import { signupUser } from "@/lib/auth.functions";
-import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
+import { PremiumField } from "@/components/mobile/PremiumField";
 
 export const Route = createFileRoute("/signup")({
   head: () => ({
@@ -42,7 +43,6 @@ function SignupPage() {
       const res = await signup({ data: values });
       toast.success(`Account created! Your referral code: ${res.referralCode}`);
 
-      // Immediately sign in (email confirmation off by default for cloud test).
       const { error: signInErr } = await supabase.auth.signInWithPassword({
         email: values.email,
         password: values.password,
@@ -62,56 +62,76 @@ function SignupPage() {
   };
 
   return (
-    <div className="px-5 py-8">
-      <h1 className="text-display mb-1">Create account</h1>
-      <p className="text-body-secondary mb-6">Join Ness and start earning today.</p>
+    <div className="min-h-screen px-6 pt-10 pb-10 flex flex-col">
+      <div className="mb-8">
+        <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center shadow-card mb-5">
+          <Sparkles className="h-6 w-6 text-primary-foreground" />
+        </div>
+        <h1 className="text-display mb-2">Create account</h1>
+        <p className="text-body-secondary">Join Ness and start earning today.</p>
+      </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <Field label="Full name" error={form.formState.errors.full_name?.message}>
-          <Input {...form.register("full_name")} placeholder="Your name" autoComplete="name" />
-        </Field>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex-1">
+        <PremiumField
+          {...form.register("full_name")}
+          label="Full name"
+          autoComplete="name"
+          icon={<User className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.full_name?.message}
+        />
 
-        <Field label="Mobile number" error={form.formState.errors.mobile_number?.message}>
-          <Input {...form.register("mobile_number")} inputMode="numeric" placeholder="017XXXXXXXX" autoComplete="tel" />
-        </Field>
+        <PremiumField
+          {...form.register("mobile_number")}
+          label="Mobile number"
+          inputMode="numeric"
+          autoComplete="tel"
+          icon={<Phone className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.mobile_number?.message}
+        />
 
-        <Field label="Email address" error={form.formState.errors.email?.message}>
-          <Input {...form.register("email")} type="email" placeholder="you@example.com" autoComplete="email" />
-        </Field>
+        <PremiumField
+          {...form.register("email")}
+          label="Email address"
+          type="email"
+          autoComplete="email"
+          icon={<Mail className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.email?.message}
+        />
 
-        <Field label="Referral code (optional)" error={form.formState.errors.referral_code?.message}>
-          <Input {...form.register("referral_code")} placeholder="e.g. AB12CD34" autoCapitalize="characters" />
-        </Field>
+        <PremiumField
+          {...form.register("referral_code")}
+          label="Referral code (optional)"
+          autoCapitalize="characters"
+          icon={<Gift className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.referral_code?.message}
+        />
 
-        <Field label="Password" error={form.formState.errors.password?.message}>
-          <Input {...form.register("password")} type="password" placeholder="Min 8 chars, upper/lower/number" autoComplete="new-password" />
-        </Field>
+        <PremiumField
+          {...form.register("password")}
+          label="Password"
+          type="password"
+          autoComplete="new-password"
+          icon={<Lock className="h-[18px] w-[18px]" />}
+          hint="Min 8 chars · upper, lower & number"
+          error={form.formState.errors.password?.message}
+        />
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full h-12 rounded-full bg-foreground text-background text-button active:scale-[0.98] transition-transform disabled:opacity-60"
+          className="w-full rounded-2xl bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
+          style={{ height: 52 }}
         >
           {submitting ? "Creating account..." : "Create account"}
         </button>
       </form>
 
-      <p className="text-label mt-6 text-center text-muted-foreground">
+      <p className="text-label mt-8 text-center text-muted-foreground">
         Already have an account?{" "}
-        <Link to="/login" className="text-foreground font-medium underline">
+        <Link to="/login" className="text-primary font-semibold">
           Sign in
         </Link>
       </p>
     </div>
-  );
-}
-
-function Field({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="text-label text-foreground block mb-1.5">{label}</span>
-      {children}
-      {error && <span className="text-caption text-destructive block mt-1">{error}</span>}
-    </label>
   );
 }

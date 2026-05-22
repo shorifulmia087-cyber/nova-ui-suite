@@ -18,6 +18,7 @@ export function MobileShell() {
     tabs.findIndex((t) => t.to === pathname),
   );
   const count = tabs.length;
+  const hideNav = pathname === "/login" || pathname === "/signup";
 
   // Preload only the most likely next routes when the browser is idle,
   // and only once per session — avoids fetching every tab up front.
@@ -51,10 +52,11 @@ export function MobileShell() {
   return (
     <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
       <div className="relative w-full max-w-md min-h-screen bg-background shadow-navy overflow-hidden flex flex-col">
-        <main className="flex-1 pb-28">
+        <main className={cn("flex-1", hideNav ? "pb-0" : "pb-28")}>
           <Outlet />
         </main>
 
+        {!hideNav && (
         <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-4 pt-2 z-50">
           <div className="relative rounded-full p-1.5 border border-white/20 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden">
             <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
@@ -108,6 +110,7 @@ export function MobileShell() {
             </div>
           </div>
         </nav>
+        )}
       </div>
     </div>
   );

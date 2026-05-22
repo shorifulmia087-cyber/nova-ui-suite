@@ -3,9 +3,10 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
+import { Mail, Lock, ShieldCheck } from "lucide-react";
 import { loginSchema, type LoginInput } from "@/lib/auth-schemas";
 import { supabase } from "@/integrations/supabase/client";
-import { Input } from "@/components/ui/input";
+import { PremiumField } from "@/components/mobile/PremiumField";
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -44,43 +45,47 @@ function LoginPage() {
   };
 
   return (
-    <div className="px-5 py-8">
-      <h1 className="text-display mb-1">Welcome back</h1>
-      <p className="text-body-secondary mb-6">Sign in to your account.</p>
+    <div className="min-h-screen px-6 pt-12 pb-10 flex flex-col">
+      <div className="mb-10">
+        <div className="h-12 w-12 rounded-2xl bg-primary flex items-center justify-center shadow-card mb-5">
+          <ShieldCheck className="h-6 w-6 text-primary-foreground" />
+        </div>
+        <h1 className="text-display mb-2">Welcome back</h1>
+        <p className="text-body-secondary">Sign in to continue to your account.</p>
+      </div>
 
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-        <label className="block">
-          <span className="text-label text-foreground block mb-1.5">Email</span>
-          <Input {...form.register("email")} type="email" autoComplete="email" />
-          {form.formState.errors.email && (
-            <span className="text-caption text-destructive block mt-1">
-              {form.formState.errors.email.message}
-            </span>
-          )}
-        </label>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 flex-1">
+        <PremiumField
+          {...form.register("email")}
+          label="Email address"
+          type="email"
+          autoComplete="email"
+          icon={<Mail className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.email?.message}
+        />
 
-        <label className="block">
-          <span className="text-label text-foreground block mb-1.5">Password</span>
-          <Input {...form.register("password")} type="password" autoComplete="current-password" />
-          {form.formState.errors.password && (
-            <span className="text-caption text-destructive block mt-1">
-              {form.formState.errors.password.message}
-            </span>
-          )}
-        </label>
+        <PremiumField
+          {...form.register("password")}
+          label="Password"
+          type="password"
+          autoComplete="current-password"
+          icon={<Lock className="h-[18px] w-[18px]" />}
+          error={form.formState.errors.password?.message}
+        />
 
         <button
           type="submit"
           disabled={submitting}
-          className="w-full h-12 rounded-full bg-foreground text-background text-button active:scale-[0.98] transition-transform disabled:opacity-60"
+          className="w-full h-13 mt-2 rounded-2xl bg-primary text-primary-foreground text-button shadow-card hover:bg-primary/90 active:scale-[0.99] transition-all disabled:opacity-60"
+          style={{ height: 52 }}
         >
           {submitting ? "Signing in..." : "Sign in"}
         </button>
       </form>
 
-      <p className="text-label mt-6 text-center text-muted-foreground">
+      <p className="text-label mt-8 text-center text-muted-foreground">
         Don't have an account?{" "}
-        <Link to="/signup" className="text-foreground font-medium underline">
+        <Link to="/signup" className="text-primary font-semibold">
           Create one
         </Link>
       </p>
