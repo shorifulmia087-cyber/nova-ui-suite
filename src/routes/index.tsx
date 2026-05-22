@@ -56,8 +56,8 @@ function Home() {
               <img src={avatarUser} alt={displayName || "Profile"} width={48} height={48} className="h-full w-full object-cover" />
             </div>
             {verified && (
-              <span className="absolute -bottom-0.5 -right-0.5 h-[18px] w-[18px] rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center shadow-card">
-                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3} />
+              <span className="absolute -bottom-0.5 -right-0.5 h-[16px] w-[16px] rounded-full bg-[color:var(--accent)] border-[2px] border-background flex items-center justify-center">
+                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3.5} />
               </span>
             )}
           </div>
