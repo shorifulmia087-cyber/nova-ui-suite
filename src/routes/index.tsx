@@ -228,35 +228,30 @@ function IntroVideoBanner() {
 
   return (
     <>
-      <div className="px-4 mt-5">
+      <div className="px-5 mt-5">
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-2xl shadow-card ring-1 ring-border/60 aspect-video active:scale-[0.99] transition-transform"
+          className="w-full flex items-center gap-3 h-16 px-3 rounded-lg bg-card border border-border/60 shadow-card active:scale-[0.99] transition-transform text-left"
         >
-          <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 60%, rgba(15,23,42,0.9) 100%)" }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy ring-1 ring-white/40">
-              <svg viewBox="0 0 24 24" className="h-6 w-6 ml-1 text-[color:var(--primary)] fill-current">
-                <path d="M8 5v14l11-7z" />
-              </svg>
+          <div className="relative h-12 w-[72px] shrink-0 overflow-hidden rounded-md bg-muted">
+            <img src={thumb} alt="" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="absolute inset-0 bg-black/30" />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="h-6 w-6 rounded-full bg-white/95 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="h-3 w-3 ml-[1px] text-[color:var(--primary)] fill-current">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
             </div>
           </div>
-          <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.12em" }}>
-              পরিচিতি ভিডিও
-            </span>
-            <p className="text-[15px] font-bold text-white leading-snug mt-2 tracking-tight">
-              এই ওয়েবসাইটে কিভাবে কাজ করবেন
+          <div className="flex-1 min-w-0">
+            <p className="text-[13px] font-bold text-foreground leading-tight truncate">
+              কিভাবে কাজ করবেন — পরিচিতি ভিডিও
             </p>
-            <p className="text-[12px] text-white/85 mt-0.5 font-medium">
-              বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
-            </p>
+            <p className="text-[11px] text-muted-foreground mt-0.5 font-medium">ভিডিও দেখতে ট্যাপ করুন</p>
           </div>
+          <ChevronRight className="h-4 w-4 text-muted-foreground shrink-0" strokeWidth={2.4} />
         </button>
       </div>
 
