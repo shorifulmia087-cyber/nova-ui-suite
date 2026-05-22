@@ -125,8 +125,6 @@ function Home() {
         </div>
       )}
 
-      {/* Promo banner carousel */}
-      <PromoBanners />
 
 
 
@@ -290,105 +288,6 @@ function RecentActivity() {
   );
 }
 
-import bannerFarm from "@/assets/banner-farm.jpg";
-import bannerRefer from "@/assets/banner-refer.jpg";
-import bannerTasks from "@/assets/banner-tasks.jpg";
-
-const banners = [
-  {
-    id: "b1",
-    eyebrow: "Limited offer",
-    title: "Earn 18% APR on Farm Plots",
-    cta: "Start farming",
-    to: "/farm",
-    image: bannerFarm,
-    overlay: "linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.55) 55%, rgba(15,23,42,0.1) 100%)",
-    accent: "#5EEAD4",
-  },
-  {
-    id: "b2",
-    eyebrow: "Bonus",
-    title: "Refer a friend & get ৳2,500",
-    cta: "Invite now",
-    to: "/refer",
-    image: bannerRefer,
-    overlay: "linear-gradient(90deg, rgba(30,27,75,0.92) 0%, rgba(30,27,75,0.55) 55%, rgba(30,27,75,0.1) 100%)",
-    accent: "#C7D2FE",
-  },
-  {
-    id: "b3",
-    eyebrow: "New tasks",
-    title: "Complete tasks. Earn daily.",
-    cta: "View tasks",
-    to: "/tasks",
-    image: bannerTasks,
-    overlay: "linear-gradient(90deg, rgba(67,20,7,0.92) 0%, rgba(67,20,7,0.5) 55%, rgba(67,20,7,0.1) 100%)",
-    accent: "#FED7AA",
-  },
-];
-
-function PromoBanners() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [active, setActive] = useState(0);
-
-  const onScroll = () => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const idx = Math.round(el.scrollLeft / el.clientWidth);
-    if (idx !== active) setActive(idx);
-  };
-
-  return (
-    <div className="mt-4">
-      <div
-        ref={scrollerRef}
-        onScroll={onScroll}
-        className="flex overflow-x-auto snap-x snap-mandatory no-scrollbar scroll-smooth px-5 gap-3"
-      >
-        {banners.map((b) => (
-          <Link
-            key={b.id}
-            to={b.to}
-            className="snap-center shrink-0 w-full relative overflow-hidden rounded-lg text-white shadow-navy h-[128px]"
-          >
-            <img
-              src={b.image}
-              alt=""
-              loading="lazy"
-              width={800}
-              height={512}
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0" style={{ background: b.overlay }} />
-            <div className="relative p-5 h-full flex flex-col justify-between">
-              <span className="text-caption text-white self-start inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
-                {b.eyebrow}
-              </span>
-              <div>
-                <p className="text-card-title text-white max-w-[70%]">
-                  {b.title}
-                </p>
-                <div className="text-label mt-2 inline-flex items-center gap-1.5" style={{ color: b.accent }}>
-                  {b.cta}
-                  <ChevronRight className="h-3.5 w-3.5" />
-                </div>
-              </div>
-            </div>
-          </Link>
-        ))}
-      </div>
-
-      <div className="flex items-center justify-center gap-1.5 mt-3">
-        {banners.map((_, i) => (
-          <span
-            key={i}
-            className={`h-1.5 rounded-full transition-all ${i === active ? "w-5 bg-[color:var(--accent)]" : "w-1.5 bg-border"}`}
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
 
 import type { Tx } from "@/lib/mock";
 function TxRow({ tx }: { tx: Tx }) {
