@@ -63,15 +63,15 @@ function Home() {
           </div>
           <div className="flex flex-col min-w-0 gap-1">
             <span
-              className="text-[11px] font-semibold uppercase text-muted-foreground leading-none"
-              style={{ letterSpacing: "0.08em" }}
+              className="text-[10.5px] font-medium uppercase text-muted-foreground leading-none"
+              style={{ letterSpacing: "0.04em" }}
             >
               Good morning
             </span>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
-              <h1 className="text-[17px] font-bold tracking-tight text-foreground leading-tight truncate">
+              <h1 className="text-[16px] font-semibold tracking-tight text-foreground leading-tight truncate">
                 {displayName || "Welcome"}
               </h1>
             )}
