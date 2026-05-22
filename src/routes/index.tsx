@@ -76,37 +76,9 @@ function Home() {
       </header>
 
 
-      {/* Info banner */}
-      <div className="px-4 mt-5">
-        <Link to="/tasks" className="block relative overflow-hidden rounded-lg shadow-card aspect-[2/1]">
-          <img
-            src={bannerTasks}
-            alt="আমাদের ওয়েবসাইট সম্পর্কে বিস্তারিত"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div
-            className="absolute inset-0"
-            style={{ background: "linear-gradient(90deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.55) 60%, rgba(15,23,42,0.15) 100%)" }}
-          />
-          <div className="relative p-4 h-full flex flex-col justify-between text-white">
-            <span className="text-caption self-start inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
-              পরিচিতি
-            </span>
-            <div>
-              <p className="text-card-title text-white leading-snug">
-                আমাদের ওয়েবসাইট সম্পর্কে বিস্তারিত
-              </p>
-              <p className="text-label mt-1 text-white/85">
-                পেমেন্ট প্রমাণ ও ইনকাম গাইড — ইউটিউবে ভিডিও দেখুন
-              </p>
-              <div className="text-label mt-2 inline-flex items-center gap-1.5 text-[color:var(--accent)]">
-                বিস্তারিত দেখুন
-                <ChevronRight className="h-3.5 w-3.5" />
-              </div>
-            </div>
-          </div>
-        </Link>
-      </div>
+      {/* Info banner — intro video */}
+      <IntroVideoBanner />
+
 
       {/* Quick actions — circular icon buttons */}
       <div className="px-4 mt-5">
