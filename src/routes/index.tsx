@@ -214,7 +214,7 @@ function IntroVideoBanner() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-lg shadow-card aspect-[21/9] active:scale-[0.99] transition-transform"
+          className="block w-full relative overflow-hidden rounded-lg shadow-card aspect-video active:scale-[0.99] transition-transform"
         >
           <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
           <div
