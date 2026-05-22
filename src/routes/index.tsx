@@ -80,7 +80,6 @@ function Home() {
       <div className="px-4 mt-5">
         <div className="bg-card rounded-lg shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
           {[
-            { to: "/deposit", icon: Plus, label: "Add money", primary: true },
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/tasks", icon: ClipboardList, label: "Task" },
             { to: "/refer", icon: Gift, label: "Refer" },
