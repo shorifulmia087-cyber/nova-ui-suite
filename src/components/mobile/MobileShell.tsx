@@ -68,8 +68,8 @@ export function MobileShell() {
 
         {!hideNav && (
         <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-4 pt-2 z-50">
-          <div className="relative rounded-full p-1.5 border border-white/20 dark:border-white/10 bg-white/55 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_8px_30px_rgba(0,0,0,0.12)] overflow-hidden">
-            <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" />
+          <div className="relative rounded-full p-1.5 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_36px_-10px_rgba(15,23,42,0.25)] overflow-hidden">
+            <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
 
             <span
               aria-hidden
@@ -91,7 +91,7 @@ export function MobileShell() {
                     key={to}
                     to={to}
                     className={cn(
-                      "relative flex-1 flex flex-col items-center justify-center gap-0.5 py-2 rounded-full select-none",
+                      "relative flex-1 flex flex-col items-center justify-center gap-1 py-2.5 rounded-full select-none",
                       "transition-colors duration-300",
                       active
                         ? "text-primary-foreground"
@@ -100,15 +100,15 @@ export function MobileShell() {
                   >
                     <Icon
                       className={cn(
-                        "h-[18px] w-[18px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                        "h-[20px] w-[20px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
                         active ? "scale-110 -translate-y-0.5" : "scale-100",
                       )}
                       strokeWidth={active ? 2.4 : 2}
                     />
                     <span
                       className={cn(
-                        "text-tab text-[14px] font-semibold leading-none transition-all duration-300",
-                        active ? "opacity-100" : "opacity-70",
+                        "text-[11px] font-semibold leading-none tracking-tight transition-all duration-300",
+                        active ? "opacity-100" : "opacity-80",
                       )}
                     >
                       {label}
@@ -119,6 +119,7 @@ export function MobileShell() {
             </div>
           </div>
         </nav>
+
         )}
       </div>
     </div>
