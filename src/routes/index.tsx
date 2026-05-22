@@ -86,12 +86,19 @@ function Home() {
 
 
 
-      {/* Info banner — intro video */}
-      <IntroVideoBanner />
-
+      {/* Primary CTA — Deposit */}
+      <div className="px-5 mt-5">
+        <Link
+          to="/deposit"
+          className="flex items-center justify-center gap-2 h-13 py-3.5 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow text-button active:scale-[0.98] transition-transform"
+        >
+          <Plus className="h-[18px] w-[18px]" strokeWidth={2.5} />
+          Deposit money
+        </Link>
+      </div>
 
       {/* Quick actions — refined card */}
-      <div className="px-4 mt-5">
+      <div className="px-4 mt-4">
         <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
@@ -100,7 +107,7 @@ function Home() {
             { to: "/transactions", icon: TrendingUp, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
+              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-card text-[color:var(--accent)] ring-1 ring-border/70 shadow-card group-active:bg-muted/40">
                 <I className="h-[22px] w-[22px]" strokeWidth={2} />
               </div>
               <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
@@ -108,6 +115,9 @@ function Home() {
           ))}
         </div>
       </div>
+
+      {/* Info strip — intro video (demoted) */}
+      <IntroVideoBanner />
 
       {/* Verification — dark card with submit */}
       {!verified && (
