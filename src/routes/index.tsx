@@ -320,15 +320,15 @@ function TxRow({ tx }: { tx: Tx }) {
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-4 flex items-center gap-3">
-      <div className={`h-11 w-11 rounded-xl flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
-        <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+    <div className="px-4 py-3 flex items-center gap-3">
+      <div className={`h-9 w-9 rounded-lg flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-[16px] w-[16px]" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
-        <p className="text-[11px] text-muted-foreground mt-1 font-medium">{tx.date}</p>
+        <h3 className="text-[13.5px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
+        <p className="text-[11px] text-muted-foreground mt-0.5 font-medium">{tx.date}</p>
       </div>
-      <p className={`text-[15px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
+      <p className={`text-[14px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-destructive"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </p>
     </div>
