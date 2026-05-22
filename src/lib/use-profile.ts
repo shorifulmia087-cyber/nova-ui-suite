@@ -16,10 +16,37 @@ export type Profile = {
   is_active: boolean;
 };
 
+// Module-level cache so navigating between pages doesn't refetch
+// and cause a flicker. Keyed by user id.
+const cache = new Map<string, Profile | null>();
+const inflight = new Map<string, Promise<Profile | null>>();
+const listeners = new Set<() => void>();
+
+function notify() {
+  listeners.forEach((l) => l());
+}
+
+async function fetchProfile(userId: string): Promise<Profile | null> {
+  const existing = inflight.get(userId);
+  if (existing) return existing;
+  const p = Promise.resolve(
+    supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
+  ).then(({ data }) => {
+    const profile = (data as Profile | null) ?? null;
+    cache.set(userId, profile);
+    inflight.delete(userId);
+    notify();
+    return profile;
+  });
+  inflight.set(userId, p);
+  return p;
+}
+
 export function useProfile() {
   const { user } = useAuth();
-  const [profile, setProfile] = useState<Profile | null>(null);
-  const [loading, setLoading] = useState(true);
+  const cached = user ? cache.get(user.id) ?? null : null;
+  const [profile, setProfile] = useState<Profile | null>(cached);
+  const [loading, setLoading] = useState(user ? !cache.has(user.id) : false);
 
   useEffect(() => {
     if (!user) {
@@ -27,20 +54,23 @@ export function useProfile() {
       setLoading(false);
       return;
     }
-    let cancelled = false;
-    setLoading(true);
-    supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", user.id)
-      .maybeSingle()
-      .then(({ data }) => {
-        if (cancelled) return;
-        setProfile(data as Profile | null);
-        setLoading(false);
-      });
+
+    const update = () => {
+      setProfile(cache.get(user.id) ?? null);
+      setLoading(false);
+    };
+    listeners.add(update);
+
+    if (cache.has(user.id)) {
+      setProfile(cache.get(user.id) ?? null);
+      setLoading(false);
+    } else {
+      setLoading(true);
+      fetchProfile(user.id);
+    }
+
     return () => {
-      cancelled = true;
+      listeners.delete(update);
     };
   }, [user]);
 
