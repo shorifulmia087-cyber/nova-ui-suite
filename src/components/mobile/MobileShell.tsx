@@ -1,4 +1,4 @@
-import { Outlet, Link, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Outlet, Link, useRouterState, useNavigate, useRouter } from "@tanstack/react-router";
 import { Home, Sprout, Gift, User } from "lucide-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
