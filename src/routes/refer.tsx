@@ -12,9 +12,11 @@ export const Route = createFileRoute("/refer")({
 
 function Refer() {
   const [copied, setCopied] = useState(false);
-  const { profile } = useProfile();
+  const { profile, loading: profileLoading } = useProfile();
   const [referralsCount, setReferralsCount] = useState(0);
-  const code = profile?.referral_code || "—";
+  const code = profile?.referral_code || "";
+  const codeLoading = profileLoading && !profile?.referral_code;
+
 
   useEffect(() => {
     if (!profile?.referral_code) return;
@@ -51,16 +53,22 @@ function Refer() {
             <div className="mt-5 rounded-lg bg-white/10 border border-white/20 p-3 flex items-center justify-between">
               <div className="text-left pl-2">
                 <p className="text-caption text-white/70 uppercase tracking-widest">Your code</p>
-                <p className="text-card-title tracking-wider">{code}</p>
+                {codeLoading ? (
+                  <div className="mt-1 h-5 w-28 rounded bg-white/20 animate-pulse" />
+                ) : (
+                  <p className="text-card-title tracking-wider">{code || "—"}</p>
+                )}
               </div>
               <button
                 onClick={copy}
-                className="text-label h-10 px-3 rounded-lg bg-white text-primary inline-flex items-center gap-1.5"
+                disabled={codeLoading || !code}
+                className="text-label h-10 px-3 rounded-lg bg-white text-primary inline-flex items-center gap-1.5 disabled:opacity-50"
               >
                 {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                 {copied ? "Copied" : "Copy"}
               </button>
             </div>
+
 
             <ActionButton variant="mint" className="!text-primary mt-4 w-full">
               <Share2 className="h-4 w-4" /> Share invite
