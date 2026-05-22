@@ -270,7 +270,7 @@ function Tasks() {
                       href={t.task_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 h-11 rounded-xl inline-flex items-center justify-center transition-colors bg-primary-foreground/10 text-primary-foreground/80 hover:bg-primary-foreground/20"
+                      className="px-4 h-11 rounded-xl inline-flex items-center justify-center transition-colors border border-border text-muted-foreground hover:bg-muted"
                       aria-label="Open task link"
                     >
                       <ExternalLink className="h-5 w-5" />
