@@ -186,11 +186,14 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex items-center h-9 px-4 rounded-lg bg-card border border-border shadow-card transition-all duration-300 ${
+      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-2xl bg-card border border-border/70 shadow-card transition-all duration-300 ${
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
-      <span className="text-label text-foreground tabular-nums leading-none transition-colors duration-300">
+      <span className="text-[9px] font-semibold uppercase text-muted-foreground leading-none" style={{ letterSpacing: "0.08em" }}>
+        Balance
+      </span>
+      <span className="mt-1 text-[15px] font-bold text-foreground tabular-nums leading-none">
         {text}
       </span>
     </div>
