@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton } from "@/components/mobile/Primitives";
@@ -41,36 +42,29 @@ function Tasks() {
   const fetchTasks = useServerFn(listTasks);
   const submitComplete = useServerFn(completeTask);
   const checkAdmin = useServerFn(isCurrentUserAdmin);
+  const queryClient = useQueryClient();
 
-  const [tasks, setTasks] = useState<TaskItem[]>([]);
-  const [completedCount, setCompletedCount] = useState(0);
-  const [totalEarned, setTotalEarned] = useState(0);
-  const [loading, setLoading] = useState(true);
   const [submittingId, setSubmittingId] = useState<string | null>(null);
-  const [isAdmin, setIsAdmin] = useState(false);
 
-  async function reload() {
-    try {
-      const res = await fetchTasks();
-      setTasks(res.tasks);
-      setCompletedCount(res.completedCount);
-      setTotalEarned(res.totalEarned);
-    } catch (e: any) {
-      toast.error(e?.message ?? "Failed to load tasks");
-    } finally {
-      setLoading(false);
-    }
-  }
+  const tasksQuery = useQuery({
+    queryKey: ["tasks", user?.id],
+    queryFn: () => fetchTasks(),
+    enabled: !!user,
+    staleTime: 60_000,
+  });
 
-  useEffect(() => {
-    if (!user) {
-      setLoading(false);
-      return;
-    }
-    reload();
-    checkAdmin().then((r) => setIsAdmin(r.isAdmin)).catch(() => {});
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user?.id]);
+  const adminQuery = useQuery({
+    queryKey: ["isAdmin", user?.id],
+    queryFn: () => checkAdmin(),
+    enabled: !!user,
+    staleTime: 5 * 60_000,
+  });
+
+  const tasks: TaskItem[] = tasksQuery.data?.tasks ?? [];
+  const completedCount = tasksQuery.data?.completedCount ?? 0;
+  const totalEarned = tasksQuery.data?.totalEarned ?? 0;
+  const isAdmin = adminQuery.data?.isAdmin ?? false;
+  const loading = tasksQuery.isLoading;
 
   async function handleComplete(task: TaskItem) {
     if (task.completed || submittingId) return;
@@ -79,13 +73,15 @@ function Tasks() {
       const res = await submitComplete({ data: { taskId: task.id } });
       toast.success(`+৳${res.reward.toFixed(2)} added to your balance`);
       if (user) await invalidateProfile(user.id);
-      await reload();
+      await queryClient.invalidateQueries({ queryKey: ["tasks", user?.id] });
     } catch (e: any) {
       toast.error(e?.message ?? "Could not complete task");
     } finally {
       setSubmittingId(null);
     }
   }
+
+
 
   if (!user) {
     return (
