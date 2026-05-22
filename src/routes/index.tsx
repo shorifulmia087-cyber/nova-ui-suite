@@ -40,12 +40,11 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
-  const { profile } = useProfile();
+  const { profile, loading: profileLoading } = useProfile();
   const verified = useVerified(!!profile?.is_verified);
-  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "Welcome";
+  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "";
   const balance = Number(profile?.main_balance ?? 0);
-  const fmt = (n: number) =>
-    hidden ? "••••••" : `৳${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const showProfileSkeleton = profileLoading && !profile;
 
   return (
     <div>
@@ -54,7 +53,7 @@ function Home() {
         <Link to="/profile" className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
             <div className="h-11 w-11 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
-              <img src={avatarUser} alt={displayName} width={44} height={44} className="h-full w-full object-cover" />
+              <img src={avatarUser} alt={displayName || "Profile"} width={44} height={44} className="h-full w-full object-cover" />
             </div>
             {verified && (
               <span className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center">
@@ -66,14 +65,23 @@ function Home() {
             <span className="text-eyebrow leading-none">
               Good morning
             </span>
-            <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
-              {displayName}
-            </h1>
+            {showProfileSkeleton ? (
+              <div className="mt-1.5 h-4 w-28 rounded bg-muted animate-pulse" />
+            ) : (
+              <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
+                {displayName || "Welcome"}
+              </h1>
+            )}
           </div>
         </Link>
-        <BalancePill value={balance} hidden={hidden} />
+        {showProfileSkeleton ? (
+          <div className="shrink-0 h-9 w-24 rounded-lg bg-muted animate-pulse" />
+        ) : (
+          <BalancePill value={balance} hidden={hidden} />
+        )}
 
       </header>
+
 
 
       {/* Info banner — intro video */}
