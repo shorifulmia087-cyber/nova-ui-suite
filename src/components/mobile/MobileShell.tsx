@@ -110,6 +110,7 @@ export function MobileShell() {
             </div>
           </div>
         </nav>
+        )}
       </div>
     </div>
   );
