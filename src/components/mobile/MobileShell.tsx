@@ -1,7 +1,8 @@
-import { Outlet, Link, useRouter, useRouterState } from "@tanstack/react-router";
+import { Outlet, Link, useRouter, useRouterState, useNavigate } from "@tanstack/react-router";
 import { Home, Sprout, Gift, User } from "lucide-react";
 import { useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/lib/auth-context";
 
 const tabs = [
   { to: "/", label: "Home", icon: Home },
@@ -10,15 +11,35 @@ const tabs = [
   { to: "/profile", label: "Profile", icon: User },
 ] as const;
 
+const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
+
 export function MobileShell() {
   const router = useRouter();
+  const navigate = useNavigate();
+  const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const activeIndex = Math.max(
     0,
     tabs.findIndex((t) => t.to === pathname),
   );
   const count = tabs.length;
-  const hideNav = pathname === "/login" || pathname === "/signup";
+  const isPublic = PUBLIC_ROUTES.has(pathname);
+  const hideNav = isPublic || !user;
+
+  useEffect(() => {
+    if (loading) return;
+    if (!user && !isPublic) {
+      navigate({ to: "/login", replace: true });
+    }
+  }, [loading, user, isPublic, navigate]);
+
+  if (loading && !isPublic) {
+    return <div className="min-h-screen w-full bg-gradient-soft" />;
+  }
+
+  if (!user && !isPublic) {
+    return <div className="min-h-screen w-full bg-gradient-soft" />;
+  }
 
   // Preload only the most likely next routes when the browser is idle,
   // and only once per session — avoids fetching every tab up front.
