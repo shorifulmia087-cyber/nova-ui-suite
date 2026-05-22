@@ -122,7 +122,7 @@ function Tasks() {
 
       {/* Earnings hero — light card, mint accents */}
       <div className="px-5">
-        <div className="rounded-3xl bg-card border border-border shadow-card p-6">
+        <div className="rounded-lg bg-card border border-border shadow-card p-6">
           <div className="flex justify-between items-start mb-5">
             <div>
               <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.18em] mb-1">
