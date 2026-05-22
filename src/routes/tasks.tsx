@@ -132,7 +132,7 @@ function Tasks() {
         </Card>
       </div>
 
-      <div className="px-5 mt-5 space-y-2">
+      <div className="flex-1 pb-28 opacity-100 mt-5 space-y-2">
         {loading ? (
           <Card className="p-6 text-center text-caption text-muted-foreground">Loading tasks…</Card>
         ) : total === 0 ? (
