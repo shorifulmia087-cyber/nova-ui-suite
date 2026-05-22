@@ -21,6 +21,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as FarmRouteImport } from './routes/farm'
 import { Route as DepositRouteImport } from './routes/deposit'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminTasksRouteImport } from './routes/admin.tasks'
 
 const WithdrawRoute = WithdrawRouteImport.update({
   id: '/withdraw',
@@ -82,6 +83,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminTasksRoute = AdminTasksRouteImport.update({
+  id: '/admin/tasks',
+  path: '/admin/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -96,6 +102,7 @@ export interface FileRoutesByFullPath {
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -110,6 +117,7 @@ export interface FileRoutesByTo {
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -125,6 +133,7 @@ export interface FileRoutesById {
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/verify'
     | '/withdraw'
+    | '/admin/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -155,6 +165,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/verify'
     | '/withdraw'
+    | '/admin/tasks'
   id:
     | '__root__'
     | '/'
@@ -169,6 +180,7 @@ export interface FileRouteTypes {
     | '/transactions'
     | '/verify'
     | '/withdraw'
+    | '/admin/tasks'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -184,6 +196,7 @@ export interface RootRouteChildren {
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
   WithdrawRoute: typeof WithdrawRoute
+  AdminTasksRoute: typeof AdminTasksRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -272,6 +285,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/tasks': {
+      id: '/admin/tasks'
+      path: '/admin/tasks'
+      fullPath: '/admin/tasks'
+      preLoaderRoute: typeof AdminTasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -288,6 +308,7 @@ const rootRouteChildren: RootRouteChildren = {
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
   WithdrawRoute: WithdrawRoute,
+  AdminTasksRoute: AdminTasksRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
