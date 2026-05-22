@@ -309,7 +309,7 @@ function TxRow({ tx }: { tx: Tx }) {
   const iconTone: Record<Tx["category"], string> = {
     earn: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
     deposit: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
-    withdraw: "text-foreground bg-muted",
+    withdraw: "text-destructive bg-destructive/10",
     task: "text-[color:var(--warning)] bg-[color:var(--warning)]/10",
     referral: "text-[color:var(--accent)] bg-[color:var(--accent)]/10",
   };
