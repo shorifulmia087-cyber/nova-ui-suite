@@ -102,11 +102,11 @@ function Home() {
             { to: "/verify", icon: ShieldCheck, label: "Verify" },
             { to: "/notifications", icon: Sparkles, label: "Rewards" },
           ].map(({ to, icon: I, label }) => (
-            <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
-                <I className="h-[22px] w-[22px]" strokeWidth={2} />
+            <Link key={label} to={to} className="flex flex-col items-center gap-1.5 group">
+              <div className="h-[52px] w-[52px] rounded-lg flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground group-active:bg-muted/80">
+                <I className="h-[20px] w-[20px]" strokeWidth={1.8} />
               </div>
-              <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
+              <span className="text-foreground font-medium text-[12px] leading-none tracking-tight">{label}</span>
             </Link>
           ))}
         </div>
