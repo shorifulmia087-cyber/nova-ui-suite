@@ -29,18 +29,15 @@ function notify() {
 async function fetchProfile(userId: string): Promise<Profile | null> {
   const existing = inflight.get(userId);
   if (existing) return existing;
-  const p = supabase
-    .from("profiles")
-    .select("*")
-    .eq("id", userId)
-    .maybeSingle()
-    .then(({ data }) => {
-      const profile = (data as Profile | null) ?? null;
-      cache.set(userId, profile);
-      inflight.delete(userId);
-      notify();
-      return profile;
-    });
+  const p = Promise.resolve(
+    supabase.from("profiles").select("*").eq("id", userId).maybeSingle(),
+  ).then(({ data }) => {
+    const profile = (data as Profile | null) ?? null;
+    cache.set(userId, profile);
+    inflight.delete(userId);
+    notify();
+    return profile;
+  });
   inflight.set(userId, p);
   return p;
 }
