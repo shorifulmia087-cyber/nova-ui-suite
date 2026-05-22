@@ -40,7 +40,7 @@ function Profile() {
       <div className="px-5">
         <Card className="p-5 bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
-            <div className="h-16 w-16 rounded-md overflow-hidden bg-muted shadow-glow">
+            <div className="h-16 w-16 rounded-lg overflow-hidden bg-muted shadow-glow">
               <img src={avatarUser} alt={user.name} width={64} height={64} className="h-full w-full object-cover" />
             </div>
             <div className="flex-1 min-w-0">
@@ -80,7 +80,7 @@ function Profile() {
       </Section>
 
       <div className="px-5 mt-4 mb-2">
-        <button className="text-button w-full h-12 rounded-md bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
+        <button className="text-button w-full h-12 rounded-lg bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
           <LogOut className="h-4 w-4" /> Log out
         </button>
       </div>
@@ -106,7 +106,7 @@ function Row({
 }) {
   const inner = (
     <div className="flex items-center gap-3 px-4 py-3.5 hover:bg-muted/50 transition">
-      <div className="h-9 w-9 rounded-md bg-muted flex items-center justify-center text-foreground">
+      <div className="h-9 w-9 rounded-lg bg-muted flex items-center justify-center text-foreground">
         <Icon className="h-4.5 w-4.5" />
       </div>
       <span className="text-label flex-1">{label}</span>

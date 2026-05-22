@@ -25,7 +25,7 @@ function Farm() {
               <p className="text-caption text-white/70 uppercase tracking-widest">Total staked</p>
               <p className="mt-1 text-stat">৳{totalStaked.toLocaleString()}</p>
             </div>
-            <div className="h-12 w-12 rounded-md bg-white/15 flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg bg-white/15 flex items-center justify-center">
               <Sprout className="h-6 w-6" />
             </div>
           </div>
@@ -50,7 +50,7 @@ function Farm() {
         {farmPlots.map((p) => (
           <Card key={p.id} className="p-4">
             <div className="flex items-center gap-3">
-              <div className="h-11 w-11 rounded-md bg-gradient-mint flex items-center justify-center text-white shadow-glow">
+              <div className="h-11 w-11 rounded-lg bg-gradient-mint flex items-center justify-center text-white shadow-glow">
                 <Sprout className="h-5 w-5" />
               </div>
               <div className="flex-1 min-w-0">

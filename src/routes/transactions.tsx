@@ -35,7 +35,7 @@ function TxList() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Search activity"
-            className="text-input w-full h-11 pl-9 pr-3 rounded-md bg-card border border-border outline-none focus:border-[color:var(--accent)]"
+            className="text-input w-full h-11 pl-9 pr-3 rounded-lg bg-card border border-border outline-none focus:border-[color:var(--accent)]"
           />
         </div>
       </div>
@@ -45,7 +45,7 @@ function TxList() {
           <button
             key={x}
             onClick={() => setF(x)}
-            className={`text-label shrink-0 h-9 px-3.5 rounded-md transition ৳{f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
+            className={`text-label shrink-0 h-9 px-3.5 rounded-lg transition ৳{f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
           >
             {x}
           </button>
@@ -79,7 +79,7 @@ function Row({ tx }: { tx: Tx }) {
                                 "text-destructive";
   return (
     <Card className="p-3 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{colors[tx.category]}`}>
+      <div className={`h-10 w-10 rounded-lg flex items-center justify-center ৳{colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>
       <div className="flex-1 min-w-0">
