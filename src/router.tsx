@@ -9,7 +9,7 @@ export const getRouter = () => {
     routeTree,
     context: { queryClient },
     scrollRestoration: true,
-    defaultPreload: "intent",
+    defaultPreload: false,
     defaultPreloadStaleTime: 0,
     // No pending indicator — navigations feel instant
     defaultPendingMs: 100000,
