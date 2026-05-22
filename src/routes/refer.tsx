@@ -12,9 +12,11 @@ export const Route = createFileRoute("/refer")({
 
 function Refer() {
   const [copied, setCopied] = useState(false);
-  const { profile } = useProfile();
+  const { profile, loading: profileLoading } = useProfile();
   const [referralsCount, setReferralsCount] = useState(0);
-  const code = profile?.referral_code || "—";
+  const code = profile?.referral_code || "";
+  const codeLoading = profileLoading && !profile?.referral_code;
+
 
   useEffect(() => {
     if (!profile?.referral_code) return;
