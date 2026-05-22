@@ -2,8 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton, StatPill } from "@/components/mobile/Primitives";
 import { Copy, Share2, Users, Sparkles, Check } from "lucide-react";
-import { useState } from "react";
-import { user } from "@/lib/mock";
+import { useEffect, useState } from "react";
+import { useProfile } from "@/lib/use-profile";
 
 export const Route = createFileRoute("/refer")({
   head: () => ({ meta: [{ title: "Refer & Earn — Ness" }, { name: "description", content: "Invite friends and earn ৳25 each." }] }),
@@ -12,8 +12,23 @@ export const Route = createFileRoute("/refer")({
 
 function Refer() {
   const [copied, setCopied] = useState(false);
-  const code = "ALEX-25";
+  const { profile } = useProfile();
+  const [referralsCount, setReferralsCount] = useState(0);
+  const code = profile?.referral_code || "—";
+
+  useEffect(() => {
+    if (!profile?.referral_code) return;
+    import("@/integrations/supabase/client").then(({ supabase }) =>
+      supabase
+        .from("profiles")
+        .select("id", { count: "exact", head: true })
+        .eq("referred_by", profile.referral_code!)
+        .then(({ count }) => setReferralsCount(count ?? 0))
+    );
+  }, [profile?.referral_code]);
+
   const copy = async () => {
+    if (!profile?.referral_code) return;
     await navigator.clipboard?.writeText(code);
     setCopied(true);
     setTimeout(() => setCopied(false), 1500);
@@ -55,8 +70,8 @@ function Refer() {
       </div>
 
       <div className="px-5 mt-4 flex gap-3">
-        <StatPill icon={<Users className="h-3.5 w-3.5" />} label="Friends joined" value={String(user.referrals)} />
-        <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`৳${(user.referrals * 25).toFixed(0)}`} tone="success" />
+        <StatPill icon={<Users className="h-3.5 w-3.5" />} label="Friends joined" value={String(referralsCount)} />
+        <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`৳${(referralsCount * 25).toFixed(0)}`} tone="success" />
       </div>
 
       <h2 className="text-section-title px-5 pt-6 pb-3">How it works</h2>

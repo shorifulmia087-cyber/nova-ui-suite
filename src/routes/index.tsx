@@ -6,13 +6,14 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
-import { user, transactions, cards } from "@/lib/mock";
+import { transactions, cards } from "@/lib/mock";
+import { useProfile } from "@/lib/use-profile";
 import avatarUser from "@/assets/avatar-user.jpg";
 
-function useVerified() {
-  const [v, setV] = useState(user.verified);
+function useVerified(serverVerified: boolean) {
+  const [v, setV] = useState(serverVerified);
   useEffect(() => {
-    const read = () => setV(localStorage.getItem("nessVerified") === "1" || user.verified);
+    const read = () => setV(localStorage.getItem("nessVerified") === "1" || serverVerified);
     read();
     window.addEventListener("storage", read);
     window.addEventListener("focus", read);
@@ -22,7 +23,7 @@ function useVerified() {
       window.removeEventListener("focus", read);
       window.removeEventListener("ness:verified", read);
     };
-  }, []);
+  }, [serverVerified]);
   return v;
 }
 
@@ -39,7 +40,10 @@ export const Route = createFileRoute("/")({
 
 function Home() {
   const [hidden, setHidden] = useState(false);
-  const verified = useVerified();
+  const { profile } = useProfile();
+  const verified = useVerified(!!profile?.is_verified);
+  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "Welcome";
+  const balance = Number(profile?.main_balance ?? 0);
   const fmt = (n: number) =>
     hidden ? "••••••" : `৳${n.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
@@ -50,7 +54,7 @@ function Home() {
         <Link to="/profile" className="flex items-center gap-3 min-w-0">
           <div className="relative shrink-0">
             <div className="h-11 w-11 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
-              <img src={avatarUser} alt={user.name} width={44} height={44} className="h-full w-full object-cover" />
+              <img src={avatarUser} alt={displayName} width={44} height={44} className="h-full w-full object-cover" />
             </div>
             {verified && (
               <span className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center">
@@ -63,11 +67,11 @@ function Home() {
               Good morning
             </span>
             <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
-              {user.name}
+              {displayName}
             </h1>
           </div>
         </Link>
-        <BalancePill value={user.balance} hidden={hidden} />
+        <BalancePill value={balance} hidden={hidden} />
 
       </header>
 

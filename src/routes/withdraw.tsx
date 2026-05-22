@@ -3,7 +3,7 @@ import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton } from "@/components/mobile/Primitives";
 import { Building2, Bitcoin, Wallet, AlertCircle } from "lucide-react";
 import { useState } from "react";
-import { user } from "@/lib/mock";
+import { useProfile } from "@/lib/use-profile";
 
 export const Route = createFileRoute("/withdraw")({
   head: () => ({ meta: [{ title: "Withdraw — Ness" }] }),
@@ -11,13 +11,15 @@ export const Route = createFileRoute("/withdraw")({
 });
 
 function Withdraw() {
+  const { profile } = useProfile();
+  const balance = Number(profile?.main_balance ?? 0);
   const [amt, setAmt] = useState(100);
   const fee = +(amt * 0.005).toFixed(2);
   const receive = (amt - fee).toFixed(2);
 
   return (
     <div>
-      <ScreenHeader title="Withdraw" subtitle={`Available · ৳${user.balance.toLocaleString()}`} />
+      <ScreenHeader title="Withdraw" subtitle={`Available · ৳${balance.toLocaleString()}`} />
 
       <div className="px-5">
         <Card className="p-6 text-center bg-gradient-soft">
@@ -44,7 +46,7 @@ function Withdraw() {
         {[25, 50, 100].map((p) => (
           <button
             key={p}
-            onClick={() => setAmt(Math.round((user.balance * p) / 100))}
+            onClick={() => setAmt(Math.round((balance * p) / 100))}
             className="text-label flex-1 h-10 rounded-lg bg-muted hover:bg-muted/70"
           >
             {p}%
