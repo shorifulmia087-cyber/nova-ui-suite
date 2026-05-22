@@ -113,7 +113,7 @@ function Tasks() {
       />
 
       <div className="px-5">
-        <Card className="p-4 bg-gradient-brand text-white border-0 shadow-glow">
+        <Card className="rounded-lg bg-card border-border shadow-card p-6 text-center text-muted-foreground border-0 shadow-sm text-white">
           <p className="text-caption text-white/70 uppercase tracking-widest">Available rewards</p>
           <div className="mt-1 flex items-end justify-between">
             <p className="text-stat">৳{totalReward.toFixed(2)}</p>
