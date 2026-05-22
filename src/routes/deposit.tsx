@@ -40,7 +40,7 @@ function Deposit() {
           <button
             key={p}
             onClick={() => setAmt(p)}
-            className={`text-label h-11 rounded-md transition border ৳{amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
+            className={`text-label h-11 rounded-lg transition border ৳{amt === p ? "bg-gradient-brand text-primary-foreground border-transparent shadow-glow" : "bg-card border-border text-foreground hover:bg-muted"}`}
           >
             ৳{p}
           </button>
@@ -59,9 +59,9 @@ function Deposit() {
             <button
               key={m.id}
               onClick={() => setMethod(m.id)}
-              className={`w-full text-left rounded-md border p-4 flex items-center gap-3 transition ৳{active ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 shadow-card" : "border-border bg-card"}`}
+              className={`w-full text-left rounded-lg border p-4 flex items-center gap-3 transition ৳{active ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 shadow-card" : "border-border bg-card"}`}
             >
-              <div className={`h-10 w-10 rounded-md flex items-center justify-center ৳{active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted text-foreground"}`}>
+              <div className={`h-10 w-10 rounded-lg flex items-center justify-center ৳{active ? "bg-gradient-mint text-white shadow-glow" : "bg-muted text-foreground"}`}>
                 <m.Icon className="h-5 w-5" />
               </div>
               <div className="flex-1">

@@ -11,7 +11,7 @@ export function Card({
   as?: "div" | "section" | "article";
 }) {
   return (
-    <As className={cn("rounded-md bg-card border border-border shadow-card", className)}>
+    <As className={cn("rounded-lg bg-card border border-border shadow-card", className)}>
       {children}
     </As>
   );
@@ -44,7 +44,7 @@ export function ActionButton({
   return (
     <button
       className={cn(
-        "text-button inline-flex items-center justify-center gap-2 rounded-md transition-all duration-200 active:scale-[0.98] disabled:opacity-50",
+        "text-button inline-flex items-center justify-center gap-2 rounded-lg transition-all duration-200 active:scale-[0.98] disabled:opacity-50",
         sizes[size],
         variants[variant],
         className,
@@ -74,7 +74,7 @@ export function StatPill({
     danger: "text-destructive",
   } as const;
   return (
-    <div className="flex-1 rounded-md bg-card border border-border p-3 shadow-card">
+    <div className="flex-1 rounded-lg bg-card border border-border p-3 shadow-card">
       <div className="text-caption flex items-center gap-2">
         {icon}
         <span>{label}</span>
