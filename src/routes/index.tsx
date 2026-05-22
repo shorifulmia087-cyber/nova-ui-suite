@@ -189,6 +189,90 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
   );
 }
 
+const INTRO_VIDEO_ID = "dQw4w9WgXcQ"; // TODO: replace with actual tutorial video ID
+
+function IntroVideoBanner() {
+  const [open, setOpen] = useState(false);
+  const videoId =
+    (typeof window !== "undefined" && localStorage.getItem("nessIntroVideoId")) || INTRO_VIDEO_ID;
+  const thumb = `https://img.youtube.com/vi/${videoId}/hqdefault.jpg`;
+
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    window.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      window.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
+  return (
+    <>
+      <div className="px-4 mt-5">
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
+          className="block w-full relative overflow-hidden rounded-lg shadow-card aspect-[16/9] active:scale-[0.99] transition-transform"
+        >
+          <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
+          <div
+            className="absolute inset-0"
+            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.15) 0%, rgba(15,23,42,0.85) 100%)" }}
+          />
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy">
+              <svg viewBox="0 0 24 24" className="h-6 w-6 ml-1 text-[color:var(--primary)] fill-current">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+          <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
+            <span className="text-caption inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+              পরিচিতি ভিডিও
+            </span>
+            <p className="text-card-title text-white leading-snug mt-2">
+              এই ওয়েবসাইটে কিভাবে কাজ করবেন
+            </p>
+            <p className="text-label text-white/85 mt-0.5">
+              বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
+            </p>
+          </div>
+        </button>
+      </div>
+
+      {open && (
+        <div
+          className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="relative w-full max-w-2xl aspect-video bg-black rounded-lg overflow-hidden shadow-navy"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="absolute -top-2 -right-2 z-10 h-9 w-9 rounded-full bg-white text-foreground flex items-center justify-center shadow-card"
+              aria-label="বন্ধ করুন"
+            >
+              ✕
+            </button>
+            <iframe
+              src={`https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`}
+              title="পরিচিতি ভিডিও"
+              className="absolute inset-0 w-full h-full"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
 function RecentActivity() {
 
   const items = transactions.slice(0, 5);
