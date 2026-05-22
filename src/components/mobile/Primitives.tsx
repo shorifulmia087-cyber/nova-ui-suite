@@ -35,11 +35,11 @@ export function ActionButton({
     lg: "h-14 px-6",
   } as const;
   const variants = {
-    brand: "bg-gradient-brand text-primary-foreground shadow-glow hover:opacity-95",
-    mint: "bg-gradient-mint text-white shadow-glow hover:opacity-95",
+    brand: "bg-primary text-primary-foreground shadow-card hover:bg-primary/90 active:bg-primary/95",
+    mint: "bg-accent text-accent-foreground shadow-card hover:bg-accent/90 active:bg-accent/95",
     ghost: "bg-muted text-foreground hover:bg-muted/70",
     outline: "border border-border bg-card text-foreground hover:bg-muted",
-    danger: "bg-destructive text-destructive-foreground hover:opacity-95",
+    danger: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
   } as const;
   return (
     <button
