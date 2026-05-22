@@ -85,7 +85,7 @@ function LoginPage() {
 
       <p className="text-label mt-8 text-center text-muted-foreground">
         Don't have an account?{" "}
-        <Link to="/signup" className="text-primary font-semibold">
+        <Link to="/signup" preload="render" className="text-primary font-semibold">
           Create one
         </Link>
       </p>
