@@ -33,14 +33,6 @@ export function MobileShell() {
     }
   }, [loading, user, isPublic, navigate]);
 
-  if (loading && !isPublic) {
-    return <div className="min-h-screen w-full bg-gradient-soft" />;
-  }
-
-  if (!user && !isPublic) {
-    return <div className="min-h-screen w-full bg-gradient-soft" />;
-  }
-
   // Preload only the most likely next routes when the browser is idle,
   // and only once per session — avoids fetching every tab up front.
   const preloadedRef = useRef(false);
@@ -69,6 +61,15 @@ export function MobileShell() {
       return () => window.clearTimeout(id);
     }
   }, [router, activeIndex]);
+
+  if (loading && !isPublic) {
+    return <div className="min-h-screen w-full bg-gradient-soft" />;
+  }
+
+  if (!user && !isPublic) {
+    return <div className="min-h-screen w-full bg-gradient-soft" />;
+  }
+
 
   return (
     <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
