@@ -95,12 +95,9 @@ function Home() {
         <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
-            { to: "/tasks", icon: ClipboardList, label: "Task" },
             { to: "/refer", icon: Gift, label: "Refer" },
-            { to: "/farm", icon: Sprout, label: "Farm" },
+            { to: "/tasks", icon: ClipboardList, label: "Task" },
             { to: "/transactions", icon: TrendingUp, label: "History" },
-            { to: "/verify", icon: ShieldCheck, label: "Verify" },
-            { to: "/notifications", icon: Sparkles, label: "Rewards" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
               <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
