@@ -13,7 +13,7 @@ export const getRouter = () => {
     defaultPreload: "intent",
     defaultPreloadStaleTime: 0,
     defaultPendingComponent: PageSkeleton,
-    defaultPendingMs: 0,
+    defaultPendingMs: 1000,
     defaultPendingMinMs: 0,
   });
 
