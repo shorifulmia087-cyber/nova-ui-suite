@@ -225,28 +225,28 @@ function IntroVideoBanner() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-lg shadow-card aspect-video active:scale-[0.99] transition-transform"
+          className="block w-full relative overflow-hidden rounded-2xl shadow-card ring-1 ring-border/60 aspect-video active:scale-[0.99] transition-transform"
         >
           <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.15) 0%, rgba(15,23,42,0.85) 100%)" }}
+            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 60%, rgba(15,23,42,0.9) 100%)" }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy">
+            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy ring-1 ring-white/40">
               <svg viewBox="0 0 24 24" className="h-6 w-6 ml-1 text-[color:var(--primary)] fill-current">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           </div>
           <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
-            <span className="text-caption inline-flex items-center px-2 py-0.5 rounded-full uppercase tracking-widest bg-white/15 backdrop-blur-sm">
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.12em" }}>
               পরিচিতি ভিডিও
             </span>
-            <p className="text-card-title text-white leading-snug mt-2">
+            <p className="text-[15px] font-bold text-white leading-snug mt-2 tracking-tight">
               এই ওয়েবসাইটে কিভাবে কাজ করবেন
             </p>
-            <p className="text-label text-white/85 mt-0.5">
+            <p className="text-[12px] text-white/85 mt-0.5 font-medium">
               বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
             </p>
           </div>
