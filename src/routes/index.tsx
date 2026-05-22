@@ -49,37 +49,39 @@ function Home() {
   return (
     <div>
       {/* Top bar */}
-      <header className="px-5 pt-5 pb-1 flex items-center justify-between">
-        <Link to="/profile" className="flex items-center gap-3 min-w-0">
+      <header className="px-5 pt-6 pb-2 flex items-center justify-between gap-3">
+        <Link to="/profile" className="flex items-center gap-3 min-w-0 flex-1">
           <div className="relative shrink-0">
-            <div className="h-11 w-11 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
-              <img src={avatarUser} alt={displayName || "Profile"} width={44} height={44} className="h-full w-full object-cover" />
+            <div className="h-12 w-12 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
+              <img src={avatarUser} alt={displayName || "Profile"} width={48} height={48} className="h-full w-full object-cover" />
             </div>
             {verified && (
-              <span className="absolute -bottom-0.5 -right-0.5 h-4 w-4 rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center">
+              <span className="absolute -bottom-0.5 -right-0.5 h-[18px] w-[18px] rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center shadow-card">
                 <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3} />
               </span>
             )}
           </div>
-          <div className="flex flex-col min-w-0">
-            <span className="text-eyebrow leading-none">
+          <div className="flex flex-col min-w-0 gap-1">
+            <span
+              className="text-[11px] font-semibold uppercase text-muted-foreground leading-none"
+              style={{ letterSpacing: "0.08em" }}
+            >
               Good morning
             </span>
             {showProfileSkeleton ? (
-              <div className="mt-1.5 h-4 w-28 rounded bg-muted animate-pulse" />
+              <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
-              <h1 className="mt-1.5 text-card-title text-foreground leading-none truncate">
+              <h1 className="text-[17px] font-bold tracking-tight text-foreground leading-tight truncate">
                 {displayName || "Welcome"}
               </h1>
             )}
           </div>
         </Link>
         {showProfileSkeleton ? (
-          <div className="shrink-0 h-9 w-24 rounded-lg bg-muted animate-pulse" />
+          <div className="shrink-0 h-11 w-28 rounded-2xl bg-muted animate-pulse" />
         ) : (
           <BalancePill value={balance} hidden={hidden} />
         )}
-
       </header>
 
 
@@ -88,9 +90,9 @@ function Home() {
       <IntroVideoBanner />
 
 
-      {/* Quick actions — circular icon buttons */}
+      {/* Quick actions — refined card */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-lg shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/tasks", icon: ClipboardList, label: "Task" },
@@ -101,10 +103,10 @@ function Home() {
             { to: "/notifications", icon: Sparkles, label: "Rewards" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div className="h-14 w-14 rounded-full flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground">
-                <I className="h-5 w-5" strokeWidth={2.4} />
+              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
+                <I className="h-[22px] w-[22px]" strokeWidth={2} />
               </div>
-              <span className="text-foreground font-medium" style={{ fontSize: 14, lineHeight: "20px" }}>{label}</span>
+              <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
             </Link>
           ))}
         </div>
