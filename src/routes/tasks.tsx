@@ -214,7 +214,7 @@ function Tasks() {
             return (
               <div
                 key={t.id}
-                className={`rounded-2xl p-5 shadow-navy transition-all bg-primary ${
+                className={`rounded-2xl p-5 border border-border bg-card transition-all ${
                   done ? "opacity-75" : "hover:shadow-glow"
                 }`}
               >
@@ -226,7 +226,7 @@ function Tasks() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start gap-2">
-                      <h3 className="text-primary-foreground font-bold text-base leading-tight truncate">
+                      <h3 className="text-card-foreground font-bold text-base leading-tight truncate">
                         {t.title}
                       </h3>
                       <span className="text-[color:var(--accent)] font-bold bg-[color:var(--accent)]/10 px-2 py-0.5 rounded text-sm shrink-0">
@@ -234,10 +234,11 @@ function Tasks() {
                       </span>
                     </div>
                     {t.description && (
-                      <p className="text-primary-foreground/60 text-caption mt-1 line-clamp-2">
+                      <p className="text-muted-foreground text-caption mt-1 line-clamp-2">
                         {t.description}
                       </p>
                     )}
+
                   </div>
                 </div>
 
