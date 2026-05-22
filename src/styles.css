@@ -69,7 +69,7 @@
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.25rem;
 
   /* Premium fintech palette (exact hex from brief) */
   --background: #f6f7f9;
