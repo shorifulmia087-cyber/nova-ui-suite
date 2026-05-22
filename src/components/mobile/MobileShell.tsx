@@ -18,6 +18,7 @@ export function MobileShell() {
     tabs.findIndex((t) => t.to === pathname),
   );
   const count = tabs.length;
+  const hideNav = pathname === "/login" || pathname === "/signup";
 
   // Preload only the most likely next routes when the browser is idle,
   // and only once per session — avoids fetching every tab up front.
