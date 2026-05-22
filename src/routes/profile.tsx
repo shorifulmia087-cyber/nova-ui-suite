@@ -90,7 +90,7 @@ function Profile() {
       </Section>
 
       <div className="px-5 mt-4 mb-2">
-        <button className="text-button w-full h-12 rounded-lg bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
+        <button onClick={handleLogout} className="text-button w-full h-12 rounded-lg bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
           <LogOut className="h-4 w-4" /> Log out
         </button>
       </div>

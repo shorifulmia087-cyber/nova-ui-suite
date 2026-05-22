@@ -3,7 +3,7 @@ import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton, StatPill } from "@/components/mobile/Primitives";
 import { Copy, Share2, Users, Sparkles, Check } from "lucide-react";
 import { useState } from "react";
-import { user } from "@/lib/mock";
+import { useProfile } from "@/lib/use-profile";
 
 export const Route = createFileRoute("/refer")({
   head: () => ({ meta: [{ title: "Refer & Earn — Ness" }, { name: "description", content: "Invite friends and earn ৳25 each." }] }),
