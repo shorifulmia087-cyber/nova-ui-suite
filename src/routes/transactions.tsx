@@ -45,7 +45,7 @@ function TxList() {
           <button
             key={x}
             onClick={() => setF(x)}
-            className={`text-label shrink-0 h-9 px-3.5 rounded-full transition ৳{f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
+            className={`text-label shrink-0 h-9 px-3.5 rounded-md transition ৳{f === x ? "bg-gradient-brand text-primary-foreground shadow-glow" : "bg-card border border-border text-muted-foreground hover:text-foreground"}`}
           >
             {x}
           </button>

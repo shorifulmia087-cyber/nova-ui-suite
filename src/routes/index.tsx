@@ -74,7 +74,7 @@ function Home() {
 
       {/* Quick actions — circular icon buttons */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-sm shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-md shadow-card px-0 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/deposit", icon: Plus, label: "Add money", primary: true },
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
@@ -105,9 +105,9 @@ function Home() {
       {!verified && (
 
         <div className="px-5 mt-6">
-          <div className="rounded-2xl bg-primary text-primary-foreground p-4 shadow-navy">
+          <div className="rounded-md bg-primary text-primary-foreground p-4 shadow-navy">
             <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 h-11 w-11 rounded-xl bg-warning/15 flex items-center justify-center">
+              <div className="flex-shrink-0 h-11 w-11 rounded-md bg-warning/15 flex items-center justify-center">
                 <ClipboardList className="h-5 w-5 text-warning" strokeWidth={2.4} />
               </div>
               <p className="flex-1 text-label pt-0.5">
@@ -116,7 +116,7 @@ function Home() {
             </div>
             <Link
               to="/verify"
-              className="text-button mt-4 flex items-center justify-center h-12 rounded-full bg-background text-foreground active:scale-[0.98] transition-transform"
+              className="text-button mt-4 flex items-center justify-center h-12 rounded-md bg-background text-foreground active:scale-[0.98] transition-transform"
             >
               Submit
             </Link>
@@ -177,7 +177,7 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex items-center h-9 px-4 rounded-full bg-card border border-border shadow-card transition-all duration-300 ${
+      className={`shrink-0 inline-flex items-center h-9 px-4 rounded-md bg-card border border-border shadow-card transition-all duration-300 ${
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
@@ -193,7 +193,7 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="bg-card rounded-2xl shadow-card overflow-hidden">
+      <div className="bg-card rounded-md shadow-card overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
             {i > 0 && <div className="ml-[72px] mr-4 h-px bg-border" />}
