@@ -68,18 +68,16 @@ export function MobileShell() {
 
         {!hideNav && (
         <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pb-4 pt-2 z-50">
-          <div className="relative rounded-full p-1.5 border border-white/30 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_10px_36px_-10px_rgba(15,23,42,0.25)] overflow-hidden">
-            <span className="pointer-events-none absolute inset-x-2 top-0 h-px bg-gradient-to-r from-transparent via-white/80 to-transparent" />
-
+          <div className="relative rounded-full p-1 border border-border/40 bg-card/85 backdrop-blur-2xl backdrop-saturate-150 shadow-[0_6px_24px_-8px_rgba(15,23,42,0.18)] overflow-hidden">
             <span
               aria-hidden
-              className="absolute top-1.5 bottom-1.5 rounded-full bg-gradient-brand shadow-glow will-change-transform"
+              className="absolute top-1 bottom-1 rounded-full bg-gradient-brand will-change-transform"
               style={{
-                width: `calc((100% - 0.75rem) / ${count})`,
-                left: "0.375rem",
+                width: `calc((100% - 0.5rem) / ${count})`,
+                left: "0.25rem",
                 transform: `translateX(calc(${activeIndex} * 100%))`,
                 transition:
-                  "transform 520ms cubic-bezier(0.34, 1.56, 0.64, 1)",
+                  "transform 480ms cubic-bezier(0.34, 1.56, 0.64, 1)",
               }}
             />
 
@@ -91,7 +89,7 @@ export function MobileShell() {
                     key={to}
                     to={to}
                     className={cn(
-                      "relative flex-1 flex flex-col items-center justify-center gap-1 py-2.5 rounded-full select-none",
+                      "relative flex-1 flex flex-col items-center justify-center gap-1 py-2 rounded-full select-none",
                       "transition-colors duration-300",
                       active
                         ? "text-primary-foreground"
@@ -100,14 +98,14 @@ export function MobileShell() {
                   >
                     <Icon
                       className={cn(
-                        "h-[20px] w-[20px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
-                        active ? "scale-110 -translate-y-0.5" : "scale-100",
+                        "h-[18px] w-[18px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
+                        active ? "scale-105" : "scale-100",
                       )}
-                      strokeWidth={active ? 2.4 : 2}
+                      strokeWidth={active ? 2.2 : 1.8}
                     />
                     <span
                       className={cn(
-                        "text-[11px] font-semibold leading-none tracking-tight transition-all duration-300",
+                        "text-[10.5px] font-semibold leading-none tracking-tight transition-opacity duration-300",
                         active ? "opacity-100" : "opacity-80",
                       )}
                     >
@@ -119,6 +117,7 @@ export function MobileShell() {
             </div>
           </div>
         </nav>
+
 
         )}
       </div>
