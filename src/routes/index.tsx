@@ -290,10 +290,10 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="bg-card rounded-2xl shadow-card border border-border/60 overflow-hidden">
+      <div className="bg-card rounded-lg shadow-card border border-border/50 overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
+            {i > 0 && <div className="ml-[64px] mr-4 h-px bg-border/60" />}
             <TxRow tx={t} />
           </div>
         ))}
@@ -319,15 +319,15 @@ function TxRow({ tx }: { tx: Tx }) {
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-4 flex items-center gap-3">
-      <div className={`h-11 w-11 rounded-xl flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
-        <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
+    <div className="px-4 py-3.5 flex items-center gap-3">
+      <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
-        <p className="text-[11px] text-muted-foreground mt-1 font-medium">{tx.date}</p>
+        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight tracking-tight">{tx.title}</h3>
+        <p className="text-[11px] text-muted-foreground/80 mt-1 font-normal">{tx.date}</p>
       </div>
-      <p className={`text-[15px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
+      <p className={`text-[14.5px] font-semibold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </p>
     </div>
