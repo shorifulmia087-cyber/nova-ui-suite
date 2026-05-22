@@ -1,6 +1,6 @@
-import { Outlet, Link, useRouter, useRouterState, useNavigate } from "@tanstack/react-router";
+import { Outlet, Link, useRouterState, useNavigate } from "@tanstack/react-router";
 import { Home, Sprout, Gift, User } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
 
@@ -14,7 +14,6 @@ const tabs = [
 const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
 
 export function MobileShell() {
-  const router = useRouter();
   const navigate = useNavigate();
   const { user, loading } = useAuth();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
@@ -32,32 +31,6 @@ export function MobileShell() {
       navigate({ to: "/login", replace: true });
     }
   }, [loading, user, isPublic, navigate]);
-
-  // Preload ALL tab routes once the browser is idle so tab switches
-  // never trigger a network fetch (which is what causes the browser's
-  // top loading bar to appear).
-  const preloadedRef = useRef(false);
-  useEffect(() => {
-    if (preloadedRef.current || !user) return;
-    preloadedRef.current = true;
-
-    const run = () => {
-      tabs.forEach(({ to }) => {
-        router.preloadRoute({ to }).catch(() => {});
-      });
-    };
-
-    const ric = (window as typeof window & {
-      requestIdleCallback?: (cb: () => void, opts?: { timeout: number }) => number;
-    }).requestIdleCallback;
-
-    if (typeof ric === "function") {
-      ric(run, { timeout: 2000 });
-    } else {
-      const id = window.setTimeout(run, 800);
-      return () => window.clearTimeout(id);
-    }
-  }, [router, user]);
 
   if (loading && !isPublic) {
     return <div className="min-h-screen w-full bg-gradient-soft" />;
@@ -99,7 +72,6 @@ export function MobileShell() {
                   <Link
                     key={to}
                     to={to}
-                    preload="intent"
                     className={cn(
                       "relative flex-1 flex flex-col items-center justify-center gap-0.5 py-2 rounded-full select-none",
                       "transition-colors duration-300",
