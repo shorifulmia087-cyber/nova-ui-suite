@@ -56,22 +56,22 @@ function Home() {
               <img src={avatarUser} alt={displayName || "Profile"} width={48} height={48} className="h-full w-full object-cover" />
             </div>
             {verified && (
-              <span className="absolute -bottom-0.5 -right-0.5 h-[16px] w-[16px] rounded-full bg-[color:var(--accent)] border-[2px] border-background flex items-center justify-center">
-                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3.5} />
+              <span className="absolute -bottom-0.5 -right-0.5 h-[18px] w-[18px] rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center shadow-card">
+                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3} />
               </span>
             )}
           </div>
           <div className="flex flex-col min-w-0 gap-1">
             <span
-              className="text-[10.5px] font-medium uppercase text-muted-foreground leading-none"
-              style={{ letterSpacing: "0.04em" }}
+              className="text-[11px] font-semibold uppercase text-muted-foreground leading-none"
+              style={{ letterSpacing: "0.08em" }}
             >
               Good morning
             </span>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
-              <h1 className="text-[16px] font-semibold tracking-tight text-foreground leading-tight truncate">
+              <h1 className="text-[17px] font-bold tracking-tight text-foreground leading-tight truncate">
                 {displayName || "Welcome"}
               </h1>
             )}
@@ -92,7 +92,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-lg shadow-card border border-border/50 px-3 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/tasks", icon: ClipboardList, label: "Task" },
@@ -102,11 +102,11 @@ function Home() {
             { to: "/verify", icon: ShieldCheck, label: "Verify" },
             { to: "/notifications", icon: Sparkles, label: "Rewards" },
           ].map(({ to, icon: I, label }) => (
-            <Link key={label} to={to} className="flex flex-col items-center gap-1.5 group">
-              <div className="h-[52px] w-[52px] rounded-lg flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground group-active:bg-muted/80">
-                <I className="h-[20px] w-[20px]" strokeWidth={1.8} />
+            <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
+              <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-muted text-foreground ring-1 ring-border/60 group-active:bg-muted/80">
+                <I className="h-[22px] w-[22px]" strokeWidth={2} />
               </div>
-              <span className="text-foreground font-medium text-[12px] leading-none tracking-tight">{label}</span>
+              <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
             </Link>
           ))}
         </div>
@@ -186,14 +186,14 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex flex-col items-end justify-center h-12 px-4 rounded-lg bg-card border border-border/50 shadow-card transition-all duration-300 ${
+      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-2xl bg-card border border-border/70 shadow-card transition-all duration-300 ${
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
-      <span className="text-[9px] font-medium uppercase text-muted-foreground/80 leading-none" style={{ letterSpacing: "0.05em" }}>
+      <span className="text-[9px] font-semibold uppercase text-muted-foreground leading-none" style={{ letterSpacing: "0.08em" }}>
         Balance
       </span>
-      <span className="mt-1.5 text-[16px] font-bold text-foreground tabular-nums leading-none tracking-tight">
+      <span className="mt-1 text-[15px] font-bold text-foreground tabular-nums leading-none">
         {text}
       </span>
     </div>
@@ -225,29 +225,28 @@ function IntroVideoBanner() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-lg shadow-card border border-border/50 active:scale-[0.99] transition-transform"
-          style={{ aspectRatio: "16 / 10" }}
+          className="block w-full relative overflow-hidden rounded-2xl shadow-card ring-1 ring-border/60 aspect-video active:scale-[0.99] transition-transform"
         >
           <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
           <div
             className="absolute inset-0"
-            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0) 0%, rgba(15,23,42,0.45) 55%, rgba(15,23,42,0.88) 100%)" }}
+            style={{ background: "linear-gradient(180deg, rgba(15,23,42,0.05) 0%, rgba(15,23,42,0.55) 60%, rgba(15,23,42,0.9) 100%)" }}
           />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-11 w-11 rounded-full bg-white/95 flex items-center justify-center shadow-card">
-              <svg viewBox="0 0 24 24" className="h-[18px] w-[18px] ml-[2px] text-[color:var(--primary)] fill-current">
+            <div className="h-14 w-14 rounded-full bg-white/95 flex items-center justify-center shadow-navy ring-1 ring-white/40">
+              <svg viewBox="0 0 24 24" className="h-6 w-6 ml-1 text-[color:var(--primary)] fill-current">
                 <path d="M8 5v14l11-7z" />
               </svg>
             </div>
           </div>
           <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.08em" }}>
+            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.12em" }}>
               পরিচিতি ভিডিও
             </span>
-            <p className="text-[14px] font-semibold text-white leading-snug mt-2 tracking-tight">
+            <p className="text-[15px] font-bold text-white leading-snug mt-2 tracking-tight">
               এই ওয়েবসাইটে কিভাবে কাজ করবেন
             </p>
-            <p className="text-[11px] text-white/80 mt-0.5 font-medium">
+            <p className="text-[12px] text-white/85 mt-0.5 font-medium">
               বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
             </p>
           </div>
@@ -290,10 +289,10 @@ function RecentActivity() {
   const items = transactions.slice(0, 5);
   return (
     <div className="px-5">
-      <div className="bg-card rounded-lg shadow-card border border-border/50 overflow-hidden">
+      <div className="bg-card rounded-2xl shadow-card border border-border/60 overflow-hidden">
         {items.map((t, i) => (
           <div key={t.id}>
-            {i > 0 && <div className="ml-[64px] mr-4 h-px bg-border/60" />}
+            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
             <TxRow tx={t} />
           </div>
         ))}
@@ -319,15 +318,15 @@ function TxRow({ tx }: { tx: Tx }) {
   const positive = tx.amount >= 0;
 
   return (
-    <div className="px-4 py-3.5 flex items-center gap-3">
-      <div className={`h-10 w-10 rounded-lg flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
-        <Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
+    <div className="px-4 py-4 flex items-center gap-3">
+      <div className={`h-11 w-11 rounded-xl flex items-center justify-center shrink-0 ${iconTone[tx.category]}`}>
+        <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight tracking-tight">{tx.title}</h3>
-        <p className="text-[11px] text-muted-foreground/80 mt-1 font-normal">{tx.date}</p>
+        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
+        <p className="text-[11px] text-muted-foreground mt-1 font-medium">{tx.date}</p>
       </div>
-      <p className={`text-[14.5px] font-semibold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
+      <p className={`text-[15px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
       </p>
     </div>
