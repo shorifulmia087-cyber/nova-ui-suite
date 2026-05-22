@@ -9,12 +9,13 @@ import { invalidateProfile } from "@/lib/use-profile";
 import { useAuth } from "@/lib/auth-context";
 import { CheckCircle2, Sparkles, ExternalLink, Settings, Share2, Play, Gift, Target, Loader2 } from "lucide-react";
 
-const ICON_PALETTE = [
-  { bg: "bg-emerald-500/10", text: "text-emerald-400", Icon: Play },
-  { bg: "bg-teal-500/10", text: "text-teal-400", Icon: Share2 },
-  { bg: "bg-amber-500/10", text: "text-amber-400", Icon: Gift },
-  { bg: "bg-sky-500/10", text: "text-sky-400", Icon: Target },
+const ICON_TONES = [
+  "bg-[color:var(--accent)]/15 text-[color:var(--accent)]",
+  "bg-[color:var(--secondary)]/15 text-[color:var(--secondary)]",
+  "bg-[color:var(--warning)]/15 text-[color:var(--warning)]",
+  "bg-[color:var(--success)]/15 text-[color:var(--success)]",
 ] as const;
+const ICONS = [Play, Share2, Gift, Target] as const;
 
 export const Route = createFileRoute("/tasks")({
   head: () => ({
@@ -131,7 +132,7 @@ function Tasks() {
                 ৳{totalReward.toFixed(2)}
               </p>
             </div>
-            <span className="text-[11px] font-bold bg-emerald-50 text-emerald-600 px-2.5 py-1 rounded-full">
+            <span className="text-[11px] font-bold bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-2.5 py-1 rounded-full">
               {completedCount}/{total || 0} Completed
             </span>
           </div>
@@ -139,7 +140,7 @@ function Tasks() {
           <div className="space-y-2">
             <div className="h-2.5 w-full rounded-full bg-muted overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500"
+                className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-[color:var(--accent)] to-[color:var(--secondary)]"
                 style={{ width: total ? `${(completedCount / total) * 100}%` : "0%" }}
               />
             </div>
@@ -194,10 +195,10 @@ function Tasks() {
               </p>
             </div>
           ) : remaining === 0 ? (
-            <div className="rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-500 p-6 text-center text-white shadow-glow">
+            <div className="rounded-2xl p-6 text-center text-accent-foreground shadow-glow bg-gradient-to-br from-[color:var(--accent)] to-[color:var(--secondary)]">
               <Sparkles className="h-7 w-7 mx-auto mb-2" />
               <p className="text-label font-bold">All tasks completed!</p>
-              <p className="text-caption text-white/85 mt-1">
+              <p className="text-caption opacity-90 mt-1">
                 You earned ৳{totalEarned.toFixed(2)} today. Come back tomorrow for more.
               </p>
             </div>
@@ -206,36 +207,34 @@ function Tasks() {
           {tasks.map((t, idx) => {
             const done = t.completed;
             const submitting = submittingId === t.id;
-            const palette = ICON_PALETTE[idx % ICON_PALETTE.length];
-            const Icon = done ? CheckCircle2 : palette.Icon;
+            const Icon = done ? CheckCircle2 : ICONS[idx % ICONS.length];
+            const iconTone = done
+              ? "bg-[color:var(--accent)]/15 text-[color:var(--accent)]"
+              : ICON_TONES[idx % ICON_TONES.length];
             return (
               <div
                 key={t.id}
-                className={`rounded-2xl p-5 shadow-xl transition-all ${
-                  done
-                    ? "bg-slate-900/70 opacity-75"
-                    : "bg-slate-900 hover:shadow-2xl"
+                className={`rounded-2xl p-5 shadow-navy transition-all bg-primary ${
+                  done ? "opacity-75" : "hover:shadow-glow"
                 }`}
               >
                 <div className="flex gap-4 items-start">
                   <div
-                    className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${
-                      done ? "bg-emerald-500/15 text-emerald-400" : `${palette.bg} ${palette.text}`
-                    }`}
+                    className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${iconTone}`}
                   >
                     <Icon className="w-6 h-6" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex justify-between items-start gap-2">
-                      <h3 className="text-white font-bold text-base leading-tight truncate">
+                      <h3 className="text-primary-foreground font-bold text-base leading-tight truncate">
                         {t.title}
                       </h3>
-                      <span className="text-emerald-400 font-bold bg-emerald-400/10 px-2 py-0.5 rounded text-sm shrink-0">
+                      <span className="text-[color:var(--accent)] font-bold bg-[color:var(--accent)]/10 px-2 py-0.5 rounded text-sm shrink-0">
                         ৳{t.reward.toFixed(2)}
                       </span>
                     </div>
                     {t.description && (
-                      <p className="text-slate-400 text-caption mt-1 line-clamp-2">
+                      <p className="text-primary-foreground/60 text-caption mt-1 line-clamp-2">
                         {t.description}
                       </p>
                     )}
@@ -249,8 +248,8 @@ function Tasks() {
                     onClick={() => handleComplete(t)}
                     className={`flex-1 inline-flex items-center justify-center gap-2 h-11 rounded-xl text-sm font-bold transition-colors disabled:cursor-not-allowed ${
                       done
-                        ? "bg-emerald-500/15 text-emerald-400"
-                        : "bg-emerald-500 hover:bg-emerald-400 text-slate-950 disabled:opacity-70"
+                        ? "bg-[color:var(--accent)]/15 text-[color:var(--accent)]"
+                        : "bg-accent text-accent-foreground hover:bg-accent/90 disabled:opacity-70"
                     }`}
                   >
                     {done ? (
@@ -270,7 +269,7 @@ function Tasks() {
                       href={t.task_url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 h-11 bg-slate-800 text-slate-300 rounded-xl hover:bg-slate-700 inline-flex items-center justify-center transition-colors"
+                      className="px-4 h-11 rounded-xl inline-flex items-center justify-center transition-colors bg-primary-foreground/10 text-primary-foreground/80 hover:bg-primary-foreground/20"
                       aria-label="Open task link"
                     >
                       <ExternalLink className="h-5 w-5" />
