@@ -51,6 +51,9 @@ function Tasks() {
     queryFn: () => fetchTasks(),
     enabled: !!user,
     staleTime: 60_000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   const adminQuery = useQuery({
@@ -58,6 +61,9 @@ function Tasks() {
     queryFn: () => checkAdmin(),
     enabled: !!user,
     staleTime: 5 * 60_000,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
   });
 
   const tasks: TaskItem[] = tasksQuery.data?.tasks ?? [];
@@ -73,7 +79,7 @@ function Tasks() {
       const res = await submitComplete({ data: { taskId: task.id } });
       toast.success(`+৳${res.reward.toFixed(2)} added to your balance`);
       if (user) await invalidateProfile(user.id);
-      await queryClient.invalidateQueries({ queryKey: ["tasks", user?.id] });
+      await queryClient.invalidateQueries({ queryKey: ["tasks", user?.id], refetchType: "active" });
     } catch (e: any) {
       toast.error(e?.message ?? "Could not complete task");
     } finally {
