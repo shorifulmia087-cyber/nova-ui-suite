@@ -203,9 +203,9 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
-      <span className="text-[9px] font-semibold uppercase text-muted-foreground leading-none" style={{ letterSpacing: "0.08em" }}>
+      <Text variant="caption" case="upper" className="text-[9px] font-semibold text-muted-foreground leading-none">
         Balance
-      </span>
+      </Text>
       <span className="mt-1 text-[15px] font-bold text-foreground tabular-nums leading-none">
         {text}
       </span>
