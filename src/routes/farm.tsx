@@ -18,7 +18,7 @@ function Farm() {
       <ScreenHeader title="My Farm" subtitle="Yield-bearing plots" back={false} />
 
       <div className="px-5">
-        <Card className="relative overflow-hidden p-5 bg-gradient-card text-white border-0">
+        <Card className="relative overflow-hidden p-card bg-gradient-card text-white border-0">
           <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative flex items-center justify-between">
             <div>
