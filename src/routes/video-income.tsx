@@ -233,51 +233,9 @@ function VideoIncomePage() {
     <div className="pb-40">
       <ScreenHeader title="Earn from videos" />
 
-      {/* Hero */}
-      <section className="px-5">
-        <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-6 shadow-navy">
-          <span aria-hidden className="pointer-events-none absolute -top-24 -right-16 h-52 w-52 rounded-full bg-accent/30 blur-3xl" />
-          <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
-
-          <div className="relative flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-foreground/10 backdrop-blur px-2.5 py-1 ring-1 ring-primary-foreground/15">
-              <Youtube className="h-3.5 w-3.5 text-accent" strokeWidth={2.5} />
-              <Text variant="caption" case="upper" className="text-primary-foreground/90">
-                YouTube rewards
-              </Text>
-            </span>
-          </div>
-
-          <div className="relative mt-5">
-            <Heading variant="screenTitle" case="sentence" className="text-primary-foreground text-balance">
-              Get paid for the views you already earn
-            </Heading>
-
-            <div className="mt-5 flex items-end gap-2">
-              <Text variant="caption" case="upper" className="text-primary-foreground/60 mb-2">
-                Up to
-              </Text>
-              <p className="text-display text-accent tabular-nums leading-none">৳1,500</p>
-              <Text variant="bodySecondary" className="text-primary-foreground/70 mb-1.5">
-                / video
-              </Text>
-            </div>
-
-            <Text variant="bodySecondary" as="p" className="text-primary-foreground/75 mt-3">
-              The more views your video gets, the bigger the verified reward.
-            </Text>
-          </div>
-
-          <div className="relative mt-5 grid grid-cols-3 gap-2">
-            <TrustStat label="Verified" value="100%" />
-            <TrustStat label="Avg. review" value="24 h" />
-            <TrustStat label="Payout" value="Direct" />
-          </div>
-        </div>
-      </section>
-
       {/* Tier selection */}
-      <section className="px-5 mt-8">
+      <section className="px-5 mt-2">
+
         <SectionEyebrow>Step 01</SectionEyebrow>
         <div className="flex items-end justify-between gap-3 mt-1">
           <Heading variant="sectionTitle" case="sentence" className="text-foreground">
