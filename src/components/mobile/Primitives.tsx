@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Heading } from "@/lib/typography";
 import { type ReactNode, type ButtonHTMLAttributes } from "react";
 
 export function Card({
