@@ -92,7 +92,14 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-2xl shadow-card px-2 pt-4 pb-5">
+          <div className="px-3">
+            <h2 className="text-[13px] font-semibold uppercase text-muted-foreground" style={{ letterSpacing: "0.08em" }}>
+              Quick actions
+            </h2>
+            <div className="mt-3 h-px bg-border/70" />
+          </div>
+          <div className="pt-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/refer", icon: Gift, label: "Refer" },
@@ -106,6 +113,7 @@ function Home() {
               <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
             </Link>
           ))}
+          </div>
         </div>
       </div>
 
