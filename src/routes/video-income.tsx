@@ -115,7 +115,8 @@ function VideoIncomePage() {
 
   if (submitted) {
     return (
-      <div className="pb-28">
+      <div className="pb-44">
+
         <ScreenHeader title="সাবমিশন স্ট্যাটাস" />
 
         {/* Success hero */}
@@ -274,7 +275,8 @@ function VideoIncomePage() {
         </section>
 
         {/* Sticky CTA */}
-        <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pb-5 pt-3 bg-gradient-to-t from-background via-background to-transparent z-40">
+        <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pt-6 pb-2 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
+
           <button
             onClick={reset}
             className="group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-glow active:scale-[0.98] transition-transform"
@@ -288,7 +290,7 @@ function VideoIncomePage() {
   }
 
   return (
-    <div className="pb-28">
+    <div className="pb-44">
       <ScreenHeader title="ভিডিও বানিয়ে ইনকাম" />
 
       {/* Hero */}
@@ -480,7 +482,7 @@ function VideoIncomePage() {
       </section>
 
       {/* Sticky CTA */}
-      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pb-5 pt-3 bg-gradient-to-t from-background via-background to-transparent z-40">
+      <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pt-6 pb-2 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
         <button
           onClick={handleSubmit}
           disabled={!canSubmit}
