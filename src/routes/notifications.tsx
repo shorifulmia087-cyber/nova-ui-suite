@@ -25,7 +25,7 @@ function Notifs() {
         {notifications.map((n) => {
           const { Icon, c } = map[n.type as keyof typeof map];
           return (
-            <Card key={n.id} className="p-3 flex items-start gap-3">
+            <Card key={n.id} className="p-card flex items-start gap-3">
               <div className={`h-10 w-10 rounded-lg flex items-center justify-center ${c}`}>
                 <Icon className="h-5 w-5" />
               </div>

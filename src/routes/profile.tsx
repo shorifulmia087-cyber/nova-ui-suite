@@ -48,7 +48,7 @@ function Profile() {
       <ScreenHeader title="Profile" back={false} />
 
       <div className="px-5">
-        <Card className="p-5 bg-gradient-soft border-0">
+        <Card className="p-card bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-lg overflow-hidden bg-muted shadow-glow">
               <img src={avatarUser} alt={displayName} width={64} height={64} className="h-full w-full object-cover" />

@@ -89,7 +89,7 @@ function Refer() {
           { n: 2, t: "Friend signs up", d: "They enter your code at registration." },
           { n: 3, t: "Both earn rewards", d: "You get ৳25, they get ৳10 instantly." },
         ].map((s) => (
-          <Card key={s.n} className="p-4 flex items-center gap-3">
+          <Card key={s.n} className="p-card flex items-center gap-3">
             <div className="text-card-title h-10 w-10 rounded-full bg-gradient-mint flex items-center justify-center text-white shadow-glow">
               {s.n}
             </div>

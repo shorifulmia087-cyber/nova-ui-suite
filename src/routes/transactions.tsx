@@ -55,7 +55,7 @@ function TxList() {
       <div className="px-5 mt-4 space-y-2">
         {list.map((t) => <Row key={t.id} tx={t} />)}
         {!list.length && (
-          <Card className="p-8 text-center text-body-secondary">No transactions found.</Card>
+          <Card className="p-card text-center text-body-secondary">No transactions found.</Card>
         )}
       </div>
     </div>
@@ -78,7 +78,7 @@ function Row({ tx }: { tx: Tx }) {
     tx.status === "pending"   ? "text-[color:var(--warning)]" :
                                 "text-destructive";
   return (
-    <Card className="p-3 flex items-center gap-3">
+    <Card className="p-card flex items-center gap-3">
       <div className={`h-10 w-10 rounded-lg flex items-center justify-center ৳{colors[tx.category]}`}>
         <Icon className="h-5 w-5" />
       </div>

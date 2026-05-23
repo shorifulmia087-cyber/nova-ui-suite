@@ -94,7 +94,7 @@ function Tasks() {
       <div>
         <ScreenHeader title="Tasks" subtitle="Sign in to earn" back={false} />
         <div className="px-5">
-          <Card className="p-6 text-center">
+          <Card className="p-card text-center">
             <p className="text-label mb-3">Please sign in to view tasks.</p>
             <Link to="/login"><ActionButton variant="brand">Sign in</ActionButton></Link>
           </Card>
