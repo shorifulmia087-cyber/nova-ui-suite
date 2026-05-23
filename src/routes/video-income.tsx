@@ -322,7 +322,7 @@ function VideoIncomePage() {
           Provide accurate info — the reward is released after verification
         </Text>
 
-        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-card">
+        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border shadow-card p-card">
           {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video" first>
             <FieldInput
