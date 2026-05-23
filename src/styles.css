@@ -223,8 +223,8 @@
   }
   /* Section headers */
   .text-section-title {
-    font-size: 20px;
-    line-height: 28px;
+    font-size: 18px;
+    line-height: 26px;
     font-weight: 700;
     letter-spacing: -0.015em;
   }
