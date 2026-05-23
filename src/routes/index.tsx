@@ -113,6 +113,7 @@ function Home() {
               <span className="text-foreground font-medium text-[13px] leading-none">{label}</span>
             </Link>
           ))}
+          </div>
         </div>
       </div>
 
