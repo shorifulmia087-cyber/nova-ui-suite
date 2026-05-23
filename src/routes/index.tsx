@@ -125,6 +125,40 @@ function Home() {
         </div>
       </div>
 
+      {/* Target Bonus — ভিডিও বানিয়ে ইনকাম */}
+      <div className="px-4 mt-5">
+        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
+          <div className="px-3">
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
+              ভিডিও বানিয়ে ইনকাম
+            </Heading>
+            <div className="mt-2 h-px bg-border/70" />
+          </div>
+          <div className="pt-3 px-2 grid grid-cols-2 gap-2">
+            {[
+              { target: "১০টি ভিডিও", bonus: "৳১০০" },
+              { target: "৫০টি ভিডিও", bonus: "৳৬০০" },
+              { target: "১০০টি ভিডিও", bonus: "৳১,৫০০" },
+              { target: "৫০০টি ভিডিও", bonus: "৳৮,০০০" },
+            ].map(({ target, bonus }) => (
+              <div
+                key={target}
+                className="rounded-2xl bg-background ring-1 ring-border/60 px-3 py-3 flex flex-col gap-1"
+              >
+                <Text variant="caption" case="upper" className="font-semibold text-muted-foreground leading-none">
+                  Target
+                </Text>
+                <span className="text-foreground font-bold text-[15px] leading-tight">{target}</span>
+                <div className="mt-1 flex items-center justify-between">
+                  <Text variant="caption" className="text-muted-foreground">Bonus</Text>
+                  <span className="text-[color:var(--accent)] font-bold text-[15px] tabular-nums">{bonus}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
       {/* Verification — dark card with submit */}
       {!verified && (
 
