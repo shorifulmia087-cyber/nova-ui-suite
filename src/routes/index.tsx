@@ -115,7 +115,7 @@ function Home() {
             { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="group">
-              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 bg-background text-primary ring-1 ring-border/60 group-active:bg-muted/40">
+              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 bg-background text-foreground ring-1 ring-border/60 group-active:bg-muted/40">
                 <I className="h-[28px] w-[28px]" stroke={1.75} />
                 <span className="text-foreground font-semibold text-[12px] leading-none">{label}</span>
               </div>
