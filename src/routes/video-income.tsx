@@ -161,7 +161,7 @@ function VideoIncomePage() {
               return (
                 <li
                   key={title}
-                  className="relative bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-4 flex items-start gap-4"
+                  className="relative bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-card flex items-start gap-4"
                 >
                   <div
                     className={cn(
