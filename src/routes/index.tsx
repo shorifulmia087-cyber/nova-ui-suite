@@ -140,15 +140,13 @@ function Home() {
                 to: "/video-income",
                 icon: Sparkles,
                 title: "ভিডিও বানিয়ে ইনকাম",
-                subtitle: "ভিডিও জমা দিয়ে আয় করুন",
               },
               {
                 to: "/target-bonus",
                 icon: Gift,
-                title: "Target Bonus",
-                subtitle: "টার্গেট পূরণে বোনাস",
+                title: "টার্গেট বোনাস",
               },
-            ].map(({ to, icon: I, title, subtitle }) => (
+            ].map(({ to, icon: I, title }) => (
               <Link
                 key={title}
                 to={to}
@@ -160,9 +158,6 @@ function Home() {
                 <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight font-semibold">
                   {title}
                 </Heading>
-                <Text variant="caption" className="text-muted-foreground leading-snug">
-                  {subtitle}
-                </Text>
               </Link>
             ))}
           </div>
