@@ -117,7 +117,6 @@ function VideoIncomePage() {
   if (submitted) {
     return (
       <div className="pb-44">
-
         <ScreenHeader title="Submission status" />
 
         {/* Success hero */}
@@ -135,14 +134,14 @@ function VideoIncomePage() {
                 <Text
                   variant="caption"
                   case="upper"
-                  className="text-[10px] font-bold tracking-wider text-primary-foreground/80"
+                  className="text-primary-foreground/80"
                 >
                   Submitted
                 </Text>
                 <Heading
                   variant="cardTitle"
                   case="sentence"
-                  className="text-primary-foreground text-[18px] leading-tight mt-0.5"
+                  className="text-primary-foreground mt-0.5"
                 >
                   Submission successful
                 </Heading>
@@ -151,26 +150,28 @@ function VideoIncomePage() {
 
             <div className="relative mt-5 rounded-2xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-4 flex items-center justify-between">
               <div>
-                <Text
-                  variant="caption"
-                  className="text-primary-foreground/70 text-[11px]"
-                >
+                <Text variant="caption" className="text-primary-foreground/70">
                   Selected tier
                 </Text>
-                <p className="text-primary-foreground font-bold text-[15px] mt-0.5">
+                <Text
+                  variant="label"
+                  as="p"
+                  className="text-primary-foreground mt-0.5"
+                >
                   {tier.views}
-                </p>
+                </Text>
               </div>
               <div className="text-right">
-                <Text
-                  variant="caption"
-                  className="text-primary-foreground/70 text-[11px]"
-                >
+                <Text variant="caption" className="text-primary-foreground/70">
                   Reward
                 </Text>
-                <p className="text-[color:var(--accent)] font-extrabold text-[20px] tabular-nums leading-none mt-1">
+                <Text
+                  variant="cardTitle"
+                  as="p"
+                  className="text-[color:var(--accent)] tabular-nums mt-0.5"
+                >
                   ৳{tier.amount}
-                </p>
+                </Text>
               </div>
             </div>
           </div>
@@ -178,14 +179,10 @@ function VideoIncomePage() {
 
         {/* Timeline */}
         <section className="px-5 mt-6">
-          <Heading
-            variant="sectionTitle"
-            case="sentence"
-            className="text-foreground"
-          >
+          <Heading variant="sectionTitle" case="sentence" className="text-foreground">
             Review & payment process
           </Heading>
-          <Text variant="caption" className="text-muted-foreground mt-1 block">
+          <Text variant="bodySecondary" as="p" className="text-muted-foreground mt-1">
             Your video will be verified and the reward added to your balance
           </Text>
 
@@ -212,8 +209,10 @@ function VideoIncomePage() {
                     >
                       <I className="h-6 w-6" strokeWidth={2} />
                     </div>
-                    <span className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground text-[10px] font-extrabold flex items-center justify-center shadow-card tabular-nums">
-                      {idx + 1}
+                    <span className="absolute -top-1.5 -right-1.5 h-5 w-5 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-card">
+                      <Text variant="caption" className="tabular-nums leading-none">
+                        {idx + 1}
+                      </Text>
                     </span>
                   </div>
                   <div className="flex-1 min-w-0 pt-0.5">
@@ -221,25 +220,25 @@ function VideoIncomePage() {
                       <Heading
                         variant="cardTitle"
                         case="sentence"
-                        className="text-foreground leading-tight text-[15px]"
+                        className="text-foreground"
                       >
                         {title}
                       </Heading>
-                      <Text
-                        variant="caption"
+                      <span
                         className={cn(
-                          "shrink-0 text-[10px] font-bold px-2 py-0.5 rounded-full",
+                          "shrink-0 px-2 py-0.5 rounded-full",
                           active
                             ? "bg-[color:var(--accent)]/15 text-[color:var(--accent)]"
                             : "bg-muted text-muted-foreground",
                         )}
                       >
-                        {eta}
-                      </Text>
+                        <Text variant="caption">{eta}</Text>
+                      </span>
                     </div>
                     <Text
-                      variant="caption"
-                      className="text-muted-foreground leading-snug mt-1"
+                      variant="bodySecondary"
+                      as="p"
+                      className="text-muted-foreground mt-1"
                     >
                       {sub}
                     </Text>
@@ -260,13 +259,14 @@ function VideoIncomePage() {
               <Heading
                 variant="cardTitle"
                 case="sentence"
-                className="text-foreground leading-tight text-[14px]"
+                className="text-foreground"
               >
                 Please note
               </Heading>
               <Text
-                variant="caption"
-                className="text-muted-foreground leading-snug mt-1"
+                variant="bodySecondary"
+                as="p"
+                className="text-muted-foreground mt-1"
               >
                 Views are verified against YouTube Studio analytics. Submissions
                 with fake views or bot traffic will be rejected.
@@ -277,12 +277,11 @@ function VideoIncomePage() {
 
         {/* Sticky CTA */}
         <div className="fixed bottom-24 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pt-6 pb-2 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
-
           <button
             onClick={reset}
-            className="group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-glow active:scale-[0.98] transition-transform"
+            className="group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl bg-[color:var(--accent)] text-accent-foreground shadow-glow active:scale-[0.98] transition-transform"
           >
-            <span>Submit a new video</span>
+            <Text variant="button">Submit a new video</Text>
             <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
           </button>
         </div>
@@ -312,7 +311,7 @@ function VideoIncomePage() {
               <Text
                 variant="caption"
                 case="upper"
-                className="text-[10px] font-bold tracking-wider text-primary-foreground/90"
+                className="text-primary-foreground/90"
               >
                 YouTube Views Reward
               </Text>
@@ -323,15 +322,16 @@ function VideoIncomePage() {
             <Heading
               variant="screenTitle"
               case="sentence"
-              className="text-primary-foreground leading-tight"
+              className="text-primary-foreground"
             >
               Earn up to
               <br />
               <span className="text-[color:var(--accent)]">৳1,500</span> per video
             </Heading>
             <Text
-              variant="caption"
-              className="text-primary-foreground/75 mt-2 leading-relaxed"
+              variant="bodySecondary"
+              as="p"
+              className="text-primary-foreground/75 mt-2"
             >
               The more views your YouTube video gets, the bigger the reward.
             </Text>
@@ -342,11 +342,7 @@ function VideoIncomePage() {
       {/* Tier selection */}
       <section className="px-5 mt-6">
         <div className="flex items-center justify-between">
-          <Heading
-            variant="sectionTitle"
-            case="upper"
-            className="text-foreground text-[15px] tracking-tight"
-          >
+          <Heading variant="sectionTitle" case="sentence" className="text-foreground">
             Choose your tier
           </Heading>
           <Text variant="caption" className="text-muted-foreground">
@@ -354,14 +350,8 @@ function VideoIncomePage() {
           </Text>
         </div>
         <div className="mt-1.5 flex items-center gap-1.5">
-          <span className="h-3 w-3 inline-flex items-center justify-center rounded-full bg-[color:var(--accent)]/10">
-            <CheckCircle2 className="h-2.5 w-2.5 text-[color:var(--accent)]" strokeWidth={3} />
-          </span>
-          <Text
-            variant="caption"
-            case="upper"
-            className="text-muted-foreground text-[10px] tracking-wide"
-          >
+          <CheckCircle2 className="h-3.5 w-3.5 text-[color:var(--accent)]" strokeWidth={2.5} />
+          <Text variant="caption" className="text-muted-foreground">
             Verified via YouTube Studio analytics
           </Text>
         </div>
@@ -388,7 +378,7 @@ function VideoIncomePage() {
                 )}
                 <div
                   className={cn(
-                    "h-10 w-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                    "h-11 w-11 rounded-xl flex items-center justify-center shrink-0 transition-colors",
                     active
                       ? "bg-[color:var(--accent)]/10 text-[color:var(--accent)]"
                       : "bg-muted text-muted-foreground",
@@ -400,34 +390,32 @@ function VideoIncomePage() {
                   <Heading
                     variant="cardTitle"
                     case="sentence"
-                    className={cn(
-                      "leading-tight text-[14px]",
-                      active ? "font-bold text-foreground" : "font-semibold text-foreground",
-                    )}
+                    className="text-foreground"
                   >
                     {views}
                   </Heading>
                   <Text
                     variant="caption"
-                    case="upper"
                     className={cn(
-                      "text-[10px] tracking-widest mt-0.5 block",
-                      active
-                        ? "font-bold text-[color:var(--accent)]"
-                        : "font-medium text-muted-foreground",
+                      "mt-0.5 block",
+                      active ? "text-[color:var(--accent)]" : "text-muted-foreground",
                     )}
                   >
                     {label}
                   </Text>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-[18px] font-bold text-[color:var(--accent)] tabular-nums leading-none tracking-tight">
+                  <Text
+                    variant="cardTitle"
+                    as="p"
+                    className="text-[color:var(--accent)] tabular-nums"
+                  >
                     ৳{amount}
-                  </p>
+                  </Text>
                   <Text
                     variant="caption"
                     case="upper"
-                    className="text-[9px] font-bold text-muted-foreground tracking-tighter mt-1 block"
+                    className="text-muted-foreground block"
                   >
                     Reward
                   </Text>
@@ -438,17 +426,12 @@ function VideoIncomePage() {
         </div>
       </section>
 
-
       {/* Submission form */}
       <section className="px-5 mt-7">
-        <Heading
-          variant="sectionTitle"
-          case="sentence"
-          className="text-foreground"
-        >
+        <Heading variant="sectionTitle" case="sentence" className="text-foreground">
           Submission details
         </Heading>
-        <Text variant="caption" className="text-muted-foreground mt-1 block">
+        <Text variant="bodySecondary" as="p" className="text-muted-foreground mt-1">
           Provide accurate info — reward is released after verification
         </Text>
 
@@ -488,24 +471,29 @@ function VideoIncomePage() {
       <section className="px-5 mt-6">
         <div className="rounded-2xl bg-card ring-1 ring-border/60 shadow-card p-4 flex items-center justify-between">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
+            <div className="h-11 w-11 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
               <Coins className="h-5 w-5" strokeWidth={2} />
             </div>
             <div className="min-w-0">
-              <Text
-                variant="caption"
-                className="text-muted-foreground text-[11px]"
-              >
+              <Text variant="caption" className="text-muted-foreground">
                 You will receive
               </Text>
-              <p className="text-foreground font-bold text-[14px] leading-tight mt-0.5 truncate">
+              <Text
+                variant="label"
+                as="p"
+                className="text-foreground mt-0.5 truncate"
+              >
                 {tier.views}
-              </p>
+              </Text>
             </div>
           </div>
-          <p className="text-[22px] font-extrabold text-[color:var(--accent)] tabular-nums leading-none">
+          <Text
+            variant="sectionTitle"
+            as="p"
+            className="text-[color:var(--accent)] tabular-nums"
+          >
             ৳{tier.amount}
-          </p>
+          </Text>
         </div>
       </section>
 
@@ -515,13 +503,13 @@ function VideoIncomePage() {
           onClick={handleSubmit}
           disabled={!canSubmit}
           className={cn(
-            "group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl font-bold text-[15px] transition-all",
+            "group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl transition-all",
             canSubmit
               ? "bg-[color:var(--accent)] text-accent-foreground shadow-glow active:scale-[0.98]"
               : "bg-muted text-muted-foreground cursor-not-allowed",
           )}
         >
-          <span>Submit</span>
+          <Text variant="button">Submit</Text>
           <ArrowRight
             className="h-5 w-5 transition-transform group-active:translate-x-1"
             strokeWidth={2.5}
@@ -547,10 +535,7 @@ function FieldInput({
 }) {
   return (
     <label className="block">
-      <Text
-        variant="caption"
-        className="text-foreground font-medium text-[12px] mb-1.5 ml-1 block"
-      >
+      <Text variant="label" className="text-foreground mb-1.5 ml-1 block">
         {label}
       </Text>
       <div className="relative">
@@ -562,7 +547,7 @@ function FieldInput({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full h-12 pl-11 pr-4 rounded-xl bg-card ring-1 ring-border/60 text-foreground text-[14px] placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-[color:var(--accent)] focus:outline-none transition-all"
+          className="w-full h-12 pl-11 pr-4 rounded-xl bg-card ring-1 ring-border/60 text-foreground text-input placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-[color:var(--accent)] focus:outline-none transition-all"
         />
       </div>
     </label>
@@ -587,10 +572,7 @@ function FileField({
 
   return (
     <div className="block">
-      <Text
-        variant="caption"
-        className="text-foreground font-medium text-[12px] mb-1.5 ml-1 block"
-      >
+      <Text variant="label" className="text-foreground mb-1.5 ml-1 block">
         {label}
       </Text>
       <button
@@ -617,26 +599,20 @@ function FileField({
         <div className="flex-1 min-w-0">
           {file ? (
             <>
-              <p className="text-foreground font-medium text-[13px] truncate">
+              <Text variant="label" as="p" className="text-foreground truncate">
                 {file.name}
-              </p>
-              <Text
-                variant="caption"
-                className="text-muted-foreground text-[11px]"
-              >
+              </Text>
+              <Text variant="caption" className="text-muted-foreground">
                 {(file.size / 1024).toFixed(0)} KB
               </Text>
             </>
           ) : (
             <>
-              <p className="text-foreground font-medium text-[13px]">
+              <Text variant="label" as="p" className="text-foreground">
                 Upload file
-              </p>
+              </Text>
               {hint && (
-                <Text
-                  variant="caption"
-                  className="text-muted-foreground text-[11px]"
-                >
+                <Text variant="caption" className="text-muted-foreground">
                   {hint}
                 </Text>
               )}
