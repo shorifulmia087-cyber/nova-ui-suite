@@ -125,37 +125,39 @@ function Home() {
         </div>
       </div>
 
-      {/* Target Bonus — ভিডিও বানিয়ে ইনকাম */}
+      {/* Earning options — 2 column */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
-          <div className="px-3">
-            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
-              ভিডিও বানিয়ে ইনকাম
-            </Heading>
-            <div className="mt-2 h-px bg-border/70" />
-          </div>
-          <div className="pt-3 px-2 grid grid-cols-2 gap-2">
-            {[
-              { target: "১০টি ভিডিও", bonus: "৳১০০" },
-              { target: "৫০টি ভিডিও", bonus: "৳৬০০" },
-              { target: "১০০টি ভিডিও", bonus: "৳১,৫০০" },
-              { target: "৫০০টি ভিডিও", bonus: "৳৮,০০০" },
-            ].map(({ target, bonus }) => (
-              <div
-                key={target}
-                className="rounded-2xl bg-background ring-1 ring-border/60 px-3 py-3 flex flex-col gap-1"
-              >
-                <Text variant="caption" case="upper" className="font-semibold text-muted-foreground leading-none">
-                  Target
-                </Text>
-                <span className="text-foreground font-bold text-[15px] leading-tight">{target}</span>
-                <div className="mt-1 flex items-center justify-between">
-                  <Text variant="caption" className="text-muted-foreground">Bonus</Text>
-                  <span className="text-[color:var(--accent)] font-bold text-[15px] tabular-nums">{bonus}</span>
-                </div>
+        <div className="grid grid-cols-2 gap-3">
+          {[
+            {
+              to: "/tasks",
+              icon: Sparkles,
+              title: "ভিডিও বানিয়ে ইনকাম",
+              subtitle: "ভিডিও জমা দিয়ে আয় করুন",
+            },
+            {
+              to: "/tasks",
+              icon: Gift,
+              title: "Target Bonus",
+              subtitle: "টার্গেট পূরণে বোনাস",
+            },
+          ].map(({ to, icon: I, title, subtitle }) => (
+            <Link
+              key={title}
+              to={to}
+              className="bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-4 flex flex-col gap-2 active:scale-[0.98] transition-transform"
+            >
+              <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                <I className="h-5 w-5" strokeWidth={2} />
               </div>
-            ))}
-          </div>
+              <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[15px]">
+                {title}
+              </Heading>
+              <Text variant="caption" className="text-muted-foreground leading-snug">
+                {subtitle}
+              </Text>
+            </Link>
+          ))}
         </div>
       </div>
 
