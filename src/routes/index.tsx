@@ -143,7 +143,7 @@ function Home() {
                 subtitle: "ভিডিও জমা দিয়ে আয় করুন",
               },
               {
-                to: "/tasks",
+                to: "/video-income",
                 icon: Gift,
                 title: "Target Bonus",
                 subtitle: "টার্গেট পূরণে বোনাস",
