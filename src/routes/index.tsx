@@ -12,6 +12,7 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
+import { Heading, Text } from "@/lib/typography";
 import { transactions, cards } from "@/lib/mock";
 import { useProfile } from "@/lib/use-profile";
 import avatarUser from "@/assets/avatar-user.jpg";
