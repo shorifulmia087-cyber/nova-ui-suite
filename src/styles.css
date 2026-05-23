@@ -72,6 +72,8 @@
 :root {
   --radius: 1rem;
   --spacing-card: 1rem; /* 16px — single source of truth for card inner padding */
+  --spacing-section: 1.5rem; /* 24px — gap between top-level sections (was 2rem / 8) */
+
 
 
 
@@ -171,6 +173,9 @@
   .p-card  { padding: var(--spacing-card); }
   .px-card { padding-left: var(--spacing-card); padding-right: var(--spacing-card); }
   .py-card { padding-top: var(--spacing-card); padding-bottom: var(--spacing-card); }
+  .mt-section { margin-top: var(--spacing-section); }
+  .mb-section { margin-bottom: var(--spacing-section); }
+
   .text-balance { text-wrap: balance; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { scrollbar-width: none; }
