@@ -130,7 +130,7 @@ function Home() {
         <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
-              Earning Options
+              Special Income
             </Heading>
             <div className="mt-2 h-px bg-border/70" />
           </div>
