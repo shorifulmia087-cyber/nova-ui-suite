@@ -71,6 +71,9 @@
 
 :root {
   --radius: 1rem;
+  --spacing-card: 1rem; /* 16px — single source of truth for card inner padding */
+
+
 
   /* Premium fintech palette (exact hex from brief) */
   --background: #f6f7f9;
