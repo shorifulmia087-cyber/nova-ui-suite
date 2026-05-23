@@ -198,8 +198,8 @@ function Home() {
 
       {/* Recent activity */}
       <div className="px-5 mt-5 mb-6">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-2">
-          <div className="px-3 flex items-center justify-between">
+        <div className="bg-card rounded-2xl shadow-card p-card">
+          <div className="flex items-center justify-between">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Recent activity
             </Heading>
@@ -208,8 +208,8 @@ function Home() {
               <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
             </Link>
           </div>
-          <div className="mt-2 mx-3 h-px bg-border/70" />
-          <div className="pt-1 px-2">
+          <div className="mt-3 h-px bg-border/70" />
+          <div className="mt-1">
             <RecentActivityList />
           </div>
         </div>
