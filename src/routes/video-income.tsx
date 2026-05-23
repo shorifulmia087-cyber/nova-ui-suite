@@ -383,7 +383,7 @@ function VideoIncomePage() {
 /* ============================== PRIMITIVES ============================== */
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
-  return <p className="text-eyebrow text-accent">{children}</p>;
+  return <p className="text-eyebrow text-accent normal-case capitalize tracking-normal">{children}</p>;
 }
 
 
