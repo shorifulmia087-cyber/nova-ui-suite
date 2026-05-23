@@ -99,7 +99,7 @@ function Home() {
 
 
       {/* Quick actions — refined card */}
-      <div className="px-5 mt-5">
+      <div className="px-5 mt-section">
         <div className="bg-card rounded-2xl shadow-card p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -126,7 +126,7 @@ function Home() {
       </div>
 
       {/* Earning options — single section, 2 columns */}
-      <div className="px-5 mt-5">
+      <div className="px-5 mt-section">
         <div className="bg-card rounded-2xl shadow-card p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -172,7 +172,7 @@ function Home() {
       {/* Verification — dark card with submit */}
       {!verified && (
 
-        <div className="px-5 mt-6">
+        <div className="px-5 mt-section">
           <div className="rounded-lg bg-primary text-primary-foreground p-4 shadow-navy">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 h-11 w-11 rounded-lg bg-warning/15 flex items-center justify-center">
@@ -197,7 +197,7 @@ function Home() {
 
 
       {/* Recent activity */}
-      <div className="px-5 mt-5 mb-6">
+      <div className="px-5 mt-section mb-section">
         <div className="bg-card rounded-2xl shadow-card p-0">
           <div className="flex items-center justify-between p-card pb-0">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -284,7 +284,7 @@ function IntroVideoBanner() {
 
   return (
     <>
-      <div className="px-5 mt-5">
+      <div className="px-5 mt-section">
         <button
           type="button"
           onClick={() => setOpen(true)}
