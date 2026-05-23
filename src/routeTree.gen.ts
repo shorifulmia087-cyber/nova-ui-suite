@@ -14,6 +14,7 @@ import { Route as VideoIncomeRouteImport } from './routes/video-income'
 import { Route as VerifyRouteImport } from './routes/verify'
 import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TasksRouteImport } from './routes/tasks'
+import { Route as TargetBonusRouteImport } from './routes/target-bonus'
 import { Route as SignupRouteImport } from './routes/signup'
 import { Route as ReferRouteImport } from './routes/refer'
 import { Route as ProfileRouteImport } from './routes/profile'
@@ -47,6 +48,11 @@ const TransactionsRoute = TransactionsRouteImport.update({
 const TasksRoute = TasksRouteImport.update({
   id: '/tasks',
   path: '/tasks',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TargetBonusRoute = TargetBonusRouteImport.update({
+  id: '/target-bonus',
+  path: '/target-bonus',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SignupRoute = SignupRouteImport.update({
@@ -104,6 +110,7 @@ export interface FileRoutesByFullPath {
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
   '/signup': typeof SignupRoute
+  '/target-bonus': typeof TargetBonusRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -120,6 +127,7 @@ export interface FileRoutesByTo {
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
   '/signup': typeof SignupRoute
+  '/target-bonus': typeof TargetBonusRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -137,6 +145,7 @@ export interface FileRoutesById {
   '/profile': typeof ProfileRoute
   '/refer': typeof ReferRoute
   '/signup': typeof SignupRoute
+  '/target-bonus': typeof TargetBonusRoute
   '/tasks': typeof TasksRoute
   '/transactions': typeof TransactionsRoute
   '/verify': typeof VerifyRoute
@@ -155,6 +164,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/refer'
     | '/signup'
+    | '/target-bonus'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -171,6 +181,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/refer'
     | '/signup'
+    | '/target-bonus'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -187,6 +198,7 @@ export interface FileRouteTypes {
     | '/profile'
     | '/refer'
     | '/signup'
+    | '/target-bonus'
     | '/tasks'
     | '/transactions'
     | '/verify'
@@ -204,6 +216,7 @@ export interface RootRouteChildren {
   ProfileRoute: typeof ProfileRoute
   ReferRoute: typeof ReferRoute
   SignupRoute: typeof SignupRoute
+  TargetBonusRoute: typeof TargetBonusRoute
   TasksRoute: typeof TasksRoute
   TransactionsRoute: typeof TransactionsRoute
   VerifyRoute: typeof VerifyRoute
@@ -247,6 +260,13 @@ declare module '@tanstack/react-router' {
       path: '/tasks'
       fullPath: '/tasks'
       preLoaderRoute: typeof TasksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/target-bonus': {
+      id: '/target-bonus'
+      path: '/target-bonus'
+      fullPath: '/target-bonus'
+      preLoaderRoute: typeof TargetBonusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/signup': {
@@ -324,6 +344,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProfileRoute: ProfileRoute,
   ReferRoute: ReferRoute,
   SignupRoute: SignupRoute,
+  TargetBonusRoute: TargetBonusRoute,
   TasksRoute: TasksRoute,
   TransactionsRoute: TransactionsRoute,
   VerifyRoute: VerifyRoute,
