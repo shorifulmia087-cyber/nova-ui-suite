@@ -159,6 +159,16 @@
   .shadow-card  { box-shadow: var(--shadow-card); }
   .shadow-glow  { box-shadow: var(--shadow-glow); }
   .shadow-navy  { box-shadow: var(--shadow-navy); }
+
+  /* ============================================================
+     CARD PADDING TOKEN — single source of truth for card insets.
+     ALWAYS use `p-card` on card surfaces (bg-card containers).
+     Do NOT use ad-hoc p-3 / p-5 / p-6 on cards.
+     ============================================================ */
+  --spacing-card: 1rem; /* 16px */
+  .p-card  { padding: var(--spacing-card); }
+  .px-card { padding-left: var(--spacing-card); padding-right: var(--spacing-card); }
+  .py-card { padding-top: var(--spacing-card); padding-bottom: var(--spacing-card); }
   .text-balance { text-wrap: balance; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { scrollbar-width: none; }
