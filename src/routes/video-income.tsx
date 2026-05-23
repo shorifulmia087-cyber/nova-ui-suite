@@ -324,7 +324,7 @@ function VideoIncomePage() {
 
         <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-card">
           {/* Group 1 — Channel & video */}
-          <FieldGroup title="Channel & video">
+          <FieldGroup title="Channel & video" first>
             <FieldInput
               label="Video URL"
               icon={<Link2 className="h-[18px] w-[18px]" />}
@@ -387,9 +387,9 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
 }
 
 
-function FieldGroup({ title, children }: { title: string; children: ReactNode }) {
+function FieldGroup({ title, children, first }: { title: string; children: ReactNode; first?: boolean }) {
   return (
-    <div className="mt-5">
+    <div className={first ? "" : "mt-4"}>
       <Text variant="caption" case="title" className="text-muted-foreground ml-1">
         {title}
       </Text>
