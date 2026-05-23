@@ -125,39 +125,47 @@ function Home() {
         </div>
       </div>
 
-      {/* Earning options — 2 column */}
+      {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-5">
-        <div className="grid grid-cols-2 gap-3">
-          {[
-            {
-              to: "/tasks",
-              icon: Sparkles,
-              title: "ভিডিও বানিয়ে ইনকাম",
-              subtitle: "ভিডিও জমা দিয়ে আয় করুন",
-            },
-            {
-              to: "/tasks",
-              icon: Gift,
-              title: "Target Bonus",
-              subtitle: "টার্গেট পূরণে বোনাস",
-            },
-          ].map(({ to, icon: I, title, subtitle }) => (
-            <Link
-              key={title}
-              to={to}
-              className="bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-4 flex flex-col gap-2 active:scale-[0.98] transition-transform"
-            >
-              <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
-                <I className="h-5 w-5" strokeWidth={2} />
-              </div>
-              <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[15px]">
-                {title}
-              </Heading>
-              <Text variant="caption" className="text-muted-foreground leading-snug">
-                {subtitle}
-              </Text>
-            </Link>
-          ))}
+        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
+          <div className="px-3">
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
+              Earning Options
+            </Heading>
+            <div className="mt-2 h-px bg-border/70" />
+          </div>
+          <div className="pt-3 px-2 grid grid-cols-2 gap-2">
+            {[
+              {
+                to: "/tasks",
+                icon: Sparkles,
+                title: "ভিডিও বানিয়ে ইনকাম",
+                subtitle: "ভিডিও জমা দিয়ে আয় করুন",
+              },
+              {
+                to: "/tasks",
+                icon: Gift,
+                title: "Target Bonus",
+                subtitle: "টার্গেট পূরণে বোনাস",
+              },
+            ].map(({ to, icon: I, title, subtitle }) => (
+              <Link
+                key={title}
+                to={to}
+                className="rounded-2xl bg-background ring-1 ring-border/60 p-3 flex flex-col gap-2 active:scale-[0.98] transition-transform"
+              >
+                <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                  <I className="h-[18px] w-[18px]" strokeWidth={2} />
+                </div>
+                <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[14px]">
+                  {title}
+                </Heading>
+                <Text variant="caption" className="text-muted-foreground leading-snug">
+                  {subtitle}
+                </Text>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
 
