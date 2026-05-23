@@ -102,9 +102,9 @@ function Home() {
       <div className="px-4 mt-5">
         <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
-            <h2 className="text-[20px] font-bold text-foreground tracking-tight leading-tight">
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
-            </h2>
+            </Heading>
             <div className="mt-2 h-px bg-border/70" />
           </div>
           <div className="pt-3 px-2 grid grid-cols-4 gap-2">
