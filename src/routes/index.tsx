@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import {
   IconCashBanknote,
-  IconGift as TablerGift,
+  IconUsersGroup,
   IconChecklist,
   IconHistory,
 } from "@tabler/icons-react";
