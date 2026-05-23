@@ -27,7 +27,7 @@ export function ScreenHeader({
         </button>
       )}
       <div className="flex-1 min-w-0">
-        <h1 className="text-screen-title truncate">{title}</h1>
+        <Heading variant="screenTitle" case="sentence" className="truncate">{title}</Heading>
         {subtitle && <p className="text-body-secondary mt-1">{subtitle}</p>}
       </div>
 
@@ -37,7 +37,7 @@ export function ScreenHeader({
 }
 
 export function PageTitle({ children }: { children: ReactNode }) {
-  return <h2 className="text-section-title mb-3 px-5">{children}</h2>;
+  return <Heading variant="sectionTitle" case="sentence" className="mb-3 px-5">{children}</Heading>;
 }
 
 export function _Link() { return <Link to="/" />; }
