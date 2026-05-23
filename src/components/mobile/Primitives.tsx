@@ -75,7 +75,7 @@ export function StatPill({
     danger: "text-destructive",
   } as const;
   return (
-    <div className="flex-1 rounded-lg bg-card border border-border p-3 shadow-card">
+    <div className="flex-1 rounded-lg bg-card border border-border p-card shadow-card">
       <div className="text-caption flex items-center gap-2">
         {icon}
         <span>{label}</span>

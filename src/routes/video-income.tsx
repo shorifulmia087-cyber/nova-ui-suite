@@ -161,7 +161,7 @@ function VideoIncomePage() {
               return (
                 <li
                   key={title}
-                  className="relative bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-4 flex items-start gap-4"
+                  className="relative bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-card flex items-start gap-4"
                 >
                   <div
                     className={cn(
@@ -257,7 +257,7 @@ function VideoIncomePage() {
                 onClick={() => setSelectedTier(id)}
                 aria-pressed={active}
                 className={cn(
-                  "w-full text-left rounded-2xl p-4 flex items-center gap-4 transition-all active:scale-[0.99]",
+                  "w-full text-left rounded-2xl p-card flex items-center gap-4 transition-all active:scale-[0.99]",
                   active
                     ? "bg-card ring-2 ring-accent shadow-glow"
                     : "bg-card ring-1 ring-border/60 hover:ring-border",
@@ -322,7 +322,7 @@ function VideoIncomePage() {
           Provide accurate info — the reward is released after verification
         </Text>
 
-        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-5">
+        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-card">
           {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video">
             <FieldInput
