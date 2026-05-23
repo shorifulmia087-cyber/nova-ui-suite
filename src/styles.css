@@ -173,6 +173,9 @@
   .p-card  { padding: var(--spacing-card); }
   .px-card { padding-left: var(--spacing-card); padding-right: var(--spacing-card); }
   .py-card { padding-top: var(--spacing-card); padding-bottom: var(--spacing-card); }
+  .mt-section { margin-top: var(--spacing-section); }
+  .mb-section { margin-bottom: var(--spacing-section); }
+
   .text-balance { text-wrap: balance; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
   .no-scrollbar { scrollbar-width: none; }
