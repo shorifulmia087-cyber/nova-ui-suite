@@ -101,7 +101,7 @@ function Home() {
         <div className="bg-card rounded-2xl shadow-card px-2 pt-4 pb-5">
           <div className="px-3">
             <h2 className="text-[13px] font-semibold uppercase text-muted-foreground" style={{ letterSpacing: "0.08em" }}>
-              Quick actions
+              Shortcuts
             </h2>
             <div className="mt-3 h-px bg-border/70" />
           </div>
