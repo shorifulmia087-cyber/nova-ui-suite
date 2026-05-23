@@ -72,7 +72,7 @@
 :root {
   --radius: 1rem;
   --spacing-card: 1rem; /* 16px — single source of truth for card inner padding */
-  --spacing-section: 1.25rem; /* 20px — gap between top-level sections */
+  --spacing-section: 1rem; /* 16px — gap between top-level sections */
 
 
 
