@@ -223,9 +223,9 @@
   }
   /* Section headers */
   .text-section-title {
-    font-size: 20px;
-    line-height: 28px;
-    font-weight: 600;
+    font-size: 22px;
+    line-height: 30px;
+    font-weight: 700;
     letter-spacing: -0.015em;
   }
   /* Card / list important titles */
