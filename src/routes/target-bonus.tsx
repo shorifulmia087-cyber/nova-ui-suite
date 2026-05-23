@@ -29,7 +29,7 @@ function TargetBonusPage() {
 
       {/* Hero */}
       <div className="px-4">
-        <div className="rounded-2xl bg-primary text-primary-foreground p-5 shadow-navy">
+        <div className="rounded-2xl bg-primary text-primary-foreground p-card shadow-navy">
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-2xl bg-[color:var(--accent)]/20 text-[color:var(--accent)] flex items-center justify-center">
               <Gift className="h-6 w-6" strokeWidth={2} />
@@ -64,7 +64,7 @@ function TargetBonusPage() {
             ].map(({ icon: I, title, subtitle }, idx) => (
               <div
                 key={title}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-3 flex items-start gap-3"
+                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex items-start gap-3"
               >
                 <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
                   <I className="h-[20px] w-[20px]" strokeWidth={2} />
@@ -101,7 +101,7 @@ function TargetBonusPage() {
             {tiers.map((t) => (
               <div
                 key={t.target}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-3 flex items-center gap-3"
+                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex items-center gap-3"
               >
                 <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
                   <Trophy className="h-[20px] w-[20px]" strokeWidth={2} />

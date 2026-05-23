@@ -18,7 +18,7 @@ function Farm() {
       <ScreenHeader title="My Farm" subtitle="Yield-bearing plots" back={false} />
 
       <div className="px-5">
-        <Card className="relative overflow-hidden p-5 bg-gradient-card text-white border-0">
+        <Card className="relative overflow-hidden p-card bg-gradient-card text-white border-0">
           <div className="absolute -right-12 -bottom-12 h-44 w-44 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative flex items-center justify-between">
             <div>
@@ -48,7 +48,7 @@ function Farm() {
       <h2 className="text-section-title px-5 pt-6 pb-3">Your plots</h2>
       <div className="px-5 space-y-2">
         {farmPlots.map((p) => (
-          <Card key={p.id} className="p-4">
+          <Card key={p.id} className="p-card">
             <div className="flex items-center gap-3">
               <div className="h-11 w-11 rounded-lg bg-gradient-mint flex items-center justify-center text-white shadow-glow">
                 <Sprout className="h-5 w-5" />

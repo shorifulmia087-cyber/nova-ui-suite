@@ -94,7 +94,7 @@ function Tasks() {
       <div>
         <ScreenHeader title="Tasks" subtitle="Sign in to earn" back={false} />
         <div className="px-5">
-          <Card className="p-6 text-center">
+          <Card className="p-card text-center">
             <p className="text-label mb-3">Please sign in to view tasks.</p>
             <Link to="/login"><ActionButton variant="brand">Sign in</ActionButton></Link>
           </Card>
@@ -175,7 +175,7 @@ function Tasks() {
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="rounded-2xl bg-muted/60 animate-pulse p-5 flex gap-4 items-center"
+                  className="rounded-2xl bg-muted/60 animate-pulse p-card flex gap-4 items-center"
                 >
                   <div className="w-12 h-12 bg-muted rounded-xl shrink-0" />
                   <div className="flex-1 space-y-2">
@@ -187,7 +187,7 @@ function Tasks() {
               ))}
             </>
           ) : total === 0 ? (
-            <div className="rounded-2xl bg-card border border-border shadow-card p-10 text-center">
+            <div className="rounded-2xl bg-card border border-border shadow-card p-card text-center">
               <div className="mx-auto h-14 w-14 rounded-full bg-muted flex items-center justify-center mb-3">
                 <Gift className="h-7 w-7 text-muted-foreground" />
               </div>
@@ -197,7 +197,7 @@ function Tasks() {
               </p>
             </div>
           ) : remaining === 0 ? (
-            <div className="rounded-2xl p-6 text-center text-accent-foreground shadow-glow bg-gradient-to-br from-[color:var(--accent)] to-[color:var(--secondary)]">
+            <div className="rounded-2xl p-card text-center text-accent-foreground shadow-glow bg-gradient-to-br from-[color:var(--accent)] to-[color:var(--secondary)]">
               <Sparkles className="h-7 w-7 mx-auto mb-2" />
               <p className="text-label font-bold">All tasks completed!</p>
               <p className="text-caption opacity-90 mt-1">

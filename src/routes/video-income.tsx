@@ -102,7 +102,7 @@ function VideoIncomePage() {
         <ScreenHeader title="Submission status" />
 
         <section className="px-5">
-          <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-6 shadow-navy">
+          <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-card shadow-navy">
             <span aria-hidden className="pointer-events-none absolute -top-20 -right-16 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
             <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
 
@@ -492,7 +492,7 @@ function FileField({
         type="button"
         onClick={() => inputRef.current?.click()}
         className={cn(
-          "w-full rounded-xl bg-card ring-1 p-3 flex items-center gap-3 transition-all active:scale-[0.99] text-left",
+          "w-full rounded-xl bg-card ring-1 p-card flex items-center gap-3 transition-all active:scale-[0.99] text-left",
           file
             ? "ring-accent/40 bg-accent/5"
             : "ring-border/60 hover:ring-border",

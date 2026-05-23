@@ -48,7 +48,7 @@ function Verify() {
       <div>
         <ScreenHeader title="Verification" />
         <div className="px-5">
-          <Card className="p-6 text-center border-0 bg-gradient-soft">
+          <Card className="p-card text-center border-0 bg-gradient-soft">
             <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
               <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
             </div>
@@ -89,7 +89,7 @@ function Verify() {
     <div>
       <ScreenHeader title="Verify identity" />
       <form onSubmit={submit} className="px-5 pb-8 space-y-5">
-        <Card className="p-4 border-0 bg-gradient-soft flex items-start gap-3">
+        <Card className="p-card border-0 bg-gradient-soft flex items-start gap-3">
           <div className="h-10 w-10 rounded-lg bg-[color:var(--accent)]/15 flex items-center justify-center text-[color:var(--accent)]">
             <IdCard className="h-5 w-5" />
           </div>
@@ -98,7 +98,7 @@ function Verify() {
           </div>
         </Card>
 
-        <Card className="p-4 border-0 space-y-3">
+        <Card className="p-card border-0 space-y-3">
           <Field label="Full legal name">
             <input
               value={fullName}
@@ -118,7 +118,7 @@ function Verify() {
           </Field>
         </Card>
 
-        <Card className="p-4 border-0 space-y-3">
+        <Card className="p-card border-0 space-y-3">
           <p className="text-eyebrow">Documents</p>
           <FileBox label="NID front" file={frontFile} onPick={setFrontFile} icon={Upload} />
           <FileBox label="NID back" file={backFile} onPick={setBackFile} icon={Upload} />

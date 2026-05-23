@@ -132,7 +132,7 @@ function AdminTasks() {
     return (
       <div>
         <ScreenHeader title="Admin · Tasks" />
-        <div className="px-5"><Card className="p-6 text-center text-caption text-muted-foreground">Checking access…</Card></div>
+        <div className="px-5"><Card className="p-card text-center text-caption text-muted-foreground">Checking access…</Card></div>
       </div>
     );
   }
@@ -142,7 +142,7 @@ function AdminTasks() {
       <div>
         <ScreenHeader title="Admin · Tasks" />
         <div className="px-5">
-          <Card className="p-6 text-center">
+          <Card className="p-card text-center">
             <p className="text-label mb-3">Admin access required.</p>
             <Link to="/"><ActionButton variant="outline">Go home</ActionButton></Link>
           </Card>
@@ -156,7 +156,7 @@ function AdminTasks() {
       <ScreenHeader title="Admin · Tasks" subtitle="Create and manage tasks" />
 
       <div className="px-5">
-        <Card className="p-4">
+        <Card className="p-card">
           <h2 className="text-section-title mb-3 inline-flex items-center gap-2">
             <Plus className="h-4 w-4" /> New task
           </h2>
@@ -187,12 +187,12 @@ function AdminTasks() {
       <div className="px-5 mt-5 space-y-2">
         <h2 className="text-section-title">All tasks</h2>
         {loading ? (
-          <Card className="p-6 text-center text-caption text-muted-foreground">Loading…</Card>
+          <Card className="p-card text-center text-caption text-muted-foreground">Loading…</Card>
         ) : rows.length === 0 ? (
-          <Card className="p-6 text-center text-caption text-muted-foreground">No tasks yet.</Card>
+          <Card className="p-card text-center text-caption text-muted-foreground">No tasks yet.</Card>
         ) : (
           rows.map((r) => (
-            <Card key={r.id} className="p-4">
+            <Card key={r.id} className="p-card">
               <div className="flex items-start justify-between gap-2">
                 <div className="min-w-0 flex-1">
                   <p className="text-label truncate">{r.title}</p>

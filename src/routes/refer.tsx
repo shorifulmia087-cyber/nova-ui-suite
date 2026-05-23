@@ -41,7 +41,7 @@ function Refer() {
       <ScreenHeader title="Refer & Earn" subtitle="Grow together" back={false} />
 
       <div className="px-5">
-        <Card className="relative overflow-hidden p-6 bg-gradient-brand text-white border-0 text-center">
+        <Card className="relative overflow-hidden p-card bg-gradient-brand text-white border-0 text-center">
           <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative">
             <div className="mx-auto h-14 w-14 rounded-lg bg-white/15 flex items-center justify-center">
@@ -89,7 +89,7 @@ function Refer() {
           { n: 2, t: "Friend signs up", d: "They enter your code at registration." },
           { n: 3, t: "Both earn rewards", d: "You get ৳25, they get ৳10 instantly." },
         ].map((s) => (
-          <Card key={s.n} className="p-4 flex items-center gap-3">
+          <Card key={s.n} className="p-card flex items-center gap-3">
             <div className="text-card-title h-10 w-10 rounded-full bg-gradient-mint flex items-center justify-center text-white shadow-glow">
               {s.n}
             </div>
