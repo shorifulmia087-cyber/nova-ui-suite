@@ -152,7 +152,7 @@ function Home() {
               <Link
                 key={title}
                 to={to}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-3 flex flex-col gap-2 active:scale-[0.98] transition-transform"
+                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
                 <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
