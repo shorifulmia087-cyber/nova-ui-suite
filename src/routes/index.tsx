@@ -70,8 +70,8 @@ function Home() {
           </div>
           <div className="flex flex-col min-w-0 gap-1">
             <Text
-              variant="caption"
-              case="upper"
+              variant="label"
+              case="title"
               className="font-semibold text-muted-foreground leading-none"
             >
               Good morning
