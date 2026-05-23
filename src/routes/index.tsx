@@ -157,7 +157,7 @@ function Home() {
                 <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
-                <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
+                <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight font-semibold">
                   {title}
                 </Heading>
                 <Text variant="caption" className="text-muted-foreground leading-snug">
