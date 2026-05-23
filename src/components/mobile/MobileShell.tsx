@@ -1,14 +1,14 @@
 import { Outlet, Link, useRouterState, useNavigate, useRouter } from "@tanstack/react-router";
-import { Home, Sprout, Gift, User } from "lucide-react";
+import { IconHome, IconPlant2, IconGift, IconUser } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
 
 const tabs = [
-  { to: "/", label: "Home", icon: Home },
-  { to: "/farm", label: "Farm", icon: Sprout },
-  { to: "/refer", label: "Refer", icon: Gift },
-  { to: "/profile", label: "Profile", icon: User },
+  { to: "/", label: "Home", icon: IconHome },
+  { to: "/farm", label: "Farm", icon: IconPlant2 },
+  { to: "/refer", label: "Refer", icon: IconGift },
+  { to: "/profile", label: "Profile", icon: IconUser },
 ] as const;
 
 const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
@@ -103,7 +103,7 @@ export function MobileShell() {
                         "h-[20px] w-[20px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
                         active ? "scale-110 -translate-y-0.5" : "scale-100",
                       )}
-                      strokeWidth={active ? 2.4 : 2}
+                      stroke={active ? 2.2 : 1.75}
                     />
                     <span
                       className={cn(
