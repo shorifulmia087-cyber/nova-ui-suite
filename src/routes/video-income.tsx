@@ -390,7 +390,7 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
 function FieldGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="mt-5">
-      <Text variant="caption" case="upper" className="text-muted-foreground ml-1">
+      <Text variant="caption" case="title" className="text-muted-foreground ml-1">
         {title}
       </Text>
       <div className="mt-2 space-y-3">{children}</div>
