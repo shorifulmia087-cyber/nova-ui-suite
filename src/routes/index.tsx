@@ -100,14 +100,14 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-5 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
-          <div className="px-3">
+        <div className="bg-card rounded-2xl shadow-card p-card">
+          <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
             </Heading>
             <div className="mt-2 h-px bg-border/70" />
           </div>
-          <div className="pt-3 px-2 grid grid-cols-4 gap-2">
+          <div className="mt-3 grid grid-cols-4 gap-2">
           {[
             { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
             { to: "/refer", icon: IconUsersGroup, label: "Refer" },
@@ -127,14 +127,14 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-5 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
-          <div className="px-3">
+        <div className="bg-card rounded-2xl shadow-card p-card">
+          <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
             </Heading>
             <div className="mt-2 h-px bg-border/70" />
           </div>
-          <div className="pt-3 px-2 grid grid-cols-2 gap-2">
+          <div className="mt-3 grid grid-cols-2 gap-2">
             {[
               {
                 to: "/video-income",
