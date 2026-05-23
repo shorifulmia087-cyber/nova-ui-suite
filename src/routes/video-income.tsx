@@ -322,42 +322,45 @@ function VideoIncomePage() {
           Provide accurate info — the reward is released after verification
         </Text>
 
-        {/* Group 1 — Channel & video */}
-        <FieldGroup title="Channel & video">
-          <FieldInput
-            label="Video URL"
-            icon={<Link2 className="h-[18px] w-[18px]" />}
-            placeholder="https://youtube.com/watch?v=..."
-            value={videoUrl}
-            onChange={(e) => setVideoUrl(e.target.value)}
-          />
-          <FieldInput
-            label="YouTube channel name"
-            icon={<Youtube className="h-[18px] w-[18px]" />}
-            placeholder="Your channel name"
-            value={channelName}
-            onChange={(e) => setChannelName(e.target.value)}
-          />
-        </FieldGroup>
+        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-5">
+          {/* Group 1 — Channel & video */}
+          <FieldGroup title="Channel & video">
+            <FieldInput
+              label="Video URL"
+              icon={<Link2 className="h-[18px] w-[18px]" />}
+              placeholder="https://youtube.com/watch?v=..."
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+            />
+            <FieldInput
+              label="YouTube channel name"
+              icon={<Youtube className="h-[18px] w-[18px]" />}
+              placeholder="Your channel name"
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+            />
+          </FieldGroup>
 
-        {/* Group 2 — Verification uploads */}
-        <FieldGroup title="Verification uploads">
-          <FileField
-            label="Channel logo"
-            hint="PNG or JPG, square preferred"
-            icon={<ImageIcon className="h-[18px] w-[18px]" />}
-            file={logoFile}
-            onChange={setLogoFile}
-          />
-          <FileField
-            label="YT Studio analytics screenshot"
-            hint="Must clearly show the view count"
-            icon={<BarChart3 className="h-[18px] w-[18px]" />}
-            file={analyticsFile}
-            onChange={setAnalyticsFile}
-          />
-        </FieldGroup>
+          {/* Group 2 — Verification uploads */}
+          <FieldGroup title="Verification uploads">
+            <FileField
+              label="Channel logo"
+              hint="PNG or JPG, square preferred"
+              icon={<ImageIcon className="h-[18px] w-[18px]" />}
+              file={logoFile}
+              onChange={setLogoFile}
+            />
+            <FileField
+              label="YT Studio analytics screenshot"
+              hint="Must clearly show the view count"
+              icon={<BarChart3 className="h-[18px] w-[18px]" />}
+              file={analyticsFile}
+              onChange={setAnalyticsFile}
+            />
+          </FieldGroup>
+        </div>
       </section>
+
 
       {/* Summary */}
       <section className="px-5 mt-8">
