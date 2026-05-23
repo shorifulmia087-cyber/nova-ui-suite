@@ -69,12 +69,13 @@ function Home() {
             )}
           </div>
           <div className="flex flex-col min-w-0 gap-1">
-            <span
-              className="text-[11px] font-semibold uppercase text-muted-foreground leading-none"
-              style={{ letterSpacing: "0.08em" }}
+            <Text
+              variant="caption"
+              case="upper"
+              className="font-semibold text-muted-foreground leading-none"
             >
               Good morning
-            </span>
+            </Text>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
