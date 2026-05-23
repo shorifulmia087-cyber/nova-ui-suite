@@ -71,6 +71,9 @@
 
 :root {
   --radius: 1rem;
+  --spacing-card: 1rem; /* 16px — single source of truth for card inner padding */
+
+
 
   /* Premium fintech palette (exact hex from brief) */
   --background: #f6f7f9;
@@ -165,7 +168,6 @@
      ALWAYS use `p-card` on card surfaces (bg-card containers).
      Do NOT use ad-hoc p-3 / p-5 / p-6 on cards.
      ============================================================ */
-  --spacing-card: 1rem; /* 16px */
   .p-card  { padding: var(--spacing-card); }
   .px-card { padding-left: var(--spacing-card); padding-right: var(--spacing-card); }
   .py-card { padding-top: var(--spacing-card); padding-bottom: var(--spacing-card); }
