@@ -4,7 +4,7 @@ import {
   Sparkles,
   PlayCircle,
   Upload,
-  CheckCircle2,
+  
   Coins,
   Flame,
   ArrowRight,
