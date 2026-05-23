@@ -99,7 +99,7 @@ function Home() {
 
 
       {/* Quick actions — refined card */}
-      <div className="px-4 mt-5">
+      <div className="px-5 mt-5">
         <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -126,7 +126,7 @@ function Home() {
       </div>
 
       {/* Earning options — single section, 2 columns */}
-      <div className="px-4 mt-5">
+      <div className="px-5 mt-5">
         <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -278,7 +278,7 @@ function IntroVideoBanner() {
 
   return (
     <>
-      <div className="px-4 mt-5">
+      <div className="px-5 mt-5">
         <button
           type="button"
           onClick={() => setOpen(true)}
