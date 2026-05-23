@@ -100,7 +100,7 @@ function Home() {
       <div className="px-4 mt-5">
         <div className="bg-card rounded-2xl shadow-card px-2 pt-4 pb-5">
           <div className="px-3">
-            <h2 className="text-[13px] font-bold uppercase text-foreground" style={{ letterSpacing: "0.08em" }}>
+            <h2 className="text-[15px] font-bold text-foreground tracking-tight">
               Easy Earning
             </h2>
             <div className="mt-3 h-px bg-border/70" />
