@@ -416,18 +416,6 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
   return <p className="text-eyebrow text-accent">{children}</p>;
 }
 
-function TrustStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur px-3 py-2.5 text-center">
-      <Text variant="label" as="p" className="text-primary-foreground tabular-nums">
-        {value}
-      </Text>
-      <Text variant="caption" className="text-primary-foreground/60">
-        {label}
-      </Text>
-    </div>
-  );
-}
 
 function FieldGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
