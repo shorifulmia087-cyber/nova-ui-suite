@@ -107,14 +107,14 @@ function Home() {
           </div>
           <div className="pt-5 grid grid-cols-4 gap-y-5">
           {[
-            { to: "/withdraw", icon: Minus, label: "Withdraw" },
-            { to: "/refer", icon: Gift, label: "Refer" },
-            { to: "/tasks", icon: ClipboardList, label: "Task" },
-            { to: "/transactions", icon: TrendingUp, label: "History" },
+            { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
+            { to: "/refer", icon: TablerGift, label: "Refer" },
+            { to: "/tasks", icon: IconChecklist, label: "Task" },
+            { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
               <div className="h-14 w-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-background text-foreground ring-1 ring-border/60 group-active:bg-muted/40">
-                <I className="h-[22px] w-[22px]" strokeWidth={2} />
+                <I className="h-[24px] w-[24px]" stroke={1.75} />
               </div>
               <span className="text-foreground font-semibold text-[13px] leading-none">{label}</span>
             </Link>
