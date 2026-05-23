@@ -1,5 +1,6 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
+import { Heading } from "@/lib/typography";
 import { type ReactNode } from "react";
 
 export function ScreenHeader({
