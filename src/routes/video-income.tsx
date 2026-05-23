@@ -286,4 +286,27 @@ function VideoIncomePage() {
                 variant="caption"
                 className="text-muted-foreground leading-snug mt-1"
               >
-                নিজের তৈরি অরিজিনাল কন্টেন্ট
+                নিজের তৈরি অরিজিনাল কন্টেন্ট জমা দিন। কপি বা ডুপ্লিকেট ভিডিও
+                বাতিল হবে এবং অ্যাকাউন্ট সাসপেন্ড হতে পারে।
+              </Text>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Sticky CTA */}
+      <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pb-5 pt-3 bg-gradient-to-t from-background via-background to-transparent z-40">
+        <Link
+          to="/tasks"
+          className="group relative flex items-center justify-center gap-2 h-14 rounded-2xl bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-glow active:scale-[0.98] transition-transform"
+        >
+          <span>ভিডিও জমা দিন</span>
+          <ArrowRight
+            className="h-5 w-5 transition-transform group-active:translate-x-1"
+            strokeWidth={2.5}
+          />
+        </Link>
+      </div>
+    </div>
+  );
+}
