@@ -114,7 +114,7 @@ function Home() {
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
               <div className="w-full h-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-background text-primary ring-1 ring-border/60 group-active:bg-muted/40">
-                <I className="h-[26px] w-[26px]" stroke={1.75} />
+                <I className="h-[28px] w-[28px]" stroke={1.75} />
               </div>
               <span className="text-foreground font-semibold text-[13px] leading-none">{label}</span>
             </Link>
