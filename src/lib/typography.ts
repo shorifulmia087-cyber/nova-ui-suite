@@ -56,17 +56,63 @@ export function typographyClass(token: TypographyToken): string {
   return TYPOGRAPHY[token].className;
 }
 
+/**
+ * Case formatting tokens — single source of truth for text casing.
+ * Use via `<Text case="...">` / `<Heading case="...">` instead of raw
+ * Tailwind `uppercase` / `capitalize` classes in components.
+ */
+export type CaseToken = "none" | "title" | "upper" | "lower" | "sentence";
+
+const CASE_CLASS: Record<CaseToken, string> = {
+  none: "",
+  title: "capitalize",
+  upper: "uppercase tracking-[0.08em]",
+  lower: "lowercase",
+  sentence: "normal-case first-letter:uppercase",
+};
+
+export function caseClass(token: CaseToken = "none"): string {
+  return CASE_CLASS[token];
+}
+
 type TextProps = HTMLAttributes<HTMLElement> & {
   variant: TypographyToken;
   as?: ElementType;
+  case?: CaseToken;
 };
 
-/** Semantic typography component — `<Text variant="cardTitle">…</Text>`. */
-export function Text({ variant, as, className, children, ...rest }: TextProps) {
+/** Semantic typography component — `<Text variant="cardTitle" case="title">…</Text>`. */
+export function Text({ variant, as, case: caseToken = "none", className, children, ...rest }: TextProps) {
   const Tag = (as ?? "span") as ElementType;
   return createElement(
     Tag,
-    { className: cn(TYPOGRAPHY[variant].className, className), ...rest },
+    { className: cn(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
+    children,
+  );
+}
+
+/** Semantic heading — defaults to a real <h*> tag matching the variant. */
+const HEADING_TAG: Partial<Record<TypographyToken, ElementType>> = {
+  display: "h1",
+  screenTitle: "h1",
+  sectionTitle: "h2",
+  cardTitle: "h3",
+};
+
+type HeadingProps = Omit<TextProps, "variant"> & { variant?: TypographyToken };
+
+export function Heading({
+  variant = "sectionTitle",
+  as,
+  case: caseToken = "none",
+  className,
+  children,
+  ...rest
+}: HeadingProps) {
+  const Tag = (as ?? HEADING_TAG[variant] ?? "h2") as ElementType;
+  return createElement(
+    Tag,
+    { className: cn(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
     children,
   );
 }

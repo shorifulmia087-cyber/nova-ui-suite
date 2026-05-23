@@ -12,6 +12,7 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
+import { Heading, Text } from "@/lib/typography";
 import { transactions, cards } from "@/lib/mock";
 import { useProfile } from "@/lib/use-profile";
 import avatarUser from "@/assets/avatar-user.jpg";
@@ -68,12 +69,13 @@ function Home() {
             )}
           </div>
           <div className="flex flex-col min-w-0 gap-1">
-            <span
-              className="text-[11px] font-semibold uppercase text-muted-foreground leading-none"
-              style={{ letterSpacing: "0.08em" }}
+            <Text
+              variant="caption"
+              case="upper"
+              className="font-semibold text-muted-foreground leading-none"
             >
               Good morning
-            </span>
+            </Text>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
@@ -100,9 +102,9 @@ function Home() {
       <div className="px-4 mt-5">
         <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
-            <h2 className="text-[20px] font-bold text-foreground tracking-tight leading-tight">
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
-            </h2>
+            </Heading>
             <div className="mt-2 h-px bg-border/70" />
           </div>
           <div className="pt-3 px-2 grid grid-cols-4 gap-2">
@@ -201,9 +203,9 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
-      <span className="text-[9px] font-semibold uppercase text-muted-foreground leading-none" style={{ letterSpacing: "0.08em" }}>
+      <Text variant="caption" case="upper" className="text-[9px] font-semibold text-muted-foreground leading-none">
         Balance
-      </span>
+      </Text>
       <span className="mt-1 text-[15px] font-bold text-foreground tabular-nums leading-none">
         {text}
       </span>
