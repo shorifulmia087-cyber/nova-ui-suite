@@ -362,36 +362,6 @@ function VideoIncomePage() {
       </section>
 
 
-      {/* Summary */}
-      <section className="px-5 mt-8">
-        <SectionEyebrow>Step 03</SectionEyebrow>
-        <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
-          Reward summary
-        </Heading>
-
-        <div className="mt-4 rounded-2xl bg-card ring-1 ring-border/60 shadow-card overflow-hidden">
-          <div className="p-4 flex items-center justify-between gap-4">
-            <div className="flex items-center gap-3 min-w-0">
-              <div className="h-11 w-11 rounded-xl bg-accent/10 text-accent flex items-center justify-center shrink-0">
-                <Coins className="h-5 w-5" strokeWidth={2} />
-              </div>
-              <div className="min-w-0">
-                <Text variant="caption">You will receive</Text>
-                <Text variant="label" as="p" className="text-foreground mt-0.5 truncate">
-                  {tier.views} · {tier.label}
-                </Text>
-              </div>
-            </div>
-            <Text variant="sectionTitle" as="p" className="text-accent tabular-nums shrink-0">
-              ৳{tier.amount}
-            </Text>
-          </div>
-          <div className="border-t border-border/60 px-4 py-3 bg-muted/40 flex items-center gap-2">
-            <ShieldCheck className="h-4 w-4 text-accent shrink-0" strokeWidth={2.2} />
-            <Text variant="caption">Reward is locked until verification is complete</Text>
-          </div>
-        </div>
-      </section>
 
       {/* Sticky CTA */}
       <StickyCta>
@@ -453,7 +423,7 @@ function PrimaryButton({
         "group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl transition-all",
         disabled
           ? "bg-muted text-muted-foreground cursor-not-allowed"
-          : "bg-accent text-accent-foreground shadow-glow active:scale-[0.98]",
+          : "bg-primary text-primary-foreground shadow-glow active:scale-[0.98]",
       )}
     >
       <Text variant="button" className="inline-flex items-center gap-2">
