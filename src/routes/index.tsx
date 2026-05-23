@@ -137,13 +137,13 @@ function Home() {
           <div className="pt-3 px-2 grid grid-cols-2 gap-2">
             {[
               {
-                to: "/tasks",
+                to: "/video-income",
                 icon: Sparkles,
                 title: "ভিডিও বানিয়ে ইনকাম",
                 subtitle: "ভিডিও জমা দিয়ে আয় করুন",
               },
               {
-                to: "/video-income",
+                to: "/tasks",
                 icon: Gift,
                 title: "Target Bonus",
                 subtitle: "টার্গেট পূরণে বোনাস",
