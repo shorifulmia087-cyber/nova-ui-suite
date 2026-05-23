@@ -4,6 +4,12 @@ import {
   ClipboardList, Gift, ChevronRight, ChevronDown, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight, Plus, Minus, ArrowRight, MoreHorizontal,
 } from "lucide-react";
+import {
+  IconCashBanknote,
+  IconGift as TablerGift,
+  IconChecklist,
+  IconHistory,
+} from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { transactions, cards } from "@/lib/mock";
