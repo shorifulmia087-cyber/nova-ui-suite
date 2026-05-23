@@ -103,7 +103,7 @@ export function MobileShell() {
                         "h-[20px] w-[20px] transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)]",
                         active ? "scale-110 -translate-y-0.5" : "scale-100",
                       )}
-                      strokeWidth={active ? 2.4 : 2}
+                      stroke={active ? 2.2 : 1.75}
                     />
                     <span
                       className={cn(
