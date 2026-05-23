@@ -42,14 +42,15 @@ type Tier = {
   views: string;
   amount: number;
   icon: typeof Eye;
+  label: string;
 };
 
 const tiers: Tier[] = [
-  { id: "t1", views: "500+ views", amount: 100, icon: Eye },
-  { id: "t2", views: "1,000+ views", amount: 250, icon: PlayCircle },
-  { id: "t3", views: "2,000+ views", amount: 500, icon: Sparkles },
-  { id: "t4", views: "3,000+ views", amount: 700, icon: BarChart3 },
-  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame },
+  { id: "t1", views: "500+ views", amount: 100, icon: Eye, label: "Entry level" },
+  { id: "t2", views: "1,000+ views", amount: 250, icon: PlayCircle, label: "Popular" },
+  { id: "t3", views: "2,000+ views", amount: 500, icon: Sparkles, label: "Advanced" },
+  { id: "t4", views: "3,000+ views", amount: 700, icon: BarChart3, label: "Pro tier" },
+  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame, label: "Expert" },
 ];
 
 const timeline = [
