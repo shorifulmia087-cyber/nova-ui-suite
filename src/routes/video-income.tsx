@@ -201,7 +201,7 @@ function VideoIncomePage() {
 
         {/* Note */}
         <section className="px-4 mt-6">
-          <div className="rounded-2xl bg-muted/50 ring-1 ring-border/60 p-4 flex items-start gap-3">
+          <div className="rounded-2xl bg-muted/50 ring-1 ring-border/60 p-card flex items-start gap-3">
             <div className="h-10 w-10 rounded-xl bg-card text-accent flex items-center justify-center shrink-0 shadow-card">
               <ShieldCheck className="h-5 w-5" strokeWidth={2} />
             </div>
