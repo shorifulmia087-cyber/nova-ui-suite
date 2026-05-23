@@ -1,14 +1,14 @@
 import { Outlet, Link, useRouterState, useNavigate, useRouter } from "@tanstack/react-router";
-import { Home, Sprout, Gift, User } from "lucide-react";
+import { IconHome, IconPlant2, IconGift, IconUser } from "@tabler/icons-react";
 import { useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/lib/auth-context";
 
 const tabs = [
-  { to: "/", label: "Home", icon: Home },
-  { to: "/farm", label: "Farm", icon: Sprout },
-  { to: "/refer", label: "Refer", icon: Gift },
-  { to: "/profile", label: "Profile", icon: User },
+  { to: "/", label: "Home", icon: IconHome },
+  { to: "/farm", label: "Farm", icon: IconPlant2 },
+  { to: "/refer", label: "Refer", icon: IconGift },
+  { to: "/profile", label: "Profile", icon: IconUser },
 ] as const;
 
 const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
