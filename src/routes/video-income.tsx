@@ -233,51 +233,9 @@ function VideoIncomePage() {
     <div className="pb-40">
       <ScreenHeader title="Earn from videos" />
 
-      {/* Hero */}
-      <section className="px-5">
-        <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-6 shadow-navy">
-          <span aria-hidden className="pointer-events-none absolute -top-24 -right-16 h-52 w-52 rounded-full bg-accent/30 blur-3xl" />
-          <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
-
-          <div className="relative flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-primary-foreground/10 backdrop-blur px-2.5 py-1 ring-1 ring-primary-foreground/15">
-              <Youtube className="h-3.5 w-3.5 text-accent" strokeWidth={2.5} />
-              <Text variant="caption" case="upper" className="text-primary-foreground/90">
-                YouTube rewards
-              </Text>
-            </span>
-          </div>
-
-          <div className="relative mt-5">
-            <Heading variant="screenTitle" case="sentence" className="text-primary-foreground text-balance">
-              Get paid for the views you already earn
-            </Heading>
-
-            <div className="mt-5 flex items-end gap-2">
-              <Text variant="caption" case="upper" className="text-primary-foreground/60 mb-2">
-                Up to
-              </Text>
-              <p className="text-display text-accent tabular-nums leading-none">৳1,500</p>
-              <Text variant="bodySecondary" className="text-primary-foreground/70 mb-1.5">
-                / video
-              </Text>
-            </div>
-
-            <Text variant="bodySecondary" as="p" className="text-primary-foreground/75 mt-3">
-              The more views your video gets, the bigger the verified reward.
-            </Text>
-          </div>
-
-          <div className="relative mt-5 grid grid-cols-3 gap-2">
-            <TrustStat label="Verified" value="100%" />
-            <TrustStat label="Avg. review" value="24 h" />
-            <TrustStat label="Payout" value="Direct" />
-          </div>
-        </div>
-      </section>
-
       {/* Tier selection */}
-      <section className="px-5 mt-8">
+      <section className="px-5 mt-2">
+
         <SectionEyebrow>Step 01</SectionEyebrow>
         <div className="flex items-end justify-between gap-3 mt-1">
           <Heading variant="sectionTitle" case="sentence" className="text-foreground">
@@ -325,7 +283,7 @@ function VideoIncomePage() {
 
                 <div className="text-right shrink-0 flex items-center gap-3">
                   <div>
-                    <Text variant="caption" case="upper" className={cn(active ? "text-accent/80" : "text-muted-foreground")}>
+                    <Text variant="caption" className={cn(active ? "text-accent/80" : "text-muted-foreground")}>
                       Reward
                     </Text>
                     <Text variant="cardTitle" as="p" className={cn("tabular-nums", active ? "text-accent" : "text-foreground")}>
@@ -364,42 +322,45 @@ function VideoIncomePage() {
           Provide accurate info — the reward is released after verification
         </Text>
 
-        {/* Group 1 — Channel & video */}
-        <FieldGroup title="Channel & video">
-          <FieldInput
-            label="Video URL"
-            icon={<Link2 className="h-[18px] w-[18px]" />}
-            placeholder="https://youtube.com/watch?v=..."
-            value={videoUrl}
-            onChange={(e) => setVideoUrl(e.target.value)}
-          />
-          <FieldInput
-            label="YouTube channel name"
-            icon={<Youtube className="h-[18px] w-[18px]" />}
-            placeholder="Your channel name"
-            value={channelName}
-            onChange={(e) => setChannelName(e.target.value)}
-          />
-        </FieldGroup>
+        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-5">
+          {/* Group 1 — Channel & video */}
+          <FieldGroup title="Channel & video">
+            <FieldInput
+              label="Video URL"
+              icon={<Link2 className="h-[18px] w-[18px]" />}
+              placeholder="https://youtube.com/watch?v=..."
+              value={videoUrl}
+              onChange={(e) => setVideoUrl(e.target.value)}
+            />
+            <FieldInput
+              label="YouTube channel name"
+              icon={<Youtube className="h-[18px] w-[18px]" />}
+              placeholder="Your channel name"
+              value={channelName}
+              onChange={(e) => setChannelName(e.target.value)}
+            />
+          </FieldGroup>
 
-        {/* Group 2 — Verification uploads */}
-        <FieldGroup title="Verification uploads">
-          <FileField
-            label="Channel logo"
-            hint="PNG or JPG, square preferred"
-            icon={<ImageIcon className="h-[18px] w-[18px]" />}
-            file={logoFile}
-            onChange={setLogoFile}
-          />
-          <FileField
-            label="YT Studio analytics screenshot"
-            hint="Must clearly show the view count"
-            icon={<BarChart3 className="h-[18px] w-[18px]" />}
-            file={analyticsFile}
-            onChange={setAnalyticsFile}
-          />
-        </FieldGroup>
+          {/* Group 2 — Verification uploads */}
+          <FieldGroup title="Verification uploads">
+            <FileField
+              label="Channel logo"
+              hint="PNG or JPG, square preferred"
+              icon={<ImageIcon className="h-[18px] w-[18px]" />}
+              file={logoFile}
+              onChange={setLogoFile}
+            />
+            <FileField
+              label="YT Studio analytics screenshot"
+              hint="Must clearly show the view count"
+              icon={<BarChart3 className="h-[18px] w-[18px]" />}
+              file={analyticsFile}
+              onChange={setAnalyticsFile}
+            />
+          </FieldGroup>
+        </div>
       </section>
+
 
       {/* Summary */}
       <section className="px-5 mt-8">
@@ -455,18 +416,6 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
   return <p className="text-eyebrow text-accent">{children}</p>;
 }
 
-function TrustStat({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur px-3 py-2.5 text-center">
-      <Text variant="label" as="p" className="text-primary-foreground tabular-nums">
-        {value}
-      </Text>
-      <Text variant="caption" className="text-primary-foreground/60">
-        {label}
-      </Text>
-    </div>
-  );
-}
 
 function FieldGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
