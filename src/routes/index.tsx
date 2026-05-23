@@ -105,7 +105,7 @@ function Home() {
             </h2>
             <div className="mt-3 h-px bg-border/70" />
           </div>
-          <div className="pt-5 grid grid-cols-4 gap-2">
+          <div className="pt-5 grid grid-cols-4 gap-3">
           {[
             { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
             { to: "/refer", icon: TablerGift, label: "Refer" },
