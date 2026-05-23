@@ -198,8 +198,8 @@ function Home() {
 
       {/* Recent activity */}
       <div className="px-5 mt-5 mb-6">
-        <div className="bg-card rounded-2xl shadow-card p-card">
-          <div className="flex items-center justify-between">
+        <div className="bg-card rounded-2xl shadow-card p-0">
+          <div className="flex items-center justify-between p-card pb-0">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Recent activity
             </Heading>
