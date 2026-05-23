@@ -324,7 +324,7 @@ function VideoIncomePage() {
 
         <div className="mt-4 rounded-3xl bg-card ring-1 ring-border/60 shadow-card p-card">
           {/* Group 1 — Channel & video */}
-          <FieldGroup title="Channel & video">
+          <FieldGroup title="Channel & video" first>
             <FieldInput
               label="Video URL"
               icon={<Link2 className="h-[18px] w-[18px]" />}
