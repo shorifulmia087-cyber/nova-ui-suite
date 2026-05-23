@@ -112,11 +112,11 @@ function Home() {
             { to: "/tasks", icon: IconChecklist, label: "Task" },
             { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
-            <Link key={label} to={to} className="flex flex-col items-center gap-2 group">
-              <div className="w-full h-14 rounded-2xl flex items-center justify-center transition-all active:scale-95 bg-background text-primary ring-1 ring-border/60 group-active:bg-muted/40">
-                <I className="h-[28px] w-[28px]" stroke={1.75} />
+            <Link key={label} to={to} className="group">
+              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 bg-background text-primary ring-1 ring-border/60 group-active:bg-muted/40">
+                <I className="h-[26px] w-[26px]" stroke={1.75} />
+                <span className="text-foreground font-semibold text-[12px] leading-none">{label}</span>
               </div>
-              <span className="text-foreground font-semibold text-[13px] leading-none">{label}</span>
             </Link>
           ))}
           </div>
