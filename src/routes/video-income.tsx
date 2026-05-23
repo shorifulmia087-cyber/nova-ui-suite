@@ -42,14 +42,15 @@ type Tier = {
   views: string;
   amount: number;
   icon: typeof Eye;
+  label: string;
 };
 
 const tiers: Tier[] = [
-  { id: "t1", views: "500+ views", amount: 100, icon: Eye },
-  { id: "t2", views: "1,000+ views", amount: 250, icon: PlayCircle },
-  { id: "t3", views: "2,000+ views", amount: 500, icon: Sparkles },
-  { id: "t4", views: "3,000+ views", amount: 700, icon: BarChart3 },
-  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame },
+  { id: "t1", views: "500+ views", amount: 100, icon: Eye, label: "Entry level" },
+  { id: "t2", views: "1,000+ views", amount: 250, icon: PlayCircle, label: "Popular" },
+  { id: "t3", views: "2,000+ views", amount: 500, icon: Sparkles, label: "Advanced" },
+  { id: "t4", views: "3,000+ views", amount: 700, icon: BarChart3, label: "Pro tier" },
+  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame, label: "Expert" },
 ];
 
 const timeline = [
@@ -340,11 +341,11 @@ function VideoIncomePage() {
 
       {/* Tier selection */}
       <section className="px-5 mt-6">
-        <div className="flex items-end justify-between">
+        <div className="flex items-center justify-between">
           <Heading
             variant="sectionTitle"
-            case="sentence"
-            className="text-foreground"
+            case="upper"
+            className="text-foreground text-[15px] tracking-tight"
           >
             Choose your tier
           </Heading>
@@ -352,9 +353,21 @@ function VideoIncomePage() {
             Select one
           </Text>
         </div>
+        <div className="mt-1.5 flex items-center gap-1.5">
+          <span className="h-3 w-3 inline-flex items-center justify-center rounded-full bg-[color:var(--accent)]/10">
+            <CheckCircle2 className="h-2.5 w-2.5 text-[color:var(--accent)]" strokeWidth={3} />
+          </span>
+          <Text
+            variant="caption"
+            case="upper"
+            className="text-muted-foreground text-[10px] tracking-wide"
+          >
+            Verified via YouTube Studio analytics
+          </Text>
+        </div>
 
-        <div className="mt-4 space-y-2.5">
-          {tiers.map(({ id, views, amount, icon: I }) => {
+        <div className="mt-4 space-y-3">
+          {tiers.map(({ id, views, amount, icon: I, label }) => {
             const active = selectedTier === id;
             return (
               <button
@@ -362,45 +375,59 @@ function VideoIncomePage() {
                 type="button"
                 onClick={() => setSelectedTier(id)}
                 className={cn(
-                  "w-full text-left bg-card rounded-2xl shadow-card p-4 flex items-center gap-3 transition-all active:scale-[0.99] ring-1",
+                  "w-full text-left bg-card rounded-2xl p-4 flex items-center gap-4 transition-all active:scale-[0.98] relative",
                   active
-                    ? "ring-2 ring-[color:var(--accent)] bg-[color:var(--accent)]/5"
-                    : "ring-border/60 hover:ring-border",
+                    ? "border-2 border-[color:var(--accent)] shadow-lg shadow-[color:var(--accent)]/10"
+                    : "border border-border/60 hover:border-border",
                 )}
               >
+                {active && (
+                  <span className="absolute -top-2 -right-2 bg-[color:var(--accent)] text-accent-foreground p-1 rounded-full shadow-md">
+                    <CheckCircle2 className="h-3 w-3" strokeWidth={3} />
+                  </span>
+                )}
                 <div
                   className={cn(
-                    "h-11 w-11 rounded-xl flex items-center justify-center shrink-0 transition-colors",
+                    "h-10 w-10 rounded-xl flex items-center justify-center shrink-0 transition-colors",
                     active
-                      ? "bg-[color:var(--accent)] text-accent-foreground"
-                      : "bg-[color:var(--accent)]/10 text-[color:var(--accent)]",
+                      ? "bg-[color:var(--accent)]/10 text-[color:var(--accent)]"
+                      : "bg-muted text-muted-foreground",
                   )}
                 >
-                  <I className="h-[20px] w-[20px]" strokeWidth={2} />
+                  <I className="h-5 w-5" strokeWidth={2} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <Heading
                     variant="cardTitle"
                     case="sentence"
-                    className="text-foreground leading-tight text-[14px]"
+                    className={cn(
+                      "leading-tight text-[14px]",
+                      active ? "font-bold text-foreground" : "font-semibold text-foreground",
+                    )}
                   >
                     {views}
                   </Heading>
                   <Text
                     variant="caption"
-                    className="text-muted-foreground leading-snug mt-0.5"
+                    case="upper"
+                    className={cn(
+                      "text-[10px] tracking-widest mt-0.5 block",
+                      active
+                        ? "font-bold text-[color:var(--accent)]"
+                        : "font-medium text-muted-foreground",
+                    )}
                   >
-                    Verified via YouTube Studio analytics
+                    {label}
                   </Text>
                 </div>
                 <div className="text-right shrink-0">
-                  <p className="text-[20px] font-extrabold text-[color:var(--accent)] tabular-nums leading-none">
+                  <p className="text-[18px] font-bold text-[color:var(--accent)] tabular-nums leading-none tracking-tight">
                     ৳{amount}
                   </p>
                   <Text
                     variant="caption"
                     case="upper"
-                    className="text-[9px] font-bold text-muted-foreground tracking-wider mt-1"
+                    className="text-[9px] font-bold text-muted-foreground tracking-tighter mt-1 block"
                   >
                     Reward
                   </Text>
@@ -410,6 +437,7 @@ function VideoIncomePage() {
           })}
         </div>
       </section>
+
 
       {/* Submission form */}
       <section className="px-5 mt-7">
