@@ -26,11 +26,11 @@ import { toast } from "sonner";
 export const Route = createFileRoute("/video-income")({
   head: () => ({
     meta: [
-      { title: "ভিডিও বানিয়ে ইনকাম — Ness" },
+      { title: "Earn from Videos — Ness" },
       {
         name: "description",
         content:
-          "YouTube ভিডিওর ভিউ অনুযায়ী ইনকাম করুন। ৫০০+ ভিউ থেকে ৫০০০+ ভিউ পর্যন্ত আলাদা রিওয়ার্ড।",
+          "Earn rewards based on your YouTube video views. From 500+ to 5000+ views, each tier pays differently.",
       },
     ],
   }),
@@ -45,37 +45,37 @@ type Tier = {
 };
 
 const tiers: Tier[] = [
-  { id: "t1", views: "৫০০+ ভিউ", amount: 100, icon: Eye },
-  { id: "t2", views: "১০০০+ ভিউ", amount: 250, icon: PlayCircle },
-  { id: "t3", views: "২০০০+ ভিউ", amount: 500, icon: Sparkles },
-  { id: "t4", views: "৩০০০+ ভিউ", amount: 700, icon: BarChart3 },
-  { id: "t5", views: "৫০০০+ ভিউ", amount: 1500, icon: Flame },
+  { id: "t1", views: "500+ views", amount: 100, icon: Eye },
+  { id: "t2", views: "1,000+ views", amount: 250, icon: PlayCircle },
+  { id: "t3", views: "2,000+ views", amount: 500, icon: Sparkles },
+  { id: "t4", views: "3,000+ views", amount: 700, icon: BarChart3 },
+  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame },
 ];
 
 const timeline = [
   {
     icon: Upload,
-    title: "সাবমিট সম্পন্ন",
-    sub: "আপনার ভিডিও জমা হয়েছে",
-    eta: "এখন",
+    title: "Submitted",
+    sub: "Your video has been received",
+    eta: "Now",
   },
   {
     icon: Clock,
-    title: "রিভিউ চলছে",
-    sub: "টিম ভিউ ও কন্টেন্ট যাচাই করছে",
-    eta: "১২–২৪ ঘন্টা",
+    title: "Under review",
+    sub: "Our team is verifying views and content",
+    eta: "12–24 hours",
   },
   {
     icon: ShieldCheck,
-    title: "অনুমোদন",
-    sub: "যাচাই শেষে অনুমোদন দেওয়া হবে",
-    eta: "২৪–৪৮ ঘন্টা",
+    title: "Approval",
+    sub: "Approved after successful verification",
+    eta: "24–48 hours",
   },
   {
     icon: Wallet,
-    title: "ব্যালেন্সে যোগ",
-    sub: "রিওয়ার্ড মূল ব্যালেন্সে যোগ হবে",
-    eta: "৪৮–৭২ ঘন্টা",
+    title: "Added to balance",
+    sub: "Reward will be added to your main balance",
+    eta: "48–72 hours",
   },
 ];
 
@@ -97,11 +97,11 @@ function VideoIncomePage() {
 
   const handleSubmit = () => {
     if (!canSubmit) {
-      toast.error("সব তথ্য পূরণ করুন");
+      toast.error("Please fill in all the fields");
       return;
     }
     setSubmitted(true);
-    toast.success("সফলভাবে জমা হয়েছে");
+    toast.success("Submitted successfully");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -117,7 +117,7 @@ function VideoIncomePage() {
     return (
       <div className="pb-44">
 
-        <ScreenHeader title="সাবমিশন স্ট্যাটাস" />
+        <ScreenHeader title="Submission status" />
 
         {/* Success hero */}
         <section className="px-5">
@@ -143,7 +143,7 @@ function VideoIncomePage() {
                   case="sentence"
                   className="text-primary-foreground text-[18px] leading-tight mt-0.5"
                 >
-                  জমা সফল হয়েছে
+                  Submission successful
                 </Heading>
               </div>
             </div>
@@ -154,7 +154,7 @@ function VideoIncomePage() {
                   variant="caption"
                   className="text-primary-foreground/70 text-[11px]"
                 >
-                  নির্বাচিত টিয়ার
+                  Selected tier
                 </Text>
                 <p className="text-primary-foreground font-bold text-[15px] mt-0.5">
                   {tier.views}
@@ -165,7 +165,7 @@ function VideoIncomePage() {
                   variant="caption"
                   className="text-primary-foreground/70 text-[11px]"
                 >
-                  রিওয়ার্ড
+                  Reward
                 </Text>
                 <p className="text-[color:var(--accent)] font-extrabold text-[20px] tabular-nums leading-none mt-1">
                   ৳{tier.amount}
@@ -182,10 +182,10 @@ function VideoIncomePage() {
             case="sentence"
             className="text-foreground"
           >
-            রিভিউ ও পেমেন্ট প্রসেস
+            Review & payment process
           </Heading>
           <Text variant="caption" className="text-muted-foreground mt-1 block">
-            আপনার ভিডিও যাচাই হয়ে ব্যালেন্সে যোগ হবে
+            Your video will be verified and the reward added to your balance
           </Text>
 
           <ol className="relative mt-4 space-y-3">
@@ -261,14 +261,14 @@ function VideoIncomePage() {
                 case="sentence"
                 className="text-foreground leading-tight text-[14px]"
               >
-                মনে রাখুন
+                Please note
               </Heading>
               <Text
                 variant="caption"
                 className="text-muted-foreground leading-snug mt-1"
               >
-                ভিউ যাচাই YouTube Studio অ্যানালিটিক্স অনুযায়ী হবে। ভুয়া ভিউ বা
-                বট ট্রাফিক ধরা পড়লে সাবমিশন বাতিল হবে।
+                Views are verified against YouTube Studio analytics. Submissions
+                with fake views or bot traffic will be rejected.
               </Text>
             </div>
           </div>
@@ -281,7 +281,7 @@ function VideoIncomePage() {
             onClick={reset}
             className="group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-glow active:scale-[0.98] transition-transform"
           >
-            <span>নতুন ভিডিও জমা দিন</span>
+            <span>Submit a new video</span>
             <ArrowRight className="h-5 w-5" strokeWidth={2.5} />
           </button>
         </div>
@@ -291,7 +291,7 @@ function VideoIncomePage() {
 
   return (
     <div className="pb-44">
-      <ScreenHeader title="ভিডিও বানিয়ে ইনকাম" />
+      <ScreenHeader title="Earn from videos" />
 
       {/* Hero */}
       <section className="px-5">
@@ -324,15 +324,15 @@ function VideoIncomePage() {
               case="sentence"
               className="text-primary-foreground leading-tight"
             >
-              ভিউ অনুযায়ী
+              Earn up to
               <br />
-              <span className="text-[color:var(--accent)]">৳১৫০০ পর্যন্ত</span> পান
+              <span className="text-[color:var(--accent)]">৳1,500</span> per video
             </Heading>
             <Text
               variant="caption"
               className="text-primary-foreground/75 mt-2 leading-relaxed"
             >
-              YouTube ভিডিওর ভিউ যত বেশি, রিওয়ার্ড তত বড়।
+              The more views your YouTube video gets, the bigger the reward.
             </Text>
           </div>
         </div>
@@ -346,10 +346,10 @@ function VideoIncomePage() {
             case="sentence"
             className="text-foreground"
           >
-            আপনার টিয়ার বাছুন
+            Choose your tier
           </Heading>
           <Text variant="caption" className="text-muted-foreground">
-            ১টি বাছাই করুন
+            Select one
           </Text>
         </div>
 
@@ -390,7 +390,7 @@ function VideoIncomePage() {
                     variant="caption"
                     className="text-muted-foreground leading-snug mt-0.5"
                   >
-                    YouTube Studio অ্যানালিটিক্স অনুযায়ী
+                    Verified via YouTube Studio analytics
                   </Text>
                 </div>
                 <div className="text-right shrink-0">
@@ -418,37 +418,37 @@ function VideoIncomePage() {
           case="sentence"
           className="text-foreground"
         >
-          সাবমিশন তথ্য
+          Submission details
         </Heading>
         <Text variant="caption" className="text-muted-foreground mt-1 block">
-          সঠিক তথ্য দিন, যাচাইয়ের পর রিওয়ার্ড দেওয়া হবে
+          Provide accurate info — reward is released after verification
         </Text>
 
         <div className="mt-4 space-y-3">
           <FieldInput
-            label="ভিডিও URL"
+            label="Video URL"
             icon={<Link2 className="h-[18px] w-[18px]" />}
             placeholder="https://youtube.com/watch?v=..."
             value={videoUrl}
             onChange={(e) => setVideoUrl(e.target.value)}
           />
           <FieldInput
-            label="YouTube চ্যানেল নাম"
+            label="YouTube channel name"
             icon={<Youtube className="h-[18px] w-[18px]" />}
-            placeholder="আপনার চ্যানেলের নাম"
+            placeholder="Your channel name"
             value={channelName}
             onChange={(e) => setChannelName(e.target.value)}
           />
           <FileField
-            label="চ্যানেল লোগো"
+            label="Channel logo"
             hint="PNG / JPG"
             icon={<ImageIcon className="h-[18px] w-[18px]" />}
             file={logoFile}
             onChange={setLogoFile}
           />
           <FileField
-            label="YT Studio অ্যানালিটিক্স স্ক্রিনশট"
-            hint="ভিউ-কাউন্ট স্পষ্ট দেখা যায় এমন স্ক্রিনশট"
+            label="YT Studio analytics screenshot"
+            hint="A screenshot that clearly shows the view count"
             icon={<BarChart3 className="h-[18px] w-[18px]" />}
             file={analyticsFile}
             onChange={setAnalyticsFile}
@@ -468,7 +468,7 @@ function VideoIncomePage() {
                 variant="caption"
                 className="text-muted-foreground text-[11px]"
               >
-                আপনি পাবেন
+                You will receive
               </Text>
               <p className="text-foreground font-bold text-[14px] leading-tight mt-0.5 truncate">
                 {tier.views}
@@ -493,7 +493,7 @@ function VideoIncomePage() {
               : "bg-muted text-muted-foreground cursor-not-allowed",
           )}
         >
-          <span>সাবমিট করুন</span>
+          <span>Submit</span>
           <ArrowRight
             className="h-5 w-5 transition-transform group-active:translate-x-1"
             strokeWidth={2.5}
@@ -602,7 +602,7 @@ function FileField({
           ) : (
             <>
               <p className="text-foreground font-medium text-[13px]">
-                ফাইল আপলোড করুন
+                Upload file
               </p>
               {hint && (
                 <Text
