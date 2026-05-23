@@ -98,14 +98,14 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-4 pb-5">
+        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
-            <h2 className="text-[20px] font-bold text-foreground tracking-tight">
+            <h2 className="text-[20px] font-bold text-foreground tracking-tight leading-tight">
               Easy Earning
             </h2>
-            <div className="mt-3 h-px bg-border/70" />
+            <div className="mt-2 h-px bg-border/70" />
           </div>
-          <div className="pt-5 px-2 grid grid-cols-4 gap-2">
+          <div className="pt-3 px-2 grid grid-cols-4 gap-2">
           {[
             { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
             { to: "/refer", icon: IconUsersGroup, label: "Refer" },
