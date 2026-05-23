@@ -197,17 +197,23 @@ function Home() {
 
 
       {/* Recent activity */}
-      <SectionLabel
-        action={
-          <Link to="/transactions" className="text-label inline-flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors">
-            View all
-            <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-          </Link>
-        }
-      >
-        Recent activity
-      </SectionLabel>
-      <RecentActivity />
+      <div className="px-5 mt-5 mb-6">
+        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-2">
+          <div className="px-3 flex items-center justify-between">
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
+              Recent activity
+            </Heading>
+            <Link to="/transactions" className="text-label inline-flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors">
+              View all
+              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
+            </Link>
+          </div>
+          <div className="mt-2 mx-3 h-px bg-border/70" />
+          <div className="pt-1 px-2">
+            <RecentActivityList />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
@@ -341,19 +347,16 @@ function IntroVideoBanner() {
   );
 }
 
-function RecentActivity() {
-
+function RecentActivityList() {
   const items = transactions.slice(0, 5);
   return (
-    <div className="px-5">
-      <div className="bg-card rounded-2xl shadow-card overflow-hidden">
-        {items.map((t, i) => (
-          <div key={t.id}>
-            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
-            <TxRow tx={t} />
-          </div>
-        ))}
-      </div>
+    <div>
+      {items.map((t, i) => (
+        <div key={t.id}>
+          {i > 0 && <div className="ml-[60px] mr-2 h-px bg-border/70" />}
+          <TxRow tx={t} />
+        </div>
+      ))}
     </div>
   );
 }
