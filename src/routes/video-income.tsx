@@ -111,7 +111,7 @@ function VideoIncomePage() {
                 <Check className="h-7 w-7" strokeWidth={2.6} />
               </div>
               <div className="min-w-0">
-                <Text variant="caption" case="upper" className="text-primary-foreground/70">
+                <Text variant="caption" case="title" className="text-primary-foreground/70">
                   Status
                 </Text>
                 <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-1">
@@ -383,14 +383,14 @@ function VideoIncomePage() {
 /* ============================== PRIMITIVES ============================== */
 
 function SectionEyebrow({ children }: { children: ReactNode }) {
-  return <p className="text-eyebrow text-accent">{children}</p>;
+  return <p className="text-eyebrow text-accent normal-case capitalize tracking-normal">{children}</p>;
 }
 
 
 function FieldGroup({ title, children }: { title: string; children: ReactNode }) {
   return (
     <div className="mt-5">
-      <Text variant="caption" case="upper" className="text-muted-foreground ml-1">
+      <Text variant="caption" case="title" className="text-muted-foreground ml-1">
         {title}
       </Text>
       <div className="mt-2 space-y-3">{children}</div>
