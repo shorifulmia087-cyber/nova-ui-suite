@@ -76,15 +76,15 @@
 
 
   /* Premium fintech palette (exact hex from brief) */
-  --background: #fde047;
+  --background: #edf2f5;
   --foreground: #0f172a;
   --card: #ffffff;
   --card-foreground: #0f172a;
   --popover: #ffffff;
   --popover-foreground: #0f172a;
 
-  --primary: #0f172a;            /* deep navy */
-  --primary-foreground: #f8fafc;
+  --primary: #fde047;             /* bright yellow */
+  --primary-foreground: #0f172a;
 
   --secondary: #10b981;          /* professional green */
   --secondary-foreground: #ffffff;
