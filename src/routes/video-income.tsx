@@ -120,7 +120,7 @@ function VideoIncomePage() {
               </div>
             </div>
 
-            <div className="relative mt-6 rounded-2xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-4 flex items-center justify-between gap-4">
+            <div className="relative mt-6 rounded-2xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
               <div className="min-w-0">
                 <Text variant="caption" className="text-primary-foreground/70">
                   Selected tier
