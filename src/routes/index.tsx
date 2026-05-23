@@ -191,25 +191,6 @@ function Home() {
 
 
 
-      {/* Recent activity */}
-      <div className="px-5 mt-section mb-section">
-        <div className="bg-card rounded-2xl shadow-card p-0">
-          <div className="flex items-center justify-between p-card pb-0">
-            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
-              Recent activity
-            </Heading>
-            <Link to="/transactions" className="text-label inline-flex items-center gap-0.5 text-muted-foreground hover:text-foreground transition-colors">
-              View all
-              <ChevronRight className="h-3.5 w-3.5" strokeWidth={2.4} />
-            </Link>
-          </div>
-          <div className="mt-3 h-px bg-border/70" />
-          <div className="mt-1">
-            <RecentActivityList />
-          </div>
-        </div>
-      </div>
-    </div>
   );
 }
 
