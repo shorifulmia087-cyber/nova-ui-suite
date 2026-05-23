@@ -257,7 +257,7 @@ function VideoIncomePage() {
                 onClick={() => setSelectedTier(id)}
                 aria-pressed={active}
                 className={cn(
-                  "w-full text-left rounded-2xl p-4 flex items-center gap-4 transition-all active:scale-[0.99]",
+                  "w-full text-left rounded-2xl p-card flex items-center gap-4 transition-all active:scale-[0.99]",
                   active
                     ? "bg-card ring-2 ring-accent shadow-glow"
                     : "bg-card ring-1 ring-border/60 hover:ring-border",
