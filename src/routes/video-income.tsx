@@ -111,7 +111,7 @@ function VideoIncomePage() {
                 <Check className="h-7 w-7" strokeWidth={2.6} />
               </div>
               <div className="min-w-0">
-                <Text variant="caption" case="upper" className="text-primary-foreground/70">
+                <Text variant="caption" case="title" className="text-primary-foreground/70">
                   Status
                 </Text>
                 <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-1">
