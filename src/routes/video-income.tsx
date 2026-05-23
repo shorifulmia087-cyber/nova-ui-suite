@@ -390,7 +390,7 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
 function FieldGroup({ title, children, first }: { title: string; children: ReactNode; first?: boolean }) {
   return (
     <div className={first ? "" : "mt-4"}>
-      <Text variant="caption" case="title" className="text-muted-foreground ml-1">
+      <Text variant="caption" case="title" className="text-muted-foreground">
         {title}
       </Text>
       <div className="mt-2 space-y-3">{children}</div>
@@ -448,7 +448,7 @@ function FieldInput({
 }) {
   return (
     <label className="block">
-      <Text variant="label" className="text-foreground mb-1.5 ml-1 block">
+      <Text variant="label" className="text-foreground mb-1.5 block">
         {label}
       </Text>
       <div className="relative">
@@ -485,7 +485,7 @@ function FileField({
 
   return (
     <div className="block">
-      <Text variant="label" className="text-foreground mb-1.5 ml-1 block">
+      <Text variant="label" className="text-foreground mb-1.5 block">
         {label}
       </Text>
       <button
