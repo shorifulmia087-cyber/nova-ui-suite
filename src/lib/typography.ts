@@ -40,7 +40,7 @@ export const TYPOGRAPHY: Record<
 > = {
   display:       { fontSize: 32, lineHeight: 40, fontWeight: 700, className: "text-display" },
   screenTitle:   { fontSize: 24, lineHeight: 32, fontWeight: 700, className: "text-screen-title" },
-  sectionTitle:  { fontSize: 22, lineHeight: 30, fontWeight: 700, className: "text-section-title" },
+  sectionTitle:  { fontSize: 24, lineHeight: 32, fontWeight: 700, className: "text-section-title" },
   cardTitle:     { fontSize: 18, lineHeight: 26, fontWeight: 600, className: "text-card-title" },
   body:          { fontSize: 16, lineHeight: 24, fontWeight: 400, className: "text-body" },
   bodySecondary: { fontSize: 14, lineHeight: 20, fontWeight: 400, className: "text-body-secondary" },
