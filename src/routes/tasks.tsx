@@ -216,7 +216,7 @@ function Tasks() {
             return (
               <div
                 key={t.id}
-                className={`rounded-lg p-5 bg-card transition-all ${
+                className={`rounded-lg p-card bg-card transition-all ${
                   done ? "opacity-75" : "hover:shadow-glow"
                 }`}
               >
