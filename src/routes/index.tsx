@@ -92,7 +92,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-5">
-        <div className="bg-card rounded-2xl shadow-card border border-border/60 px-2 py-5 grid grid-cols-4 gap-y-5">
+        <div className="bg-card rounded-2xl shadow-card px-2 py-5 grid grid-cols-4 gap-y-5">
           {[
             { to: "/withdraw", icon: Minus, label: "Withdraw" },
             { to: "/refer", icon: Gift, label: "Refer" },
