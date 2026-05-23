@@ -347,19 +347,16 @@ function IntroVideoBanner() {
   );
 }
 
-function RecentActivity() {
-
+function RecentActivityList() {
   const items = transactions.slice(0, 5);
   return (
-    <div className="px-5">
-      <div className="bg-card rounded-2xl shadow-card overflow-hidden">
-        {items.map((t, i) => (
-          <div key={t.id}>
-            {i > 0 && <div className="ml-[68px] mr-4 h-px bg-border/70" />}
-            <TxRow tx={t} />
-          </div>
-        ))}
-      </div>
+    <div>
+      {items.map((t, i) => (
+        <div key={t.id}>
+          {i > 0 && <div className="ml-[60px] mr-2 h-px bg-border/70" />}
+          <TxRow tx={t} />
+        </div>
+      ))}
     </div>
   );
 }
