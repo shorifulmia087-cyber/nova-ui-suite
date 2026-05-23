@@ -283,7 +283,7 @@ function VideoIncomePage() {
 
                 <div className="text-right shrink-0 flex items-center gap-3">
                   <div>
-                    <Text variant="caption" case="upper" className={cn(active ? "text-accent/80" : "text-muted-foreground")}>
+                    <Text variant="caption" className={cn(active ? "text-accent/80" : "text-muted-foreground")}>
                       Reward
                     </Text>
                     <Text variant="cardTitle" as="p" className={cn("tabular-nums", active ? "text-accent" : "text-foreground")}>
