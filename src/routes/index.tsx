@@ -6,7 +6,7 @@ import {
 } from "lucide-react";
 import {
   IconCashBanknote,
-  IconGift as TablerGift,
+  IconUsersGroup,
   IconChecklist,
   IconHistory,
 } from "@tabler/icons-react";
@@ -105,10 +105,10 @@ function Home() {
             </h2>
             <div className="mt-3 h-px bg-border/70" />
           </div>
-          <div className="pt-5 grid grid-cols-4 gap-3">
+          <div className="pt-5 px-2 grid grid-cols-4 gap-2">
           {[
             { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
-            { to: "/refer", icon: TablerGift, label: "Refer" },
+            { to: "/refer", icon: IconUsersGroup, label: "Refer" },
             { to: "/tasks", icon: IconChecklist, label: "Task" },
             { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
