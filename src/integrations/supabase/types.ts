@@ -175,6 +175,98 @@ export type Database = {
         }
         Relationships: []
       }
+      video_submissions: {
+        Row: {
+          admin_note: string | null
+          analytics_url: string
+          channel_logo_url: string
+          channel_name: string
+          created_at: string
+          id: string
+          reviewed_at: string | null
+          reviewed_by: string | null
+          reward_amount: number
+          status: Database["public"]["Enums"]["video_submission_status"]
+          tier_id: string
+          updated_at: string
+          user_id: string
+          video_url: string
+        }
+        Insert: {
+          admin_note?: string | null
+          analytics_url: string
+          channel_logo_url: string
+          channel_name: string
+          created_at?: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reward_amount: number
+          status?: Database["public"]["Enums"]["video_submission_status"]
+          tier_id: string
+          updated_at?: string
+          user_id: string
+          video_url: string
+        }
+        Update: {
+          admin_note?: string | null
+          analytics_url?: string
+          channel_logo_url?: string
+          channel_name?: string
+          created_at?: string
+          id?: string
+          reviewed_at?: string | null
+          reviewed_by?: string | null
+          reward_amount?: number
+          status?: Database["public"]["Enums"]["video_submission_status"]
+          tier_id?: string
+          updated_at?: string
+          user_id?: string
+          video_url?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "video_submissions_tier_id_fkey"
+            columns: ["tier_id"]
+            isOneToOne: false
+            referencedRelation: "video_tiers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      video_tiers: {
+        Row: {
+          created_at: string
+          id: string
+          is_active: boolean
+          label: string | null
+          min_views: number
+          reward_amount: number
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          min_views: number
+          reward_amount: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_active?: boolean
+          label?: string | null
+          min_views?: number
+          reward_amount?: number
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
@@ -190,6 +282,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "user"
+      video_submission_status: "pending" | "approved" | "rejected" | "paid"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -318,6 +411,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "user"],
+      video_submission_status: ["pending", "approved", "rejected", "paid"],
     },
   },
 } as const
