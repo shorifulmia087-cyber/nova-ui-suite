@@ -9,7 +9,7 @@
  */
 
 import { type ElementType, type HTMLAttributes, createElement } from "react";
-import { cn } from "@/lib/utils";
+import { clsx } from "clsx";
 
 export const FONT_FAMILY = '"Prompt", "Hind Siliguri", system-ui, sans-serif' as const;
 
@@ -86,7 +86,7 @@ export function Text({ variant, as, case: caseToken = "none", className, childre
   const Tag = (as ?? "span") as ElementType;
   return createElement(
     Tag,
-    { className: cn(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
+    { className: clsx(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
     children,
   );
 }
@@ -112,7 +112,7 @@ export function Heading({
   const Tag = (as ?? HEADING_TAG[variant] ?? "h2") as ElementType;
   return createElement(
     Tag,
-    { className: cn(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
+    { className: clsx(TYPOGRAPHY[variant].className, caseClass(caseToken), className), ...rest },
     children,
   );
 }
