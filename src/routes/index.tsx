@@ -227,12 +227,12 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
-      <Text variant="caption" case="upper" className="text-[9px] font-semibold text-muted-foreground leading-none">
+      <Text variant="caption" case="upper" className="text-muted-foreground leading-none">
         Balance
       </Text>
-      <span className="mt-1 text-[15px] font-bold text-foreground tabular-nums leading-none">
+      <Text variant="label" className="mt-1 text-foreground tabular-nums leading-none">
         {text}
-      </span>
+      </Text>
     </div>
   );
 }
