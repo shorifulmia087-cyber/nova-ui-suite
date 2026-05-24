@@ -80,9 +80,9 @@ function Home() {
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
             ) : (
-              <h1 className="text-[17px] font-bold tracking-tight text-foreground leading-tight truncate">
+              <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight truncate">
                 {displayName || "Welcome"}
-              </h1>
+              </Heading>
             )}
           </div>
         </Link>
