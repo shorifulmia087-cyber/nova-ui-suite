@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton } from "@/components/mobile/Primitives";
+import { Heading, Text } from "@/lib/typography";
 import { listTasks, completeTask, isCurrentUserAdmin } from "@/lib/tasks.functions";
 import { invalidateProfile } from "@/lib/use-profile";
 import { useAuth } from "@/lib/auth-context";
