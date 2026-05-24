@@ -71,10 +71,10 @@ function TargetBonusPage() {
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold text-muted-foreground tabular-nums">
+                    <Text variant="caption" className="text-muted-foreground tabular-nums font-semibold">
                       {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[14px]">
+                    </Text>
+                    <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight">
                       {title}
                     </Heading>
                   </div>
