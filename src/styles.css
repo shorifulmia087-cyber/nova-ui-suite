@@ -80,9 +80,9 @@
   /* Transparent liquid-glass palette — surfaces float on the water bg */
   --background: transparent;
   --foreground: #0a2540;
-  --card: rgba(255, 255, 255, 0.35);
+  --card: #ffffff;
   --card-foreground: #0a2540;
-  --popover: rgba(255, 255, 255, 0.75);
+  --popover: #ffffff;
   --popover-foreground: #0a2540;
 
 
@@ -164,11 +164,11 @@
 
   /* Auto glassmorphism: every bg-card / bg-background / bg-popover surface
      across the whole app becomes a frosted glass panel. */
+  /* Solid white card surfaces on the glassmorphism background */
   .bg-card, .bg-background, .bg-popover {
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.30);
-    box-shadow: 0 8px 32px -12px rgba(31, 38, 135, 0.18);
+    background-color: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.06);
+    box-shadow: 0 8px 32px -12px rgba(31, 38, 135, 0.15);
   }
 }
 
