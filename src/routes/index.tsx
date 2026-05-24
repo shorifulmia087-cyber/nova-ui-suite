@@ -65,7 +65,7 @@ function Home() {
             </div>
             {verified && (
               <span className="absolute -bottom-0.5 -right-0.5 h-[18px] w-[18px] rounded-full bg-[color:var(--accent)] border-2 border-background flex items-center justify-center shadow-card">
-                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" strokeWidth={3} />
+                <ShieldCheck className="h-2.5 w-2.5 text-accent-foreground" />
               </span>
             )}
           </div>
@@ -87,7 +87,7 @@ function Home() {
           </div>
         </Link>
         {showProfileSkeleton ? (
-          <div className="shrink-0 h-11 w-28 rounded-2xl bg-muted animate-pulse" />
+          <div className="shrink-0 h-11 w-28 rounded-lg bg-muted animate-pulse" />
         ) : (
           <BalancePill value={balance} hidden={hidden} />
         )}
@@ -101,7 +101,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-5 mt-section">
-        <div className="liquid-glass rounded-2xl p-card">
+        <div className="liquid-glass rounded-lg p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
@@ -116,7 +116,7 @@ function Home() {
             { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="group">
-              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
+              <div className="w-full rounded-lg flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
                 <I className="h-[28px] w-[28px]" stroke={1.75} />
                 <span className="text-foreground font-semibold text-[12px] leading-none">{label}</span>
               </div>
@@ -128,7 +128,7 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-5 mt-section">
-        <div className="liquid-glass rounded-2xl p-card">
+        <div className="liquid-glass rounded-lg p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
@@ -151,7 +151,7 @@ function Home() {
               <Link
                 key={title}
                 to={to}
-                className="liquid-glass-tile rounded-2xl p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
+                className="liquid-glass-tile rounded-lg p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
                 <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
@@ -169,10 +169,10 @@ function Home() {
       {!verified && (
 
         <div className="px-5 mt-section">
-          <div className="liquid-glass rounded-2xl p-card">
+          <div className="liquid-glass rounded-lg p-card">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 h-11 w-11 rounded-xl liquid-glass-tile flex items-center justify-center">
-                <ClipboardList className="h-5 w-5 text-[color:var(--warning)]" strokeWidth={2.4} />
+                <ClipboardList className="h-5 w-5 text-[color:var(--warning)]" />
               </div>
               <p className="flex-1 text-label pt-0.5 text-foreground">
                 Verification required. Please verify your identity.
@@ -223,7 +223,7 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-2xl liquid-glass-tile transition-all duration-300 ${
+      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-lg liquid-glass-tile transition-all duration-300 ${
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
@@ -262,7 +262,7 @@ function IntroVideoBanner() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-2xl liquid-glass aspect-video active:scale-[0.99] transition-transform"
+          className="block w-full relative overflow-hidden rounded-lg liquid-glass aspect-video active:scale-[0.99] transition-transform"
         >
           <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
           <div
