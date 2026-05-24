@@ -107,7 +107,7 @@ export function MobileShell() {
                     />
                     <span
                       className={cn(
-                        "text-[11px] font-semibold leading-none tracking-tight transition-all duration-300",
+                        "text-tab leading-none transition-all duration-300",
                         active ? "opacity-100" : "opacity-80",
                       )}
                     >
