@@ -77,13 +77,14 @@
 
 
 
-  /* Premium fintech palette (exact hex from brief) */
-  --background: #FAF7FF;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  /* Transparent liquid-glass palette — surfaces float on the water bg */
+  --background: transparent;
+  --foreground: #0a2540;
+  --card: rgba(255, 255, 255, 0.35);
+  --card-foreground: #0a2540;
+  --popover: rgba(255, 255, 255, 0.75);
+  --popover-foreground: #0a2540;
+
 
   --primary: #6D28D9;             /* violet */
   --primary-foreground: #ffffff;
@@ -137,15 +138,21 @@
 @layer base {
   * { border-color: var(--color-border); font-family: var(--font-sans); }
   html, body {
-    background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 15% 10%, rgba(125, 211, 252, 0.65) 0%, transparent 45%),
+      radial-gradient(circle at 85% 20%, rgba(94, 234, 212, 0.55) 0%, transparent 48%),
+      radial-gradient(circle at 30% 85%, rgba(165, 243, 252, 0.70) 0%, transparent 50%),
+      radial-gradient(circle at 90% 95%, rgba(56, 189, 248, 0.45) 0%, transparent 45%),
+      linear-gradient(180deg, #E0F7FF 0%, #C7ECFB 50%, #B9E6F5 100%);
+    background-attachment: fixed;
   }
-  /* Headings inherit Prompt; specific size/weight comes from semantic tokens */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-sans);
     font-weight: 600;
@@ -154,7 +161,19 @@
   button, input, textarea, select {
     font-family: var(--font-sans);
   }
+
+  /* Auto liquid-glass: every bg-card / bg-background / bg-popover surface
+     across the whole app becomes transparent frosted glass. */
+  .bg-card, .bg-background, .bg-popover {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255,255,255,0.45);
+    box-shadow:
+      0 8px 28px -10px rgba(56, 189, 248, 0.20),
+      inset 0 1px 0 0 rgba(255,255,255,0.55);
+  }
 }
+
 
 @layer utilities {
   .bg-gradient-brand { background-image: var(--gradient-brand); }
@@ -193,15 +212,16 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 100%);
-    backdrop-filter: blur(22px) saturate(180%);
-    -webkit-backdrop-filter: blur(22px) saturate(180%);
-    border: 1px solid rgba(255,255,255,0.55);
+    background: linear-gradient(135deg, rgba(255,255,255,0.30) 0%, rgba(255,255,255,0.12) 100%);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.40);
     box-shadow:
-      0 8px 32px -8px rgba(56, 189, 248, 0.25),
-      inset 0 1px 0 0 rgba(255,255,255,0.7),
-      inset 0 -1px 0 0 rgba(255,255,255,0.15);
+      0 8px 32px -8px rgba(56, 189, 248, 0.20),
+      inset 0 1px 0 0 rgba(255,255,255,0.55),
+      inset 0 -1px 0 0 rgba(255,255,255,0.10);
   }
+
   .liquid-glass::before {
     content: "";
     position: absolute;
@@ -239,14 +259,15 @@
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.40) 100%);
-    backdrop-filter: blur(16px) saturate(160%);
-    -webkit-backdrop-filter: blur(16px) saturate(160%);
-    border: 1px solid rgba(255,255,255,0.65);
+    background: linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0.20) 100%);
+    backdrop-filter: blur(18px) saturate(170%);
+    -webkit-backdrop-filter: blur(18px) saturate(170%);
+    border: 1px solid rgba(255,255,255,0.50);
     box-shadow:
-      0 4px 14px -6px rgba(56, 189, 248, 0.22),
-      inset 0 1px 0 0 rgba(255,255,255,0.8);
+      0 4px 14px -6px rgba(56, 189, 248, 0.20),
+      inset 0 1px 0 0 rgba(255,255,255,0.65);
   }
+
   .liquid-glass-tile::before {
     content: "";
     position: absolute;
