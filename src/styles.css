@@ -71,7 +71,7 @@
 
 :root {
   --radius: 1rem;
-  --spacing-card: 1rem;
+  --spacing-card: 12px;
   --spacing-section: 1rem;
 
   /* SPACING SCALE — 4/8/12/16/20/24/32/40/48/64 */
