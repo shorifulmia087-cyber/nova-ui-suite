@@ -128,16 +128,16 @@ function Tasks() {
         <div className="rounded-lg bg-card border border-border shadow-card p-card">
           <div className="flex justify-between items-start mb-5">
             <div>
-              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.18em] mb-1">
+              <Text variant="caption" as="p" case="upper" className="text-muted-foreground font-semibold mb-1">
                 Available rewards
-              </p>
-              <p className="text-3xl font-bold tracking-tight text-foreground">
+              </Text>
+              <Text variant="stat" as="p" className="text-foreground">
                 ৳{totalReward.toFixed(2)}
-              </p>
+              </Text>
             </div>
-            <span className="text-[11px] font-bold bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-2.5 py-1 rounded-full">
+            <Text variant="caption" className="font-semibold bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-3 py-1 rounded-pill">
               {completedCount}/{total || 0} Completed
-            </span>
+            </Text>
           </div>
 
           <div className="space-y-2">
