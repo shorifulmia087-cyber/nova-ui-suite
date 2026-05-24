@@ -54,7 +54,7 @@ function Home() {
   const showProfileSkeleton = profileLoading && !profile;
 
   return (
-    <div className="liquid-bg min-h-screen">
+    <div className="min-h-screen">
 
       {/* Top bar */}
       <header className="px-5 pt-6 pb-2 flex items-center justify-between gap-3">
