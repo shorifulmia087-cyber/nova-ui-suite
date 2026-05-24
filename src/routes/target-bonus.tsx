@@ -107,16 +107,16 @@ function TargetBonusPage() {
                   <Trophy className="h-[20px] w-[20px]" strokeWidth={2} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[14px]">
+                  <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight">
                     {t.target}
                   </Heading>
                   <Text variant="caption" className="text-muted-foreground leading-snug mt-0.5">
                     {t.note}
                   </Text>
                 </div>
-                <p className="text-[18px] font-bold text-[color:var(--accent)] tabular-nums leading-none">
+                <Text variant="cardTitle" as="p" className="text-[color:var(--accent)] tabular-nums leading-none">
                   {t.bonus}
-                </p>
+                </Text>
               </div>
             ))}
           </div>
