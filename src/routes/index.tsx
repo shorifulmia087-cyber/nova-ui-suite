@@ -277,15 +277,15 @@ function IntroVideoBanner() {
             </div>
           </div>
           <div className="absolute left-0 right-0 bottom-0 p-4 text-left text-white">
-            <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase bg-white/15 backdrop-blur-sm" style={{ letterSpacing: "0.12em" }}>
+            <Text variant="caption" case="upper" className="inline-flex items-center px-2 py-0.5 rounded-pill font-semibold bg-white/15 backdrop-blur-sm text-white">
               পরিচিতি ভিডিও
-            </span>
-            <p className="text-[15px] font-bold text-white leading-snug mt-2 tracking-tight">
+            </Text>
+            <Text variant="cardTitle" as="p" case="sentence" className="text-white leading-snug mt-2">
               এই ওয়েবসাইটে কিভাবে কাজ করবেন
-            </p>
-            <p className="text-[12px] text-white/85 mt-0.5 font-medium">
+            </Text>
+            <Text variant="caption" as="p" className="text-white/85 mt-0.5">
               বিস্তারিত গাইড — ভিডিও দেখতে ট্যাপ করুন
-            </p>
+            </Text>
           </div>
         </button>
       </div>
