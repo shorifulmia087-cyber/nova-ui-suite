@@ -5,6 +5,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card, ActionButton } from "@/components/mobile/Primitives";
+import { Heading, Text } from "@/lib/typography";
 import { listTasks, completeTask, isCurrentUserAdmin } from "@/lib/tasks.functions";
 import { invalidateProfile } from "@/lib/use-profile";
 import { useAuth } from "@/lib/auth-context";
@@ -127,16 +128,16 @@ function Tasks() {
         <div className="rounded-lg bg-card border border-border shadow-card p-card">
           <div className="flex justify-between items-start mb-5">
             <div>
-              <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.18em] mb-1">
+              <Text variant="caption" as="p" case="upper" className="text-muted-foreground font-semibold mb-1">
                 Available rewards
-              </p>
-              <p className="text-3xl font-bold tracking-tight text-foreground">
+              </Text>
+              <Text variant="stat" as="p" className="text-foreground">
                 ৳{totalReward.toFixed(2)}
-              </p>
+              </Text>
             </div>
-            <span className="text-[11px] font-bold bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-2.5 py-1 rounded-full">
+            <Text variant="caption" className="font-semibold bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-3 py-1 rounded-pill">
               {completedCount}/{total || 0} Completed
-            </span>
+            </Text>
           </div>
 
           <div className="space-y-2">
@@ -159,9 +160,9 @@ function Tasks() {
       {/* Task list */}
       <div className="flex-1 pb-28 mt-6">
         <div className="px-5 mb-3 flex items-center justify-between">
-          <h2 className="text-[11px] font-bold text-muted-foreground uppercase tracking-[0.18em]">
+          <Text variant="caption" as="h2" case="upper" className="text-muted-foreground font-semibold">
             Active tasks
-          </h2>
+          </Text>
           {!loading && total > 0 && (
             <span className="text-caption text-muted-foreground">
               {remaining} remaining
@@ -175,7 +176,7 @@ function Tasks() {
               {[0, 1, 2].map((i) => (
                 <div
                   key={i}
-                  className="rounded-2xl bg-muted/60 animate-pulse p-card flex gap-4 items-center"
+                  className="rounded-lg bg-muted/60 animate-pulse p-card flex gap-4 items-center"
                 >
                   <div className="w-12 h-12 bg-muted rounded-xl shrink-0" />
                   <div className="flex-1 space-y-2">
@@ -187,7 +188,7 @@ function Tasks() {
               ))}
             </>
           ) : total === 0 ? (
-            <div className="rounded-2xl bg-card border border-border shadow-card p-card text-center">
+            <div className="rounded-lg bg-card border border-border shadow-card p-card text-center">
               <div className="mx-auto h-14 w-14 rounded-full bg-muted flex items-center justify-center mb-3">
                 <Gift className="h-7 w-7 text-muted-foreground" />
               </div>
@@ -197,7 +198,7 @@ function Tasks() {
               </p>
             </div>
           ) : remaining === 0 ? (
-            <div className="rounded-2xl p-card text-center text-accent-foreground shadow-glow bg-gradient-to-br from-[color:var(--accent)] to-[color:var(--secondary)]">
+            <div className="rounded-lg p-card text-center text-accent-foreground shadow-glow bg-gradient-to-br from-[color:var(--accent)] to-[color:var(--secondary)]">
               <Sparkles className="h-7 w-7 mx-auto mb-2" />
               <p className="text-label font-bold">All tasks completed!</p>
               <p className="text-caption opacity-90 mt-1">

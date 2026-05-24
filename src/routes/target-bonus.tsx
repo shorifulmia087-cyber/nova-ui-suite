@@ -29,9 +29,9 @@ function TargetBonusPage() {
 
       {/* Hero */}
       <div className="px-5">
-        <div className="rounded-2xl bg-primary text-primary-foreground p-card shadow-navy">
+        <div className="rounded-lg bg-primary text-primary-foreground p-card shadow-navy">
           <div className="flex items-center gap-3">
-            <div className="h-12 w-12 rounded-2xl bg-[color:var(--accent)]/20 text-[color:var(--accent)] flex items-center justify-center">
+            <div className="h-12 w-12 rounded-lg bg-[color:var(--accent)]/20 text-[color:var(--accent)] flex items-center justify-center">
               <Gift className="h-6 w-6" strokeWidth={2} />
             </div>
             <div className="flex-1 min-w-0">
@@ -48,7 +48,7 @@ function TargetBonusPage() {
 
       {/* How it works */}
       <div className="px-5 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
+        <div className="bg-card rounded-lg shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               কিভাবে কাজ করে
@@ -64,17 +64,17 @@ function TargetBonusPage() {
             ].map(({ icon: I, title, subtitle }, idx) => (
               <div
                 key={title}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex items-start gap-3"
+                className="rounded-lg bg-background ring-1 ring-border/60 p-card flex items-start gap-3"
               >
                 <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
                   <I className="h-[20px] w-[20px]" strokeWidth={2} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-bold text-muted-foreground tabular-nums">
+                    <Text variant="caption" className="text-muted-foreground tabular-nums font-semibold">
                       {String(idx + 1).padStart(2, "0")}
-                    </span>
-                    <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[14px]">
+                    </Text>
+                    <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight">
                       {title}
                     </Heading>
                   </div>
@@ -90,7 +90,7 @@ function TargetBonusPage() {
 
       {/* Tiers */}
       <div className="px-5 mt-5">
-        <div className="bg-card rounded-2xl shadow-card px-2 pt-3 pb-4">
+        <div className="bg-card rounded-lg shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               বোনাস টায়ার
@@ -101,22 +101,22 @@ function TargetBonusPage() {
             {tiers.map((t) => (
               <div
                 key={t.target}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex items-center gap-3"
+                className="rounded-lg bg-background ring-1 ring-border/60 p-card flex items-center gap-3"
               >
                 <div className="h-10 w-10 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center shrink-0">
                   <Trophy className="h-[20px] w-[20px]" strokeWidth={2} />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight text-[14px]">
+                  <Heading variant="cardTitle" case="sentence" className="text-foreground leading-tight">
                     {t.target}
                   </Heading>
                   <Text variant="caption" className="text-muted-foreground leading-snug mt-0.5">
                     {t.note}
                   </Text>
                 </div>
-                <p className="text-[18px] font-bold text-[color:var(--accent)] tabular-nums leading-none">
+                <Text variant="cardTitle" as="p" className="text-[color:var(--accent)] tabular-nums leading-none">
                   {t.bonus}
-                </p>
+                </Text>
               </div>
             ))}
           </div>
@@ -127,7 +127,7 @@ function TargetBonusPage() {
       <div className="px-5 mt-5">
         <Link
           to="/refer"
-          className="flex items-center justify-center h-12 rounded-2xl bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-card active:scale-[0.98] transition-transform"
+          className="text-button flex items-center justify-center h-12 rounded-lg bg-[color:var(--accent)] text-accent-foreground shadow-card active:scale-[0.98] transition-transform"
         >
           এখনই শুরু করুন
         </Link>

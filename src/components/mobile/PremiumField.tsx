@@ -53,8 +53,8 @@ export const PremiumField = forwardRef<HTMLInputElement, PremiumFieldProps>(
               "absolute pointer-events-none transition-all duration-200 select-none",
               icon ? "left-11" : "left-4",
               floated
-                ? "top-2 text-[11px] font-medium tracking-wide uppercase text-muted-foreground"
-                : "top-1/2 -translate-y-1/2 text-[15px] text-muted-foreground",
+                ? "top-2 text-caption uppercase tracking-wide text-muted-foreground"
+                : "top-1/2 -translate-y-1/2 text-input text-muted-foreground",
               focused && floated && "text-primary",
             )}
           >
@@ -79,7 +79,7 @@ export const PremiumField = forwardRef<HTMLInputElement, PremiumFieldProps>(
               onBlur?.(e);
             }}
             className={cn(
-              "w-full bg-transparent outline-none text-[15px] text-foreground placeholder:text-transparent",
+              "w-full bg-transparent outline-none text-input text-foreground placeholder:text-transparent",
               "pt-6 pb-2",
               icon ? "pl-11" : "pl-4",
               isPassword ? "pr-12" : "pr-4",

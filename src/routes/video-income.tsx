@@ -102,13 +102,13 @@ function VideoIncomePage() {
         <ScreenHeader title="Submission status" />
 
         <section className="px-5">
-          <div className="relative overflow-hidden rounded-3xl bg-primary text-primary-foreground p-card shadow-navy">
+          <div className="relative overflow-hidden rounded-xl bg-primary text-primary-foreground p-card shadow-navy">
             <span aria-hidden className="pointer-events-none absolute -top-20 -right-16 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
             <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
 
             <div className="relative flex items-center gap-4">
-              <div className="h-14 w-14 rounded-2xl bg-accent text-accent-foreground flex items-center justify-center shadow-glow">
-                <Check className="h-7 w-7" strokeWidth={2.6} />
+              <div className="h-14 w-14 rounded-lg bg-accent text-accent-foreground flex items-center justify-center shadow-glow">
+                <Check className="h-7 w-7" />
               </div>
               <div className="min-w-0">
                 <Text variant="caption" case="title" className="text-primary-foreground/70">
@@ -120,7 +120,7 @@ function VideoIncomePage() {
               </div>
             </div>
 
-            <div className="relative mt-6 rounded-2xl bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
+            <div className="relative mt-6 rounded-lg bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
               <div className="min-w-0">
                 <Text variant="caption" className="text-primary-foreground/70">
                   Selected tier
@@ -161,11 +161,11 @@ function VideoIncomePage() {
               return (
                 <li
                   key={title}
-                  className="relative bg-card rounded-2xl shadow-card ring-1 ring-border/60 p-card flex items-start gap-4"
+                  className="relative bg-card rounded-lg shadow-card ring-1 ring-border/60 p-card flex items-start gap-4"
                 >
                   <div
                     className={cn(
-                      "h-14 w-14 rounded-2xl flex items-center justify-center shrink-0 ring-1",
+                      "h-14 w-14 rounded-lg flex items-center justify-center shrink-0 ring-1",
                       active
                         ? "bg-accent text-accent-foreground ring-accent/30 shadow-glow"
                         : "bg-muted text-muted-foreground ring-border",
@@ -180,7 +180,7 @@ function VideoIncomePage() {
                       </Heading>
                       <span
                         className={cn(
-                          "shrink-0 inline-flex items-center px-2.5 py-1 rounded-full",
+                          "shrink-0 inline-flex items-center px-3 py-1 rounded-pill",
                           active ? "bg-accent/15" : "bg-muted",
                         )}
                       >
@@ -201,7 +201,7 @@ function VideoIncomePage() {
 
         {/* Note */}
         <section className="px-5 mt-6">
-          <div className="rounded-2xl bg-muted/50 ring-1 ring-border/60 p-card flex items-start gap-3">
+          <div className="rounded-lg bg-muted/50 ring-1 ring-border/60 p-card flex items-start gap-3">
             <div className="h-10 w-10 rounded-xl bg-card text-accent flex items-center justify-center shrink-0 shadow-card">
               <ShieldCheck className="h-5 w-5" strokeWidth={2} />
             </div>
@@ -221,7 +221,7 @@ function VideoIncomePage() {
         <StickyCta>
           <PrimaryButton onClick={reset}>
             Submit a new video
-            <ArrowRight className="h-5 w-5" strokeWidth={2.4} />
+            <ArrowRight className="h-5 w-5" />
           </PrimaryButton>
         </StickyCta>
       </div>
@@ -257,7 +257,7 @@ function VideoIncomePage() {
                 onClick={() => setSelectedTier(id)}
                 aria-pressed={active}
                 className={cn(
-                  "w-full text-left rounded-2xl p-card flex items-center gap-4 transition-all active:scale-[0.99]",
+                  "w-full text-left rounded-lg p-card flex items-center gap-4 transition-all active:scale-[0.99]",
                   active
                     ? "bg-card ring-2 ring-accent shadow-glow"
                     : "bg-card ring-1 ring-border/60 hover:ring-border",
@@ -298,7 +298,7 @@ function VideoIncomePage() {
                         : "bg-transparent ring-1 ring-border",
                     )}
                   >
-                    {active && <Check className="h-3.5 w-3.5" strokeWidth={3} />}
+                    {active && <Check className="h-3.5 w-3.5" />}
                   </span>
                 </div>
               </button>
@@ -307,7 +307,7 @@ function VideoIncomePage() {
         </div>
 
         <div className="mt-3 flex items-center gap-1.5 px-1">
-          <ShieldCheck className="h-3.5 w-3.5 text-accent" strokeWidth={2.4} />
+          <ShieldCheck className="h-3.5 w-3.5 text-accent" />
           <Text variant="caption">Verified against YouTube Studio analytics</Text>
         </div>
       </section>
@@ -322,7 +322,7 @@ function VideoIncomePage() {
           Provide accurate info — the reward is released after verification
         </Text>
 
-        <div className="mt-4 rounded-3xl bg-card ring-1 ring-border shadow-card p-card">
+        <div className="mt-4 rounded-xl bg-card ring-1 ring-border shadow-card p-card">
           {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video" first>
             <FieldInput
@@ -369,7 +369,7 @@ function VideoIncomePage() {
           {canSubmit ? (
             <>
               Submit for review · ৳{tier.amount}
-              <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" strokeWidth={2.4} />
+              <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
             </>
           ) : (
             <>Complete all fields to submit</>
@@ -420,7 +420,7 @@ function PrimaryButton({
       onClick={onClick}
       disabled={disabled}
       className={cn(
-        "group relative w-full flex items-center justify-center gap-2 h-14 rounded-2xl transition-all",
+        "group relative w-full flex items-center justify-center gap-2 h-14 rounded-lg transition-all",
         disabled
           ? "bg-muted text-muted-foreground cursor-not-allowed"
           : "bg-primary text-primary-foreground shadow-glow active:scale-[0.98]",
