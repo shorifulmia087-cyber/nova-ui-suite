@@ -153,7 +153,7 @@ function Home() {
                 to={to}
                 className="liquid-glass-tile rounded-2xl p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
-                <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
                 <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight font-semibold">
