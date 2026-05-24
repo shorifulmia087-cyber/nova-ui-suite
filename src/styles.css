@@ -221,6 +221,17 @@
   .shadow-glow  { box-shadow: var(--shadow-glow); }
   .shadow-navy  { box-shadow: var(--shadow-navy); }
 
+  /* Elevation utilities — prefer these for new surfaces */
+  .elevation-0 { box-shadow: var(--elevation-0); }
+  .elevation-1 { box-shadow: var(--elevation-1); }
+  .elevation-2 { box-shadow: var(--elevation-2); }
+  .elevation-3 { box-shadow: var(--elevation-3); }
+  .elevation-4 { box-shadow: var(--elevation-4); }
+
+  /* Radius utilities aligned to the radius scale */
+  .rounded-xs   { border-radius: var(--radius-xs); }
+  .rounded-pill { border-radius: var(--radius-pill); }
+
   /* ============================================================
      CARD PADDING TOKEN — single source of truth for card insets.
      ALWAYS use `p-card` on card surfaces (bg-card containers).
