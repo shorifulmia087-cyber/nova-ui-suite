@@ -77,13 +77,14 @@
 
 
 
-  /* Premium fintech palette (exact hex from brief) */
-  --background: #FAF7FF;
-  --foreground: #0f172a;
-  --card: #ffffff;
-  --card-foreground: #0f172a;
-  --popover: #ffffff;
-  --popover-foreground: #0f172a;
+  /* Transparent liquid-glass palette — surfaces float on the water bg */
+  --background: transparent;
+  --foreground: #0a2540;
+  --card: rgba(255, 255, 255, 0.35);
+  --card-foreground: #0a2540;
+  --popover: rgba(255, 255, 255, 0.75);
+  --popover-foreground: #0a2540;
+
 
   --primary: #6D28D9;             /* violet */
   --primary-foreground: #ffffff;
