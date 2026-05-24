@@ -146,11 +146,11 @@
     text-rendering: optimizeLegibility;
     min-height: 100vh;
     background:
-      radial-gradient(circle at 15% 10%, rgba(125, 211, 252, 0.65) 0%, transparent 45%),
-      radial-gradient(circle at 85% 20%, rgba(94, 234, 212, 0.55) 0%, transparent 48%),
-      radial-gradient(circle at 30% 85%, rgba(165, 243, 252, 0.70) 0%, transparent 50%),
-      radial-gradient(circle at 90% 95%, rgba(56, 189, 248, 0.45) 0%, transparent 45%),
-      linear-gradient(180deg, #E0F7FF 0%, #C7ECFB 50%, #B9E6F5 100%);
+      radial-gradient(circle at 18% 12%, rgba(167, 139, 250, 0.55) 0%, transparent 50%),
+      radial-gradient(circle at 82% 18%, rgba(244, 114, 182, 0.45) 0%, transparent 50%),
+      radial-gradient(circle at 25% 88%, rgba(96, 165, 250, 0.50) 0%, transparent 52%),
+      radial-gradient(circle at 88% 90%, rgba(45, 212, 191, 0.40) 0%, transparent 50%),
+      linear-gradient(180deg, #EEF2FF 0%, #F5F3FF 50%, #FDF2F8 100%);
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
@@ -162,15 +162,13 @@
     font-family: var(--font-sans);
   }
 
-  /* Auto liquid-glass: every bg-card / bg-background / bg-popover surface
-     across the whole app becomes transparent frosted glass. */
+  /* Auto glassmorphism: every bg-card / bg-background / bg-popover surface
+     across the whole app becomes a frosted glass panel. */
   .bg-card, .bg-background, .bg-popover {
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-color: rgba(255,255,255,0.45);
-    box-shadow:
-      0 8px 28px -10px rgba(56, 189, 248, 0.20),
-      inset 0 1px 0 0 rgba(255,255,255,0.55);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    box-shadow: 0 8px 32px -12px rgba(31, 38, 135, 0.18);
   }
 }
 
