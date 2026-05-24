@@ -80,9 +80,9 @@
   /* Transparent liquid-glass palette — surfaces float on the water bg */
   --background: transparent;
   --foreground: #0a2540;
-  --card: rgba(255, 255, 255, 0.35);
+  --card: #ffffff;
   --card-foreground: #0a2540;
-  --popover: rgba(255, 255, 255, 0.75);
+  --popover: #ffffff;
   --popover-foreground: #0a2540;
 
 
