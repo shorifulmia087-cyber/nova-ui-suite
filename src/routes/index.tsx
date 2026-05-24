@@ -140,12 +140,12 @@ function Home() {
               {
                 to: "/video-income",
                 icon: Sparkles,
-                title: "ভিডিও বানিয়ে ইনকাম",
+                title: "Video Income",
               },
               {
                 to: "/target-bonus",
                 icon: Gift,
-                title: "টার্গেট বোনাস",
+                title: "Target Bonus",
               },
             ].map(({ to, icon: I, title }) => (
               <Link
