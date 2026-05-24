@@ -79,7 +79,7 @@ export const PremiumField = forwardRef<HTMLInputElement, PremiumFieldProps>(
               onBlur?.(e);
             }}
             className={cn(
-              "w-full bg-transparent outline-none text-[15px] text-foreground placeholder:text-transparent",
+              "w-full bg-transparent outline-none text-input text-foreground placeholder:text-transparent",
               "pt-6 pb-2",
               icon ? "pl-11" : "pl-4",
               isPassword ? "pr-12" : "pr-4",
