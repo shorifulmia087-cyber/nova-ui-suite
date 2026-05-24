@@ -71,13 +71,30 @@
 
 :root {
   --radius: 1rem;
-  --spacing-card: 1rem; /* 16px — single source of truth for card inner padding */
-  --spacing-section: 1rem; /* 16px — gap between top-level sections */
+  --spacing-card: 1rem;
+  --spacing-section: 1rem;
 
+  /* SPACING SCALE — 4/8/12/16/20/24/32/40/48/64 */
+  --space-1: 4px;  --space-2: 8px;  --space-3: 12px; --space-4: 16px;
+  --space-5: 20px; --space-6: 24px; --space-8: 32px; --space-10: 40px;
+  --space-12: 48px; --space-16: 64px;
 
+  /* RADIUS SCALE — xs/sm/md/lg/xl/pill */
+  --radius-xs: 6px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
 
+  /* ELEVATION — premium subtle (no neumorphism) */
+  --elevation-0: none;
+  --elevation-1: 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --elevation-2: 0 2px 8px -2px rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.04);
+  --elevation-3: 0 8px 24px -8px rgba(15, 23, 42, 0.10), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
+  --elevation-4: 0 16px 40px -12px rgba(15, 23, 42, 0.14), 0 4px 8px -2px rgba(15, 23, 42, 0.05);
 
-  /* Transparent liquid-glass palette — surfaces float on the water bg */
+  /* SEMANTIC COLOR TOKENS — brand identity preserved */
   --background: transparent;
   --foreground: #0a2540;
   --card: #ffffff;
@@ -85,34 +102,56 @@
   --popover: #ffffff;
   --popover-foreground: #0a2540;
 
-
-  --primary: #6D28D9;             /* violet */
+  --primary: #6D28D9;
   --primary-foreground: #ffffff;
+  --primary-dark: #4C1D95;
 
-  --secondary: #10b981;          /* professional green */
+  --secondary: #10b981;
   --secondary-foreground: #ffffff;
 
-  --accent: #6D28D9;             /* violet accent */
+  --accent: #6D28D9;
   --accent-foreground: #ffffff;
 
   --muted: #f1f5f9;
   --muted-foreground: #64748b;
 
-  --success: #22c55e;
+  --success: #16a34a;
   --success-foreground: #ffffff;
-  --warning: #f59e0b;
-  --warning-foreground: #0f172a;
-  --destructive: #ef4444;
+  --warning: #d97706;
+  --warning-foreground: #ffffff;
+  --destructive: #dc2626;
   --destructive-foreground: #ffffff;
+  --info: #2563eb;
+  --info-foreground: #ffffff;
 
   --border: #e2e8f0;
+  --divider: #eef2f7;
   --input: #e2e8f0;
   --ring: #6D28D9;
 
+  /* Text scale */
+  --text-primary: #0a2540;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-disabled: #cbd5e1;
+  --text-inverse: #ffffff;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-secondary: #f8fafc;
+  --surface-tertiary: #f1f5f9;
+  --disabled: #f1f5f9;
+  --overlay: rgba(15, 23, 42, 0.48);
+  --overlay-light: rgba(15, 23, 42, 0.24);
+
+  /* Financial semantics */
+  --profit: var(--success);
+  --loss: var(--destructive);
+
   --gradient-brand: linear-gradient(135deg, #0f172a 0%, #6D28D9 100%);
-  --gradient-mint: linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
-  --gradient-card: linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #6D28D9 130%);
-  --gradient-soft: linear-gradient(180deg, #FAF7FF 0%, #EDE4FF 100%);
+  --gradient-mint:  linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
+  --gradient-card:  linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #6D28D9 130%);
+  --gradient-soft:  linear-gradient(180deg, #FAF7FF 0%, #EDE4FF 100%);
 }
 
 .dark {
@@ -181,6 +220,17 @@
   .shadow-card  { box-shadow: var(--shadow-card); }
   .shadow-glow  { box-shadow: var(--shadow-glow); }
   .shadow-navy  { box-shadow: var(--shadow-navy); }
+
+  /* Elevation utilities — prefer these for new surfaces */
+  .elevation-0 { box-shadow: var(--elevation-0); }
+  .elevation-1 { box-shadow: var(--elevation-1); }
+  .elevation-2 { box-shadow: var(--elevation-2); }
+  .elevation-3 { box-shadow: var(--elevation-3); }
+  .elevation-4 { box-shadow: var(--elevation-4); }
+
+  /* Radius utilities aligned to the radius scale */
+  .rounded-xs   { border-radius: var(--radius-xs); }
+  .rounded-pill { border-radius: var(--radius-pill); }
 
   /* ============================================================
      CARD PADDING TOKEN — single source of truth for card insets.
