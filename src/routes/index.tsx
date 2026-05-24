@@ -357,12 +357,12 @@ function TxRow({ tx }: { tx: Tx }) {
         <Icon className="h-[18px] w-[18px]" strokeWidth={2} />
       </div>
       <div className="flex-1 min-w-0">
-        <h3 className="text-[14px] font-semibold text-foreground truncate leading-tight">{tx.title}</h3>
-        <p className="text-[11px] text-muted-foreground mt-1 font-medium">{tx.date}</p>
+        <Text variant="bodySecondary" as="h3" className="font-semibold text-foreground truncate leading-tight">{tx.title}</Text>
+        <Text variant="caption" as="p" className="text-muted-foreground mt-1">{tx.date}</Text>
       </div>
-      <p className={`text-[15px] font-bold tabular-nums shrink-0 tracking-tight ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
+      <Text variant="label" as="p" className={`tabular-nums shrink-0 font-semibold ${positive ? "text-[color:var(--success)]" : "text-foreground"}`}>
         {positive ? "+" : "−"}৳{Math.abs(tx.amount).toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-      </p>
+      </Text>
     </div>
   );
 }
