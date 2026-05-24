@@ -187,6 +187,37 @@
   }
 
   /* ============================================================
+     LIQUID GLASS — frosted translucent surfaces with depth
+     ============================================================ */
+  .liquid-glass {
+    background: linear-gradient(135deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.30) 100%);
+    backdrop-filter: blur(22px) saturate(180%);
+    -webkit-backdrop-filter: blur(22px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.55);
+    box-shadow:
+      0 8px 32px -8px rgba(109, 40, 217, 0.18),
+      inset 0 1px 0 0 rgba(255,255,255,0.7),
+      inset 0 -1px 0 0 rgba(255,255,255,0.15);
+  }
+  .liquid-glass-tile {
+    background: linear-gradient(135deg, rgba(255,255,255,0.70) 0%, rgba(255,255,255,0.40) 100%);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
+    border: 1px solid rgba(255,255,255,0.65);
+    box-shadow:
+      0 4px 14px -6px rgba(109, 40, 217, 0.15),
+      inset 0 1px 0 0 rgba(255,255,255,0.8);
+  }
+  .liquid-bg {
+    position: relative;
+    background:
+      radial-gradient(circle at 12% 8%, rgba(167, 139, 250, 0.55) 0%, transparent 42%),
+      radial-gradient(circle at 88% 18%, rgba(109, 40, 217, 0.40) 0%, transparent 45%),
+      radial-gradient(circle at 50% 95%, rgba(196, 181, 253, 0.55) 0%, transparent 50%),
+      linear-gradient(180deg, #FAF7FF 0%, #EDE4FF 100%);
+  }
+
+  /* ============================================================
      TYPOGRAPHY TOKEN SYSTEM — single source of truth
      Family: DM Sans. Weights: 400 / 500 / 600 / 700 only.
      Use these classes. Do NOT use ad-hoc text-* / font-* values.
