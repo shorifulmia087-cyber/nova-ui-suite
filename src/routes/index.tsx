@@ -153,7 +153,7 @@ function Home() {
                 to={to}
                 className="liquid-glass-tile rounded-2xl p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
-                <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
                 <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight font-semibold">
@@ -169,23 +169,24 @@ function Home() {
       {!verified && (
 
         <div className="px-5 mt-section">
-          <div className="rounded-lg bg-primary text-primary-foreground p-4 shadow-navy">
+          <div className="liquid-glass rounded-2xl p-card">
             <div className="flex items-start gap-3">
-              <div className="flex-shrink-0 h-11 w-11 rounded-lg bg-warning/15 flex items-center justify-center">
-                <ClipboardList className="h-5 w-5 text-warning" strokeWidth={2.4} />
+              <div className="flex-shrink-0 h-11 w-11 rounded-xl liquid-glass-tile flex items-center justify-center">
+                <ClipboardList className="h-5 w-5 text-[color:var(--warning)]" strokeWidth={2.4} />
               </div>
-              <p className="flex-1 text-label pt-0.5">
+              <p className="flex-1 text-label pt-0.5 text-foreground">
                 Verification required. Please verify your identity.
               </p>
             </div>
             <Link
               to="/verify"
-              className="text-button mt-4 flex items-center justify-center h-12 rounded-lg bg-background text-foreground active:scale-[0.98] transition-transform"
+              className="text-button mt-4 flex items-center justify-center h-12 rounded-xl liquid-glass-tile text-foreground active:scale-[0.98] transition-transform"
             >
               Submit
             </Link>
           </div>
         </div>
+
       )}
     </div>
   );
@@ -261,7 +262,7 @@ function IntroVideoBanner() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="block w-full relative overflow-hidden rounded-2xl shadow-card ring-1 ring-border/60 aspect-video active:scale-[0.99] transition-transform"
+          className="block w-full relative overflow-hidden rounded-2xl liquid-glass aspect-video active:scale-[0.99] transition-transform"
         >
           <img src={thumb} alt="ওয়েবসাইটের পরিচিতি ভিডিও" className="absolute inset-0 w-full h-full object-cover" />
           <div
