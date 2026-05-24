@@ -127,7 +127,7 @@ function TargetBonusPage() {
       <div className="px-5 mt-5">
         <Link
           to="/refer"
-          className="flex items-center justify-center h-12 rounded-lg bg-[color:var(--accent)] text-accent-foreground font-bold text-[15px] shadow-card active:scale-[0.98] transition-transform"
+          className="text-button flex items-center justify-center h-12 rounded-lg bg-[color:var(--accent)] text-accent-foreground shadow-card active:scale-[0.98] transition-transform"
         >
           এখনই শুরু করুন
         </Link>
