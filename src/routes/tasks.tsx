@@ -160,9 +160,9 @@ function Tasks() {
       {/* Task list */}
       <div className="flex-1 pb-28 mt-6">
         <div className="px-5 mb-3 flex items-center justify-between">
-          <Heading variant="sectionTitle" as="h2" case="upper" className="text-muted-foreground">
+          <Text variant="caption" as="h2" case="upper" className="text-muted-foreground font-semibold">
             Active tasks
-          </Heading>
+          </Text>
           {!loading && total > 0 && (
             <span className="text-caption text-muted-foreground">
               {remaining} remaining
