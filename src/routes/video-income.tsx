@@ -180,7 +180,7 @@ function VideoIncomePage() {
                       </Heading>
                       <span
                         className={cn(
-                          "shrink-0 inline-flex items-center px-2.5 py-1 rounded-full",
+                          "shrink-0 inline-flex items-center px-3 py-1 rounded-pill",
                           active ? "bg-accent/15" : "bg-muted",
                         )}
                       >
