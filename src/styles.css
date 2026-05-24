@@ -161,6 +161,17 @@
   button, input, textarea, select {
     font-family: var(--font-sans);
   }
+
+  /* Auto liquid-glass: every bg-card / bg-background / bg-popover surface
+     across the whole app becomes transparent frosted glass. */
+  .bg-card, .bg-background, .bg-popover {
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-color: rgba(255,255,255,0.45);
+    box-shadow:
+      0 8px 28px -10px rgba(56, 189, 248, 0.20),
+      inset 0 1px 0 0 rgba(255,255,255,0.55);
+  }
 }
 
 
