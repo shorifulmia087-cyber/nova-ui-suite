@@ -109,7 +109,7 @@ function Tasks() {
   const totalReward = tasks.reduce((s, t) => s + t.reward, 0);
 
   return (
-    <div>
+    <div className="liquid-bg min-h-screen">
       <ScreenHeader
         title="Tasks"
         subtitle="Complete to earn instantly"
