@@ -101,7 +101,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-5 mt-section">
-        <div className="bg-card rounded-2xl shadow-card p-card">
+        <div className="liquid-glass rounded-2xl p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
@@ -116,7 +116,7 @@ function Home() {
             { to: "/transactions", icon: IconHistory, label: "History" },
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="group">
-              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 bg-background text-foreground ring-1 ring-border/60 group-active:bg-muted/40">
+              <div className="w-full rounded-2xl flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
                 <I className="h-[28px] w-[28px]" stroke={1.75} />
                 <span className="text-foreground font-semibold text-[12px] leading-none">{label}</span>
               </div>
@@ -128,7 +128,7 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-5 mt-section">
-        <div className="bg-card rounded-2xl shadow-card p-card">
+        <div className="liquid-glass rounded-2xl p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
@@ -151,7 +151,7 @@ function Home() {
               <Link
                 key={title}
                 to={to}
-                className="rounded-2xl bg-background ring-1 ring-border/60 p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
+                className="liquid-glass-tile rounded-2xl p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
                 <div className="h-9 w-9 rounded-xl bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
