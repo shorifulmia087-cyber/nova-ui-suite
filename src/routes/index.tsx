@@ -222,7 +222,7 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-2xl bg-card border border-border/70 shadow-card transition-all duration-300 ${
+      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-2xl liquid-glass-tile transition-all duration-300 ${
         pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
       }`}
     >
