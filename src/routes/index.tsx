@@ -156,9 +156,9 @@ function Home() {
                 <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
-                <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight font-semibold">
+                <Text variant="button" case="title" className="text-foreground leading-tight">
                   {title}
-                </Heading>
+                </Text>
               </Link>
             ))}
           </div>
