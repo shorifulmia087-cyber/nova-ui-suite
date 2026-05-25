@@ -1,5 +1,5 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { ChevronLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Heading } from "@/lib/typography";
 import { type ReactNode } from "react";
 
@@ -16,19 +16,19 @@ export function ScreenHeader({
 }) {
   const router = useRouter();
   return (
-    <header className="px-4 pt-6 pb-4 flex items-start gap-3">
+    <header className="bg-card px-4 pt-4 pb-4 flex items-center gap-3">
       {back && (
         <button
           onClick={() => router.history.back()}
-          className="h-10 w-10 rounded-full bg-card border border-border shadow-card flex items-center justify-center text-foreground hover:bg-muted transition"
+          className="h-10 w-10 rounded-full bg-background flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
-          <ChevronLeft className="h-5 w-5" />
+          <ArrowLeft className="h-5 w-5" strokeWidth={2} />
         </button>
       )}
       <div className="flex-1 min-w-0">
-        <Heading variant="screenTitle" case="sentence" className="truncate">{title}</Heading>
-        {subtitle && <p className="text-body-secondary mt-1">{subtitle}</p>}
+        <Heading variant="sectionTitle" case="sentence" className="truncate">{title}</Heading>
+        {subtitle && <p className="text-body-secondary mt-0.5 truncate">{subtitle}</p>}
       </div>
 
       {right}
