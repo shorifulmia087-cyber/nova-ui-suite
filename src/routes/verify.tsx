@@ -47,7 +47,7 @@ function Verify() {
     return (
       <div>
         <ScreenHeader title="Verification" />
-        <div className="px-5">
+        <div className="px-4">
           <Card className="p-card text-center border-0 bg-gradient-soft">
             <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
               <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
@@ -88,7 +88,7 @@ function Verify() {
   return (
     <div>
       <ScreenHeader title="Verify identity" />
-      <form onSubmit={submit} className="px-5 pb-8 space-y-5">
+      <form onSubmit={submit} className="px-4 pb-8 space-y-5">
         <Card className="p-card border-0 bg-gradient-soft flex items-start gap-3">
           <div className="h-10 w-10 rounded-lg bg-[color:var(--accent)]/15 flex items-center justify-center text-[color:var(--accent)]">
             <IdCard className="h-5 w-5" />

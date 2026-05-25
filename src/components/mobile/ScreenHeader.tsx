@@ -16,7 +16,7 @@ export function ScreenHeader({
 }) {
   const router = useRouter();
   return (
-    <header className="px-5 pt-6 pb-4 flex items-start gap-3">
+    <header className="px-4 pt-6 pb-4 flex items-start gap-3">
       {back && (
         <button
           onClick={() => router.history.back()}
@@ -37,7 +37,7 @@ export function ScreenHeader({
 }
 
 export function PageTitle({ children }: { children: ReactNode }) {
-  return <Heading variant="sectionTitle" case="sentence" className="mb-3 px-5">{children}</Heading>;
+  return <Heading variant="sectionTitle" case="sentence" className="mb-3 px-4">{children}</Heading>;
 }
 
 export function _Link() { return <Link to="/" />; }

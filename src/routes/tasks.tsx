@@ -94,7 +94,7 @@ function Tasks() {
     return (
       <div>
         <ScreenHeader title="Tasks" subtitle="Sign in to earn" back={false} />
-        <div className="px-5">
+        <div className="px-4">
           <Card className="p-card text-center">
             <p className="text-label mb-3">Please sign in to view tasks.</p>
             <Link to="/login"><ActionButton variant="brand">Sign in</ActionButton></Link>
@@ -124,7 +124,7 @@ function Tasks() {
       />
 
       {/* Earnings hero — light card, mint accents */}
-      <div className="px-5">
+      <div className="px-4">
         <div className="rounded-lg bg-card border border-border shadow-card p-card">
           <div className="flex justify-between items-start mb-5">
             <div>
@@ -159,7 +159,7 @@ function Tasks() {
 
       {/* Task list */}
       <div className="flex-1 pb-28 mt-6">
-        <div className="px-5 mb-3 flex items-center justify-between">
+        <div className="px-4 mb-3 flex items-center justify-between">
           <Text variant="caption" as="h2" case="upper" className="text-muted-foreground font-semibold">
             Active tasks
           </Text>
@@ -170,7 +170,7 @@ function Tasks() {
           )}
         </div>
 
-        <div className="px-5 space-y-3">
+        <div className="px-4 space-y-3">
           {loading ? (
             <>
               {[0, 1, 2].map((i) => (

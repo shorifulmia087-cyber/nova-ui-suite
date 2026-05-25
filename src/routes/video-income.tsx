@@ -101,7 +101,7 @@ function VideoIncomePage() {
       <div className="pb-40">
         <ScreenHeader title="Submission status" />
 
-        <section className="px-5">
+        <section className="px-4">
           <div className="relative overflow-hidden rounded-xl bg-primary text-primary-foreground p-card shadow-navy">
             <span aria-hidden className="pointer-events-none absolute -top-20 -right-16 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
             <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
@@ -142,7 +142,7 @@ function VideoIncomePage() {
         </section>
 
         {/* Timeline */}
-        <section className="px-5 mt-8">
+        <section className="px-4 mt-8">
           <SectionEyebrow>Process</SectionEyebrow>
           <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
             Review & payment
@@ -200,7 +200,7 @@ function VideoIncomePage() {
         </section>
 
         {/* Note */}
-        <section className="px-5 mt-6">
+        <section className="px-4 mt-6">
           <div className="rounded-lg bg-muted/50 ring-1 ring-border/60 p-card flex items-start gap-3">
             <div className="h-10 w-10 rounded-xl bg-card text-accent flex items-center justify-center shrink-0 shadow-card">
               <ShieldCheck className="h-5 w-5" strokeWidth={2} />
@@ -234,7 +234,7 @@ function VideoIncomePage() {
       <ScreenHeader title="Earn from videos" />
 
       {/* Tier selection */}
-      <section className="px-5 mt-2">
+      <section className="px-4 mt-2">
 
         <SectionEyebrow>Step 01</SectionEyebrow>
         <div className="flex items-end justify-between gap-3 mt-1">
@@ -313,7 +313,7 @@ function VideoIncomePage() {
       </section>
 
       {/* Submission form */}
-      <section className="px-5 mt-8">
+      <section className="px-4 mt-8">
         <SectionEyebrow>Step 02</SectionEyebrow>
         <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
           Submission details
@@ -400,7 +400,7 @@ function FieldGroup({ title, children, first }: { title: string; children: React
 
 function StickyCta({ children }: { children: ReactNode }) {
   return (
-    <div className="fixed bottom-20 left-1/2 -translate-x-1/2 w-full max-w-md px-5 pt-6 pb-3 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
+    <div className="fixed bottom-20 left-1/2 -translate-x-1/2 w-full max-w-md px-4 pt-6 pb-3 bg-gradient-to-t from-background via-background/95 to-transparent z-40">
       {children}
     </div>
   );

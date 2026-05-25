@@ -21,7 +21,7 @@ function Notifs() {
   return (
     <div>
       <ScreenHeader title="Notifications" subtitle={`${notifications.length} updates`} />
-      <div className="px-5 space-y-2">
+      <div className="px-4 space-y-2">
         {notifications.map((n) => {
           const { Icon, c } = map[n.type as keyof typeof map];
           return (

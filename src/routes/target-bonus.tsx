@@ -28,7 +28,7 @@ function TargetBonusPage() {
       <ScreenHeader title="Target Bonus" />
 
       {/* Hero */}
-      <div className="px-5">
+      <div className="px-4">
         <div className="rounded-lg bg-primary text-primary-foreground p-card shadow-navy">
           <div className="flex items-center gap-3">
             <div className="h-12 w-12 rounded-lg bg-[color:var(--accent)]/20 text-[color:var(--accent)] flex items-center justify-center">
@@ -47,7 +47,7 @@ function TargetBonusPage() {
       </div>
 
       {/* How it works */}
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <div className="bg-card rounded-lg shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -89,7 +89,7 @@ function TargetBonusPage() {
       </div>
 
       {/* Tiers */}
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <div className="bg-card rounded-lg shadow-card px-2 pt-3 pb-4">
           <div className="px-3">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -124,7 +124,7 @@ function TargetBonusPage() {
       </div>
 
       {/* CTA */}
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <Link
           to="/refer"
           className="text-button flex items-center justify-center h-12 rounded-lg bg-[color:var(--accent)] text-accent-foreground shadow-card active:scale-[0.98] transition-transform"

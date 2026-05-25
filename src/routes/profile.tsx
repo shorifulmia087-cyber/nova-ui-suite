@@ -47,7 +47,7 @@ function Profile() {
     <div>
       <ScreenHeader title="Profile" back={false} />
 
-      <div className="px-5">
+      <div className="px-4">
         <Card className="p-card bg-gradient-soft border-0">
           <div className="flex items-center gap-4">
             <div className="h-16 w-16 rounded-lg overflow-hidden bg-muted shadow-glow">
@@ -89,7 +89,7 @@ function Profile() {
         <Row icon={FileText} label="Terms & privacy" />
       </Section>
 
-      <div className="px-5 mt-4 mb-2">
+      <div className="px-4 mt-4 mb-2">
         <button onClick={handleLogout} className="text-button w-full h-12 rounded-lg bg-destructive/10 text-destructive inline-flex items-center justify-center gap-2 active:scale-[0.98] transition">
           <LogOut className="h-4 w-4" /> Log out
         </button>
@@ -102,8 +102,8 @@ function Profile() {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mt-5">
-      <h2 className="text-eyebrow px-5 pb-2">{title}</h2>
-      <div className="px-5"><Card className="overflow-hidden divide-y divide-border border-0">{children}</Card></div>
+      <h2 className="text-eyebrow px-4 pb-2">{title}</h2>
+      <div className="px-4"><Card className="overflow-hidden divide-y divide-border border-0">{children}</Card></div>
     </div>
   );
 }

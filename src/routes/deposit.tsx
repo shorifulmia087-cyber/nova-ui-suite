@@ -19,7 +19,7 @@ function Deposit() {
     <div>
       <ScreenHeader title="Add money" subtitle="Top up your balance" />
 
-      <div className="px-5">
+      <div className="px-4">
         <Card className="p-card text-center bg-gradient-soft">
           <p className="text-caption uppercase tracking-widest">Amount</p>
           <div className="mt-2 flex items-center justify-center gap-1">
@@ -35,7 +35,7 @@ function Deposit() {
         </Card>
       </div>
 
-      <div className="px-5 mt-4 grid grid-cols-3 gap-2">
+      <div className="px-4 mt-4 grid grid-cols-3 gap-2">
         {presets.map((p) => (
           <button
             key={p}
@@ -47,8 +47,8 @@ function Deposit() {
         ))}
       </div>
 
-      <h2 className="text-section-title px-5 pt-6 pb-3">Payment method</h2>
-      <div className="px-5 space-y-2">
+      <h2 className="text-section-title px-4 pt-6 pb-3">Payment method</h2>
+      <div className="px-4 space-y-2">
         {[
           { id: "card", Icon: CreditCard, t: "Visa ••8821", d: "Instant · no fee" },
           { id: "bank", Icon: Building2, t: "Bank transfer", d: "1-2 business days" },
@@ -74,7 +74,7 @@ function Deposit() {
         })}
       </div>
 
-      <div className="px-5 mt-6">
+      <div className="px-4 mt-6">
         <ActionButton variant="brand" size="lg" className="w-full">
           Add ৳{amt.toLocaleString()}
         </ActionButton>
