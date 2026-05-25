@@ -21,7 +21,7 @@ function Withdraw() {
     <div>
       <ScreenHeader title="Withdraw" subtitle={`Available · ৳${balance.toLocaleString()}`} />
 
-      <div className="px-5">
+      <div className="px-4">
         <Card className="p-card text-center bg-gradient-soft">
           <p className="text-caption uppercase tracking-widest">You withdraw</p>
           <div className="mt-2 flex items-center justify-center gap-1">
@@ -42,7 +42,7 @@ function Withdraw() {
         </Card>
       </div>
 
-      <div className="px-5 mt-4 flex gap-2">
+      <div className="px-4 mt-4 flex gap-2">
         {[25, 50, 100].map((p) => (
           <button
             key={p}
@@ -54,8 +54,8 @@ function Withdraw() {
         ))}
       </div>
 
-      <h2 className="text-section-title px-5 pt-6 pb-3">Withdraw to</h2>
-      <div className="px-5 space-y-2">
+      <h2 className="text-section-title px-4 pt-6 pb-3">Withdraw to</h2>
+      <div className="px-4 space-y-2">
         {[
           { Icon: Building2, t: "Bank ••4421", d: "Dhaka Bank · BDT", active: true },
           { Icon: Bitcoin, t: "bKash Wallet", d: "Mobile wallet" },
@@ -73,14 +73,14 @@ function Withdraw() {
         ))}
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <div className="rounded-lg bg-[color:var(--warning)]/10 border border-[color:var(--warning)]/30 p-3 flex items-start gap-2 text-caption text-[color:var(--warning)]">
           <AlertCircle className="h-4 w-4 mt-0.5 shrink-0" />
           <p>Withdrawals typically process within 1-2 business days.</p>
         </div>
       </div>
 
-      <div className="px-5 mt-5">
+      <div className="px-4 mt-5">
         <ActionButton variant="brand" size="lg" className="w-full">
           Confirm withdrawal
         </ActionButton>

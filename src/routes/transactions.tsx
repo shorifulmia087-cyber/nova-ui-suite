@@ -28,7 +28,7 @@ function TxList() {
     <div>
       <ScreenHeader title="Transactions" subtitle={`${list.length} activities`} />
 
-      <div className="px-5">
+      <div className="px-4">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <input
@@ -40,7 +40,7 @@ function TxList() {
         </div>
       </div>
 
-      <div className="px-5 mt-3 flex gap-2 overflow-x-auto no-scrollbar">
+      <div className="px-4 mt-3 flex gap-2 overflow-x-auto no-scrollbar">
         {filters.map((x) => (
           <button
             key={x}
@@ -52,7 +52,7 @@ function TxList() {
         ))}
       </div>
 
-      <div className="px-5 mt-4 space-y-2">
+      <div className="px-4 mt-4 space-y-2">
         {list.map((t) => <Row key={t.id} tx={t} />)}
         {!list.length && (
           <Card className="p-card text-center text-body-secondary">No transactions found.</Card>

@@ -58,7 +58,7 @@ function Home() {
     <div className="min-h-screen">
 
       {/* Top bar */}
-      <header className="px-5 pt-6 pb-2 flex items-center justify-between gap-3">
+      <header className="px-4 pt-6 pb-2 flex items-center justify-between gap-3">
         <Link to="/profile" className="flex items-center gap-3 min-w-0 flex-1">
           <div className="relative shrink-0">
             <div className="h-12 w-12 rounded-full overflow-hidden bg-muted shadow-card ring-2 ring-background">
@@ -101,7 +101,7 @@ function Home() {
 
 
       {/* Quick actions — refined card */}
-      <div className="px-5 mt-section">
+      <div className="px-4 mt-section">
         <div className="liquid-glass rounded-lg p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -128,7 +128,7 @@ function Home() {
       </div>
 
       {/* Earning options — single section, 2 columns */}
-      <div className="px-5 mt-section">
+      <div className="px-4 mt-section">
         <div className="liquid-glass rounded-lg p-card">
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -169,7 +169,7 @@ function Home() {
       {/* Verification — dark card with submit */}
       {!verified && (
 
-        <div className="px-5 mt-section">
+        <div className="px-4 mt-section">
           <div className="liquid-glass rounded-lg p-card">
             <div className="flex items-start gap-3">
               <div className="flex-shrink-0 h-11 w-11 rounded-xl liquid-glass-tile flex items-center justify-center">
@@ -260,7 +260,7 @@ function IntroVideoBanner() {
 
   return (
     <>
-      <div className="px-5 mt-section">
+      <div className="px-4 mt-section">
         <button
           type="button"
           onClick={() => setOpen(true)}

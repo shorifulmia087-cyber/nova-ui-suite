@@ -32,7 +32,7 @@ export function ActionButton({
 }: PrimaryBtnProps) {
   const sizes = {
     sm: "h-9 px-4",
-    md: "h-12 px-5",
+    md: "h-12 px-4",
     lg: "h-14 px-6",
   } as const;
   const variants = {
@@ -87,7 +87,7 @@ export function StatPill({
 
 export function SectionLabel({ children, action }: { children: ReactNode; action?: ReactNode }) {
   return (
-    <div className="flex items-center justify-between px-5 pt-6 pb-3">
+    <div className="flex items-center justify-between px-4 pt-6 pb-3">
       <Heading variant="sectionTitle" case="sentence">{children}</Heading>
       {action}
     </div>

@@ -40,7 +40,7 @@ function Refer() {
     <div>
       <ScreenHeader title="Refer & Earn" subtitle="Grow together" back={false} />
 
-      <div className="px-5">
+      <div className="px-4">
         <Card className="relative overflow-hidden p-card bg-gradient-brand text-white border-0 text-center">
           <div className="absolute -right-12 -top-12 h-44 w-44 rounded-full bg-[color:var(--accent)]/30 blur-3xl" />
           <div className="relative">
@@ -77,13 +77,13 @@ function Refer() {
         </Card>
       </div>
 
-      <div className="px-5 mt-4 flex gap-3">
+      <div className="px-4 mt-4 flex gap-3">
         <StatPill icon={<Users className="h-3.5 w-3.5" />} label="Friends joined" value={String(referralsCount)} />
         <StatPill icon={<Sparkles className="h-3.5 w-3.5" />} label="Earned" value={`৳${(referralsCount * 25).toFixed(0)}`} tone="success" />
       </div>
 
-      <h2 className="text-section-title px-5 pt-6 pb-3">How it works</h2>
-      <div className="px-5 space-y-2">
+      <h2 className="text-section-title px-4 pt-6 pb-3">How it works</h2>
+      <div className="px-4 space-y-2">
         {[
           { n: 1, t: "Share your code", d: "Send it to friends via any app." },
           { n: 2, t: "Friend signs up", d: "They enter your code at registration." },
