@@ -9,6 +9,7 @@ import {
   IconUsersGroup,
   IconChecklist,
   IconHistory,
+  IconWallet,
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
@@ -223,16 +224,21 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
 
   return (
     <div
-      className={`shrink-0 inline-flex flex-col items-end justify-center h-11 px-3.5 rounded-lg liquid-glass-tile transition-all duration-300 ${
-        pulse ? "scale-105 ring-2 ring-[color:var(--accent)]/40" : "scale-100"
+      className={`shrink-0 inline-flex items-center gap-2.5 h-11 pl-2 pr-3.5 rounded-pill bg-gradient-brand text-primary-foreground transition-all duration-300 elevation-3 ${
+        pulse ? "scale-105 ring-2 ring-primary/40" : "scale-100"
       }`}
     >
-      <Text variant="caption" case="upper" className="text-muted-foreground leading-none">
-        Balance
-      </Text>
-      <Text variant="label" className="mt-1 text-foreground tabular-nums leading-none">
-        {text}
-      </Text>
+      <span className="h-7 w-7 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center ring-1 ring-white/20">
+        <IconWallet className="h-4 w-4 text-primary-foreground" stroke={2} />
+      </span>
+      <div className="flex flex-col items-end leading-none">
+        <Text variant="caption" case="upper" className="text-primary-foreground/70 leading-none tracking-wider">
+          Balance
+        </Text>
+        <Text variant="label" className="mt-1 text-primary-foreground tabular-nums leading-none">
+          {text}
+        </Text>
+      </div>
     </div>
   );
 }
