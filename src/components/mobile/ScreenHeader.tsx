@@ -59,7 +59,7 @@ export function ScreenHeader({
       )}
       <div className="flex-1 min-w-0">
         <Heading variant="sectionTitle" case="sentence" className="truncate">{resolvedTitle}</Heading>
-        {subtitle && <p className="text-body-secondary mt-0.5 truncate">{subtitle}</p>}
+        {resolvedSubtitle && <p className="text-body-secondary mt-0.5 truncate">{resolvedSubtitle}</p>}
       </div>
 
       {right}
