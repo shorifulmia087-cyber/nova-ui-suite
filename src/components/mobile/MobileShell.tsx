@@ -60,8 +60,9 @@ export function MobileShell() {
 
 
   return (
-    <div className="min-h-screen w-full bg-gradient-soft flex justify-center">
-      <div className="relative w-full max-w-md min-h-screen bg-background shadow-navy overflow-hidden flex flex-col">
+    <div className="min-h-screen w-full flex justify-center" style={{ backgroundColor: "#f8f8f8" }}>
+      <div className="relative w-full max-w-md min-h-screen overflow-hidden flex flex-col" style={{ backgroundColor: "#f8f8f8" }}>
+
         <main className={cn("flex-1", hideNav ? "pb-0" : "pb-28")}>
           <Outlet />
         </main>
