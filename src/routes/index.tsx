@@ -175,7 +175,7 @@ function Home() {
               <Link
                 key={title}
                 to={to}
-                className="liquid-glass-tile rounded-lg p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
+                className="bg-background rounded-lg p-card flex flex-col gap-2 active:scale-[0.98] transition-transform"
               >
                 <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
