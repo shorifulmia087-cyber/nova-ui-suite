@@ -95,65 +95,66 @@
   --elevation-3: 0 8px 24px -8px rgba(15, 23, 42, 0.10), 0 2px 4px -1px rgba(15, 23, 42, 0.04);
   --elevation-4: 0 16px 40px -12px rgba(15, 23, 42, 0.14), 0 4px 8px -2px rgba(15, 23, 42, 0.05);
 
-  /* SEMANTIC COLOR TOKENS — brand identity preserved */
+  /* SEMANTIC COLOR TOKENS — red & noir palette from reference */
   --background: transparent;
-  --foreground: #0a2540;
+  --foreground: #201A1A;
   --card: #ffffff;
-  --card-foreground: #0a2540;
+  --card-foreground: #201A1A;
   --popover: #ffffff;
-  --popover-foreground: #0a2540;
+  --popover-foreground: #201A1A;
 
-  --primary: #6D28D9;
+  --primary: #DD4448;
   --primary-foreground: #ffffff;
-  --primary-dark: #4C1D95;
+  --primary-dark: #A8323A;
 
-  --secondary: #10b981;
+  --secondary: #201A1A;
   --secondary-foreground: #ffffff;
 
-  --accent: #6D28D9;
+  --accent: #DD4448;
   --accent-foreground: #ffffff;
 
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
+  --muted: #F5F0F0;
+  --muted-foreground: #6B5E5E;
 
   --success: #16a34a;
   --success-foreground: #ffffff;
   --warning: #d97706;
   --warning-foreground: #ffffff;
-  --destructive: #dc2626;
+  --destructive: #BA1A1A;
   --destructive-foreground: #ffffff;
   --info: #2563eb;
   --info-foreground: #ffffff;
 
-  --border: #e2e8f0;
-  --divider: #eef2f7;
-  --input: #e2e8f0;
-  --ring: #6D28D9;
+  --border: #EFE6E6;
+  --divider: #F5EEEE;
+  --input: #EFE6E6;
+  --ring: #DD4448;
 
   /* Text scale */
-  --text-primary: #0a2540;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --text-disabled: #cbd5e1;
+  --text-primary: #201A1A;
+  --text-secondary: #4A3F3F;
+  --text-muted: #8A7C7C;
+  --text-disabled: #D4C8C8;
   --text-inverse: #ffffff;
 
   /* Surfaces */
   --surface: #ffffff;
-  --surface-secondary: #f8fafc;
-  --surface-tertiary: #f1f5f9;
-  --disabled: #f1f5f9;
-  --overlay: rgba(15, 23, 42, 0.48);
-  --overlay-light: rgba(15, 23, 42, 0.24);
+  --surface-secondary: #FAF6F6;
+  --surface-tertiary: #F5F0F0;
+  --disabled: #F5F0F0;
+  --overlay: rgba(32, 26, 26, 0.48);
+  --overlay-light: rgba(32, 26, 26, 0.24);
 
   /* Financial semantics */
   --profit: var(--success);
   --loss: var(--destructive);
 
-  --gradient-brand: linear-gradient(135deg, #0f172a 0%, #6D28D9 100%);
-  --gradient-mint:  linear-gradient(135deg, #8B5CF6 0%, #6D28D9 100%);
-  --gradient-card:  linear-gradient(135deg, #0f172a 0%, #1e293b 55%, #6D28D9 130%);
-  --gradient-soft:  linear-gradient(180deg, #FAF7FF 0%, #EDE4FF 100%);
+  --gradient-brand: linear-gradient(135deg, #201A1A 0%, #DD4448 100%);
+  --gradient-mint:  linear-gradient(135deg, #DD4448 0%, #A8323A 100%);
+  --gradient-card:  linear-gradient(135deg, #201A1A 0%, #3A2828 55%, #DD4448 130%);
+  --gradient-soft:  linear-gradient(180deg, #FBF7F7 0%, #F5E8E8 100%);
 }
+
 
 .dark {
   --background: #0b1220;
