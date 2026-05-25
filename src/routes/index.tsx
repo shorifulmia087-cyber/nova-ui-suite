@@ -102,7 +102,8 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card">
+        <div className="liquid-glass rounded-lg p-card shadow-none">
+
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
@@ -129,7 +130,8 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card">
+        <div className="liquid-glass rounded-lg p-card shadow-none">
+
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
