@@ -9,6 +9,7 @@ import {
   IconUsersGroup,
   IconChecklist,
   IconHistory,
+  IconWallet,
 } from "@tabler/icons-react";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
