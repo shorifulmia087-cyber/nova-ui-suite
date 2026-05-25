@@ -98,7 +98,7 @@ function Home() {
       {/* Verification — under header */}
       {!verified && (
         <div className="px-4 mt-3">
-          <div className="liquid-glass rounded-lg p-card flex items-center gap-3 [box-shadow:none]">
+          <div className="bg-card rounded-lg p-card flex items-center gap-3 [box-shadow:none]">
             <div className="flex-shrink-0 h-10 w-10 rounded-pill bg-primary/10 flex items-center justify-center">
               <ShieldCheck className="h-5 w-5 text-primary" />
             </div>
