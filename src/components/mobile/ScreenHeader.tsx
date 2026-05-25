@@ -43,7 +43,9 @@ export function ScreenHeader({
 }) {
   const router = useRouter();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const resolvedTitle = title ?? titleFromPath(pathname);
+  const derived = deriveFromPath(pathname);
+  const resolvedTitle = title ?? derived.title;
+  const resolvedSubtitle = subtitle ?? derived.param;
   return (
     <header className="bg-card px-4 pt-4 pb-4 flex items-center gap-3">
       {back && (
