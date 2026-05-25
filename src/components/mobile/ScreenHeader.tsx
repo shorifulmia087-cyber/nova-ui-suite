@@ -1,5 +1,5 @@
 import { Link, useRouter } from "@tanstack/react-router";
-import { ArrowLeft } from "lucide-react";
+import { IconArrowBadgeLeft } from "@tabler/icons-react";
 import { Heading } from "@/lib/typography";
 import { type ReactNode } from "react";
 
@@ -23,7 +23,7 @@ export function ScreenHeader({
           className="h-10 w-10 rounded-full bg-background flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
-          <ArrowLeft className="h-5 w-5" strokeWidth={2} />
+          <IconArrowBadgeLeft className="h-5 w-5" stroke={2} />
         </button>
       )}
       <div className="flex-1 min-w-0">
