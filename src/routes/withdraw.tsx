@@ -19,7 +19,7 @@ function Withdraw() {
 
   return (
     <div>
-      <ScreenHeader title="Withdraw" />
+      <ScreenHeader />
 
       <div className="px-4">
         <Card className="p-card text-center bg-gradient-soft">

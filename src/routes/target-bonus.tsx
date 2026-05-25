@@ -25,7 +25,7 @@ const tiers = [
 function TargetBonusPage() {
   return (
     <div className="pb-24">
-      <ScreenHeader title="Target Bonus" />
+      <ScreenHeader />
 
       {/* Hero */}
       <div className="px-4">

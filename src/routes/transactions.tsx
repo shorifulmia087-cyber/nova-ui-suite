@@ -26,7 +26,7 @@ function TxList() {
 
   return (
     <div>
-      <ScreenHeader title="Transactions" />
+      <ScreenHeader />
 
       <div className="px-4">
         <div className="relative">
