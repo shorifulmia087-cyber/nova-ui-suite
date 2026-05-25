@@ -22,10 +22,10 @@ export function ScreenHeader({
       {back && (
         <button
           onClick={() => router.history.back()}
-          className="p-0 border-0 bg-transparent flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
+          className="h-9 w-9 rounded-pill bg-background flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
-          <ChevronLeft size={32} strokeWidth={2} />
+          <ChevronLeft className="h-6 w-6" strokeWidth={2} />
         </button>
       )}
       <div className="flex-1 min-w-0">
