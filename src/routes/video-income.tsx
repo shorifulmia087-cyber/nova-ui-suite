@@ -99,7 +99,7 @@ function VideoIncomePage() {
   if (submitted) {
     return (
       <div className="pb-40">
-        <ScreenHeader title="Submission status" />
+        <ScreenHeader />
 
         <section className="px-4">
           <div className="relative overflow-hidden rounded-xl bg-primary text-primary-foreground p-card shadow-navy">
@@ -231,7 +231,7 @@ function VideoIncomePage() {
   /* ----------------------------- SUBMISSION VIEW ----------------------------- */
   return (
     <div className="pb-40">
-      <ScreenHeader title="Earn from videos" />
+      <ScreenHeader />
 
       {/* Tier selection */}
       <section className="px-4 mt-2">
