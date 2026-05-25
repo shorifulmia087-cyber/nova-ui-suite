@@ -153,7 +153,7 @@ function AdminTasks() {
 
   return (
     <div>
-      <ScreenHeader title="Admin · Tasks" subtitle="Create and manage tasks" />
+      <ScreenHeader title="Admin · Tasks" />
 
       <div className="px-4">
         <Card className="p-card">

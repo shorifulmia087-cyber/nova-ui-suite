@@ -17,7 +17,7 @@ function Deposit() {
 
   return (
     <div>
-      <ScreenHeader title="Add money" subtitle="Top up your balance" />
+      <ScreenHeader title="Add money" />
 
       <div className="px-4">
         <Card className="p-card text-center bg-gradient-soft">

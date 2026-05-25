@@ -15,7 +15,7 @@ function Farm() {
 
   return (
     <div className="[&_.bg-card]:border-0 [&_.bg-card]:border-transparent">
-      <ScreenHeader title="My Farm" subtitle="Yield-bearing plots" back={false} />
+      <ScreenHeader title="My Farm" back={false} />
 
       <div className="px-4">
         <Card className="relative overflow-hidden p-card bg-gradient-card text-white border-0">
