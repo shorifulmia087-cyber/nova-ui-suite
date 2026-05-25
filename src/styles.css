@@ -2,13 +2,14 @@
 @source "../src";
 @import "tw-animate-css";
 
-@import url("https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Hind Siliguri", system-ui, sans-serif;
-  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Hind Siliguri", system-ui, sans-serif;
+  --font-display: "Quicksand", "Hind Siliguri", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-sans: "Quicksand", "Hind Siliguri", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+
 
   /* Unified radius — entire app uses a single rounded-lg token */
   --radius-sm: var(--radius);
