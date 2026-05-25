@@ -93,7 +93,7 @@ function Tasks() {
   if (!user) {
     return (
       <div>
-        <ScreenHeader title="Tasks" subtitle="Sign in to earn" back={false} />
+        <ScreenHeader title="Tasks" back={false} />
         <div className="px-4">
           <Card className="p-card text-center">
             <p className="text-label mb-3">Please sign in to view tasks.</p>
@@ -112,7 +112,7 @@ function Tasks() {
     <div>
       <ScreenHeader
         title="Tasks"
-        subtitle="Complete to earn instantly"
+
         back={false}
         right={
           isAdmin ? (
