@@ -22,7 +22,7 @@ export function ScreenHeader({
       {back && (
         <button
           onClick={() => router.history.back()}
-          className="h-8 w-8 rounded-full bg-background p-0 flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
+          className="p-0 border-0 bg-transparent flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
           <IconArrowBadgeLeft size={20} stroke={2} />
