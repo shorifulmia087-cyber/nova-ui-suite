@@ -111,8 +111,6 @@ function Tasks() {
   return (
     <div>
       <ScreenHeader
-        title="Tasks"
-
         back={false}
         right={
           isAdmin ? (
