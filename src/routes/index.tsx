@@ -117,7 +117,7 @@ function Home() {
           ].map(({ to, icon: I, label }) => (
             <Link key={label} to={to} className="group">
               <div className="w-full rounded-lg flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
-                <I className="h-[28px] w-[28px]" stroke={1.75} />
+                <I className="h-[28px] w-[28px] text-primary" stroke={2} />
                 <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
               </div>
             </Link>
