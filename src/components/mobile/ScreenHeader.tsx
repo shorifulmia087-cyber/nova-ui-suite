@@ -25,7 +25,7 @@ export function ScreenHeader({
           className="p-0 border-0 bg-transparent flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
-          <IconArrowBadgeLeft size={20} stroke={2} />
+          <IconArrowBadgeLeft size={32} stroke={2} />
         </button>
       )}
       <div className="flex-1 min-w-0">
