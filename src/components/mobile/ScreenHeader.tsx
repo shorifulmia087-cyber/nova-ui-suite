@@ -1,5 +1,5 @@
 import { Link, useRouter, useRouterState } from "@tanstack/react-router";
-import { IconArrowBadgeLeft } from "@tabler/icons-react";
+import { ChevronLeft } from "lucide-react";
 import { Heading } from "@/lib/typography";
 import { type ReactNode } from "react";
 import { getRouteTitle } from "@/lib/route-titles";
@@ -25,7 +25,7 @@ export function ScreenHeader({
           className="p-0 border-0 bg-transparent flex items-center justify-center text-foreground hover:opacity-80 transition shrink-0"
           aria-label="Back"
         >
-          <IconArrowBadgeLeft size={32} stroke={2} />
+          <ChevronLeft size={32} strokeWidth={2} />
         </button>
       )}
       <div className="flex-1 min-w-0">
