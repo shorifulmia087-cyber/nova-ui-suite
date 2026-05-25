@@ -93,7 +93,7 @@ function Tasks() {
   if (!user) {
     return (
       <div>
-        <ScreenHeader back={false} />
+        <ScreenHeader />
         <div className="px-4">
           <Card className="p-card text-center">
             <p className="text-label mb-3">Please sign in to view tasks.</p>
@@ -111,7 +111,6 @@ function Tasks() {
   return (
     <div>
       <ScreenHeader
-        back={false}
         right={
           isAdmin ? (
             <Link to="/admin/tasks" className="inline-flex items-center gap-1 text-caption text-muted-foreground hover:text-foreground">
