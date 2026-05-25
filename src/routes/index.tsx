@@ -95,9 +95,30 @@ function Home() {
       </header>
 
 
+      {/* Verification — under header */}
+      {!verified && (
+        <div className="px-4 mt-3">
+          <div className="liquid-glass rounded-lg p-card shadow-none flex items-center gap-3">
+            <div className="flex-shrink-0 h-10 w-10 rounded-pill bg-primary/10 flex items-center justify-center">
+              <ShieldCheck className="h-5 w-5 text-primary" />
+            </div>
+            <Text variant="label" className="flex-1 text-foreground leading-tight">
+              Verify Your Profile
+            </Text>
+            <Link
+              to="/verify"
+              className="text-button shrink-0 inline-flex items-center justify-center h-9 px-4 rounded-pill bg-primary text-primary-foreground active:scale-[0.97] transition-transform"
+            >
+              Verify
+            </Link>
+          </div>
+        </div>
+      )}
 
       {/* Info banner — intro video */}
       <IntroVideoBanner />
+
+
 
 
       {/* Quick actions — refined card */}
