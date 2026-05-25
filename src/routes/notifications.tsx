@@ -20,7 +20,7 @@ const map = {
 function Notifs() {
   return (
     <div>
-      <ScreenHeader title="Notifications" subtitle={`${notifications.length} updates`} />
+      <ScreenHeader title="Notifications" updates`} />
       <div className="px-4 space-y-2">
         {notifications.map((n) => {
           const { Icon, c } = map[n.type as keyof typeof map];

@@ -26,7 +26,7 @@ function TxList() {
 
   return (
     <div>
-      <ScreenHeader title="Transactions" subtitle={`${list.length} activities`} />
+      <ScreenHeader title="Transactions" activities`} />
 
       <div className="px-4">
         <div className="relative">
