@@ -231,14 +231,10 @@ function BalancePill({ value, hidden }: { value: number; hidden: boolean }) {
       <span className="h-7 w-7 rounded-full bg-white/15 backdrop-blur-sm flex items-center justify-center ring-1 ring-white/20">
         <IconWallet className="h-4 w-4 text-primary-foreground" stroke={2} />
       </span>
-      <div className="flex flex-col items-end leading-none">
-        <Text variant="caption" case="upper" className="text-primary-foreground/70 leading-none tracking-wider">
-          Balance
-        </Text>
-        <Text variant="label" className="mt-1 text-primary-foreground tabular-nums leading-none">
-          {text}
-        </Text>
-      </div>
+      <Text variant="label" className="text-primary-foreground tabular-nums leading-none">
+        {text}
+      </Text>
+
     </div>
   );
 }
