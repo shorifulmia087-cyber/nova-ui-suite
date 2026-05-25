@@ -14,7 +14,7 @@ function Farm() {
   const dailyYield = farmPlots.reduce((s, p) => s + p.yieldDay, 0);
 
   return (
-    <div>
+    <div className="[&_.bg-card]:border-0 [&_.bg-card]:border-transparent">
       <ScreenHeader title="My Farm" subtitle="Yield-bearing plots" back={false} />
 
       <div className="px-5">
