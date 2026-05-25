@@ -38,7 +38,7 @@ function Refer() {
 
   return (
     <div>
-      <ScreenHeader back={false} />
+      <ScreenHeader />
 
       <div className="px-4">
         <Card className="relative overflow-hidden p-card bg-gradient-brand text-white border-0 text-center">
