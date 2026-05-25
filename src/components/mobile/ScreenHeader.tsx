@@ -18,7 +18,7 @@ export function ScreenHeader({
   const resolvedTitle = title ?? getRouteTitle(pathname);
 
   return (
-    <header className="bg-card px-4 pt-3 pb-3 flex items-center gap-3">
+    <header className="bg-card px-4 pt-3 pb-3 mb-4 flex items-center gap-3">
       {back && (
         <button
           onClick={() => router.history.back()}
