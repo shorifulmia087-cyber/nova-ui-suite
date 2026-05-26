@@ -14,18 +14,34 @@ export type TaskRow = {
   created_at: string;
 };
 
-// ----- USER: list active tasks with completion flag -----
+// Today's date in Asia/Dhaka (YYYY-MM-DD) — tasks reset daily at 12:00 AM Bangladesh time
+function todayDhaka(): string {
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Dhaka",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  });
+  return fmt.format(new Date()); // en-CA → YYYY-MM-DD
+}
+
+// ----- USER: list active tasks with today's completion flag -----
 export const listTasks = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const { supabase, userId } = context;
+    const today = todayDhaka();
     const [{ data: tasks, error: tErr }, { data: comps, error: cErr }] = await Promise.all([
       supabase
         .from("tasks")
         .select("id,title,description,reward,task_url,is_active,created_at")
         .eq("is_active", true)
         .order("created_at", { ascending: false }),
-      supabase.from("task_completions").select("task_id,reward_amount,created_at").eq("user_id", userId),
+      supabase
+        .from("task_completions")
+        .select("task_id,reward_amount,created_at,completion_date")
+        .eq("user_id", userId)
+        .eq("completion_date", today),
     ]);
     if (tErr) throw new Error(tErr.message);
     if (cErr) throw new Error(cErr.message);
