@@ -41,6 +41,10 @@ function SignupPage() {
     setSubmitting(true);
     try {
       const res = await signup({ data: values });
+      if (!res.success) {
+        toast.error(res.error);
+        return;
+      }
       toast.success(`Account created! Your referral code: ${res.referralCode}`);
 
       const { error: signInErr } = await supabase.auth.signInWithPassword({
