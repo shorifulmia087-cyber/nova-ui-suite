@@ -133,60 +133,52 @@ function VideoIncomePage() {
       <div className="pb-40">
         <ScreenHeader />
 
-        {/* Premium hero */}
+        {/* Clean hero */}
         <section className="px-4">
-          <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary via-primary to-[color:var(--primary)]/90 text-primary-foreground p-card shadow-navy">
-            <span aria-hidden className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full bg-accent/40 blur-3xl" />
-            <span aria-hidden className="pointer-events-none absolute -bottom-28 -left-16 h-52 w-52 rounded-full bg-primary-foreground/10 blur-3xl" />
-            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] [background-size:18px_18px]" />
-
-            <div className="relative flex items-center gap-4">
-              <div className="relative h-16 w-16 shrink-0">
-                <span className="absolute inset-0 rounded-pill bg-accent/30 animate-ping" />
-                <div className="relative h-16 w-16 rounded-pill bg-accent text-accent-foreground flex items-center justify-center shadow-glow">
-                  <Check className="h-8 w-8" strokeWidth={2} />
+          <div className="relative rounded-xl bg-card ring-1 ring-border elevation-2 p-card">
+            <div className="flex items-center gap-4">
+              <div className="relative h-14 w-14 shrink-0">
+                <span aria-hidden className="absolute inset-0 rounded-pill bg-accent/20 animate-ping" />
+                <div className="relative h-14 w-14 rounded-pill bg-accent text-accent-foreground flex items-center justify-center">
+                  <Check className="h-7 w-7" strokeWidth={2} />
                 </div>
               </div>
               <div className="min-w-0 flex-1">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/25 backdrop-blur ring-1 ring-primary-foreground/30">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-accent/10 ring-1 ring-accent/20">
                   <span className="h-1.5 w-1.5 rounded-pill bg-accent animate-pulse" />
-                  <Text variant="caption" className="text-primary-foreground">
+                  <Text variant="caption" className="text-accent">
                     In review
                   </Text>
                 </span>
-                <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-2">
+                <Heading variant="cardTitle" case="sentence" className="text-foreground mt-2">
                   Submission received
                 </Heading>
-                <Text variant="caption" className="text-primary-foreground/90 mt-1 block">
+                <Text variant="caption" className="text-muted-foreground mt-1 block">
                   ID · VI-{Math.random().toString(36).slice(2, 8).toUpperCase()}
                 </Text>
-
               </div>
             </div>
 
-
-
-
             {/* Progress */}
-            <div className="relative mt-5">
+            <div className="mt-5 pt-4 border-t border-border">
               <div className="flex items-center justify-between mb-2">
-                <Text variant="caption" className="text-primary-foreground/90">
+                <Text variant="caption" className="text-muted-foreground">
                   Progress
                 </Text>
-                <Text variant="caption" className="text-primary-foreground tabular-nums">
+                <Text variant="caption" className="text-foreground tabular-nums">
                   {progressPct}%
                 </Text>
               </div>
-
-              <div className="h-1.5 w-full rounded-pill bg-primary-foreground/15 overflow-hidden">
+              <div className="h-1.5 w-full rounded-pill bg-muted overflow-hidden">
                 <div
-                  className="h-full rounded-pill bg-gradient-to-r from-accent to-[color:var(--accent)]/70 transition-all duration-700"
+                  className="h-full rounded-pill bg-accent transition-all duration-700"
                   style={{ width: `${progressPct}%` }}
                 />
               </div>
             </div>
           </div>
         </section>
+
 
         {/* Timeline */}
         <section className="px-4 mt-8">
