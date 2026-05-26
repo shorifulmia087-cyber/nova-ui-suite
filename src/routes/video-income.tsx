@@ -206,7 +206,7 @@ function VideoIncomePage() {
             </span>
           </div>
 
-          <ol className="relative mt-5 pl-12">
+          <ol className="relative mt-5 pl-16">
             {/* Background rail */}
             <span aria-hidden className="absolute left-[23px] top-3 bottom-3 w-px bg-border" />
             {/* Filled rail */}
