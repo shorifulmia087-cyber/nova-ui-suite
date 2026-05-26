@@ -65,6 +65,7 @@ function VideoIncomePage() {
   const [selectedTier, setSelectedTier] = useState<string>("t1");
   const [videoUrl, setVideoUrl] = useState("");
   const [channelName, setChannelName] = useState("");
+  const [channelLink, setChannelLink] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
