@@ -55,11 +55,18 @@ const tiers: Tier[] = [
 ];
 
 const timeline = [
-  { icon: Upload,      title: "Submitted",        sub: "Your video has been received",                 eta: "Now" },
-  { icon: Clock,       title: "Under review",     sub: "Our team is verifying views and content",      eta: "12–24 h" },
-  { icon: ShieldCheck, title: "Approval",         sub: "Approved after successful verification",       eta: "24–48 h" },
-  { icon: Wallet,      title: "Added to balance", sub: "Reward credited to your main wallet balance",  eta: "48–72 h" },
+  { icon: Upload,      title: "Submitted",        sub: "Your video has been received",                 eta: "Just now",  offsetH: 0 },
+  { icon: Clock,       title: "Under review",     sub: "Our team is verifying views and content",      eta: "12–24 h",   offsetH: 18 },
+  { icon: ShieldCheck, title: "Approval",         sub: "Approved after successful verification",       eta: "24–48 h",   offsetH: 36 },
+  { icon: Wallet,      title: "Added to balance", sub: "Reward credited to your main wallet balance",  eta: "48–72 h",   offsetH: 60 },
 ];
+
+function formatStepTime(offsetH: number) {
+  const d = new Date(Date.now() + offsetH * 60 * 60 * 1000);
+  const day = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  const time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  return `${day} · ${time}`;
+}
 
 function VideoIncomePage() {
   const [selectedTier, setSelectedTier] = useState<string>("t1");
@@ -181,96 +188,119 @@ function VideoIncomePage() {
 
         {/* Timeline */}
         <section className="px-4 mt-8">
-          <SectionEyebrow>Review process</SectionEyebrow>
-          <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
-            What happens next
-          </Heading>
-          <Text variant="bodySecondary" as="p" className="mt-1">
-            Live status of your submission
-          </Text>
+          <div className="flex items-end justify-between gap-3">
+            <div className="min-w-0">
+              <SectionEyebrow>Review process</SectionEyebrow>
+              <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
+                Live status
+              </Heading>
+            </div>
+            <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-accent/10 ring-1 ring-accent/20 shrink-0">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inset-0 rounded-pill bg-accent/60 animate-ping" />
+                <span className="relative h-2 w-2 rounded-pill bg-accent" />
+              </span>
+              <Text variant="caption" className="text-accent">Live</Text>
+            </span>
+          </div>
 
-          <ol className="relative mt-5">
+          <ol className="relative mt-5 pl-12">
             {/* Background rail */}
-            <span aria-hidden className="absolute left-[27px] top-6 bottom-6 w-0.5 bg-border rounded-pill" />
-            {/* Filled rail up to current step */}
+            <span aria-hidden className="absolute left-[23px] top-3 bottom-3 w-px bg-border" />
+            {/* Filled rail */}
             <span
               aria-hidden
-              className="absolute left-[27px] top-6 w-0.5 bg-gradient-to-b from-accent via-accent to-accent/30 rounded-pill transition-all duration-700"
-              style={{ height: `calc((100% - 48px) * ${currentStep / (totalSteps - 1)})` }}
+              className="absolute left-[23px] top-3 w-px bg-gradient-to-b from-accent to-accent/30 transition-all duration-700"
+              style={{ height: `calc((100% - 24px) * ${currentStep / (totalSteps - 1)})` }}
             />
 
-            <div className="space-y-3">
-              {timeline.map(({ icon: I, title, sub, eta }, idx) => {
-                const done = idx < currentStep;
-                const active = idx === currentStep;
-                return (
-                  <li
-                    key={title}
-                    className={cn(
-                      "relative rounded-lg p-card flex items-start gap-4 transition-all",
-                      active
-                        ? "bg-card ring-1 ring-accent/40 shadow-glow"
-                        : "bg-card ring-1 ring-border/60 shadow-card",
-                    )}
-                  >
-                    <div className="relative shrink-0">
+            {timeline.map(({ icon: I, title, sub, eta, offsetH }, idx) => {
+              const done = idx < currentStep;
+              const active = idx === currentStep;
+              const pending = !done && !active;
+              const isLast = idx === timeline.length - 1;
+
+              return (
+                <li key={title} className={cn("relative", isLast ? "" : "pb-5")}>
+                  {/* Node */}
+                  <div className="absolute -left-12 top-1">
+                    <div className="relative h-12 w-12">
                       {active && (
-                        <span aria-hidden className="absolute inset-0 rounded-pill bg-accent/30 animate-ping" />
+                        <>
+                          <span aria-hidden className="absolute inset-0 rounded-pill bg-accent/25 animate-ping" />
+                          <span aria-hidden className="absolute -inset-1 rounded-pill bg-accent/10" />
+                        </>
                       )}
                       <div
                         className={cn(
-                          "relative h-14 w-14 rounded-pill flex items-center justify-center ring-2 transition-colors",
-                          done
-                            ? "bg-accent/15 text-accent ring-accent/30"
-                            : active
-                              ? "bg-accent text-accent-foreground ring-accent/40"
-                              : "bg-muted text-muted-foreground ring-border",
+                          "relative h-12 w-12 rounded-pill flex items-center justify-center transition-all",
+                          done && "bg-accent text-accent-foreground shadow-glow",
+                          active && "bg-card text-accent ring-2 ring-accent shadow-glow",
+                          pending && "bg-card text-muted-foreground ring-1 ring-border",
                         )}
                       >
-                        {done ? <Check className="h-6 w-6" /> : <I className="h-6 w-6" strokeWidth={2} />}
+                        {done ? <Check className="h-5 w-5" strokeWidth={2} /> : <I className="h-5 w-5" strokeWidth={2} />}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Card */}
+                  <div
+                    className={cn(
+                      "rounded-lg p-card transition-all",
+                      active && "bg-card ring-1 ring-accent/40 shadow-glow",
+                      done && "bg-card/60 ring-1 ring-border/50",
+                      pending && "bg-card/40 ring-1 ring-dashed ring-border/60",
+                    )}
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <Heading
+                            variant="cardTitle"
+                            case="sentence"
+                            className={cn(pending ? "text-muted-foreground" : "text-foreground")}
+                          >
+                            {title}
+                          </Heading>
+                          {active && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-pill bg-accent text-accent-foreground">
+                              <span className="h-1.5 w-1.5 rounded-pill bg-accent-foreground animate-pulse" />
+                              <Text variant="caption" className="text-accent-foreground">In progress</Text>
+                            </span>
+                          )}
+                          {done && (
+                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-pill bg-accent/15">
+                              <Check className="h-3 w-3 text-accent" strokeWidth={2} />
+                              <Text variant="caption" className="text-accent">Done</Text>
+                            </span>
+                          )}
+                        </div>
+                        <Text variant="bodySecondary" as="p" className="mt-1">
+                          {sub}
+                        </Text>
                       </div>
                     </div>
 
-                    <div className="flex-1 min-w-0 pt-1">
-                      <div className="flex items-center justify-between gap-3">
-                        <Heading variant="cardTitle" case="sentence" className="text-foreground">
-                          {title}
-                        </Heading>
-                        <span
-                          className={cn(
-                            "shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-pill",
-                            done
-                              ? "bg-accent/15"
-                              : active
-                                ? "bg-accent text-accent-foreground"
-                                : "bg-muted",
-                          )}
-                        >
-                          {active && <span className="h-1.5 w-1.5 rounded-pill bg-accent-foreground animate-pulse" />}
-                          <Text
-                            variant="caption"
-                            className={cn(
-                              done
-                                ? "text-accent"
-                                : active
-                                  ? "text-accent-foreground"
-                                  : "text-muted-foreground",
-                            )}
-                          >
-                            {done ? "Done" : eta}
-                          </Text>
-                        </span>
+                    {/* Footer meta */}
+                    <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between gap-3">
+                      <div className="inline-flex items-center gap-1.5 min-w-0">
+                        <Clock className={cn("h-3.5 w-3.5 shrink-0", done ? "text-accent" : active ? "text-accent" : "text-muted-foreground")} strokeWidth={2} />
+                        <Text variant="caption" className={cn("truncate", done ? "text-accent" : "text-muted-foreground")}>
+                          {done ? "Completed" : active ? "Now" : `In ${eta}`}
+                        </Text>
                       </div>
-                      <Text variant="bodySecondary" as="p" className="mt-1">
-                        {sub}
+                      <Text variant="caption" className="text-muted-foreground tabular-nums shrink-0">
+                        {formatStepTime(offsetH)}
                       </Text>
                     </div>
-                  </li>
-                );
-              })}
-            </div>
+                  </div>
+                </li>
+              );
+            })}
           </ol>
         </section>
+
 
         {/* Note */}
         <section className="px-4 mt-6">
