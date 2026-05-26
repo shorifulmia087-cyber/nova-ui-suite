@@ -88,10 +88,12 @@ export const signupUser = createServerFn({ method: "POST" })
       const msg = createErr?.message ?? "Failed to create account";
       const code = (createErr as any)?.code ?? "";
       if (code === "email_exists" || /already|exists|registered/i.test(msg)) {
-        throw new Error("This email is already registered");
+        // Expected validation case — return instead of throw so it isn't
+        // logged as a server RUNTIME_ERROR by the runtime collector.
+        return { success: false as const, error: "This email is already registered" };
       }
-      throw new Error(msg);
+      return { success: false as const, error: msg };
     }
 
-    return { success: true, referralCode: myReferral, email: data.email };
+    return { success: true as const, referralCode: myReferral, email: data.email };
   });
