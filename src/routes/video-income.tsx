@@ -106,6 +106,11 @@ function VideoIncomePage() {
     analyticsFile !== null;
 
   const handleSubmit = () => {
+    if (hasPending) {
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     if (!canSubmit) {
       toast.error("Please fill in all the fields");
       return;
@@ -118,6 +123,7 @@ function VideoIncomePage() {
     } catch {
       /* ignore */
     }
+    setHasPending(true);
     setSubmitted(true);
     toast.success("Submitted successfully");
     window.scrollTo({ top: 0, behavior: "smooth" });
