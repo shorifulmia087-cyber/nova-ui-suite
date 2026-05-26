@@ -88,6 +88,7 @@ export type Database = {
       }
       task_completions: {
         Row: {
+          completion_date: string
           created_at: string
           id: string
           reward_amount: number
@@ -95,6 +96,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          completion_date?: string
           created_at?: string
           id?: string
           reward_amount?: number
@@ -102,6 +104,7 @@ export type Database = {
           user_id: string
         }
         Update: {
+          completion_date?: string
           created_at?: string
           id?: string
           reward_amount?: number
