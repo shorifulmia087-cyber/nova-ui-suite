@@ -163,26 +163,8 @@ function VideoIncomePage() {
               </div>
             </div>
 
-            {/* Reward + tier */}
-            <div className="relative mt-5 rounded-lg bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
-              <div className="min-w-0">
-                <Text variant="caption" className="text-primary-foreground/70">
-                  Tier
-                </Text>
-                <Text variant="label" as="p" className="text-primary-foreground mt-1 truncate">
-                  {tier.views}
-                </Text>
-              </div>
-              <span aria-hidden className="h-10 w-px bg-primary-foreground/15" />
-              <div className="text-right shrink-0">
-                <Text variant="caption" className="text-primary-foreground/70">
-                  Reward
-                </Text>
-                <Text variant="cardTitle" as="p" className="text-accent tabular-nums mt-1">
-                  ৳{tier.amount}
-                </Text>
-              </div>
-            </div>
+
+
 
             {/* Progress */}
             <div className="relative mt-5">
