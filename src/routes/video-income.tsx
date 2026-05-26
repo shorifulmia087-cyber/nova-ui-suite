@@ -340,6 +340,33 @@ function VideoIncomePage() {
     <div className="pb-40">
       <ScreenHeader />
 
+      {/* Pending submission banner */}
+      {hasPending && (
+        <section className="px-4 mt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(true);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="w-full text-left rounded-lg p-card flex items-center gap-3 bg-accent/10 ring-1 ring-accent/30 active:scale-[0.99] transition-all"
+          >
+            <div className="h-10 w-10 rounded-pill bg-accent/20 text-accent flex items-center justify-center shrink-0">
+              <Clock className="h-5 w-5" strokeWidth={2} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <Heading variant="cardTitle" case="sentence" className="text-foreground">
+                Pending review in progress
+              </Heading>
+              <Text variant="caption" className="text-muted-foreground mt-0.5 block">
+                Tap to view current submission status
+              </Text>
+            </div>
+            <ArrowRight className="h-5 w-5 text-accent shrink-0" strokeWidth={2} />
+          </button>
+        </section>
+      )}
+
       {/* Tier selection */}
       <section className="px-4 mt-2">
         <div className="mt-5 space-y-2.5">
