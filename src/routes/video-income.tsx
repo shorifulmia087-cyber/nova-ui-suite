@@ -301,7 +301,7 @@ function VideoIncomePage() {
       <section className="px-4 mt-8">
 
 
-        <div className="mt-4 rounded-xl bg-card ring-1 ring-border shadow-card p-card">
+        <div className="mt-4 rounded-xl bg-white ring-1 ring-border shadow-card p-card text-slate-900">
           {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video" first>
             <FieldInput
