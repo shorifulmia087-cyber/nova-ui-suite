@@ -55,11 +55,18 @@ const tiers: Tier[] = [
 ];
 
 const timeline = [
-  { icon: Upload,      title: "Submitted",        sub: "Your video has been received",                 eta: "Now" },
-  { icon: Clock,       title: "Under review",     sub: "Our team is verifying views and content",      eta: "12–24 h" },
-  { icon: ShieldCheck, title: "Approval",         sub: "Approved after successful verification",       eta: "24–48 h" },
-  { icon: Wallet,      title: "Added to balance", sub: "Reward credited to your main wallet balance",  eta: "48–72 h" },
+  { icon: Upload,      title: "Submitted",        sub: "Your video has been received",                 eta: "Just now",  offsetH: 0 },
+  { icon: Clock,       title: "Under review",     sub: "Our team is verifying views and content",      eta: "12–24 h",   offsetH: 18 },
+  { icon: ShieldCheck, title: "Approval",         sub: "Approved after successful verification",       eta: "24–48 h",   offsetH: 36 },
+  { icon: Wallet,      title: "Added to balance", sub: "Reward credited to your main wallet balance",  eta: "48–72 h",   offsetH: 60 },
 ];
+
+function formatStepTime(offsetH: number) {
+  const d = new Date(Date.now() + offsetH * 60 * 60 * 1000);
+  const day = d.toLocaleDateString(undefined, { month: "short", day: "numeric" });
+  const time = d.toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit" });
+  return `${day} · ${time}`;
+}
 
 function VideoIncomePage() {
   const [selectedTier, setSelectedTier] = useState<string>("t1");
