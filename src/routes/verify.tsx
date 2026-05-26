@@ -318,7 +318,8 @@ function Verify() {
           type="button"
           onClick={() => setStep("payment")}
           disabled={!agreed}
-          className="text-button w-full h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
+          style={agreed ? { animation: "attention-wiggle 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite, attention-pulse 1.8s ease-in-out infinite" } : undefined}
+          className="text-button w-full h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none disabled:animate-none inline-flex items-center justify-center gap-2"
         >
           Continue to payment
           <ArrowRight className="h-4 w-4" />
