@@ -324,9 +324,6 @@ function VideoIncomePage() {
         <StickyCta>
           <div className="w-full flex items-center justify-center gap-2 h-14 rounded-lg bg-muted text-muted-foreground cursor-not-allowed ring-1 ring-border">
             <ShieldCheck className="h-5 w-5" strokeWidth={2} />
-            <Text variant="button" className="text-muted-foreground">
-              Locked until admin approval
-            </Text>
           </div>
         </StickyCta>
       </div>
