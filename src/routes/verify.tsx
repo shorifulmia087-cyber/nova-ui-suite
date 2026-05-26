@@ -32,12 +32,12 @@ type Step = "benefits" | "payment" | "processing" | "verified";
 const VERIFY_FEE = 250;
 
 const BENEFITS = [
-  { icon: Wallet, title: "Unlimited Withdrawals", desc: "Withdraw your earnings anytime without limits." },
-  { icon: TrendingUp, title: "Higher Earning Rate", desc: "Earn up to 2x more on tasks and videos." },
-  { icon: Gift, title: "Exclusive Bonuses", desc: "Access target bonuses and special rewards." },
-  { icon: Crown, title: "Verified Badge", desc: "Stand out with a verified badge on your profile." },
-  { icon: Zap, title: "Priority Task Access", desc: "Get first access to high-paying tasks." },
-  { icon: Headphones, title: "Priority Support", desc: "24/7 dedicated customer support." },
+  { icon: Wallet, title: "আনলিমিটেড উইথড্র", desc: "যেকোনো সময় কোনো লিমিট ছাড়াই আপনার আয় উইথড্র করুন।" },
+  { icon: TrendingUp, title: "বেশি আয়ের সুযোগ", desc: "টাস্ক ও ভিডিও থেকে ২x পর্যন্ত বেশি আয় করুন।" },
+  { icon: Gift, title: "এক্সক্লুসিভ বোনাস", desc: "টার্গেট বোনাস ও বিশেষ রিওয়ার্ড উপভোগ করুন।" },
+  { icon: Crown, title: "ভেরিফাইড ব্যাজ", desc: "আপনার প্রোফাইলে ভেরিফাইড ব্যাজ পান।" },
+  { icon: Zap, title: "প্রায়োরিটি টাস্ক অ্যাক্সেস", desc: "হাই-পেয়িং টাস্কে সবার আগে অ্যাক্সেস পান।" },
+  { icon: Headphones, title: "প্রায়োরিটি সাপোর্ট", desc: "২৪/৭ ডেডিকেটেড কাস্টমার সাপোর্ট।" },
 ];
 
 const PAYMENT_METHODS = [
