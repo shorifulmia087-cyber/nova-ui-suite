@@ -426,11 +426,11 @@ function FieldInput({
 }) {
   return (
     <label className="block">
-      <Text variant="label" className="text-foreground mb-1.5 block">
+      <Text variant="label" className="text-slate-700 mb-1.5 block">
         {label}
       </Text>
       <div className="relative">
-        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
           {icon}
         </span>
         <input
@@ -438,12 +438,13 @@ function FieldInput({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full h-12 pl-11 pr-4 rounded-xl bg-card ring-1 ring-border/60 text-foreground text-input placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-accent focus:outline-none transition-all"
+          className="w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:ring-accent focus:bg-white focus:outline-none transition-all"
         />
       </div>
     </label>
   );
 }
+
 
 function FileField({
   label,
