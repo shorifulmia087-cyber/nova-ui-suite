@@ -235,19 +235,8 @@ function VideoIncomePage() {
 
       {/* Tier selection */}
       <section className="px-4 mt-2">
-
-        <SectionEyebrow>Step 01</SectionEyebrow>
-        <div className="flex items-end justify-between gap-3 mt-1">
-          <Heading variant="sectionTitle" case="sentence" className="text-foreground">
-            Choose your tier
-          </Heading>
-          <Text variant="caption">{tiers.length} options</Text>
-        </div>
-        <Text variant="bodySecondary" as="p" className="mt-1">
-          Select the tier that matches your video's current view count
-        </Text>
-
         <div className="mt-5 space-y-2.5">
+
           {tiers.map(({ id, views, amount, icon: I, label }) => {
             const active = selectedTier === id;
             return (
@@ -314,13 +303,7 @@ function VideoIncomePage() {
 
       {/* Submission form */}
       <section className="px-4 mt-8">
-        <SectionEyebrow>Step 02</SectionEyebrow>
-        <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
-          Submission details
-        </Heading>
-        <Text variant="bodySecondary" as="p" className="mt-1">
-          Provide accurate info — the reward is released after verification
-        </Text>
+
 
         <div className="mt-4 rounded-xl bg-card ring-1 ring-border shadow-card p-card">
           {/* Group 1 — Channel & video */}
