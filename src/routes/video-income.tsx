@@ -170,13 +170,14 @@ function VideoIncomePage() {
             {/* Progress */}
             <div className="relative mt-5">
               <div className="flex items-center justify-between mb-2">
-                <Text variant="caption" className="text-primary-foreground/70">
+                <Text variant="caption" className="text-primary-foreground/90">
                   Progress
                 </Text>
-                <Text variant="caption" className="text-accent tabular-nums">
+                <Text variant="caption" className="text-primary-foreground tabular-nums">
                   {progressPct}%
                 </Text>
               </div>
+
               <div className="h-1.5 w-full rounded-pill bg-primary-foreground/15 overflow-hidden">
                 <div
                   className="h-full rounded-pill bg-gradient-to-r from-accent to-[color:var(--accent)]/70 transition-all duration-700"
