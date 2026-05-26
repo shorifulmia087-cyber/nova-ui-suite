@@ -484,16 +484,28 @@ function VideoIncomePage() {
 
       {/* Sticky CTA */}
       <StickyCta>
-        <PrimaryButton onClick={handleSubmit} disabled={!canSubmit}>
-          {canSubmit ? (
-            <>
-              Submit for review · ৳{tier.amount}
-              <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
-            </>
-          ) : (
-            <>Complete all fields to submit</>
-          )}
-        </PrimaryButton>
+        {hasPending ? (
+          <PrimaryButton
+            onClick={() => {
+              setSubmitted(true);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            <Eye className="h-5 w-5" />
+            View pending submission status
+          </PrimaryButton>
+        ) : (
+          <PrimaryButton onClick={handleSubmit} disabled={!canSubmit}>
+            {canSubmit ? (
+              <>
+                Submit for review · ৳{tier.amount}
+                <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
+              </>
+            ) : (
+              <>Complete all fields to submit</>
+            )}
+          </PrimaryButton>
+        )}
       </StickyCta>
     </div>
   );
