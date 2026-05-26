@@ -266,24 +266,19 @@ function Verify() {
           <Heading variant="cardTitle" case="sentence" className="text-foreground mb-2">
             What you'll get
           </Heading>
-          <div className="space-y-3">
-            {BENEFITS.map(({ icon: I, title, desc }) => (
-              <div key={title} className="flex items-start gap-3">
-                <div className="h-9 w-9 shrink-0 rounded-lg bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
-                  <I className="h-[18px] w-[18px]" strokeWidth={2} />
+          <div className="space-y-2.5">
+            {BENEFITS.map(({ title }) => (
+              <div key={title} className="flex items-center gap-3">
+                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/15 text-[color:var(--success)] flex items-center justify-center">
+                  <Check className="h-4 w-4" strokeWidth={2} />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <Text variant="label" className="text-foreground leading-tight">
-                    {title}
-                  </Text>
-                  <Text variant="caption" className="text-muted-foreground mt-0.5">
-                    {desc}
-                  </Text>
-                </div>
-                <CheckCircle2 className="h-5 w-5 text-[color:var(--success)] shrink-0 mt-0.5" strokeWidth={2} />
+                <Text variant="label" className="text-foreground leading-tight flex-1">
+                  {title}
+                </Text>
               </div>
             ))}
           </div>
+
         </Card>
 
         {/* Fee notice */}
