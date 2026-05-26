@@ -179,6 +179,7 @@ export type Database = {
         Row: {
           admin_note: string | null
           analytics_url: string
+          channel_link: string
           channel_logo_url: string
           channel_name: string
           created_at: string
@@ -195,6 +196,7 @@ export type Database = {
         Insert: {
           admin_note?: string | null
           analytics_url: string
+          channel_link?: string
           channel_logo_url: string
           channel_name: string
           created_at?: string
@@ -211,6 +213,7 @@ export type Database = {
         Update: {
           admin_note?: string | null
           analytics_url?: string
+          channel_link?: string
           channel_logo_url?: string
           channel_name?: string
           created_at?: string

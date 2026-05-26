@@ -1,0 +1,1 @@
+ALTER TABLE public.video_submissions ADD COLUMN IF NOT EXISTS channel_link text NOT NULL DEFAULT '';
