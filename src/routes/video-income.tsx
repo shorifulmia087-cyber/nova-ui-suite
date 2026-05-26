@@ -75,6 +75,7 @@ function VideoIncomePage() {
   const canSubmit =
     videoUrl.trim().length > 5 &&
     channelName.trim().length > 0 &&
+    channelLink.trim().length > 5 &&
     logoFile !== null &&
     analyticsFile !== null;
 
