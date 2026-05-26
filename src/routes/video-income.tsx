@@ -65,6 +65,7 @@ function VideoIncomePage() {
   const [selectedTier, setSelectedTier] = useState<string>("t1");
   const [videoUrl, setVideoUrl] = useState("");
   const [channelName, setChannelName] = useState("");
+  const [channelLink, setChannelLink] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
@@ -74,6 +75,7 @@ function VideoIncomePage() {
   const canSubmit =
     videoUrl.trim().length > 5 &&
     channelName.trim().length > 0 &&
+    channelLink.trim().length > 5 &&
     logoFile !== null &&
     analyticsFile !== null;
 
@@ -91,6 +93,7 @@ function VideoIncomePage() {
     setSubmitted(false);
     setVideoUrl("");
     setChannelName("");
+    setChannelLink("");
     setLogoFile(null);
     setAnalyticsFile(null);
   };
@@ -387,6 +390,13 @@ function VideoIncomePage() {
               placeholder="Your channel name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
+            />
+            <FieldInput
+              label="YouTube channel link"
+              icon={<Link2 className="h-[18px] w-[18px]" />}
+              placeholder="https://youtube.com/@yourchannel"
+              value={channelLink}
+              onChange={(e) => setChannelLink(e.target.value)}
             />
           </FieldGroup>
 
