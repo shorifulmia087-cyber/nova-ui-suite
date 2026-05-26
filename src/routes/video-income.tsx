@@ -78,9 +78,10 @@ function VideoIncomePage() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [hasPending, setHasPending] = useState(false);
 
-  // Restore pending submission on mount — user stays locked on review screen
-  // until admin approves (mock: clear localStorage entry).
+  // Detect pending submission on mount — show form with a link to status
+  // (do NOT auto-jump into the status view).
   useEffect(() => {
     try {
       const raw = localStorage.getItem(PENDING_KEY);
@@ -89,7 +90,7 @@ function VideoIncomePage() {
       if (data?.tier_id && tiers.some((t) => t.id === data.tier_id)) {
         setSelectedTier(data.tier_id);
       }
-      setSubmitted(true);
+      setHasPending(true);
     } catch {
       /* ignore */
     }
@@ -105,6 +106,11 @@ function VideoIncomePage() {
     analyticsFile !== null;
 
   const handleSubmit = () => {
+    if (hasPending) {
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     if (!canSubmit) {
       toast.error("Please fill in all the fields");
       return;
@@ -117,6 +123,7 @@ function VideoIncomePage() {
     } catch {
       /* ignore */
     }
+    setHasPending(true);
     setSubmitted(true);
     toast.success("Submitted successfully");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -333,6 +340,33 @@ function VideoIncomePage() {
     <div className="pb-40">
       <ScreenHeader />
 
+      {/* Pending submission banner */}
+      {hasPending && (
+        <section className="px-4 mt-2">
+          <button
+            type="button"
+            onClick={() => {
+              setSubmitted(true);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+            className="w-full text-left rounded-lg p-card flex items-center gap-3 bg-accent/10 ring-1 ring-accent/30 active:scale-[0.99] transition-all"
+          >
+            <div className="h-10 w-10 rounded-pill bg-accent/20 text-accent flex items-center justify-center shrink-0">
+              <Clock className="h-5 w-5" strokeWidth={2} />
+            </div>
+            <div className="flex-1 min-w-0">
+              <Heading variant="cardTitle" case="sentence" className="text-foreground">
+                Pending review in progress
+              </Heading>
+              <Text variant="caption" className="text-muted-foreground mt-0.5 block">
+                Tap to view current submission status
+              </Text>
+            </div>
+            <ArrowRight className="h-5 w-5 text-accent shrink-0" strokeWidth={2} />
+          </button>
+        </section>
+      )}
+
       {/* Tier selection */}
       <section className="px-4 mt-2">
         <div className="mt-5 space-y-2.5">
@@ -450,16 +484,28 @@ function VideoIncomePage() {
 
       {/* Sticky CTA */}
       <StickyCta>
-        <PrimaryButton onClick={handleSubmit} disabled={!canSubmit}>
-          {canSubmit ? (
-            <>
-              Submit for review · ৳{tier.amount}
-              <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
-            </>
-          ) : (
-            <>Complete all fields to submit</>
-          )}
-        </PrimaryButton>
+        {hasPending ? (
+          <PrimaryButton
+            onClick={() => {
+              setSubmitted(true);
+              window.scrollTo({ top: 0, behavior: "smooth" });
+            }}
+          >
+            <Eye className="h-5 w-5" />
+            View pending submission status
+          </PrimaryButton>
+        ) : (
+          <PrimaryButton onClick={handleSubmit} disabled={!canSubmit}>
+            {canSubmit ? (
+              <>
+                Submit for review · ৳{tier.amount}
+                <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
+              </>
+            ) : (
+              <>Complete all fields to submit</>
+            )}
+          </PrimaryButton>
+        )}
       </StickyCta>
     </div>
   );
