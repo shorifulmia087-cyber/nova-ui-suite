@@ -225,7 +225,7 @@ function VideoIncomePage() {
               return (
                 <li key={title} className={cn("relative", isLast ? "" : "pb-5")}>
                   {/* Node */}
-                  <div className="absolute -left-12 top-1">
+                  <div className="absolute -left-16 top-1">
                     <div className="relative h-12 w-12">
                       {active && (
                         <>
