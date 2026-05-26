@@ -86,7 +86,8 @@ export const signupUser = createServerFn({ method: "POST" })
 
     if (createErr || !created.user) {
       const msg = createErr?.message ?? "Failed to create account";
-      if (/already registered|exists/i.test(msg)) {
+      const code = (createErr as any)?.code ?? "";
+      if (code === "email_exists" || /already|exists|registered/i.test(msg)) {
         throw new Error("This email is already registered");
       }
       throw new Error(msg);
