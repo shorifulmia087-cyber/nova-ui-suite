@@ -93,6 +93,7 @@ function VideoIncomePage() {
     setSubmitted(false);
     setVideoUrl("");
     setChannelName("");
+    setChannelLink("");
     setLogoFile(null);
     setAnalyticsFile(null);
   };
