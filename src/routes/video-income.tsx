@@ -78,9 +78,10 @@ function VideoIncomePage() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [hasPending, setHasPending] = useState(false);
 
-  // Restore pending submission on mount — user stays locked on review screen
-  // until admin approves (mock: clear localStorage entry).
+  // Detect pending submission on mount — show form with a link to status
+  // (do NOT auto-jump into the status view).
   useEffect(() => {
     try {
       const raw = localStorage.getItem(PENDING_KEY);
@@ -89,7 +90,7 @@ function VideoIncomePage() {
       if (data?.tier_id && tiers.some((t) => t.id === data.tier_id)) {
         setSelectedTier(data.tier_id);
       }
-      setSubmitted(true);
+      setHasPending(true);
     } catch {
       /* ignore */
     }
