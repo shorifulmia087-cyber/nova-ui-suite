@@ -322,9 +322,7 @@ function VideoIncomePage() {
 
         {/* Locked CTA — new submissions blocked until admin approves */}
         <StickyCta>
-          <div className="w-full flex items-center justify-center gap-2 h-14 rounded-lg bg-muted text-muted-foreground cursor-not-allowed ring-1 ring-border">
-            <ShieldCheck className="h-5 w-5" strokeWidth={2} />
-          </div>
+          <div className="w-full h-14 rounded-lg bg-muted cursor-not-allowed ring-1 ring-border" />
         </StickyCta>
       </div>
     );
