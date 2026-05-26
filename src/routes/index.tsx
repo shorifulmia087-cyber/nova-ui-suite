@@ -52,6 +52,7 @@ function Home() {
   const verified = useVerified(!!profile?.is_verified);
   const displayName = profile?.full_name || profile?.email?.split("@")[0] || "";
   const balance = Number(profile?.main_balance ?? 0);
+  const showProfileSkeleton = profileLoading && !profile;
   const greeting = (() => {
     const h = new Date().getHours();
     if (h < 12) return "Good morning";
