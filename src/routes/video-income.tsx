@@ -320,10 +320,6 @@ function VideoIncomePage() {
           </div>
         </section>
 
-        {/* Locked CTA — new submissions blocked until admin approves */}
-        <StickyCta>
-          <div className="w-full h-14 rounded-lg bg-muted cursor-not-allowed ring-1 ring-border" />
-        </StickyCta>
       </div>
     );
   }
