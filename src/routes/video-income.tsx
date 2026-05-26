@@ -471,7 +471,7 @@ function FileField({
           "relative w-full aspect-square rounded-lg overflow-hidden transition-all active:scale-[0.98] text-left group",
           file
             ? "ring-2 ring-accent shadow-glow"
-            : "ring-1 ring-dashed ring-border hover:ring-accent/60 bg-card",
+            : "ring-1 ring-dashed ring-slate-300 hover:ring-accent/60 bg-slate-50",
         )}
       >
         {preview ? (
@@ -507,10 +507,11 @@ function FileField({
             <div className="h-12 w-12 rounded-lg bg-accent/10 text-accent flex items-center justify-center">
               {icon}
             </div>
-            <Text variant="label" as="p" className="text-foreground mt-1">
+            <Text variant="label" as="p" className="text-slate-900 mt-1">
               {label}
             </Text>
-            {hint && <Text variant="caption">{hint}</Text>}
+            {hint && <Text variant="caption" className="text-slate-500">{hint}</Text>}
+
             <span className="mt-1 inline-flex items-center gap-1 px-3 py-1 rounded-pill bg-accent/10 text-accent">
               <Upload className="h-3.5 w-3.5" />
               <Text variant="caption" className="text-accent">Upload</Text>
