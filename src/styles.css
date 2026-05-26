@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Noto+Sans+Bengali:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss" source(none);
 @import "tw-animate-css";
 @source "../src";
@@ -8,8 +8,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-display: "DM Sans", "Hind Siliguri", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  --font-sans: "DM Sans", "Hind Siliguri", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-display: "DM Sans", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  --font-sans: "DM Sans", "Noto Sans Bengali", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 
 
   /* Unified radius — entire app uses a single rounded-lg token */
