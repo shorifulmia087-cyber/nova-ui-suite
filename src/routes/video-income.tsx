@@ -295,10 +295,6 @@ function VideoIncomePage() {
           })}
         </div>
 
-        <div className="mt-3 flex items-center gap-1.5 px-1">
-          <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-          <Text variant="caption">Verified against YouTube Studio analytics</Text>
-        </div>
       </section>
 
       {/* Submission form */}
@@ -324,23 +320,22 @@ function VideoIncomePage() {
             />
           </FieldGroup>
 
-          {/* Group 2 — Verification uploads */}
-          <FieldGroup title="Verification uploads">
+          <div className="mt-4 grid grid-cols-2 gap-3">
             <FileField
               label="Channel logo"
-              hint="PNG or JPG, square preferred"
-              icon={<ImageIcon className="h-[18px] w-[18px]" />}
+              hint="PNG or JPG"
+              icon={<ImageIcon className="h-5 w-5" />}
               file={logoFile}
               onChange={setLogoFile}
             />
             <FileField
-              label="YT Studio analytics screenshot"
-              hint="Must clearly show the view count"
-              icon={<BarChart3 className="h-[18px] w-[18px]" />}
+              label="Analytics screenshot"
+              hint="Show view count"
+              icon={<BarChart3 className="h-5 w-5" />}
               file={analyticsFile}
               onChange={setAnalyticsFile}
             />
-          </FieldGroup>
+          </div>
         </div>
       </section>
 
@@ -468,65 +463,58 @@ function FileField({
 
   return (
     <div className="block">
-      <Text variant="label" className="text-foreground mb-1.5 block">
-        {label}
-      </Text>
       <button
         type="button"
         onClick={() => inputRef.current?.click()}
         className={cn(
-          "w-full rounded-xl bg-card ring-1 p-card flex items-center gap-3 transition-all active:scale-[0.99] text-left",
+          "relative w-full aspect-square rounded-lg overflow-hidden transition-all active:scale-[0.98] text-left group",
           file
-            ? "ring-accent/40 bg-accent/5"
-            : "ring-border/60 hover:ring-border",
+            ? "ring-2 ring-accent shadow-glow"
+            : "ring-1 ring-dashed ring-border hover:ring-accent/60 bg-card",
         )}
       >
         {preview ? (
-          <img
-            src={preview}
-            alt=""
-            className="h-12 w-12 rounded-lg object-cover ring-1 ring-border/60 shrink-0"
-          />
+          <>
+            <img src={preview} alt="" className="absolute inset-0 h-full w-full object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/20 to-transparent" />
+            <span
+              role="button"
+              tabIndex={0}
+              onClick={(e) => {
+                e.stopPropagation();
+                onChange(null);
+                if (inputRef.current) inputRef.current.value = "";
+              }}
+              className="absolute top-2 right-2 h-8 w-8 rounded-pill bg-background/90 text-foreground flex items-center justify-center shadow-card"
+              aria-label="Remove"
+            >
+              <X className="h-4 w-4" />
+            </span>
+            <div className="absolute bottom-0 left-0 right-0 p-card">
+              <div className="flex items-center gap-2">
+                <span className="h-7 w-7 rounded-pill bg-accent text-accent-foreground flex items-center justify-center shrink-0">
+                  <Check className="h-4 w-4" />
+                </span>
+                <Text variant="label" as="p" className="text-primary-foreground truncate">
+                  {label}
+                </Text>
+              </div>
+            </div>
+          </>
         ) : (
-          <div className="h-12 w-12 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
-            {icon}
+          <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-card text-center">
+            <div className="h-12 w-12 rounded-lg bg-accent/10 text-accent flex items-center justify-center">
+              {icon}
+            </div>
+            <Text variant="label" as="p" className="text-foreground mt-1">
+              {label}
+            </Text>
+            {hint && <Text variant="caption">{hint}</Text>}
+            <span className="mt-1 inline-flex items-center gap-1 px-3 py-1 rounded-pill bg-accent/10 text-accent">
+              <Upload className="h-3.5 w-3.5" />
+              <Text variant="caption" className="text-accent">Upload</Text>
+            </span>
           </div>
-        )}
-        <div className="flex-1 min-w-0">
-          {file ? (
-            <>
-              <Text variant="label" as="p" className="text-foreground truncate">
-                {file.name}
-              </Text>
-              <Text variant="caption">{(file.size / 1024).toFixed(0)} KB · ready</Text>
-            </>
-          ) : (
-            <>
-              <Text variant="label" as="p" className="text-foreground">
-                Tap to upload
-              </Text>
-              {hint && <Text variant="caption">{hint}</Text>}
-            </>
-          )}
-        </div>
-        {file ? (
-          <span
-            role="button"
-            tabIndex={0}
-            onClick={(e) => {
-              e.stopPropagation();
-              onChange(null);
-              if (inputRef.current) inputRef.current.value = "";
-            }}
-            className="h-9 w-9 rounded-lg bg-muted text-muted-foreground hover:text-foreground flex items-center justify-center shrink-0"
-            aria-label="Remove"
-          >
-            <X className="h-4 w-4" />
-          </span>
-        ) : (
-          <span className="h-9 w-9 rounded-lg bg-accent/10 text-accent flex items-center justify-center shrink-0">
-            <Upload className="h-4 w-4" />
-          </span>
         )}
       </button>
       <input
@@ -539,3 +527,4 @@ function FileField({
     </div>
   );
 }
+
