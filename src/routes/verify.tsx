@@ -2,48 +2,76 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
-import { ShieldCheck, Upload, Camera, CheckCircle2, IdCard, Loader2 } from "lucide-react";
+import { Heading, Text } from "@/lib/typography";
+import {
+  ShieldCheck,
+  CheckCircle2,
+  Loader2,
+  ArrowRight,
+  Wallet,
+  TrendingUp,
+  Gift,
+  Headphones,
+  Zap,
+  Crown,
+  Check,
+} from "lucide-react";
 
 export const Route = createFileRoute("/verify")({
-  head: () => ({ meta: [{ title: "Verify identity — Ness" }, { name: "description", content: "Submit your NID to verify your account." }] }),
+  head: () => ({
+    meta: [
+      { title: "Verification — Ness" },
+      { name: "description", content: "Verify your account to unlock all features." },
+    ],
+  }),
   component: Verify,
 });
 
-type Status = "idle" | "submitting" | "verified";
+type Step = "benefits" | "payment" | "processing" | "verified";
+
+const VERIFY_FEE = 250;
+
+const BENEFITS = [
+  { icon: Wallet, title: "Unlimited Withdrawals", desc: "Withdraw your earnings anytime without limits." },
+  { icon: TrendingUp, title: "Higher Earning Rate", desc: "Earn up to 2x more on tasks and videos." },
+  { icon: Gift, title: "Exclusive Bonuses", desc: "Access target bonuses and special rewards." },
+  { icon: Crown, title: "Verified Badge", desc: "Stand out with a verified badge on your profile." },
+  { icon: Zap, title: "Priority Task Access", desc: "Get first access to high-paying tasks." },
+  { icon: Headphones, title: "Priority Support", desc: "24/7 dedicated customer support." },
+];
+
+const PAYMENT_METHODS = [
+  { id: "bkash", name: "bKash", color: "#E2136E", number: "017XXXXXXXX" },
+  { id: "nagad", name: "Nagad", color: "#EC1C24", number: "017XXXXXXXX" },
+  { id: "rocket", name: "Rocket", color: "#8A1A9B", number: "017XXXXXXXX" },
+];
 
 function Verify() {
   const navigate = useNavigate();
-  const [fullName, setFullName] = useState("");
-  const [nidNumber, setNidNumber] = useState("");
-  const [frontFile, setFrontFile] = useState<File | null>(null);
-  const [backFile, setBackFile] = useState<File | null>(null);
-  const [selfieFile, setSelfieFile] = useState<File | null>(null);
-  const [status, setStatus] = useState<Status>("idle");
+  const [step, setStep] = useState<Step>("benefits");
+  const [agreed, setAgreed] = useState(false);
+  const [method, setMethod] = useState<string>("bkash");
+  const [txnId, setTxnId] = useState("");
+  const [senderNumber, setSenderNumber] = useState("");
 
   useEffect(() => {
-    if (localStorage.getItem("nessVerified") === "1") setStatus("verified");
+    if (localStorage.getItem("nessVerified") === "1") setStep("verified");
   }, []);
 
-  const canSubmit =
-    fullName.trim().length > 2 &&
-    nidNumber.trim().length >= 6 &&
-    frontFile &&
-    backFile &&
-    selfieFile &&
-    status === "idle";
+  const canPay = txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
 
-  const submit = (e: React.FormEvent) => {
+  const submitPayment = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canSubmit) return;
-    setStatus("submitting");
+    if (!canPay) return;
+    setStep("processing");
     setTimeout(() => {
       localStorage.setItem("nessVerified", "1");
       window.dispatchEvent(new Event("ness:verified"));
-      setStatus("verified");
+      setStep("verified");
     }, 1400);
   };
 
-  if (status === "verified") {
+  if (step === "verified") {
     return (
       <div>
         <ScreenHeader title="Verification" />
@@ -52,13 +80,13 @@ function Verify() {
             <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
               <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
             </div>
-            <h2 className="text-section-title flex items-center justify-center gap-1.5">
+            <Heading variant="sectionTitle" case="sentence" className="flex items-center justify-center gap-1.5">
               You're verified
               <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />
-            </h2>
-            <p className="text-body-secondary mt-1">
-              Your NID has been submitted and your account is marked as verified.
-            </p>
+            </Heading>
+            <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+              Your account is now verified. Enjoy all premium features.
+            </Text>
             <div className="mt-5 grid gap-2">
               <button
                 onClick={() => navigate({ to: "/profile" })}
@@ -70,11 +98,12 @@ function Verify() {
                 onClick={() => {
                   localStorage.removeItem("nessVerified");
                   window.dispatchEvent(new Event("ness:verified"));
-                  setStatus("idle");
-                  setFullName(""); setNidNumber("");
-                  setFrontFile(null); setBackFile(null); setSelfieFile(null);
+                  setStep("benefits");
+                  setAgreed(false);
+                  setTxnId("");
+                  setSenderNumber("");
                 }}
-                className="text-caption h-10 rounded-lg"
+                className="text-caption h-10 rounded-lg text-muted-foreground"
               >
                 Reset (testing)
               </button>
@@ -85,95 +114,216 @@ function Verify() {
     );
   }
 
+  if (step === "payment" || step === "processing") {
+    const selected = PAYMENT_METHODS.find((m) => m.id === method)!;
+    return (
+      <div>
+        <ScreenHeader title="Payment" />
+        <form onSubmit={submitPayment} className="px-4 pb-8 space-y-4">
+          {/* Amount summary */}
+          <Card className="p-card border-0 bg-gradient-soft text-center">
+            <Text variant="caption" case="upper" className="text-muted-foreground">
+              Verification Fee
+            </Text>
+            <Heading variant="display" case="none" className="mt-1 text-foreground">
+              ৳{VERIFY_FEE}
+            </Heading>
+            <Text variant="bodySecondary" className="text-muted-foreground mt-1">
+              One-time payment for lifetime access
+            </Text>
+          </Card>
+
+          {/* Method selection */}
+          <Card className="p-card border-0 space-y-3">
+            <Heading variant="cardTitle" case="sentence" className="text-foreground">
+              Select payment method
+            </Heading>
+            <div className="grid grid-cols-3 gap-2">
+              {PAYMENT_METHODS.map((m) => {
+                const active = method === m.id;
+                return (
+                  <button
+                    key={m.id}
+                    type="button"
+                    onClick={() => setMethod(m.id)}
+                    className={`relative rounded-lg p-3 flex flex-col items-center gap-1.5 transition-all active:scale-95 ${
+                      active
+                        ? "ring-2 ring-[color:var(--accent)] bg-background"
+                        : "bg-muted/60"
+                    }`}
+                  >
+                    <span
+                      className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-xs"
+                      style={{ background: m.color }}
+                    >
+                      {m.name[0]}
+                    </span>
+                    <Text variant="label" className="text-foreground leading-none">
+                      {m.name}
+                    </Text>
+                    {active && (
+                      <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center">
+                        <Check className="h-2.5 w-2.5 text-accent-foreground" />
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </Card>
+
+          {/* Send instructions */}
+          <Card className="p-card border-0 bg-muted/40 space-y-2">
+            <Text variant="label" className="text-foreground">
+              Send ৳{VERIFY_FEE} to this {selected.name} number:
+            </Text>
+            <div className="flex items-center justify-between rounded-lg bg-background px-3 py-2.5">
+              <Text variant="cardTitle" className="tabular-nums text-foreground">
+                {selected.number}
+              </Text>
+              <Text variant="caption" case="upper" className="text-[color:var(--accent)] font-semibold">
+                Personal
+              </Text>
+            </div>
+            <Text variant="caption" className="text-muted-foreground">
+              After sending, enter the Transaction ID below.
+            </Text>
+          </Card>
+
+          {/* Transaction details */}
+          <Card className="p-card border-0 space-y-3">
+            <label className="block">
+              <Text variant="label" as="span" className="block mb-1.5 text-foreground">
+                Your {selected.name} number
+              </Text>
+              <input
+                value={senderNumber}
+                onChange={(e) => setSenderNumber(e.target.value.replace(/[^0-9]/g, ""))}
+                inputMode="numeric"
+                placeholder="01XXXXXXXXX"
+                className="text-input w-full h-11 rounded-lg bg-muted px-3 outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+              />
+            </label>
+            <label className="block">
+              <Text variant="label" as="span" className="block mb-1.5 text-foreground">
+                Transaction ID
+              </Text>
+              <input
+                value={txnId}
+                onChange={(e) => setTxnId(e.target.value.toUpperCase())}
+                placeholder="e.g. 9A1B2C3D4E"
+                className="text-input w-full h-11 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+              />
+            </label>
+          </Card>
+
+          <div className="grid grid-cols-[auto_1fr] gap-2">
+            <button
+              type="button"
+              onClick={() => setStep("benefits")}
+              disabled={step === "processing"}
+              className="text-button h-12 px-5 rounded-lg bg-muted text-foreground active:scale-[0.98] transition disabled:opacity-50"
+            >
+              Back
+            </button>
+            <button
+              type="submit"
+              disabled={!canPay || step === "processing"}
+              className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
+            >
+              {step === "processing" ? (
+                <><Loader2 className="h-4 w-4 animate-spin" /> Verifying…</>
+              ) : (
+                <><ShieldCheck className="h-4 w-4" /> Confirm payment</>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+
+  // Step 1: Benefits
   return (
     <div>
-      <ScreenHeader title="Verify identity" />
-      <form onSubmit={submit} className="px-4 pb-8 space-y-5">
-        <Card className="p-card border-0 bg-gradient-soft flex items-start gap-3">
-          <div className="h-10 w-10 rounded-lg bg-[color:var(--accent)]/15 flex items-center justify-center text-[color:var(--accent)]">
-            <IdCard className="h-5 w-5" />
+      <ScreenHeader title="Verification" />
+      <div className="px-4 pb-8 space-y-4">
+        {/* Hero */}
+        <Card className="p-card text-center border-0 bg-gradient-soft">
+          <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--accent)]/15 flex items-center justify-center mb-3">
+            <ShieldCheck className="h-9 w-9 text-[color:var(--accent)]" />
           </div>
-          <div className="text-body-secondary leading-relaxed">
-            Submit your National ID details to unlock full account features. This is a UI demo — no data is sent.
+          <Heading variant="sectionTitle" case="sentence" className="text-foreground">
+            Verify your account
+          </Heading>
+          <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+            Unlock the full power of Ness with a verified account.
+          </Text>
+        </Card>
+
+        {/* Benefits list */}
+        <Card className="p-card border-0 space-y-1">
+          <Heading variant="cardTitle" case="sentence" className="text-foreground mb-2">
+            What you'll get
+          </Heading>
+          <div className="space-y-3">
+            {BENEFITS.map(({ icon: I, title, desc }) => (
+              <div key={title} className="flex items-start gap-3">
+                <div className="h-9 w-9 shrink-0 rounded-lg bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                  <I className="h-[18px] w-[18px]" strokeWidth={2} />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <Text variant="label" className="text-foreground leading-tight">
+                    {title}
+                  </Text>
+                  <Text variant="caption" className="text-muted-foreground mt-0.5">
+                    {desc}
+                  </Text>
+                </div>
+                <CheckCircle2 className="h-5 w-5 text-[color:var(--success)] shrink-0 mt-0.5" strokeWidth={2} />
+              </div>
+            ))}
           </div>
         </Card>
 
-        <Card className="p-card border-0 space-y-3">
-          <Field label="Full legal name">
-            <input
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder="As shown on your NID"
-              className="text-input w-full h-11 rounded-lg bg-muted px-3 outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
-            />
-          </Field>
-          <Field label="NID number">
-            <input
-              value={nidNumber}
-              onChange={(e) => setNidNumber(e.target.value.replace(/[^0-9]/g, ""))}
-              inputMode="numeric"
-              placeholder="e.g. 1234567890"
-              className="text-input w-full h-11 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
-            />
-          </Field>
+        {/* Fee notice */}
+        <Card className="p-card border-0 bg-muted/40 flex items-center justify-between">
+          <div>
+            <Text variant="caption" case="upper" className="text-muted-foreground">
+              One-time fee
+            </Text>
+            <Heading variant="cardTitle" className="text-foreground">
+              ৳{VERIFY_FEE}
+            </Heading>
+          </div>
+          <Text variant="caption" className="text-muted-foreground text-right max-w-[55%]">
+            Lifetime verification. No renewals or hidden charges.
+          </Text>
         </Card>
 
-        <Card className="p-card border-0 space-y-3">
-          <p className="text-eyebrow">Documents</p>
-          <FileBox label="NID front" file={frontFile} onPick={setFrontFile} icon={Upload} />
-          <FileBox label="NID back" file={backFile} onPick={setBackFile} icon={Upload} />
-          <FileBox label="Selfie with NID" file={selfieFile} onPick={setSelfieFile} icon={Camera} capture />
-        </Card>
+        {/* Agree */}
+        <label className="flex items-start gap-3 px-1 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={agreed}
+            onChange={(e) => setAgreed(e.target.checked)}
+            className="mt-0.5 h-5 w-5 rounded accent-[color:var(--accent)]"
+          />
+          <Text variant="bodySecondary" className="text-foreground leading-snug">
+            I agree to the verification terms and the one-time fee.
+          </Text>
+        </label>
 
         <button
-          type="submit"
-          disabled={!canSubmit}
+          type="button"
+          onClick={() => setStep("payment")}
+          disabled={!agreed}
           className="text-button w-full h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
         >
-          {status === "submitting" ? (
-            <><Loader2 className="h-4 w-4 animate-spin" /> Submitting…</>
-          ) : (
-            <><ShieldCheck className="h-4 w-4" /> Submit for verification</>
-          )}
+          Continue to payment
+          <ArrowRight className="h-4 w-4" />
         </button>
-      </form>
+      </div>
     </div>
-  );
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <label className="block">
-      <span className="block text-label mb-1.5">{label}</span>
-      {children}
-    </label>
-  );
-}
-
-function FileBox({
-  label, file, onPick, icon: Icon, capture,
-}: {
-  label: string; file: File | null; onPick: (f: File | null) => void;
-  icon: React.ComponentType<{ className?: string }>; capture?: boolean;
-}) {
-  return (
-    <label className="flex items-center gap-3 p-3 rounded-lg bg-muted/60 cursor-pointer hover:bg-muted transition">
-      <div className={`h-10 w-10 rounded-lg flex items-center justify-center ${file ? "bg-[color:var(--success)]/15 text-[color:var(--success)]" : "bg-background text-muted-foreground"}`}>
-        {file ? <CheckCircle2 className="h-5 w-5" /> : <Icon className="h-5 w-5" />}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-label">{label}</p>
-        <p className="text-caption truncate">
-          {file ? file.name : "Tap to upload"}
-        </p>
-      </div>
-      <input
-        type="file"
-        accept="image/*"
-        {...(capture ? { capture: "user" as const } : {})}
-        className="hidden"
-        onChange={(e) => onPick(e.target.files?.[0] ?? null)}
-      />
-    </label>
   );
 }
