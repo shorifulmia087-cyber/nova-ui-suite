@@ -53,6 +53,13 @@ function Home() {
   const displayName = profile?.full_name || profile?.email?.split("@")[0] || "";
   const balance = Number(profile?.main_balance ?? 0);
   const showProfileSkeleton = profileLoading && !profile;
+  const greeting = (() => {
+    const h = new Date().getHours();
+    if (h < 12) return "Good morning";
+    if (h < 17) return "Good afternoon";
+    if (h < 21) return "Good evening";
+    return "Good night";
+  })();
 
   return (
     <div className="min-h-screen">
@@ -76,7 +83,7 @@ function Home() {
               case="title"
               className="font-semibold text-muted-foreground leading-none"
             >
-              Good morning
+              {greeting}
             </Text>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
