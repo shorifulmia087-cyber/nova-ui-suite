@@ -97,38 +97,55 @@ function VideoIncomePage() {
 
   /* -------------------------- SUCCESS / STATUS VIEW -------------------------- */
   if (submitted) {
+    const currentStep = 1; // 1-indexed: currently "Under review"
+    const totalSteps = timeline.length;
+    const progressPct = Math.round((currentStep / (totalSteps - 1)) * 100);
+
     return (
       <div className="pb-40">
         <ScreenHeader />
 
+        {/* Premium hero */}
         <section className="px-4">
-          <div className="relative overflow-hidden rounded-xl bg-primary text-primary-foreground p-card shadow-navy">
-            <span aria-hidden className="pointer-events-none absolute -top-20 -right-16 h-48 w-48 rounded-full bg-accent/30 blur-3xl" />
-            <span aria-hidden className="pointer-events-none absolute -bottom-24 -left-12 h-44 w-44 rounded-full bg-primary-foreground/10 blur-3xl" />
+          <div className="relative overflow-hidden rounded-xl bg-gradient-to-br from-primary via-primary to-[color:var(--primary)]/90 text-primary-foreground p-card shadow-navy">
+            <span aria-hidden className="pointer-events-none absolute -top-24 -right-16 h-56 w-56 rounded-full bg-accent/40 blur-3xl" />
+            <span aria-hidden className="pointer-events-none absolute -bottom-28 -left-16 h-52 w-52 rounded-full bg-primary-foreground/10 blur-3xl" />
+            <span aria-hidden className="pointer-events-none absolute inset-0 opacity-[0.06] bg-[radial-gradient(circle_at_1px_1px,_white_1px,_transparent_0)] [background-size:18px_18px]" />
 
             <div className="relative flex items-center gap-4">
-              <div className="h-14 w-14 rounded-lg bg-accent text-accent-foreground flex items-center justify-center shadow-glow">
-                <Check className="h-7 w-7" />
+              <div className="relative h-16 w-16 shrink-0">
+                <span className="absolute inset-0 rounded-pill bg-accent/30 animate-ping" />
+                <div className="relative h-16 w-16 rounded-pill bg-accent text-accent-foreground flex items-center justify-center shadow-glow">
+                  <Check className="h-8 w-8" strokeWidth={2} />
+                </div>
               </div>
-              <div className="min-w-0">
-                <Text variant="caption" case="title" className="text-primary-foreground/70">
-                  Status
-                </Text>
-                <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-1">
+              <div className="min-w-0 flex-1">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/15 backdrop-blur ring-1 ring-primary-foreground/20">
+                  <span className="h-1.5 w-1.5 rounded-pill bg-accent animate-pulse" />
+                  <Text variant="caption" className="text-primary-foreground/90">
+                    In review
+                  </Text>
+                </span>
+                <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-2">
                   Submission received
                 </Heading>
+                <Text variant="caption" className="text-primary-foreground/70 mt-0.5 block">
+                  ID · VI-{Math.random().toString(36).slice(2, 8).toUpperCase()}
+                </Text>
               </div>
             </div>
 
-            <div className="relative mt-6 rounded-lg bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
+            {/* Reward + tier */}
+            <div className="relative mt-5 rounded-lg bg-primary-foreground/10 ring-1 ring-primary-foreground/15 backdrop-blur p-card flex items-center justify-between gap-4">
               <div className="min-w-0">
                 <Text variant="caption" className="text-primary-foreground/70">
-                  Selected tier
+                  Tier
                 </Text>
                 <Text variant="label" as="p" className="text-primary-foreground mt-1 truncate">
                   {tier.views}
                 </Text>
               </div>
+              <span aria-hidden className="h-10 w-px bg-primary-foreground/15" />
               <div className="text-right shrink-0">
                 <Text variant="caption" className="text-primary-foreground/70">
                   Reward
@@ -138,71 +155,124 @@ function VideoIncomePage() {
                 </Text>
               </div>
             </div>
+
+            {/* Progress */}
+            <div className="relative mt-5">
+              <div className="flex items-center justify-between mb-2">
+                <Text variant="caption" className="text-primary-foreground/70">
+                  Progress
+                </Text>
+                <Text variant="caption" className="text-accent tabular-nums">
+                  {progressPct}%
+                </Text>
+              </div>
+              <div className="h-1.5 w-full rounded-pill bg-primary-foreground/15 overflow-hidden">
+                <div
+                  className="h-full rounded-pill bg-gradient-to-r from-accent to-[color:var(--accent)]/70 transition-all duration-700"
+                  style={{ width: `${progressPct}%` }}
+                />
+              </div>
+            </div>
           </div>
         </section>
 
         {/* Timeline */}
         <section className="px-4 mt-8">
-          <SectionEyebrow>Process</SectionEyebrow>
+          <SectionEyebrow>Review process</SectionEyebrow>
           <Heading variant="sectionTitle" case="sentence" className="text-foreground mt-1">
-            Review & payment
+            What happens next
           </Heading>
           <Text variant="bodySecondary" as="p" className="mt-1">
-            Your video is verified before the reward is credited
+            Live status of your submission
           </Text>
 
-          <ol className="relative mt-5 space-y-3">
+          <ol className="relative mt-5">
+            {/* Background rail */}
+            <span aria-hidden className="absolute left-[27px] top-6 bottom-6 w-0.5 bg-border rounded-pill" />
+            {/* Filled rail up to current step */}
             <span
               aria-hidden
-              className="absolute left-[31px] top-7 bottom-7 w-px bg-gradient-to-b from-accent via-accent/30 to-border"
+              className="absolute left-[27px] top-6 w-0.5 bg-gradient-to-b from-accent via-accent to-accent/30 rounded-pill transition-all duration-700"
+              style={{ height: `calc((100% - 48px) * ${currentStep / (totalSteps - 1)})` }}
             />
-            {timeline.map(({ icon: I, title, sub, eta }, idx) => {
-              const active = idx === 0;
-              return (
-                <li
-                  key={title}
-                  className="relative bg-card rounded-lg shadow-card ring-1 ring-border/60 p-card flex items-start gap-4"
-                >
-                  <div
+
+            <div className="space-y-3">
+              {timeline.map(({ icon: I, title, sub, eta }, idx) => {
+                const done = idx < currentStep;
+                const active = idx === currentStep;
+                return (
+                  <li
+                    key={title}
                     className={cn(
-                      "h-14 w-14 rounded-lg flex items-center justify-center shrink-0 ring-1",
+                      "relative rounded-lg p-card flex items-start gap-4 transition-all",
                       active
-                        ? "bg-accent text-accent-foreground ring-accent/30 shadow-glow"
-                        : "bg-muted text-muted-foreground ring-border",
+                        ? "bg-card ring-1 ring-accent/40 shadow-glow"
+                        : "bg-card ring-1 ring-border/60 shadow-card",
                     )}
                   >
-                    <I className="h-6 w-6" strokeWidth={2} />
-                  </div>
-                  <div className="flex-1 min-w-0 pt-1">
-                    <div className="flex items-center justify-between gap-3">
-                      <Heading variant="cardTitle" case="sentence" className="text-foreground">
-                        {title}
-                      </Heading>
-                      <span
+                    <div className="relative shrink-0">
+                      {active && (
+                        <span aria-hidden className="absolute inset-0 rounded-pill bg-accent/30 animate-ping" />
+                      )}
+                      <div
                         className={cn(
-                          "shrink-0 inline-flex items-center px-3 py-1 rounded-pill",
-                          active ? "bg-accent/15" : "bg-muted",
+                          "relative h-14 w-14 rounded-pill flex items-center justify-center ring-2 transition-colors",
+                          done
+                            ? "bg-accent/15 text-accent ring-accent/30"
+                            : active
+                              ? "bg-accent text-accent-foreground ring-accent/40"
+                              : "bg-muted text-muted-foreground ring-border",
                         )}
                       >
-                        <Text variant="caption" className={cn(active ? "text-accent" : "text-muted-foreground")}>
-                          {eta}
-                        </Text>
-                      </span>
+                        {done ? <Check className="h-6 w-6" /> : <I className="h-6 w-6" strokeWidth={2} />}
+                      </div>
                     </div>
-                    <Text variant="bodySecondary" as="p" className="mt-1">
-                      {sub}
-                    </Text>
-                  </div>
-                </li>
-              );
-            })}
+
+                    <div className="flex-1 min-w-0 pt-1">
+                      <div className="flex items-center justify-between gap-3">
+                        <Heading variant="cardTitle" case="sentence" className="text-foreground">
+                          {title}
+                        </Heading>
+                        <span
+                          className={cn(
+                            "shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-pill",
+                            done
+                              ? "bg-accent/15"
+                              : active
+                                ? "bg-accent text-accent-foreground"
+                                : "bg-muted",
+                          )}
+                        >
+                          {active && <span className="h-1.5 w-1.5 rounded-pill bg-accent-foreground animate-pulse" />}
+                          <Text
+                            variant="caption"
+                            className={cn(
+                              done
+                                ? "text-accent"
+                                : active
+                                  ? "text-accent-foreground"
+                                  : "text-muted-foreground",
+                            )}
+                          >
+                            {done ? "Done" : eta}
+                          </Text>
+                        </span>
+                      </div>
+                      <Text variant="bodySecondary" as="p" className="mt-1">
+                        {sub}
+                      </Text>
+                    </div>
+                  </li>
+                );
+              })}
+            </div>
           </ol>
         </section>
 
         {/* Note */}
         <section className="px-4 mt-6">
-          <div className="rounded-lg bg-muted/50 ring-1 ring-border/60 p-card flex items-start gap-3">
-            <div className="h-10 w-10 rounded-xl bg-card text-accent flex items-center justify-center shrink-0 shadow-card">
+          <div className="rounded-lg bg-gradient-to-br from-accent/8 to-transparent ring-1 ring-accent/20 p-card flex items-start gap-3">
+            <div className="h-10 w-10 rounded-lg bg-accent/15 text-accent flex items-center justify-center shrink-0">
               <ShieldCheck className="h-5 w-5" strokeWidth={2} />
             </div>
             <div className="flex-1 min-w-0">
@@ -210,8 +280,7 @@ function VideoIncomePage() {
                 Verified payouts only
               </Heading>
               <Text variant="bodySecondary" as="p" className="mt-1">
-                Views are cross-checked against YouTube Studio analytics.
-                Submissions with fake views or bot traffic are rejected.
+                Views are cross-checked against YouTube Studio analytics. Fake views or bot traffic are rejected.
               </Text>
             </div>
           </div>
@@ -227,6 +296,7 @@ function VideoIncomePage() {
       </div>
     );
   }
+
 
   /* ----------------------------- SUBMISSION VIEW ----------------------------- */
   return (
@@ -301,7 +371,7 @@ function VideoIncomePage() {
       <section className="px-4 mt-8">
 
 
-        <div className="mt-4 rounded-xl bg-card ring-1 ring-border shadow-card p-card">
+        <div className="mt-4 rounded-xl bg-white ring-1 ring-border shadow-card p-card text-slate-900">
           {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video" first>
             <FieldInput
@@ -368,7 +438,7 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
 function FieldGroup({ title, children, first }: { title: string; children: ReactNode; first?: boolean }) {
   return (
     <div className={first ? "" : "mt-4"}>
-      <Text variant="caption" case="title" className="text-muted-foreground">
+      <Text variant="caption" case="title" className="text-slate-500">
         {title}
       </Text>
       <div className="mt-2 space-y-3">{children}</div>
@@ -426,11 +496,11 @@ function FieldInput({
 }) {
   return (
     <label className="block">
-      <Text variant="label" className="text-foreground mb-1.5 block">
+      <Text variant="label" className="text-slate-700 mb-1.5 block">
         {label}
       </Text>
       <div className="relative">
-        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-muted-foreground">
+        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
           {icon}
         </span>
         <input
@@ -438,12 +508,13 @@ function FieldInput({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full h-12 pl-11 pr-4 rounded-xl bg-card ring-1 ring-border/60 text-foreground text-input placeholder:text-muted-foreground/60 focus:ring-2 focus:ring-accent focus:outline-none transition-all"
+          className="w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:ring-accent focus:bg-white focus:outline-none transition-all"
         />
       </div>
     </label>
   );
 }
+
 
 function FileField({
   label,
@@ -470,7 +541,7 @@ function FileField({
           "relative w-full aspect-square rounded-lg overflow-hidden transition-all active:scale-[0.98] text-left group",
           file
             ? "ring-2 ring-accent shadow-glow"
-            : "ring-1 ring-dashed ring-border hover:ring-accent/60 bg-card",
+            : "ring-1 ring-dashed ring-slate-300 hover:ring-accent/60 bg-slate-50",
         )}
       >
         {preview ? (
@@ -506,10 +577,11 @@ function FileField({
             <div className="h-12 w-12 rounded-lg bg-accent/10 text-accent flex items-center justify-center">
               {icon}
             </div>
-            <Text variant="label" as="p" className="text-foreground mt-1">
+            <Text variant="label" as="p" className="text-slate-900 mt-1">
               {label}
             </Text>
-            {hint && <Text variant="caption">{hint}</Text>}
+            {hint && <Text variant="caption" className="text-slate-500">{hint}</Text>}
+
             <span className="mt-1 inline-flex items-center gap-1 px-3 py-1 rounded-pill bg-accent/10 text-accent">
               <Upload className="h-3.5 w-3.5" />
               <Text variant="caption" className="text-accent">Upload</Text>
