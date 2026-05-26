@@ -68,6 +68,8 @@ function formatStepTime(offsetH: number) {
   return `${day} · ${time}`;
 }
 
+const PENDING_KEY = "video_income_pending";
+
 function VideoIncomePage() {
   const [selectedTier, setSelectedTier] = useState<string>("t1");
   const [videoUrl, setVideoUrl] = useState("");
@@ -76,6 +78,22 @@ function VideoIncomePage() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
+
+  // Restore pending submission on mount — user stays locked on review screen
+  // until admin approves (mock: clear localStorage entry).
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(PENDING_KEY);
+      if (!raw) return;
+      const data = JSON.parse(raw) as { tier_id?: string };
+      if (data?.tier_id && tiers.some((t) => t.id === data.tier_id)) {
+        setSelectedTier(data.tier_id);
+      }
+      setSubmitted(true);
+    } catch {
+      /* ignore */
+    }
+  }, []);
 
   const tier = tiers.find((t) => t.id === selectedTier)!;
 
@@ -91,19 +109,19 @@ function VideoIncomePage() {
       toast.error("Please fill in all the fields");
       return;
     }
+    try {
+      localStorage.setItem(
+        PENDING_KEY,
+        JSON.stringify({ tier_id: selectedTier, submittedAt: Date.now() }),
+      );
+    } catch {
+      /* ignore */
+    }
     setSubmitted(true);
     toast.success("Submitted successfully");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const reset = () => {
-    setSubmitted(false);
-    setVideoUrl("");
-    setChannelName("");
-    setChannelLink("");
-    setLogoFile(null);
-    setAnalyticsFile(null);
-  };
 
   /* -------------------------- SUCCESS / STATUS VIEW -------------------------- */
   if (submitted) {
