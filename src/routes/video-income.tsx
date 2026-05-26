@@ -368,7 +368,7 @@ function SectionEyebrow({ children }: { children: ReactNode }) {
 function FieldGroup({ title, children, first }: { title: string; children: ReactNode; first?: boolean }) {
   return (
     <div className={first ? "" : "mt-4"}>
-      <Text variant="caption" case="title" className="text-muted-foreground">
+      <Text variant="caption" case="title" className="text-slate-500">
         {title}
       </Text>
       <div className="mt-2 space-y-3">{children}</div>
