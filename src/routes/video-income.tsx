@@ -1,11 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef, useEffect, type ChangeEvent, type ReactNode } from "react";
+import { useState, useRef, useMemo, type ChangeEvent, type ReactNode } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useServerFn } from "@tanstack/react-start";
+import { z } from "zod";
 import {
   Sparkles,
   PlayCircle,
   Upload,
-  
-  Coins,
   Flame,
   ArrowRight,
   Eye,
@@ -18,11 +19,19 @@ import {
   Wallet,
   X,
   Check,
+  Loader2,
 } from "lucide-react";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Heading, Text } from "@/lib/typography";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/lib/auth-context";
+import {
+  listVideoTiers,
+  listMyVideoSubmissions,
+  submitVideo,
+} from "@/lib/video-income.functions";
 
 export const Route = createFileRoute("/video-income")({
   head: () => ({
@@ -38,21 +47,9 @@ export const Route = createFileRoute("/video-income")({
   component: VideoIncomePage,
 });
 
-type Tier = {
-  id: string;
-  views: string;
-  amount: number;
-  icon: typeof Eye;
-  label: string;
-};
-
-const tiers: Tier[] = [
-  { id: "t1", views: "500+ views",   amount: 100,  icon: Eye,        label: "Entry" },
-  { id: "t2", views: "1,000+ views", amount: 250,  icon: PlayCircle, label: "Popular" },
-  { id: "t3", views: "2,000+ views", amount: 500,  icon: Sparkles,   label: "Advanced" },
-  { id: "t4", views: "3,000+ views", amount: 700,  icon: BarChart3,  label: "Pro" },
-  { id: "t5", views: "5,000+ views", amount: 1500, icon: Flame,      label: "Expert" },
-];
+// Map tier sort_order -> icon + label
+const tierIcons = [Eye, PlayCircle, Sparkles, BarChart3, Flame];
+const tierLabels = ["Entry", "Popular", "Advanced", "Pro", "Expert"];
 
 const timeline = [
   { icon: Upload,      title: "Submitted",        sub: "Your video has been received",                 eta: "Just now",  offsetH: 0 },
@@ -68,42 +65,150 @@ function formatStepTime(offsetH: number) {
   return `${day} · ${time}`;
 }
 
-const PENDING_KEY = "video_income_pending";
+// --- Client-side validation (mirrors server) ---
+const youtubeUrl = z
+  .string()
+  .url("সঠিক URL দিন")
+  .max(500)
+  .refine((u) => /(?:youtube\.com|youtu\.be)/i.test(u), "YouTube লিঙ্ক দিন");
+
+const formSchema = z.object({
+  tier_id: z.string().uuid("Tier নির্বাচন করুন"),
+  video_url: youtubeUrl,
+  channel_name: z.string().trim().min(1, "Channel name দিন").max(120),
+  channel_link: youtubeUrl,
+});
+
+const MAX_FILE = 5 * 1024 * 1024; // 5 MB
+const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/webp"];
+
+function validateFile(f: File | null, label: string): string | null {
+  if (!f) return `${label} আপলোড করুন`;
+  if (!ALLOWED_TYPES.includes(f.type)) return `${label}: PNG / JPG / WEBP দিন`;
+  if (f.size > MAX_FILE) return `${label}: 5MB-এর কম রাখুন`;
+  return null;
+}
 
 function VideoIncomePage() {
-  const [selectedTier, setSelectedTier] = useState<string>("t1");
+  const { user } = useAuth();
+  const qc = useQueryClient();
+
+  const tiersFn = useServerFn(listVideoTiers);
+  const subsFn = useServerFn(listMyVideoSubmissions);
+  const submitFn = useServerFn(submitVideo);
+
+  const tiersQ = useQuery({
+    queryKey: ["video-tiers"],
+    queryFn: () => tiersFn(),
+    enabled: !!user,
+  });
+  const subsQ = useQuery({
+    queryKey: ["my-video-submissions"],
+    queryFn: () => subsFn(),
+    enabled: !!user,
+  });
+
+  const tiers = tiersQ.data?.tiers ?? [];
+  const submissions = subsQ.data?.submissions ?? [];
+  const pendingSubmission = submissions.find((s) => s.status === "pending");
+  const hasPending = !!pendingSubmission;
+
+  const [selectedTier, setSelectedTier] = useState<string>("");
   const [videoUrl, setVideoUrl] = useState("");
   const [channelName, setChannelName] = useState("");
   const [channelLink, setChannelLink] = useState("");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [hasPending, setHasPending] = useState(false);
 
-  // Detect pending submission on mount — show form with a link to status
-  // (do NOT auto-jump into the status view).
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem(PENDING_KEY);
-      if (!raw) return;
-      const data = JSON.parse(raw) as { tier_id?: string };
-      if (data?.tier_id && tiers.some((t) => t.id === data.tier_id)) {
-        setSelectedTier(data.tier_id);
+  // Default tier = first one once loaded (or pending tier)
+  const effectiveTier = useMemo(() => {
+    if (selectedTier) return selectedTier;
+    if (pendingSubmission) return pendingSubmission.tier_id;
+    return tiers[0]?.id ?? "";
+  }, [selectedTier, pendingSubmission, tiers]);
+
+  const currentTier = tiers.find((t) => t.id === effectiveTier);
+
+  const mutation = useMutation({
+    mutationFn: async () => {
+      if (!user) throw new Error("Login required");
+
+      // 1. Validate text fields (client-side zod)
+      const parsed = formSchema.safeParse({
+        tier_id: effectiveTier,
+        video_url: videoUrl,
+        channel_name: channelName,
+        channel_link: channelLink,
+      });
+      if (!parsed.success) {
+        throw new Error(parsed.error.issues[0]?.message ?? "Invalid input");
       }
-      setHasPending(true);
-    } catch {
-      /* ignore */
-    }
-  }, []);
 
-  const tier = tiers.find((t) => t.id === selectedTier)!;
+      // 2. Validate files
+      const e1 = validateFile(logoFile, "Channel logo");
+      if (e1) throw new Error(e1);
+      const e2 = validateFile(analyticsFile, "Analytics screenshot");
+      if (e2) throw new Error(e2);
+
+      // 3. Upload images to storage under {userId}/...
+      const ts = Date.now();
+      const rand = Math.random().toString(36).slice(2, 8);
+      const ext = (f: File) =>
+        f.type === "image/png" ? "png" : f.type === "image/webp" ? "webp" : "jpg";
+      const logoPath = `${user.id}/video/${ts}-${rand}-logo.${ext(logoFile!)}`;
+      const analyticsPath = `${user.id}/video/${ts}-${rand}-analytics.${ext(analyticsFile!)}`;
+
+      const up1 = await supabase.storage
+        .from("video-uploads")
+        .upload(logoPath, logoFile!, { contentType: logoFile!.type, upsert: false });
+      if (up1.error) throw new Error(`Logo upload: ${up1.error.message}`);
+
+      const up2 = await supabase.storage
+        .from("video-uploads")
+        .upload(analyticsPath, analyticsFile!, {
+          contentType: analyticsFile!.type,
+          upsert: false,
+        });
+      if (up2.error) {
+        // best-effort cleanup
+        await supabase.storage.from("video-uploads").remove([logoPath]);
+        throw new Error(`Analytics upload: ${up2.error.message}`);
+      }
+
+      // 4. Server fn (server re-validates with zod + auth)
+      return submitFn({
+        data: {
+          ...parsed.data,
+          channel_logo_path: logoPath,
+          analytics_path: analyticsPath,
+        },
+      });
+    },
+    onSuccess: () => {
+      toast.success("সাবমিট হয়েছে · রিভিউ অপেক্ষমান");
+      qc.invalidateQueries({ queryKey: ["my-video-submissions"] });
+      setVideoUrl("");
+      setChannelName("");
+      setChannelLink("");
+      setLogoFile(null);
+      setAnalyticsFile(null);
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    onError: (err: Error) => {
+      toast.error(err.message || "সাবমিট করা যায়নি");
+    },
+  });
 
   const canSubmit =
+    !!effectiveTier &&
     videoUrl.trim().length > 5 &&
     channelName.trim().length > 0 &&
     channelLink.trim().length > 5 &&
     logoFile !== null &&
-    analyticsFile !== null;
+    analyticsFile !== null &&
+    !mutation.isPending;
 
   const handleSubmit = () => {
     if (hasPending) {
@@ -111,30 +216,19 @@ function VideoIncomePage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
-    if (!canSubmit) {
-      toast.error("Please fill in all the fields");
-      return;
-    }
-    try {
-      localStorage.setItem(
-        PENDING_KEY,
-        JSON.stringify({ tier_id: selectedTier, submittedAt: Date.now() }),
-      );
-    } catch {
-      /* ignore */
-    }
-    setHasPending(true);
-    setSubmitted(true);
-    toast.success("Submitted successfully");
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    mutation.mutate();
   };
 
-
   /* -------------------------- SUCCESS / STATUS VIEW -------------------------- */
-  if (submitted) {
-    const currentStep = 1; // 1-indexed: currently "Under review"
+  if (submitted && (hasPending || submissions[0])) {
+    const sub = pendingSubmission ?? submissions[0];
+    const status = sub.status as "pending" | "approved" | "rejected";
+    const currentStep =
+      status === "approved" ? timeline.length - 1 : status === "rejected" ? 1 : 1;
     const totalSteps = timeline.length;
     const progressPct = Math.round((currentStep / (totalSteps - 1)) * 100);
+    const statusLabel =
+      status === "approved" ? "Approved" : status === "rejected" ? "Rejected" : "In review";
 
     return (
       <div className="pb-40">
@@ -154,14 +248,14 @@ function VideoIncomePage() {
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-accent/10 ring-1 ring-accent/20">
                   <span className="h-1.5 w-1.5 rounded-pill bg-accent animate-pulse" />
                   <Text variant="caption" className="text-accent">
-                    In review
+                    {statusLabel}
                   </Text>
                 </span>
                 <Heading variant="cardTitle" case="sentence" className="text-foreground mt-2">
                   Submission received
                 </Heading>
                 <Text variant="caption" className="text-muted-foreground mt-1 block">
-                  ID · VI-{Math.random().toString(36).slice(2, 8).toUpperCase()}
+                  ID · {sub.id.slice(0, 8).toUpperCase()}
                 </Text>
               </div>
             </div>
@@ -186,7 +280,6 @@ function VideoIncomePage() {
           </div>
         </section>
 
-
         {/* Timeline */}
         <section className="px-4 mt-8">
           <div className="flex items-end justify-between gap-3">
@@ -206,16 +299,14 @@ function VideoIncomePage() {
           </div>
 
           <ol className="relative mt-5 pl-16">
-            {/* Background rail */}
             <span aria-hidden className="absolute left-[23px] top-3 bottom-3 w-px bg-border" />
-            {/* Filled rail */}
             <span
               aria-hidden
               className="absolute left-[23px] top-3 w-px bg-gradient-to-b from-accent to-accent/30 transition-all duration-700"
               style={{ height: `calc((100% - 24px) * ${currentStep / (totalSteps - 1)})` }}
             />
 
-            {timeline.map(({ icon: I, title, sub, eta, offsetH }, idx) => {
+            {timeline.map(({ icon: I, title, sub: stepSub, eta, offsetH }, idx) => {
               const done = idx < currentStep;
               const active = idx === currentStep;
               const pending = !done && !active;
@@ -223,7 +314,6 @@ function VideoIncomePage() {
 
               return (
                 <li key={title} className={cn("relative", isLast ? "" : "pb-5")}>
-                  {/* Node */}
                   <div className="absolute -left-16 top-1">
                     <div className="relative h-12 w-12">
                       {active && (
@@ -245,7 +335,6 @@ function VideoIncomePage() {
                     </div>
                   </div>
 
-                  {/* Card */}
                   <div
                     className={cn(
                       "rounded-lg p-card transition-all",
@@ -278,12 +367,11 @@ function VideoIncomePage() {
                           )}
                         </div>
                         <Text variant="bodySecondary" as="p" className="mt-1">
-                          {sub}
+                          {stepSub}
                         </Text>
                       </div>
                     </div>
 
-                    {/* Footer meta */}
                     <div className="mt-3 pt-3 border-t border-border/50 flex items-center justify-between gap-3">
                       <div className="inline-flex items-center gap-1.5 min-w-0">
                         <Clock className={cn("h-3.5 w-3.5 shrink-0", done ? "text-accent" : active ? "text-accent" : "text-muted-foreground")} strokeWidth={2} />
@@ -302,29 +390,19 @@ function VideoIncomePage() {
           </ol>
         </section>
 
-
-        {/* Note */}
         <section className="px-4 mt-6">
-          <div className="rounded-lg bg-gradient-to-br from-accent/8 to-transparent ring-1 ring-accent/20 p-card flex items-start gap-3">
-            <div className="h-10 w-10 rounded-lg bg-accent/15 text-accent flex items-center justify-center shrink-0">
-              <ShieldCheck className="h-5 w-5" strokeWidth={2} />
-            </div>
-            <div className="flex-1 min-w-0">
-              <Heading variant="cardTitle" case="sentence" className="text-foreground">
-                Verified payouts only
-              </Heading>
-              <Text variant="bodySecondary" as="p" className="mt-1">
-                Views are cross-checked against YouTube Studio analytics. Fake views or bot traffic are rejected.
-              </Text>
-            </div>
-          </div>
+          <button
+            type="button"
+            onClick={() => setSubmitted(false)}
+            className="w-full rounded-lg p-card bg-card ring-1 ring-border flex items-center justify-center gap-2"
+          >
+            <ArrowRight className="h-4 w-4 rotate-180" strokeWidth={2} />
+            <Text variant="button" className="text-foreground">Back to form</Text>
+          </button>
         </section>
-
       </div>
     );
   }
-
-
 
   /* ----------------------------- SUBMISSION VIEW ----------------------------- */
   return (
@@ -361,20 +439,31 @@ function VideoIncomePage() {
       {/* Tier selection */}
       <section className="px-4 mt-2">
         <div className="mt-5 space-y-2.5">
+          {tiersQ.isLoading && (
+            <div className="rounded-lg p-card bg-card ring-1 ring-border flex items-center gap-2">
+              <Loader2 className="h-4 w-4 animate-spin text-muted-foreground" strokeWidth={2} />
+              <Text variant="bodySecondary">Loading tiers…</Text>
+            </div>
+          )}
 
-          {tiers.map(({ id, views, amount, icon: I, label }) => {
-            const active = selectedTier === id;
+          {tiers.map((t, idx) => {
+            const I = tierIcons[idx % tierIcons.length];
+            const label = tierLabels[idx % tierLabels.length];
+            const active = effectiveTier === t.id;
+            const disabled = hasPending && !active;
             return (
               <button
-                key={id}
+                key={t.id}
                 type="button"
-                onClick={() => setSelectedTier(id)}
+                onClick={() => !disabled && setSelectedTier(t.id)}
+                disabled={disabled}
                 aria-pressed={active}
                 className={cn(
                   "w-full text-left rounded-lg p-card flex items-center gap-4 transition-all active:scale-[0.99]",
                   active
                     ? "bg-card ring-2 ring-accent shadow-glow"
                     : "bg-card ring-1 ring-border/60 hover:ring-border",
+                  disabled && "opacity-50 cursor-not-allowed",
                 )}
               >
                 <div
@@ -388,10 +477,10 @@ function VideoIncomePage() {
 
                 <div className="flex-1 min-w-0">
                   <Heading variant="cardTitle" case="sentence" className="text-foreground">
-                    {views}
+                    {t.min_views.toLocaleString()}+ views
                   </Heading>
                   <Text variant="caption" className={cn("mt-0.5 block", active ? "text-accent" : "text-muted-foreground")}>
-                    {label}
+                    {t.label ?? label}
                   </Text>
                 </div>
 
@@ -401,7 +490,7 @@ function VideoIncomePage() {
                       Reward
                     </Text>
                     <Text variant="cardTitle" as="p" className={cn("tabular-nums", active ? "text-accent" : "text-foreground")}>
-                      ৳{amount}
+                      ৳{Number(t.reward_amount)}
                     </Text>
                   </div>
                   <span
@@ -419,15 +508,11 @@ function VideoIncomePage() {
             );
           })}
         </div>
-
       </section>
 
       {/* Submission form */}
       <section className="px-4 mt-8">
-
-
         <div className="mt-4 rounded-xl bg-white ring-1 ring-border shadow-card p-card text-slate-900">
-          {/* Group 1 — Channel & video */}
           <FieldGroup title="Channel & video" first>
             <FieldInput
               label="Video URL"
@@ -435,6 +520,7 @@ function VideoIncomePage() {
               placeholder="https://youtube.com/watch?v=..."
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
+              disabled={hasPending}
             />
             <FieldInput
               label="YouTube channel name"
@@ -442,6 +528,7 @@ function VideoIncomePage() {
               placeholder="Your channel name"
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
+              disabled={hasPending}
             />
             <FieldInput
               label="YouTube channel link"
@@ -449,16 +536,18 @@ function VideoIncomePage() {
               placeholder="https://youtube.com/@yourchannel"
               value={channelLink}
               onChange={(e) => setChannelLink(e.target.value)}
+              disabled={hasPending}
             />
           </FieldGroup>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
             <FileField
               label="Channel logo"
-              hint="PNG or JPG"
+              hint="PNG / JPG · ≤5MB"
               icon={<ImageIcon className="h-5 w-5" />}
               file={logoFile}
               onChange={setLogoFile}
+              disabled={hasPending}
             />
             <FileField
               label="Analytics screenshot"
@@ -466,12 +555,11 @@ function VideoIncomePage() {
               icon={<BarChart3 className="h-5 w-5" />}
               file={analyticsFile}
               onChange={setAnalyticsFile}
+              disabled={hasPending}
             />
           </div>
         </div>
       </section>
-
-
 
       {/* Sticky CTA */}
       <StickyCta>
@@ -487,9 +575,14 @@ function VideoIncomePage() {
           </PrimaryButton>
         ) : (
           <PrimaryButton onClick={handleSubmit} disabled={!canSubmit}>
-            {canSubmit ? (
+            {mutation.isPending ? (
               <>
-                Submit for review · ৳{tier.amount}
+                <Loader2 className="h-5 w-5 animate-spin" />
+                Submitting…
+              </>
+            ) : canSubmit && currentTier ? (
+              <>
+                Submit for review · ৳{Number(currentTier.reward_amount)}
                 <ArrowRight className="h-5 w-5 transition-transform group-active:translate-x-1" />
               </>
             ) : (
@@ -507,7 +600,6 @@ function VideoIncomePage() {
 function SectionEyebrow({ children }: { children: ReactNode }) {
   return <p className="text-eyebrow text-accent normal-case capitalize tracking-normal">{children}</p>;
 }
-
 
 function FieldGroup({ title, children, first }: { title: string; children: ReactNode; first?: boolean }) {
   return (
@@ -561,12 +653,14 @@ function FieldInput({
   placeholder,
   value,
   onChange,
+  disabled,
 }: {
   label: string;
   icon: React.ReactNode;
   placeholder?: string;
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
 }) {
   return (
     <label className="block">
@@ -582,13 +676,13 @@ function FieldInput({
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:ring-accent focus:bg-white focus:outline-none transition-all"
+          disabled={disabled}
+          className="w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:ring-accent focus:bg-white focus:outline-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
         />
       </div>
     </label>
   );
 }
-
 
 function FileField({
   label,
@@ -596,12 +690,14 @@ function FileField({
   icon,
   file,
   onChange,
+  disabled,
 }: {
   label: string;
   hint?: string;
   icon: React.ReactNode;
   file: File | null;
   onChange: (f: File | null) => void;
+  disabled?: boolean;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const preview = file && file.type.startsWith("image/") ? URL.createObjectURL(file) : null;
@@ -610,12 +706,14 @@ function FileField({
     <div className="block">
       <button
         type="button"
-        onClick={() => inputRef.current?.click()}
+        onClick={() => !disabled && inputRef.current?.click()}
+        disabled={disabled}
         className={cn(
           "relative w-full aspect-square rounded-lg overflow-hidden transition-all active:scale-[0.98] text-left group",
           file
             ? "ring-2 ring-accent shadow-glow"
             : "ring-1 ring-dashed ring-slate-300 hover:ring-accent/60 bg-slate-50",
+          disabled && "opacity-60 cursor-not-allowed",
         )}
       >
         {preview ? (
@@ -627,6 +725,7 @@ function FileField({
               tabIndex={0}
               onClick={(e) => {
                 e.stopPropagation();
+                if (disabled) return;
                 onChange(null);
                 if (inputRef.current) inputRef.current.value = "";
               }}
@@ -666,11 +765,10 @@ function FileField({
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
+        accept="image/png,image/jpeg,image/webp"
         className="hidden"
         onChange={(e) => onChange(e.target.files?.[0] ?? null)}
       />
     </div>
   );
 }
-
