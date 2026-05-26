@@ -148,18 +148,19 @@ function VideoIncomePage() {
                 </div>
               </div>
               <div className="min-w-0 flex-1">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/15 backdrop-blur ring-1 ring-primary-foreground/20">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/25 backdrop-blur ring-1 ring-primary-foreground/30">
                   <span className="h-1.5 w-1.5 rounded-pill bg-accent animate-pulse" />
-                  <Text variant="caption" className="text-primary-foreground/90">
+                  <Text variant="caption" className="text-primary-foreground">
                     In review
                   </Text>
                 </span>
                 <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-2">
                   Submission received
                 </Heading>
-                <Text variant="caption" className="text-primary-foreground/70 mt-0.5 block">
+                <Text variant="caption" className="text-primary-foreground/90 mt-1 block">
                   ID · VI-{Math.random().toString(36).slice(2, 8).toUpperCase()}
                 </Text>
+
               </div>
             </div>
 
@@ -169,13 +170,14 @@ function VideoIncomePage() {
             {/* Progress */}
             <div className="relative mt-5">
               <div className="flex items-center justify-between mb-2">
-                <Text variant="caption" className="text-primary-foreground/70">
+                <Text variant="caption" className="text-primary-foreground/90">
                   Progress
                 </Text>
-                <Text variant="caption" className="text-accent tabular-nums">
+                <Text variant="caption" className="text-primary-foreground tabular-nums">
                   {progressPct}%
                 </Text>
               </div>
+
               <div className="h-1.5 w-full rounded-pill bg-primary-foreground/15 overflow-hidden">
                 <div
                   className="h-full rounded-pill bg-gradient-to-r from-accent to-[color:var(--accent)]/70 transition-all duration-700"
@@ -204,7 +206,7 @@ function VideoIncomePage() {
             </span>
           </div>
 
-          <ol className="relative mt-5 pl-12">
+          <ol className="relative mt-5 pl-16">
             {/* Background rail */}
             <span aria-hidden className="absolute left-[23px] top-3 bottom-3 w-px bg-border" />
             {/* Filled rail */}
@@ -223,7 +225,7 @@ function VideoIncomePage() {
               return (
                 <li key={title} className={cn("relative", isLast ? "" : "pb-5")}>
                   {/* Node */}
-                  <div className="absolute -left-12 top-1">
+                  <div className="absolute -left-16 top-1">
                     <div className="relative h-12 w-12">
                       {active && (
                         <>
