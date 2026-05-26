@@ -83,7 +83,7 @@ function Home() {
               case="title"
               className="font-semibold text-muted-foreground leading-none"
             >
-              Good morning
+              {greeting}
             </Text>
             {showProfileSkeleton ? (
               <div className="h-[18px] w-32 rounded bg-muted animate-pulse" />
