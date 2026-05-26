@@ -391,6 +391,13 @@ function VideoIncomePage() {
               value={channelName}
               onChange={(e) => setChannelName(e.target.value)}
             />
+            <FieldInput
+              label="YouTube channel link"
+              icon={<Link2 className="h-[18px] w-[18px]" />}
+              placeholder="https://youtube.com/@yourchannel"
+              value={channelLink}
+              onChange={(e) => setChannelLink(e.target.value)}
+            />
           </FieldGroup>
 
           <div className="mt-4 grid grid-cols-2 gap-3">
