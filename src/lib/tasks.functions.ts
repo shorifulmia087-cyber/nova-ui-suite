@@ -83,15 +83,17 @@ export const completeTask = createServerFn({ method: "POST" })
     if (pErr) throw new Error(pErr.message);
     if (!profile || profile.is_deleted || !profile.is_active) throw new Error("Invalid user");
 
-    // Insert completion (unique constraint blocks duplicates)
+    // Insert completion for today (unique constraint blocks duplicates per day)
     const reward = Number(task.reward);
+    const today = todayDhaka();
     const { error: insErr } = await supabaseAdmin.from("task_completions").insert({
       user_id: userId,
       task_id: task.id,
       reward_amount: reward,
+      completion_date: today,
     });
     if (insErr) {
-      if (insErr.code === "23505") throw new Error("Task already completed");
+      if (insErr.code === "23505") throw new Error("Task already completed today");
       throw new Error(insErr.message);
     }
 
