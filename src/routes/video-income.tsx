@@ -148,18 +148,19 @@ function VideoIncomePage() {
                 </div>
               </div>
               <div className="min-w-0 flex-1">
-                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/15 backdrop-blur ring-1 ring-primary-foreground/20">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-pill bg-primary-foreground/25 backdrop-blur ring-1 ring-primary-foreground/30">
                   <span className="h-1.5 w-1.5 rounded-pill bg-accent animate-pulse" />
-                  <Text variant="caption" className="text-primary-foreground/90">
+                  <Text variant="caption" className="text-primary-foreground">
                     In review
                   </Text>
                 </span>
                 <Heading variant="cardTitle" case="sentence" className="text-primary-foreground mt-2">
                   Submission received
                 </Heading>
-                <Text variant="caption" className="text-primary-foreground/70 mt-0.5 block">
+                <Text variant="caption" className="text-primary-foreground/90 mt-1 block">
                   ID · VI-{Math.random().toString(36).slice(2, 8).toUpperCase()}
                 </Text>
+
               </div>
             </div>
 
