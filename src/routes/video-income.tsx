@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState, useRef, type ChangeEvent, type ReactNode } from "react";
+import { useState, useRef, useEffect, type ChangeEvent, type ReactNode } from "react";
 import {
   Sparkles,
   PlayCircle,
