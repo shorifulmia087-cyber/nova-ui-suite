@@ -295,10 +295,6 @@ function VideoIncomePage() {
           })}
         </div>
 
-        <div className="mt-3 flex items-center gap-1.5 px-1">
-          <ShieldCheck className="h-3.5 w-3.5 text-accent" />
-          <Text variant="caption">Verified against YouTube Studio analytics</Text>
-        </div>
       </section>
 
       {/* Submission form */}
@@ -324,23 +320,22 @@ function VideoIncomePage() {
             />
           </FieldGroup>
 
-          {/* Group 2 — Verification uploads */}
-          <FieldGroup title="Verification uploads">
+          <div className="mt-4 grid grid-cols-2 gap-3">
             <FileField
               label="Channel logo"
-              hint="PNG or JPG, square preferred"
-              icon={<ImageIcon className="h-[18px] w-[18px]" />}
+              hint="PNG or JPG"
+              icon={<ImageIcon className="h-5 w-5" />}
               file={logoFile}
               onChange={setLogoFile}
             />
             <FileField
-              label="YT Studio analytics screenshot"
-              hint="Must clearly show the view count"
-              icon={<BarChart3 className="h-[18px] w-[18px]" />}
+              label="Analytics screenshot"
+              hint="Show view count"
+              icon={<BarChart3 className="h-5 w-5" />}
               file={analyticsFile}
               onChange={setAnalyticsFile}
             />
-          </FieldGroup>
+          </div>
         </div>
       </section>
 
