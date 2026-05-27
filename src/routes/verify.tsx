@@ -152,21 +152,21 @@ function Verify() {
       <div>
         <ScreenHeader title="Verification" />
         <div className="px-4">
-          <Card className="p-card text-center border-0 bg-gradient-soft">
-            <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
-              <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
+          <Card className="p-card text-center border-0 bg-gradient-soft elevation-2">
+            <div className="mx-auto h-20 w-20 rounded-full bg-[color:var(--success)]/12 flex items-center justify-center mb-4 ring-8 ring-[color:var(--success)]/5">
+              <CheckCircle2 className="h-10 w-10 text-[color:var(--success)]" />
             </div>
             <Heading variant="sectionTitle" case="sentence" className="flex items-center justify-center gap-1.5">
               You're verified
               <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />
             </Heading>
-            <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+            <Text variant="bodySecondary" className="mt-1.5 text-muted-foreground">
               Your account is now verified. Enjoy all premium features.
             </Text>
-            <div className="mt-5 grid gap-2">
+            <div className="mt-6 grid gap-2">
               <button
                 onClick={() => navigate({ to: "/profile" })}
-                className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition"
+                className="text-button h-12 rounded-lg bg-primary text-primary-foreground elevation-2 hover:elevation-3 active:scale-[0.98] transition-all"
               >
                 Back to profile
               </button>
@@ -179,7 +179,7 @@ function Verify() {
                   setTxnId("");
                   setSenderNumber("");
                 }}
-                className="text-caption h-10 rounded-lg text-muted-foreground"
+                className="text-caption h-10 rounded-lg text-muted-foreground hover:text-foreground transition-colors"
               >
                 Reset (testing)
               </button>
@@ -190,14 +190,32 @@ function Verify() {
     );
   }
 
+
   if (step === "payment" || step === "processing") {
     const selected = methods.find((m) => m.id === method);
+    const instructionSteps = selected
+      ? [
+          { label: <>আপনার <b className="font-semibold">{selected.name}</b> মোবাইল অ্যাপে যান।</> },
+          { label: <><b className="font-semibold">Send Money</b> অপশনটি সিলেক্ট করুন।</> },
+          {
+            label: <>নাম্বার দিন: <b className="font-semibold tabular-nums">{selected.address}</b></>,
+            action: { value: selected.address, label: "নাম্বার" },
+          },
+          {
+            label: <>অ্যামাউন্ট দিন: <b className="font-semibold tabular-nums">{VERIFY_FEE} BDT</b></>,
+            action: { value: String(VERIFY_FEE), label: "অ্যামাউন্ট" },
+          },
+          { label: <>আপনার <b className="font-semibold">{selected.name}</b> পিন দিয়ে কনফার্ম করুন।</> },
+          { label: <>নিচের ঘরে <b className="font-semibold">Transaction ID</b> বসিয়ে <b className="font-semibold">Verify</b> বাটনে চাপ দিন।</> },
+        ]
+      : [];
+
     return (
       <div>
         <ScreenHeader title="Payment" />
         <form onSubmit={submitPayment} className="px-4 pb-8 space-y-4">
           {/* Method selection */}
-          <Card className="p-card border-0 space-y-3">
+          <Card className="p-card border-0 space-y-3 elevation-1">
             <Heading variant="cardTitle" case="sentence" className="text-foreground">
               পেমেন্ট মেথড নির্বাচন করুন
             </Heading>
@@ -210,7 +228,7 @@ function Verify() {
                 কোনো পেমেন্ট মেথড পাওয়া যায়নি। পরে আবার চেষ্টা করুন।
               </Text>
             ) : (
-              <div className="grid grid-cols-3 gap-2">
+              <div className="grid grid-cols-3 gap-2.5">
                 {methods.map((m) => {
                   const active = method === m.id;
                   return (
@@ -218,23 +236,25 @@ function Verify() {
                       key={m.id}
                       type="button"
                       onClick={() => setMethod(m.id)}
-                      className={`relative rounded-lg p-3 flex flex-col items-center gap-2 transition-all active:scale-95 ${
-                        active ? "ring-2 ring-[color:var(--accent)] bg-background" : "bg-muted/60"
+                      className={`relative rounded-lg p-3 flex flex-col items-center gap-2 transition-all duration-200 active:scale-[0.97] border-[1.5px] ${
+                        active
+                          ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 elevation-2"
+                          : "border-border bg-card hover:border-[color:color-mix(in_oklab,var(--accent)_30%,var(--border))]"
                       }`}
                     >
-                      <div className="h-16 w-16 rounded-md bg-white flex items-center justify-center p-2 overflow-hidden">
+                      <div className="h-14 w-14 rounded-md bg-white flex items-center justify-center p-2 overflow-hidden">
                         <img
                           src={m.logo_url}
                           alt={m.name}
                           className="max-h-full max-w-full object-contain"
                         />
                       </div>
-                      <div className="h-px w-full bg-border" />
+                      <div className="h-px w-8 bg-border" />
                       <Text variant="label" className="text-foreground leading-none text-center line-clamp-1">
                         {m.name}
                       </Text>
                       {active && (
-                        <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center">
+                        <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center elevation-1">
                           <Check className="h-2.5 w-2.5 text-accent-foreground" />
                         </span>
                       )}
@@ -247,78 +267,54 @@ function Verify() {
 
           {selected && (
             <>
-
               {/* Amount */}
-              <Card className="p-card border-0 text-center">
-                <Heading variant="display" case="none" className="text-foreground tabular-nums">
-                  {VERIFY_FEE} BDT
+              <Card className="p-card border-0 text-center bg-gradient-soft elevation-1">
+                <Text variant="caption" case="upper" className="text-muted-foreground tracking-widest">
+                  One-time fee
+                </Text>
+                <Heading variant="display" case="none" className="text-foreground tabular-nums mt-1">
+                  ৳{VERIFY_FEE}
                 </Heading>
                 <Text variant="bodySecondary" className="text-muted-foreground mt-1">
-                  ওয়ান-টাইম ভেরিফিকেশন ফি
+                  ভেরিফিকেশন ফি · লাইফটাইম
                 </Text>
               </Card>
 
               {/* Step-by-step instructions (Bangla) */}
-              <Card className="p-card border-0 space-y-3">
+              <Card className="p-card border-0 space-y-4 elevation-1">
                 <Heading variant="cardTitle" case="sentence" className="text-foreground">
                   কীভাবে টাকা পাঠাবেন
                 </Heading>
 
-                <ol className="divide-y divide-border">
-                  <li className="flex gap-2 py-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed">
-                      আপনার <b>{selected.name}</b> মোবাইল অ্যাপে যান।
-                    </Text>
-                  </li>
-                  <li className="flex gap-2 py-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed">
-                      <b>Send Money</b> অপশনটি সিলেক্ট করুন।
-                    </Text>
-                  </li>
-                  <li className="flex items-center gap-2 py-2.5">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed flex-1">
-                      নাম্বার দিন: <b className="tabular-nums">{selected.address}</b>
-                    </Text>
-                    <button
-                      type="button"
-                      onClick={() => copy(selected.address, "নাম্বার")}
-                      className="inline-flex items-center gap-1 rounded-md bg-[color:var(--accent)] text-accent-foreground px-2.5 py-1.5 text-xs font-medium active:scale-95 transition"
-                    >
-                      <Copy className="h-3.5 w-3.5" /> কপি
-                    </button>
-                  </li>
-                  <li className="flex items-center gap-2 py-2.5">
-                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed flex-1">
-                      অ্যামাউন্ট দিন: <b className="tabular-nums">{VERIFY_FEE} BDT</b>
-                    </Text>
-                    <button
-                      type="button"
-                      onClick={() => copy(String(VERIFY_FEE), "অ্যামাউন্ট")}
-                      className="inline-flex items-center gap-1 rounded-md bg-[color:var(--accent)] text-accent-foreground px-2.5 py-1.5 text-xs font-medium active:scale-95 transition"
-                    >
-                      <Copy className="h-3.5 w-3.5" /> কপি
-                    </button>
-                  </li>
-                  <li className="flex gap-2 py-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed">
-                      আপনার <b>{selected.name}</b> পিন দিয়ে কনফার্ম করুন।
-                    </Text>
-                  </li>
-                  <li className="flex gap-2 py-2.5">
-                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
-                    <Text variant="body" className="text-foreground leading-relaxed">
-                      নিচের ঘরে <b>Transaction ID</b> বসিয়ে <b>Verify</b> বাটনে চাপ দিন।
-                    </Text>
-                  </li>
+                <ol className="space-y-3">
+                  {instructionSteps.map((s, i) => (
+                    <li key={i} className="flex items-center gap-3">
+                      <span className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
+                        <Text variant="caption" as="span" className="text-[color:var(--accent)] font-semibold tabular-nums">
+                          {i + 1}
+                        </Text>
+                      </span>
+                      <Text variant="body" className="text-foreground leading-relaxed flex-1">
+                        {s.label}
+                      </Text>
+                      {s.action && (
+                        <button
+                          type="button"
+                          onClick={() => copy(s.action!.value, s.action!.label)}
+                          className="inline-flex items-center gap-1 rounded-md bg-[color:var(--accent)]/10 text-[color:var(--accent)] px-2.5 py-1.5 hover:bg-[color:var(--accent)]/15 active:scale-95 transition-all"
+                        >
+                          <Copy className="h-4 w-4" />
+                          <Text variant="caption" as="span" className="text-[color:var(--accent)] font-medium">
+                            কপি
+                          </Text>
+                        </button>
+                      )}
+                    </li>
+                  ))}
                 </ol>
 
-                <div className="pt-1 space-y-3">
-                  <div>
+                <div className="pt-2 space-y-3 border-t border-border">
+                  <div className="pt-2">
                     <AppInput
                       label="Sender Number"
                       value={senderNumber}
@@ -355,26 +351,24 @@ function Verify() {
             </>
           )}
 
-
-
-          <div className="grid grid-cols-[auto_1fr] gap-2">
+          <div className="grid grid-cols-[auto_1fr] gap-2 pt-1">
             <button
               type="button"
               onClick={() => setStep("benefits")}
               disabled={step === "processing"}
-              className="text-button h-12 px-5 rounded-lg bg-muted text-foreground active:scale-[0.98] transition disabled:opacity-50"
+              className="text-button h-12 px-5 rounded-lg bg-muted text-foreground hover:bg-muted/80 active:scale-[0.98] transition-all disabled:opacity-50"
             >
               Back
             </button>
             <button
               type="submit"
               disabled={!canPay || step === "processing"}
-              className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
+              className="text-button h-12 rounded-lg bg-primary text-primary-foreground elevation-2 hover:elevation-3 active:scale-[0.98] transition-all disabled:opacity-40 disabled:elevation-0 inline-flex items-center justify-center gap-2"
             >
               {step === "processing" ? (
                 <><Loader2 className="h-4 w-4 animate-spin" /> ভেরিফাই হচ্ছে…</>
               ) : (
-                <><ShieldCheck className="h-4 w-4" /> Verify</>
+                <><ShieldCheck className="h-4 w-4" /> Verify Payment</>
               )}
             </button>
           </div>
@@ -383,34 +377,35 @@ function Verify() {
     );
   }
 
+
   // Step 1: Benefits
   return (
     <div>
       <ScreenHeader title="Verification" />
       <div className="px-4 pb-8 space-y-4">
         {/* Hero */}
-        <Card className="p-card text-center border-0 bg-gradient-soft">
-          <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--accent)]/15 flex items-center justify-center mb-3">
-            <ShieldCheck className="h-9 w-9 text-[color:var(--accent)]" />
+        <Card className="p-card text-center border-0 bg-gradient-soft elevation-2">
+          <div className="mx-auto h-20 w-20 rounded-full bg-[color:var(--accent)]/12 flex items-center justify-center mb-4 ring-8 ring-[color:var(--accent)]/5">
+            <ShieldCheck className="h-10 w-10 text-[color:var(--accent)]" />
           </div>
           <Heading variant="sectionTitle" case="sentence" className="text-foreground">
             Verify your account
           </Heading>
-          <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+          <Text variant="bodySecondary" className="mt-1.5 text-muted-foreground max-w-xs mx-auto">
             Unlock the full power of Ness with a verified account.
           </Text>
         </Card>
 
         {/* Benefits list */}
-        <Card className="p-card border-0 space-y-1">
-          <Heading variant="cardTitle" case="sentence" className="text-foreground mb-2">
+        <Card className="p-card border-0 space-y-1 elevation-1">
+          <Heading variant="cardTitle" case="sentence" className="text-foreground mb-3">
             What you'll get
           </Heading>
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {BENEFITS.map(({ title }) => (
               <div key={title} className="flex items-center gap-3">
-                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/15 text-[color:var(--success)] flex items-center justify-center">
-                  <Check className="h-4 w-4" strokeWidth={2} />
+                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/12 text-[color:var(--success)] flex items-center justify-center">
+                  <Check className="h-4 w-4" />
                 </div>
                 <Text variant="label" className="text-foreground leading-tight flex-1">
                   {title}
@@ -418,16 +413,15 @@ function Verify() {
               </div>
             ))}
           </div>
-
         </Card>
 
         {/* Fee notice */}
-        <Card className="p-card border-0 bg-muted/40 flex items-center justify-between">
+        <Card className="p-card border-0 bg-gradient-soft elevation-1 flex items-center justify-between">
           <div>
-            <Text variant="caption" case="upper" className="text-muted-foreground">
+            <Text variant="caption" case="upper" className="text-muted-foreground tracking-widest">
               One-time fee
             </Text>
-            <Heading variant="cardTitle" className="text-foreground">
+            <Heading variant="cardTitle" className="text-foreground tabular-nums mt-0.5">
               ৳{VERIFY_FEE}
             </Heading>
           </div>
@@ -453,8 +447,7 @@ function Verify() {
           type="button"
           onClick={() => setStep("payment")}
           disabled={!agreed}
-          style={agreed ? { animation: "attention-wiggle 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite, attention-pulse 1.8s ease-in-out infinite" } : undefined}
-          className="text-button w-full h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none disabled:animate-none inline-flex items-center justify-center gap-2"
+          className="text-button w-full h-12 rounded-lg bg-primary text-primary-foreground elevation-2 hover:elevation-3 active:scale-[0.98] transition-all disabled:opacity-40 disabled:elevation-0 inline-flex items-center justify-center gap-2"
         >
           Continue to payment
           <ArrowRight className="h-4 w-4" />
@@ -463,3 +456,4 @@ function Verify() {
     </div>
   );
 }
+
