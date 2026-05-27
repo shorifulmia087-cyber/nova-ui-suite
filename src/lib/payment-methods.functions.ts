@@ -53,6 +53,7 @@ const baseSchema = z.object({
   address: z.string().trim().min(1, "Address/number is required").max(200, "Max 200 characters"),
   min_amount: z.number({ invalid_type_error: "Enter a valid minimum" }).min(0, "Must be ≥ 0").max(10_000_000),
   max_amount: z.number({ invalid_type_error: "Enter a valid maximum" }).min(0, "Must be ≥ 0").max(10_000_000),
+  txn_id_length: z.number({ invalid_type_error: "Enter a valid length" }).int().min(4, "Min 4").max(32, "Max 32"),
   is_active: z.boolean().optional(),
   sort_order: z.number().int().min(0).max(10_000).optional(),
 });
