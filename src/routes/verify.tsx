@@ -292,7 +292,7 @@ function Verify() {
                       inputMode="numeric"
                       placeholder="01XXXXXXXXX"
                       aria-invalid={!!senderError}
-                      className={`text-input w-full h-12 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 ${
+                      className={`text-input w-full h-12 rounded-lg bg-card border border-border px-3 tracking-wider outline-none text-foreground placeholder:text-muted-foreground focus:ring-2 ${
                         senderError ? "ring-2 ring-[color:var(--destructive)]" : "focus:ring-[color:var(--accent)]"
                       }`}
                     />
