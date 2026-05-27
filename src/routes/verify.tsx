@@ -417,18 +417,36 @@ function Verify() {
         </Card>
 
         {/* Fee notice */}
-        <Card className="p-card border-0 bg-gradient-soft elevation-1 flex items-center justify-between">
-          <div>
-            <Text variant="caption" case="upper" className="text-muted-foreground tracking-widest">
-              One-time fee
-            </Text>
-            <Heading variant="cardTitle" className="text-foreground tabular-nums mt-0.5">
-              ৳{VERIFY_FEE}
-            </Heading>
+        <Card className="relative overflow-hidden p-card border-0 elevation-2 bg-gradient-to-br from-[color:color-mix(in_oklab,var(--accent)_8%,var(--card))] via-card to-[color:color-mix(in_oklab,var(--primary)_6%,var(--card))]">
+          <div className="absolute -top-10 -right-10 h-32 w-32 rounded-full bg-[color:var(--accent)]/10 blur-2xl pointer-events-none" />
+          <div className="absolute -bottom-12 -left-8 h-28 w-28 rounded-full bg-[color:var(--primary)]/8 blur-2xl pointer-events-none" />
+          <div className="relative flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-12 w-12 shrink-0 rounded-xl bg-gradient-to-br from-[color:var(--accent)] to-[color:color-mix(in_oklab,var(--accent)_65%,#000)] flex items-center justify-center elevation-2 ring-4 ring-[color:var(--accent)]/10">
+                <Crown className="h-6 w-6 text-accent-foreground" />
+              </div>
+              <div>
+                <Text variant="caption" case="upper" className="text-muted-foreground tracking-widest">
+                  One-time fee
+                </Text>
+                <div className="flex items-baseline gap-1 mt-0.5">
+                  <Heading variant="sectionTitle" case="none" className="text-foreground tabular-nums leading-none">
+                    ৳{VERIFY_FEE}
+                  </Heading>
+                  <Text variant="caption" className="text-muted-foreground">BDT</Text>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-col items-end gap-1.5">
+              <span className="inline-flex items-center gap-1 rounded-pill bg-[color:var(--success)]/12 px-2.5 py-1">
+                <CheckCircle2 className="h-3 w-3 text-[color:var(--success)]" />
+                <Text variant="caption" as="span" className="text-[color:var(--success)] font-medium">Lifetime</Text>
+              </span>
+              <Text variant="caption" className="text-muted-foreground text-right leading-tight max-w-[140px]">
+                No renewals or hidden charges
+              </Text>
+            </div>
           </div>
-          <Text variant="caption" className="text-muted-foreground text-right max-w-[55%]">
-            Lifetime verification. No renewals or hidden charges.
-          </Text>
         </Card>
 
         {/* Agree */}
