@@ -7,12 +7,12 @@ import { Card, ActionButton } from "@/components/mobile/Primitives";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
 import {
   adminListPaymentMethods,
   adminCreatePaymentMethod,
   adminUpdatePaymentMethod,
   adminDeletePaymentMethod,
+  adminUploadPaymentLogo,
   type PaymentMethodRow,
 } from "@/lib/payment-methods.functions";
 import { isCurrentUserAdmin } from "@/lib/tasks.functions";
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/admin/payment-methods")({
   component: AdminPaymentMethods,
 });
 
-const ACCEPTED = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+const ACCEPTED = ["image/png", "image/jpeg", "image/webp"];
 const MAX_LOGO = 2 * 1024 * 1024; // 2MB
 
 type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max", string>>;
@@ -36,6 +36,7 @@ function AdminPaymentMethods() {
   const createFn = useServerFn(adminCreatePaymentMethod);
   const updateFn = useServerFn(adminUpdatePaymentMethod);
   const deleteFn = useServerFn(adminDeletePaymentMethod);
+  const uploadFn = useServerFn(adminUploadPaymentLogo);
 
   const [authorized, setAuthorized] = useState<"checking" | "yes" | "no">("checking");
   const [rows, setRows] = useState<PaymentMethodRow[]>([]);
@@ -110,15 +111,15 @@ function AdminPaymentMethods() {
     return { ok: Object.keys(next).length === 0, min, max };
   }
 
-  async function uploadLogo(file: File): Promise<string> {
-    const ext = file.name.split(".").pop() || "png";
-    const path = `${user!.id}/${Date.now()}-${crypto.randomUUID()}.${ext}`;
-    const { error } = await supabase.storage
-      .from("payment-method-logos")
-      .upload(path, file, { contentType: file.type, upsert: false });
-    if (error) throw new Error(error.message);
-    const { data } = supabase.storage.from("payment-method-logos").getPublicUrl(path);
-    return data.publicUrl;
+  // Map server-side field error keys to local UI error keys
+  function mapServerFieldErrors(fe: Record<string, string | undefined>): FormErrors {
+    const out: FormErrors = {};
+    if (fe.name) out.name = fe.name;
+    if (fe.logo_url) out.logo = fe.logo_url;
+    if (fe.address) out.address = fe.address;
+    if (fe.min_amount) out.min = fe.min_amount;
+    if (fe.max_amount) out.max = fe.max_amount;
+    return out;
   }
 
   async function handleCreate(e: React.FormEvent) {
@@ -127,19 +128,37 @@ function AdminPaymentMethods() {
     if (!v.ok) return;
     setCreating(true);
     try {
+      // 1) Upload logo through server fn (server validates type/size/magic bytes)
       setUploading(true);
-      const logo_url = await uploadLogo(logoFile!);
+      const fd = new FormData();
+      fd.append("file", logoFile!);
+      const upRes = await uploadFn({ data: fd });
       setUploading(false);
-      await createFn({
+      if (!upRes.success) {
+        setErrors((p) => ({ ...p, logo: upRes.error }));
+        return;
+      }
+
+      // 2) Create method record (server safe-parses → structured field errors)
+      const createRes = await createFn({
         data: {
           name: name.trim(),
-          logo_url,
+          logo_url: upRes.url,
           address: address.trim(),
           min_amount: v.min,
           max_amount: v.max,
           is_active: true,
         },
       });
+      if (!createRes.success) {
+        if ("fieldErrors" in createRes && createRes.fieldErrors) {
+          setErrors((p) => ({ ...p, ...mapServerFieldErrors(createRes.fieldErrors) }));
+        } else if ("error" in createRes && createRes.error) {
+          toast.error(createRes.error);
+        }
+        return;
+      }
+
       toast.success("Method added");
       setName("");
       setAddress("");
