@@ -708,6 +708,7 @@ function FieldInput({
   value,
   onChange,
   disabled,
+  error,
 }: {
   label: string;
   icon: React.ReactNode;
@@ -715,6 +716,7 @@ function FieldInput({
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled?: boolean;
+  error?: string;
 }) {
   return (
     <label className="block">
@@ -722,7 +724,12 @@ function FieldInput({
         {label}
       </Text>
       <div className="relative">
-        <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400">
+        <span
+          className={cn(
+            "absolute left-3.5 top-1/2 -translate-y-1/2",
+            error ? "text-destructive" : "text-slate-400",
+          )}
+        >
           {icon}
         </span>
         <input
@@ -731,12 +738,24 @@ function FieldInput({
           onChange={onChange}
           placeholder={placeholder}
           disabled={disabled}
-          className="w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 ring-slate-200 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:ring-accent focus:bg-white focus:outline-none transition-all disabled:opacity-60 disabled:cursor-not-allowed"
+          aria-invalid={!!error}
+          className={cn(
+            "w-full h-12 pl-11 pr-4 rounded-xl bg-slate-50 ring-1 text-slate-900 text-input placeholder:text-slate-400 focus:ring-2 focus:bg-white focus:outline-none transition-all disabled:opacity-60 disabled:cursor-not-allowed",
+            error
+              ? "ring-destructive/60 focus:ring-destructive"
+              : "ring-slate-200 focus:ring-accent",
+          )}
         />
       </div>
+      {error && (
+        <Text variant="caption" as="p" className="text-destructive mt-1.5 ml-1">
+          {error}
+        </Text>
+      )}
     </label>
   );
 }
+
 
 function FileField({
   label,
