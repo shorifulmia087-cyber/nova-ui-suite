@@ -107,7 +107,7 @@ export const adminListPaymentMethods = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
       .from("payment_methods")
-      .select("id,name,logo_url,address,min_amount,max_amount,is_active,sort_order,created_at")
+      .select("id,name,logo_url,address,min_amount,max_amount,txn_id_length,is_active,sort_order,created_at")
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
@@ -115,6 +115,7 @@ export const adminListPaymentMethods = createServerFn({ method: "GET" })
       ...m,
       min_amount: Number(m.min_amount),
       max_amount: Number(m.max_amount),
+      txn_id_length: Number(m.txn_id_length),
     })) as PaymentMethodRow[];
   });
 
