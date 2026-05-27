@@ -256,3 +256,80 @@ export const adminDeletePaymentMethod = createServerFn({ method: "POST" })
     if (error) throw new Error(error.message);
     return { success: true };
   });
+
+// ----- USER: submit verification payment (txn id must be globally unique) -----
+export const submitVerificationPayment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) =>
+    z.object({
+      payment_method_id: z.string().uuid(),
+      txn_id: z.string().trim().min(4).max(32),
+      sender_number: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid mobile number"),
+      amount: z.number().min(1).max(10_000_000),
+    }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+
+    // Fetch the method to know required txn id length
+    const { data: method, error: mErr } = await supabase
+      .from("payment_methods")
+      .select("id,name,txn_id_length,is_active")
+      .eq("id", data.payment_method_id)
+      .maybeSingle();
+    if (mErr) return { success: false as const, error: mErr.message };
+    if (!method || !method.is_active) {
+      return { success: false as const, error: "Payment method not available" };
+    }
+
+    const txn = data.txn_id.toUpperCase();
+    if (txn.length !== Number(method.txn_id_length)) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: `${method.name} Transaction ID must be exactly ${method.txn_id_length} characters`,
+      };
+    }
+    if (!/^[A-Z0-9]+$/.test(txn)) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: "Transaction ID can only contain letters and numbers",
+      };
+    }
+
+    // Uniqueness pre-check (friendly error). Race-safe fallback below.
+    const { data: existing } = await supabase
+      .from("verification_payments")
+      .select("id")
+      .ilike("txn_id", txn)
+      .maybeSingle();
+    if (existing) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: "এই Transaction ID আগেই ব্যবহৃত হয়েছে। অনুগ্রহ করে আপনার আসল Transaction ID দিন।",
+      };
+    }
+
+    const { error: insErr } = await supabase.from("verification_payments").insert({
+      user_id: userId,
+      payment_method_id: data.payment_method_id,
+      txn_id: txn,
+      sender_number: data.sender_number,
+      amount: data.amount,
+    });
+    if (insErr) {
+      const msg = insErr.message || "";
+      if (msg.includes("verification_payments_txn_id_unique") || (insErr as any).code === "23505") {
+        return {
+          success: false as const,
+          field: "txn_id" as const,
+          error: "এই Transaction ID আগেই ব্যবহৃত হয়েছে। অনুগ্রহ করে আপনার আসল Transaction ID দিন।",
+        };
+      }
+      return { success: false as const, error: msg };
+    }
+
+    return { success: true as const };
+  });
