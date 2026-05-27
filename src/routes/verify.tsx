@@ -241,10 +241,10 @@ function Verify() {
                       key={m.id}
                       type="button"
                       onClick={() => setMethod(m.id)}
-                      className={`group relative rounded-lg overflow-hidden flex flex-col items-center transition-all duration-300 active:scale-[0.97] ${
+                      className={`group relative rounded-lg overflow-hidden flex flex-col items-center transition-all duration-300 active:scale-[0.97] border-[1.5px] ${
                         active
-                          ? "bg-gradient-to-b from-[color:color-mix(in_oklab,var(--accent)_8%,var(--card))] to-card elevation-2 ring-1 ring-[color:var(--accent)]/40"
-                          : "bg-card elevation-1 ring-1 ring-border hover:ring-[color:color-mix(in_oklab,var(--accent)_25%,var(--border))]"
+                          ? "bg-gradient-to-b from-[color:color-mix(in_oklab,var(--accent)_8%,var(--card))] to-card elevation-2 border-[color:var(--accent)]"
+                          : "bg-card elevation-1 border-border hover:border-[color:color-mix(in_oklab,var(--accent)_35%,var(--border))]"
                       }`}
                     >
                       {active && (
