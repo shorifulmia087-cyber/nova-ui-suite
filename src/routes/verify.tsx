@@ -282,6 +282,7 @@ function Verify() {
                   </li>
                 </ol>
 
+                <div className="pt-1 space-y-3">
                   <div>
                     <AppInput
                       label="Sender Number"
