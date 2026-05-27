@@ -24,6 +24,7 @@ import { Route as FarmRouteImport } from './routes/farm'
 import { Route as DepositRouteImport } from './routes/deposit'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminTasksRouteImport } from './routes/admin.tasks'
+import { Route as AdminPaymentMethodsRouteImport } from './routes/admin.payment-methods'
 
 const WithdrawRoute = WithdrawRouteImport.update({
   id: '/withdraw',
@@ -100,6 +101,11 @@ const AdminTasksRoute = AdminTasksRouteImport.update({
   path: '/admin/tasks',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminPaymentMethodsRoute = AdminPaymentMethodsRouteImport.update({
+  id: '/admin/payment-methods',
+  path: '/admin/payment-methods',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -116,6 +122,7 @@ export interface FileRoutesByFullPath {
   '/verify': typeof VerifyRoute
   '/video-income': typeof VideoIncomeRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/payment-methods': typeof AdminPaymentMethodsRoute
   '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRoutesByTo {
@@ -133,6 +140,7 @@ export interface FileRoutesByTo {
   '/verify': typeof VerifyRoute
   '/video-income': typeof VideoIncomeRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/payment-methods': typeof AdminPaymentMethodsRoute
   '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRoutesById {
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/verify': typeof VerifyRoute
   '/video-income': typeof VideoIncomeRoute
   '/withdraw': typeof WithdrawRoute
+  '/admin/payment-methods': typeof AdminPaymentMethodsRoute
   '/admin/tasks': typeof AdminTasksRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video-income'
     | '/withdraw'
+    | '/admin/payment-methods'
     | '/admin/tasks'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video-income'
     | '/withdraw'
+    | '/admin/payment-methods'
     | '/admin/tasks'
   id:
     | '__root__'
@@ -204,6 +215,7 @@ export interface FileRouteTypes {
     | '/verify'
     | '/video-income'
     | '/withdraw'
+    | '/admin/payment-methods'
     | '/admin/tasks'
   fileRoutesById: FileRoutesById
 }
@@ -222,6 +234,7 @@ export interface RootRouteChildren {
   VerifyRoute: typeof VerifyRoute
   VideoIncomeRoute: typeof VideoIncomeRoute
   WithdrawRoute: typeof WithdrawRoute
+  AdminPaymentMethodsRoute: typeof AdminPaymentMethodsRoute
   AdminTasksRoute: typeof AdminTasksRoute
 }
 
@@ -332,6 +345,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminTasksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/payment-methods': {
+      id: '/admin/payment-methods'
+      path: '/admin/payment-methods'
+      fullPath: '/admin/payment-methods'
+      preLoaderRoute: typeof AdminPaymentMethodsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -350,6 +370,7 @@ const rootRouteChildren: RootRouteChildren = {
   VerifyRoute: VerifyRoute,
   VideoIncomeRoute: VideoIncomeRoute,
   WithdrawRoute: WithdrawRoute,
+  AdminPaymentMethodsRoute: AdminPaymentMethodsRoute,
   AdminTasksRoute: AdminTasksRoute,
 }
 export const routeTree = rootRouteImport
