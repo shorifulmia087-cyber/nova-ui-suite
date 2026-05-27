@@ -176,7 +176,10 @@ export const submitVideo = createServerFn({ method: "POST" })
       })
       .select("id, status, reward_amount, created_at")
       .single();
-    if (error) throw new Error(error.message);
+    if (error) {
+      await cleanup();
+      throw new Error(error.message);
+    }
 
     return { submission: row };
   });
