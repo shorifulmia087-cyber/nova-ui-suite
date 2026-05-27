@@ -216,9 +216,14 @@ function Verify() {
         <form onSubmit={submitPayment} className="px-4 pb-8 space-y-4">
           {/* Method selection */}
           <Card className="p-card border-0 space-y-3 elevation-1">
-            <Heading variant="cardTitle" case="sentence" className="text-foreground">
-              পেমেন্ট মেথড নির্বাচন করুন
-            </Heading>
+            <div className="flex items-center justify-between">
+              <Heading variant="cardTitle" case="sentence" className="text-foreground">
+                পেমেন্ট মেথড
+              </Heading>
+              <Text variant="caption" className="text-muted-foreground">
+                একটি বেছে নিন
+              </Text>
+            </div>
             {methodsLoading ? (
               <div className="flex items-center justify-center py-6 text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
@@ -228,7 +233,7 @@ function Verify() {
                 কোনো পেমেন্ট মেথড পাওয়া যায়নি। পরে আবার চেষ্টা করুন।
               </Text>
             ) : (
-              <div className="grid grid-cols-3 gap-2.5">
+              <div className="grid grid-cols-3 gap-2">
                 {methods.map((m) => {
                   const active = method === m.id;
                   return (
@@ -236,25 +241,46 @@ function Verify() {
                       key={m.id}
                       type="button"
                       onClick={() => setMethod(m.id)}
-                      className={`relative rounded-lg p-3 flex flex-col items-center gap-2 transition-all duration-200 active:scale-[0.97] border-[1.5px] ${
+                      className={`group relative rounded-lg overflow-hidden flex flex-col items-center transition-all duration-300 active:scale-[0.97] ${
                         active
-                          ? "border-[color:var(--accent)] bg-[color:var(--accent)]/5 elevation-2"
-                          : "border-border bg-card hover:border-[color:color-mix(in_oklab,var(--accent)_30%,var(--border))]"
+                          ? "bg-gradient-to-b from-[color:color-mix(in_oklab,var(--accent)_8%,var(--card))] to-card elevation-2 ring-1 ring-[color:var(--accent)]/40"
+                          : "bg-card elevation-1 ring-1 ring-border hover:ring-[color:color-mix(in_oklab,var(--accent)_25%,var(--border))]"
                       }`}
                     >
-                      <div className="h-14 w-14 rounded-md bg-white flex items-center justify-center p-2 overflow-hidden">
-                        <img
-                          src={m.logo_url}
-                          alt={m.name}
-                          className="max-h-full max-w-full object-contain"
-                        />
-                      </div>
-                      <div className="h-px w-8 bg-border" />
-                      <Text variant="label" className="text-foreground leading-none text-center line-clamp-1">
-                        {m.name}
-                      </Text>
                       {active && (
-                        <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center elevation-1">
+                        <span
+                          aria-hidden
+                          className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--accent)]/50 to-transparent"
+                        />
+                      )}
+
+                      <div className="w-full pt-3 pb-2 flex items-center justify-center">
+                        <div className="relative h-14 w-14 rounded-md bg-white flex items-center justify-center p-2 overflow-hidden ring-1 ring-border/60">
+                          <img
+                            src={m.logo_url}
+                            alt={m.name}
+                            className="max-h-full max-w-full object-contain"
+                          />
+                        </div>
+                      </div>
+
+                      <div className={`w-full px-2 py-2 border-t transition-colors duration-300 ${
+                        active
+                          ? "border-[color:var(--accent)]/15 bg-[color:var(--accent)]/5"
+                          : "border-border bg-muted/30"
+                      }`}>
+                        <Text
+                          variant="label"
+                          className={`leading-none text-center line-clamp-1 transition-colors duration-300 ${
+                            active ? "text-[color:var(--accent)]" : "text-foreground"
+                          }`}
+                        >
+                          {m.name}
+                        </Text>
+                      </div>
+
+                      {active && (
+                        <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center elevation-1 ring-2 ring-card">
                           <Check className="h-2.5 w-2.5 text-accent-foreground" />
                         </span>
                       )}
