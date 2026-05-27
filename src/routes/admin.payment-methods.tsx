@@ -98,18 +98,20 @@ function AdminPaymentMethods() {
     setLogoPreview(URL.createObjectURL(f));
   }
 
-  function validate(): { ok: boolean; min: number; max: number } {
+  function validate(): { ok: boolean; min: number; max: number; txnLen: number } {
     const next: FormErrors = {};
     if (!name.trim()) next.name = "Name is required";
     if (!address.trim()) next.address = "Address/number is required";
     if (!logoFile) next.logo = "Logo is required";
     const min = parseFloat(minAmt);
     const max = parseFloat(maxAmt);
+    const tl = parseInt(txnLen, 10);
     if (!isFinite(min) || min < 0) next.min = "Enter a valid minimum";
     if (!isFinite(max) || max < 0) next.max = "Enter a valid maximum";
     if (isFinite(min) && isFinite(max) && max < min) next.max = "Max must be ≥ min";
+    if (!isFinite(tl) || tl < 4 || tl > 32) next.txnLen = "Must be 4–32";
     setErrors(next);
-    return { ok: Object.keys(next).length === 0, min, max };
+    return { ok: Object.keys(next).length === 0, min, max, txnLen: tl };
   }
 
   // Map server-side field error keys to local UI error keys
