@@ -5,6 +5,7 @@ import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
 import { listActivePaymentMethods, type PaymentMethodRow } from "@/lib/payment-methods.functions";
+import { toast } from "sonner";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -17,6 +18,7 @@ import {
   Zap,
   Crown,
   Check,
+  Copy,
 } from "lucide-react";
 
 export const Route = createFileRoute("/verify")({
@@ -75,7 +77,14 @@ function Verify() {
       .finally(() => setMethodsLoading(false));
   }, [step]);
 
-  const canPay = !!method && txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
+  const canPay = !!method && txnId.trim().length >= 6;
+
+  const copy = (text: string, label: string) => {
+    navigator.clipboard?.writeText(text).then(
+      () => toast.success(`${label} কপি হয়েছে`),
+      () => toast.error("কপি করা যায়নি"),
+    );
+  };
 
   const submitPayment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -137,23 +146,10 @@ function Verify() {
       <div>
         <ScreenHeader title="Payment" />
         <form onSubmit={submitPayment} className="px-4 pb-8 space-y-4">
-          {/* Amount summary */}
-          <Card className="p-card border-0 bg-gradient-soft text-center">
-            <Text variant="caption" case="upper" className="text-muted-foreground">
-              Verification Fee
-            </Text>
-            <Heading variant="display" case="none" className="mt-1 text-foreground">
-              ৳{VERIFY_FEE}
-            </Heading>
-            <Text variant="bodySecondary" className="text-muted-foreground mt-1">
-              One-time payment for lifetime access
-            </Text>
-          </Card>
-
           {/* Method selection */}
           <Card className="p-card border-0 space-y-3">
             <Heading variant="cardTitle" case="sentence" className="text-foreground">
-              Select payment method
+              পেমেন্ট মেথড নির্বাচন করুন
             </Heading>
             {methodsLoading ? (
               <div className="flex items-center justify-center py-6 text-muted-foreground">
@@ -161,7 +157,7 @@ function Verify() {
               </div>
             ) : methods.length === 0 ? (
               <Text variant="caption" className="text-muted-foreground text-center py-3">
-                No payment methods available yet. Please try again later.
+                কোনো পেমেন্ট মেথড পাওয়া যায়নি। পরে আবার চেষ্টা করুন।
               </Text>
             ) : (
               <div className="grid grid-cols-3 gap-2">
@@ -196,54 +192,105 @@ function Verify() {
             )}
           </Card>
 
-          {/* Send instructions */}
           {selected && (
-          <Card className="p-card border-0 bg-muted/40 space-y-2">
-            <Text variant="label" className="text-foreground">
-              Send ৳{VERIFY_FEE} to this {selected.name} number:
-            </Text>
-            <div className="flex items-center justify-between rounded-lg bg-background px-3 py-2.5">
-              <Text variant="cardTitle" className="tabular-nums text-foreground">
-                {selected.address}
-              </Text>
-              <Text variant="caption" case="upper" className="text-[color:var(--accent)] font-semibold">
-                Personal
-              </Text>
-            </div>
-            <Text variant="caption" className="text-muted-foreground">
-              Limits: ৳{selected.min_amount} – ৳{selected.max_amount}. After sending, enter the Transaction ID below.
-            </Text>
-          </Card>
+            <>
+              {/* Big logo */}
+              <Card className="p-card border-0 bg-gradient-soft flex items-center justify-center py-6">
+                <img
+                  src={selected.logo_url}
+                  alt={selected.name}
+                  className="h-16 object-contain"
+                />
+              </Card>
+
+              {/* Amount */}
+              <Card className="p-card border-0 text-center">
+                <Heading variant="display" case="none" className="text-foreground tabular-nums">
+                  {VERIFY_FEE} BDT
+                </Heading>
+                <Text variant="bodySecondary" className="text-muted-foreground mt-1">
+                  ওয়ান-টাইম ভেরিফিকেশন ফি
+                </Text>
+              </Card>
+
+              {/* Step-by-step instructions (Bangla) */}
+              <Card className="p-card border-0 space-y-3">
+                <Heading variant="cardTitle" case="sentence" className="text-foreground">
+                  কীভাবে টাকা পাঠাবেন
+                </Heading>
+
+                <ol className="divide-y divide-border">
+                  <li className="flex gap-2 py-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed">
+                      আপনার <b>{selected.name}</b> মোবাইল অ্যাপে যান।
+                    </Text>
+                  </li>
+                  <li className="flex gap-2 py-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed">
+                      <b>Send Money</b> অপশনটি সিলেক্ট করুন।
+                    </Text>
+                  </li>
+                  <li className="flex items-center gap-2 py-2.5">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed flex-1">
+                      নাম্বার দিন: <b className="tabular-nums">{selected.address}</b>
+                    </Text>
+                    <button
+                      type="button"
+                      onClick={() => copy(selected.address, "নাম্বার")}
+                      className="inline-flex items-center gap-1 rounded-md bg-[color:var(--accent)] text-accent-foreground px-2.5 py-1.5 text-xs font-medium active:scale-95 transition"
+                    >
+                      <Copy className="h-3.5 w-3.5" /> কপি
+                    </button>
+                  </li>
+                  <li className="flex items-center gap-2 py-2.5">
+                    <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed flex-1">
+                      অ্যামাউন্ট দিন: <b className="tabular-nums">{VERIFY_FEE} BDT</b>
+                    </Text>
+                    <button
+                      type="button"
+                      onClick={() => copy(String(VERIFY_FEE), "অ্যামাউন্ট")}
+                      className="inline-flex items-center gap-1 rounded-md bg-[color:var(--accent)] text-accent-foreground px-2.5 py-1.5 text-xs font-medium active:scale-95 transition"
+                    >
+                      <Copy className="h-3.5 w-3.5" /> কপি
+                    </button>
+                  </li>
+                  <li className="flex gap-2 py-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed">
+                      আপনার <b>{selected.name}</b> পিন দিয়ে কনফার্ম করুন।
+                    </Text>
+                  </li>
+                  <li className="flex gap-2 py-2.5">
+                    <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[color:var(--accent)]" />
+                    <Text variant="body" className="text-foreground leading-relaxed">
+                      নিচের ঘরে <b>Transaction ID</b> বসিয়ে <b>Verify</b> বাটনে চাপ দিন।
+                    </Text>
+                  </li>
+                </ol>
+
+                <div className="pt-1">
+                  <Text variant="label" as="span" className="block mb-1.5 text-foreground">
+                    Transaction ID
+                  </Text>
+                  <input
+                    value={txnId}
+                    onChange={(e) => setTxnId(e.target.value.toUpperCase())}
+                    placeholder="ট্রানজেকশন আইডি লিখুন"
+                    className="text-input w-full h-12 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
+                  />
+                  <Text variant="caption" className="text-muted-foreground mt-1.5 block">
+                    লিমিট: ৳{selected.min_amount} – ৳{selected.max_amount}
+                  </Text>
+                </div>
+              </Card>
+            </>
           )}
 
-          {/* Transaction details */}
-          {selected && (
-          <Card className="p-card border-0 space-y-3">
-            <label className="block">
-              <Text variant="label" as="span" className="block mb-1.5 text-foreground">
-                Your {selected.name} number
-              </Text>
-              <input
-                value={senderNumber}
-                onChange={(e) => setSenderNumber(e.target.value.replace(/[^0-9]/g, ""))}
-                inputMode="numeric"
-                placeholder="01XXXXXXXXX"
-                className="text-input w-full h-11 rounded-lg bg-muted px-3 outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
-              />
-            </label>
-            <label className="block">
-              <Text variant="label" as="span" className="block mb-1.5 text-foreground">
-                Transaction ID
-              </Text>
-              <input
-                value={txnId}
-                onChange={(e) => setTxnId(e.target.value.toUpperCase())}
-                placeholder="e.g. 9A1B2C3D4E"
-                className="text-input w-full h-11 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 focus:ring-[color:var(--accent)]"
-              />
-            </label>
-          </Card>
-          )}
+
 
           <div className="grid grid-cols-[auto_1fr] gap-2">
             <button
@@ -260,9 +307,9 @@ function Verify() {
               className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
             >
               {step === "processing" ? (
-                <><Loader2 className="h-4 w-4 animate-spin" /> Verifying…</>
+                <><Loader2 className="h-4 w-4 animate-spin" /> ভেরিফাই হচ্ছে…</>
               ) : (
-                <><ShieldCheck className="h-4 w-4" /> Confirm payment</>
+                <><ShieldCheck className="h-4 w-4" /> Verify</>
               )}
             </button>
           </div>
