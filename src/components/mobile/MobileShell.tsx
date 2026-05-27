@@ -12,7 +12,7 @@ const tabs = [
 ] as const;
 
 const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
-const TAB_PATHS = new Set(tabs.map((t) => t.to));
+const TAB_PATHS = new Set<string>(tabs.map((t) => t.to));
 
 export function MobileShell() {
   const navigate = useNavigate();
