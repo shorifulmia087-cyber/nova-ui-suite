@@ -168,11 +168,11 @@ function Verify() {
                       key={m.id}
                       type="button"
                       onClick={() => setMethod(m.id)}
-                      className={`relative rounded-lg p-3 flex flex-col items-center gap-1.5 transition-all active:scale-95 ${
+                      className={`relative rounded-lg p-3 flex flex-col items-center gap-2 transition-all active:scale-95 ${
                         active ? "ring-2 ring-[color:var(--accent)] bg-background" : "bg-muted/60"
                       }`}
                     >
-                      <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center p-1.5 overflow-hidden">
+                      <div className="h-16 w-16 rounded-md bg-white flex items-center justify-center p-2 overflow-hidden">
                         <img
                           src={m.logo_url}
                           alt={m.name}
