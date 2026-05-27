@@ -26,6 +26,7 @@ export type Database = {
           min_amount: number
           name: string
           sort_order: number
+          txn_id_length: number
           updated_at: string
         }
         Insert: {
@@ -39,6 +40,7 @@ export type Database = {
           min_amount: number
           name: string
           sort_order?: number
+          txn_id_length?: number
           updated_at?: string
         }
         Update: {
@@ -52,6 +54,7 @@ export type Database = {
           min_amount?: number
           name?: string
           sort_order?: number
+          txn_id_length?: number
           updated_at?: string
         }
         Relationships: []
@@ -219,6 +222,50 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      verification_payments: {
+        Row: {
+          amount: number
+          created_at: string
+          id: string
+          payment_method_id: string
+          sender_number: string
+          status: string
+          txn_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          id?: string
+          payment_method_id: string
+          sender_number: string
+          status?: string
+          txn_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          id?: string
+          payment_method_id?: string
+          sender_number?: string
+          status?: string
+          txn_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "verification_payments_payment_method_id_fkey"
+            columns: ["payment_method_id"]
+            isOneToOne: false
+            referencedRelation: "payment_methods"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       video_submissions: {
         Row: {
