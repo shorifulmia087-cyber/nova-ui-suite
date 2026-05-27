@@ -12,6 +12,7 @@ const tabs = [
 ] as const;
 
 const PUBLIC_ROUTES = new Set(["/login", "/signup"]);
+const TAB_PATHS = new Set(tabs.map((t) => t.to));
 
 export function MobileShell() {
   const navigate = useNavigate();
@@ -24,7 +25,8 @@ export function MobileShell() {
   );
   const count = tabs.length;
   const isPublic = PUBLIC_ROUTES.has(pathname);
-  const hideNav = isPublic || !user;
+  const isTabRoute = TAB_PATHS.has(pathname);
+  const hideNav = isPublic || !user || !isTabRoute;
 
   useEffect(() => {
     if (loading) return;
