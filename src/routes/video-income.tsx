@@ -846,6 +846,11 @@ function FileField({
         className="hidden"
         onChange={(e) => onChange(e.target.files?.[0] ?? null)}
       />
+      {error && (
+        <Text variant="caption" as="p" className="text-destructive mt-1.5 ml-1">
+          {error}
+        </Text>
+      )}
     </div>
   );
 }
