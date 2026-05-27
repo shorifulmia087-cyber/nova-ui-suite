@@ -47,6 +47,7 @@ function AdminPaymentMethods() {
   const [address, setAddress] = useState("");
   const [minAmt, setMinAmt] = useState("");
   const [maxAmt, setMaxAmt] = useState("");
+  const [txnLen, setTxnLen] = useState("10");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>("");
   const [uploading, setUploading] = useState(false);
