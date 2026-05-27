@@ -215,16 +215,9 @@ function Verify() {
             </Text>
           </Card>
           )}
-              <Text variant="caption" case="upper" className="text-[color:var(--accent)] font-semibold">
-                Personal
-              </Text>
-            </div>
-            <Text variant="caption" className="text-muted-foreground">
-              After sending, enter the Transaction ID below.
-            </Text>
-          </Card>
 
           {/* Transaction details */}
+          {selected && (
           <Card className="p-card border-0 space-y-3">
             <label className="block">
               <Text variant="label" as="span" className="block mb-1.5 text-foreground">
@@ -250,6 +243,7 @@ function Verify() {
               />
             </label>
           </Card>
+          )}
 
           <div className="grid grid-cols-[auto_1fr] gap-2">
             <button
