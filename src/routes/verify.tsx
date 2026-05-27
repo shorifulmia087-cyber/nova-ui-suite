@@ -77,7 +77,14 @@ function Verify() {
       .finally(() => setMethodsLoading(false));
   }, [step]);
 
-  const canPay = !!method && txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
+  const canPay = !!method && txnId.trim().length >= 6;
+
+  const copy = (text: string, label: string) => {
+    navigator.clipboard?.writeText(text).then(
+      () => toast.success(`${label} কপি হয়েছে`),
+      () => toast.error("কপি করা যায়নি"),
+    );
+  };
 
   const submitPayment = (e: React.FormEvent) => {
     e.preventDefault();
