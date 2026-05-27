@@ -307,7 +307,6 @@ function Verify() {
                       className="tracking-wider"
                     />
                   </div>
-                  </div>
                 </div>
               </Card>
             </>
