@@ -150,6 +150,7 @@ function AdminPaymentMethods() {
           address: address.trim(),
           min_amount: v.min,
           max_amount: v.max,
+          txn_id_length: v.txnLen,
           is_active: true,
         },
       });
