@@ -229,6 +229,7 @@ function Verify() {
                           className="max-h-full max-w-full object-contain"
                         />
                       </div>
+                      <div className="h-px w-full bg-border" />
                       <Text variant="label" className="text-foreground leading-none text-center line-clamp-1">
                         {m.name}
                       </Text>
