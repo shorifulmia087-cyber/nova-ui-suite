@@ -334,10 +334,22 @@ function Verify() {
                     <AppInput
                       label="Transaction ID"
                       value={txnId}
-                      onChange={(e) => setTxnId(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20))}
-                      placeholder="যেমন: 9F3A1B2C7D"
+                      onChange={(e) => {
+                        setServerTxnError("");
+                        setTxnId(
+                          e.target.value
+                            .toUpperCase()
+                            .replace(/[^A-Z0-9]/g, "")
+                            .slice(0, selected.txn_id_length),
+                        );
+                      }}
+                      maxLength={selected.txn_id_length}
                       error={txnError || undefined}
-                      hint={!txnError ? `লিমিট: ৳${selected.min_amount} – ৳${selected.max_amount}` : undefined}
+                      hint={
+                        !txnError
+                          ? `${selected.name}-এর Transaction ID ${selected.txn_id_length} ক্যারেক্টারের হবে`
+                          : undefined
+                      }
                       className="tracking-wider"
                     />
                   </div>
