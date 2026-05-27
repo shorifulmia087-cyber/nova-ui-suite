@@ -30,15 +30,12 @@ function TxList() {
       <ScreenHeader />
 
       <div className="px-4">
-        <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <input
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            placeholder="Search activity"
-            className="text-input w-full h-11 pl-9 pr-3 rounded-lg bg-card border border-border outline-none focus:border-[color:var(--accent)]"
-          />
-        </div>
+        <AppInput
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Search activity"
+          leftIcon={<Search className="h-4 w-4" />}
+        />
       </div>
 
       <div className="px-4 mt-3 flex gap-2 overflow-x-auto no-scrollbar">
