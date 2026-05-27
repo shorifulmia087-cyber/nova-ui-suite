@@ -307,9 +307,9 @@ function Verify() {
               className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none inline-flex items-center justify-center gap-2"
             >
               {step === "processing" ? (
-                <><Loader2 className="h-4 w-4 animate-spin" /> Verifying…</>
+                <><Loader2 className="h-4 w-4 animate-spin" /> ভেরিফাই হচ্ছে…</>
               ) : (
-                <><ShieldCheck className="h-4 w-4" /> Confirm payment</>
+                <><ShieldCheck className="h-4 w-4" /> Verify</>
               )}
             </button>
           </div>
