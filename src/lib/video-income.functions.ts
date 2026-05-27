@@ -77,6 +77,59 @@ export const submitVideo = createServerFn({ method: "POST" })
       throw new Error("Invalid upload path");
     }
 
+    // --- Server-side image file validation (type + size + magic bytes) ---
+    const MAX_BYTES = 5 * 1024 * 1024; // 5MB
+    const ALLOWED = new Set(["image/png", "image/jpeg", "image/webp"]);
+
+    const cleanup = async () => {
+      await supabase.storage
+        .from("video-uploads")
+        .remove([data.channel_logo_path, data.analytics_path]);
+    };
+
+    const sniffMime = (buf: Uint8Array): string | null => {
+      if (
+        buf.length >= 8 &&
+        buf[0] === 0x89 && buf[1] === 0x50 && buf[2] === 0x4e && buf[3] === 0x47 &&
+        buf[4] === 0x0d && buf[5] === 0x0a && buf[6] === 0x1a && buf[7] === 0x0a
+      ) return "image/png";
+      if (buf.length >= 3 && buf[0] === 0xff && buf[1] === 0xd8 && buf[2] === 0xff)
+        return "image/jpeg";
+      if (
+        buf.length >= 12 &&
+        buf[0] === 0x52 && buf[1] === 0x49 && buf[2] === 0x46 && buf[3] === 0x46 &&
+        buf[8] === 0x57 && buf[9] === 0x45 && buf[10] === 0x42 && buf[11] === 0x50
+      ) return "image/webp";
+      return null;
+    };
+
+    const verify = async (path: string, label: string) => {
+      const { data: blob, error: dlErr } = await supabase.storage
+        .from("video-uploads")
+        .download(path);
+      if (dlErr || !blob) {
+        await cleanup();
+        throw new Error(`${label}: ফাইল পাওয়া যায়নি`);
+      }
+      if (blob.size === 0) {
+        await cleanup();
+        throw new Error(`${label}: খালি ফাইল`);
+      }
+      if (blob.size > MAX_BYTES) {
+        await cleanup();
+        throw new Error(`${label}: 5MB-এর কম রাখুন`);
+      }
+      const head = new Uint8Array(await blob.slice(0, 16).arrayBuffer());
+      const sniffed = sniffMime(head);
+      if (!sniffed || !ALLOWED.has(sniffed)) {
+        await cleanup();
+        throw new Error(`${label}: শুধু PNG / JPG / WEBP ছবি দিন`);
+      }
+    };
+
+    await verify(data.channel_logo_path, "Channel logo");
+    await verify(data.analytics_path, "Analytics screenshot");
+
     // Block creating a new submission while one is still pending
     const { data: pending, error: pendingErr } = await supabase
       .from("video_submissions")
@@ -84,8 +137,12 @@ export const submitVideo = createServerFn({ method: "POST" })
       .eq("user_id", userId)
       .eq("status", "pending")
       .limit(1);
-    if (pendingErr) throw new Error(pendingErr.message);
+    if (pendingErr) {
+      await cleanup();
+      throw new Error(pendingErr.message);
+    }
     if (pending && pending.length > 0) {
+      await cleanup();
       throw new Error("ইতিমধ্যে একটি সাবমিশন পেন্ডিং রয়েছে");
     }
 
@@ -95,8 +152,15 @@ export const submitVideo = createServerFn({ method: "POST" })
       .select("id, reward_amount, is_active")
       .eq("id", data.tier_id)
       .maybeSingle();
-    if (tierErr) throw new Error(tierErr.message);
-    if (!tier || !tier.is_active) throw new Error("অবৈধ টিয়ার");
+    if (tierErr) {
+      await cleanup();
+      throw new Error(tierErr.message);
+    }
+    if (!tier || !tier.is_active) {
+      await cleanup();
+      throw new Error("অবৈধ টিয়ার");
+    }
+
 
     const { data: row, error } = await supabase
       .from("video_submissions")
