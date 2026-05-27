@@ -75,7 +75,7 @@ function Verify() {
       .finally(() => setMethodsLoading(false));
   }, [step]);
 
-  const canPay = txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
+  const canPay = !!method && txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
 
   const submitPayment = (e: React.FormEvent) => {
     e.preventDefault();
