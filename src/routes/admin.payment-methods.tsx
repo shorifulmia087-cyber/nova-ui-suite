@@ -27,7 +27,7 @@ export const Route = createFileRoute("/admin/payment-methods")({
 const ACCEPTED = ["image/png", "image/jpeg", "image/webp"];
 const MAX_LOGO = 2 * 1024 * 1024; // 2MB
 
-type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max", string>>;
+type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max" | "txnLen", string>>;
 
 function AdminPaymentMethods() {
   const { user, loading: authLoading } = useAuth();
@@ -47,6 +47,7 @@ function AdminPaymentMethods() {
   const [address, setAddress] = useState("");
   const [minAmt, setMinAmt] = useState("");
   const [maxAmt, setMaxAmt] = useState("");
+  const [txnLen, setTxnLen] = useState("10");
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string>("");
   const [uploading, setUploading] = useState(false);
@@ -97,18 +98,20 @@ function AdminPaymentMethods() {
     setLogoPreview(URL.createObjectURL(f));
   }
 
-  function validate(): { ok: boolean; min: number; max: number } {
+  function validate(): { ok: boolean; min: number; max: number; txnLen: number } {
     const next: FormErrors = {};
     if (!name.trim()) next.name = "Name is required";
     if (!address.trim()) next.address = "Address/number is required";
     if (!logoFile) next.logo = "Logo is required";
     const min = parseFloat(minAmt);
     const max = parseFloat(maxAmt);
+    const tl = parseInt(txnLen, 10);
     if (!isFinite(min) || min < 0) next.min = "Enter a valid minimum";
     if (!isFinite(max) || max < 0) next.max = "Enter a valid maximum";
     if (isFinite(min) && isFinite(max) && max < min) next.max = "Max must be ≥ min";
+    if (!isFinite(tl) || tl < 4 || tl > 32) next.txnLen = "Must be 4–32";
     setErrors(next);
-    return { ok: Object.keys(next).length === 0, min, max };
+    return { ok: Object.keys(next).length === 0, min, max, txnLen: tl };
   }
 
   // Map server-side field error keys to local UI error keys
@@ -147,6 +150,7 @@ function AdminPaymentMethods() {
           address: address.trim(),
           min_amount: v.min,
           max_amount: v.max,
+          txn_id_length: v.txnLen,
           is_active: true,
         },
       });
@@ -164,6 +168,7 @@ function AdminPaymentMethods() {
       setAddress("");
       setMinAmt("");
       setMaxAmt("");
+      setTxnLen("10");
       setLogoFile(null);
       setLogoPreview("");
       setErrors({});
@@ -298,6 +303,18 @@ function AdminPaymentMethods() {
                 />
                 {errors.max && <p className="text-caption text-destructive mt-1">{errors.max}</p>}
               </div>
+            </div>
+
+            <div>
+              <Label>Transaction ID length (characters)</Label>
+              <Input
+                type="number" min="4" max="32" step="1"
+                value={txnLen}
+                onChange={(e) => { setTxnLen(e.target.value); setErrors((p) => ({ ...p, txnLen: undefined })); }}
+                placeholder="e.g. 10 for bKash, 8 for Nagad"
+                className={errors.txnLen ? "ring-1 ring-destructive" : ""}
+              />
+              {errors.txnLen && <p className="text-caption text-destructive mt-1">{errors.txnLen}</p>}
             </div>
 
             <ActionButton variant="brand" disabled={creating}>

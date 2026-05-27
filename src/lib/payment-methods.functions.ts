@@ -11,6 +11,7 @@ export type PaymentMethodRow = {
   address: string;
   min_amount: number;
   max_amount: number;
+  txn_id_length: number;
   is_active: boolean;
   sort_order: number;
   created_at: string;
@@ -52,6 +53,7 @@ const baseSchema = z.object({
   address: z.string().trim().min(1, "Address/number is required").max(200, "Max 200 characters"),
   min_amount: z.number({ invalid_type_error: "Enter a valid minimum" }).min(0, "Must be ≥ 0").max(10_000_000),
   max_amount: z.number({ invalid_type_error: "Enter a valid maximum" }).min(0, "Must be ≥ 0").max(10_000_000),
+  txn_id_length: z.number({ invalid_type_error: "Enter a valid length" }).int().min(4, "Min 4").max(32, "Max 32"),
   is_active: z.boolean().optional(),
   sort_order: z.number().int().min(0).max(10_000).optional(),
 });
@@ -62,7 +64,7 @@ const upsertSchema = baseSchema.refine((d) => d.max_amount >= d.min_amount, {
 });
 
 export type PaymentMethodFieldErrors = Partial<
-  Record<"name" | "logo_url" | "address" | "min_amount" | "max_amount", string>
+  Record<"name" | "logo_url" | "address" | "min_amount" | "max_amount" | "txn_id_length", string>
 >;
 
 function flattenFieldErrors(err: z.ZodError): PaymentMethodFieldErrors {
@@ -83,7 +85,7 @@ export const listActivePaymentMethods = createServerFn({ method: "GET" })
     const { supabase } = context;
     const { data, error } = await supabase
       .from("payment_methods")
-      .select("id,name,logo_url,address,min_amount,max_amount,is_active,sort_order,created_at")
+      .select("id,name,logo_url,address,min_amount,max_amount,txn_id_length,is_active,sort_order,created_at")
       .eq("is_active", true)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
@@ -92,6 +94,7 @@ export const listActivePaymentMethods = createServerFn({ method: "GET" })
       ...m,
       min_amount: Number(m.min_amount),
       max_amount: Number(m.max_amount),
+      txn_id_length: Number(m.txn_id_length),
     })) as PaymentMethodRow[];
   });
 
@@ -104,7 +107,7 @@ export const adminListPaymentMethods = createServerFn({ method: "GET" })
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
     const { data, error } = await supabaseAdmin
       .from("payment_methods")
-      .select("id,name,logo_url,address,min_amount,max_amount,is_active,sort_order,created_at")
+      .select("id,name,logo_url,address,min_amount,max_amount,txn_id_length,is_active,sort_order,created_at")
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: false });
     if (error) throw new Error(error.message);
@@ -112,6 +115,7 @@ export const adminListPaymentMethods = createServerFn({ method: "GET" })
       ...m,
       min_amount: Number(m.min_amount),
       max_amount: Number(m.max_amount),
+      txn_id_length: Number(m.txn_id_length),
     })) as PaymentMethodRow[];
   });
 
@@ -203,6 +207,7 @@ export const adminCreatePaymentMethod = createServerFn({ method: "POST" })
         address: parsed.data.address,
         min_amount: parsed.data.min_amount,
         max_amount: parsed.data.max_amount,
+        txn_id_length: parsed.data.txn_id_length,
         is_active: parsed.data.is_active ?? true,
         sort_order: parsed.data.sort_order ?? 0,
         created_by: userId,
@@ -225,6 +230,7 @@ export const adminUpdatePaymentMethod = createServerFn({ method: "POST" })
       address: z.string().trim().min(1).max(200).optional(),
       min_amount: z.number().min(0).max(10_000_000).optional(),
       max_amount: z.number().min(0).max(10_000_000).optional(),
+      txn_id_length: z.number().int().min(4).max(32).optional(),
       is_active: z.boolean().optional(),
       sort_order: z.number().int().min(0).max(10_000).optional(),
     }).parse(input),
@@ -249,4 +255,81 @@ export const adminDeletePaymentMethod = createServerFn({ method: "POST" })
     const { error } = await supabaseAdmin.from("payment_methods").delete().eq("id", data.id);
     if (error) throw new Error(error.message);
     return { success: true };
+  });
+
+// ----- USER: submit verification payment (txn id must be globally unique) -----
+export const submitVerificationPayment = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((input) =>
+    z.object({
+      payment_method_id: z.string().uuid(),
+      txn_id: z.string().trim().min(4).max(32),
+      sender_number: z.string().trim().regex(/^01[3-9]\d{8}$/, "Invalid mobile number"),
+      amount: z.number().min(1).max(10_000_000),
+    }).parse(input),
+  )
+  .handler(async ({ data, context }) => {
+    const { supabase, userId } = context;
+
+    // Fetch the method to know required txn id length
+    const { data: method, error: mErr } = await supabase
+      .from("payment_methods")
+      .select("id,name,txn_id_length,is_active")
+      .eq("id", data.payment_method_id)
+      .maybeSingle();
+    if (mErr) return { success: false as const, error: mErr.message };
+    if (!method || !method.is_active) {
+      return { success: false as const, error: "Payment method not available" };
+    }
+
+    const txn = data.txn_id.toUpperCase();
+    if (txn.length !== Number(method.txn_id_length)) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: `${method.name} Transaction ID must be exactly ${method.txn_id_length} characters`,
+      };
+    }
+    if (!/^[A-Z0-9]+$/.test(txn)) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: "Transaction ID can only contain letters and numbers",
+      };
+    }
+
+    // Uniqueness pre-check (friendly error). Race-safe fallback below.
+    const { data: existing } = await supabase
+      .from("verification_payments")
+      .select("id")
+      .ilike("txn_id", txn)
+      .maybeSingle();
+    if (existing) {
+      return {
+        success: false as const,
+        field: "txn_id" as const,
+        error: "এই Transaction ID আগেই ব্যবহৃত হয়েছে। অনুগ্রহ করে আপনার আসল Transaction ID দিন।",
+      };
+    }
+
+    const { error: insErr } = await supabase.from("verification_payments").insert({
+      user_id: userId,
+      payment_method_id: data.payment_method_id,
+      txn_id: txn,
+      sender_number: data.sender_number,
+      amount: data.amount,
+    });
+    if (insErr) {
+      const msg = insErr.message || "";
+      if (msg.includes("verification_payments_txn_id_unique") || (insErr as any).code === "23505") {
+        return {
+          success: false as const,
+          field: "txn_id" as const,
+          error: "এই Transaction ID আগেই ব্যবহৃত হয়েছে। অনুগ্রহ করে আপনার আসল Transaction ID দিন।",
+        };
+      }
+      return { success: false as const, error: msg };
+    }
+
+    return { success: true as const };
   });

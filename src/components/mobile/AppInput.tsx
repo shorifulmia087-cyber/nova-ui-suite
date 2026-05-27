@@ -26,8 +26,8 @@ export const AppInput = forwardRef<HTMLInputElement, AppInputProps>(
     return (
       <div className={cn("block", containerClassName)}>
         {label && (
-          <label htmlFor={inputId} className="block mb-1.5">
-            <Text variant="label" as="span" className="text-foreground">
+          <label htmlFor={inputId} className="block mb-2">
+            <Text variant="body" as="span" className="text-foreground">
               {label}
             </Text>
           </label>
