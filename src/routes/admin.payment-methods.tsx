@@ -36,6 +36,7 @@ function AdminPaymentMethods() {
   const createFn = useServerFn(adminCreatePaymentMethod);
   const updateFn = useServerFn(adminUpdatePaymentMethod);
   const deleteFn = useServerFn(adminDeletePaymentMethod);
+  const uploadFn = useServerFn(adminUploadPaymentLogo);
 
   const [authorized, setAuthorized] = useState<"checking" | "yes" | "no">("checking");
   const [rows, setRows] = useState<PaymentMethodRow[]>([]);
