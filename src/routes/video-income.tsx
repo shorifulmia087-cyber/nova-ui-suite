@@ -552,24 +552,36 @@ function VideoIncomePage() {
               icon={<Link2 className="h-[18px] w-[18px]" />}
               placeholder="https://youtube.com/watch?v=..."
               value={videoUrl}
-              onChange={(e) => setVideoUrl(e.target.value)}
+              onChange={(e) => {
+                setVideoUrl(e.target.value);
+                clearError("video_url");
+              }}
               disabled={hasPending}
+              error={errors.video_url}
             />
             <FieldInput
               label="YouTube channel name"
               icon={<Youtube className="h-[18px] w-[18px]" />}
               placeholder="Your channel name"
               value={channelName}
-              onChange={(e) => setChannelName(e.target.value)}
+              onChange={(e) => {
+                setChannelName(e.target.value);
+                clearError("channel_name");
+              }}
               disabled={hasPending}
+              error={errors.channel_name}
             />
             <FieldInput
               label="YouTube channel link"
               icon={<Link2 className="h-[18px] w-[18px]" />}
               placeholder="https://youtube.com/@yourchannel"
               value={channelLink}
-              onChange={(e) => setChannelLink(e.target.value)}
+              onChange={(e) => {
+                setChannelLink(e.target.value);
+                clearError("channel_link");
+              }}
               disabled={hasPending}
+              error={errors.channel_link}
             />
           </FieldGroup>
 
@@ -579,20 +591,29 @@ function VideoIncomePage() {
               hint="PNG / JPG · ≤5MB"
               icon={<ImageIcon className="h-5 w-5" />}
               file={logoFile}
-              onChange={setLogoFile}
+              onChange={(f) => {
+                setLogoFile(f);
+                clearError("channel_logo");
+              }}
               disabled={hasPending}
+              error={errors.channel_logo}
             />
             <FileField
               label="Analytics screenshot"
               hint="Show view count"
               icon={<BarChart3 className="h-5 w-5" />}
               file={analyticsFile}
-              onChange={setAnalyticsFile}
+              onChange={(f) => {
+                setAnalyticsFile(f);
+                clearError("analytics");
+              }}
               disabled={hasPending}
+              error={errors.analytics}
             />
           </div>
         </div>
       </section>
+
 
       {/* Sticky CTA */}
       <StickyCta>
