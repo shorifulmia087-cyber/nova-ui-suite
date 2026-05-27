@@ -121,6 +121,22 @@ function VideoIncomePage() {
   const [analyticsFile, setAnalyticsFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
 
+  type FieldKey =
+    | "tier_id"
+    | "video_url"
+    | "channel_name"
+    | "channel_link"
+    | "channel_logo"
+    | "analytics";
+  const [errors, setErrors] = useState<Partial<Record<FieldKey, string>>>({});
+  const clearError = (k: FieldKey) =>
+    setErrors((prev) => {
+      if (!prev[k]) return prev;
+      const next = { ...prev };
+      delete next[k];
+      return next;
+    });
+
   // Default tier = first one once loaded (or pending tier)
   const effectiveTier = useMemo(() => {
     if (selectedTier) return selectedTier;
@@ -133,23 +149,6 @@ function VideoIncomePage() {
   const mutation = useMutation({
     mutationFn: async () => {
       if (!user) throw new Error("Login required");
-
-      // 1. Validate text fields (client-side zod)
-      const parsed = formSchema.safeParse({
-        tier_id: effectiveTier,
-        video_url: videoUrl,
-        channel_name: channelName,
-        channel_link: channelLink,
-      });
-      if (!parsed.success) {
-        throw new Error(parsed.error.issues[0]?.message ?? "Invalid input");
-      }
-
-      // 2. Validate files
-      const e1 = validateFile(logoFile, "Channel logo");
-      if (e1) throw new Error(e1);
-      const e2 = validateFile(analyticsFile, "Analytics screenshot");
-      if (e2) throw new Error(e2);
 
       // 3. Upload images to storage under {userId}/...
       const ts = Date.now();
@@ -171,15 +170,17 @@ function VideoIncomePage() {
           upsert: false,
         });
       if (up2.error) {
-        // best-effort cleanup
         await supabase.storage.from("video-uploads").remove([logoPath]);
         throw new Error(`Analytics upload: ${up2.error.message}`);
       }
 
-      // 4. Server fn (server re-validates with zod + auth)
+      // Server fn (server re-validates with zod + auth + file sniffing)
       return submitFn({
         data: {
-          ...parsed.data,
+          tier_id: effectiveTier,
+          video_url: videoUrl,
+          channel_name: channelName,
+          channel_link: channelLink,
           channel_logo_path: logoPath,
           analytics_path: analyticsPath,
         },
@@ -193,11 +194,16 @@ function VideoIncomePage() {
       setChannelLink("");
       setLogoFile(null);
       setAnalyticsFile(null);
+      setErrors({});
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: "smooth" });
     },
     onError: (err: Error) => {
-      toast.error(err.message || "সাবমিট করা যায়নি");
+      const msg = err.message || "সাবমিট করা যায়নি";
+      // Try to route server-side file errors back to the right field
+      if (/Channel logo/i.test(msg)) setErrors((p) => ({ ...p, channel_logo: msg }));
+      else if (/Analytics/i.test(msg)) setErrors((p) => ({ ...p, analytics: msg }));
+      toast.error(msg);
     },
   });
 
@@ -216,8 +222,35 @@ function VideoIncomePage() {
       window.scrollTo({ top: 0, behavior: "smooth" });
       return;
     }
+
+    // Client-side zod validation -> per-field error map
+    const parsed = formSchema.safeParse({
+      tier_id: effectiveTier,
+      video_url: videoUrl,
+      channel_name: channelName,
+      channel_link: channelLink,
+    });
+    const next: Partial<Record<FieldKey, string>> = {};
+    if (!parsed.success) {
+      for (const issue of parsed.error.issues) {
+        const path = issue.path[0] as FieldKey | undefined;
+        if (path && !next[path]) next[path] = issue.message;
+      }
+    }
+    const e1 = validateFile(logoFile, "Channel logo");
+    if (e1) next.channel_logo = e1;
+    const e2 = validateFile(analyticsFile, "Analytics screenshot");
+    if (e2) next.analytics = e2;
+
+    if (Object.keys(next).length > 0) {
+      setErrors(next);
+      toast.error("ফর্মের ত্রুটি সংশোধন করুন");
+      return;
+    }
+    setErrors({});
     mutation.mutate();
   };
+
 
   /* -------------------------- SUCCESS / STATUS VIEW -------------------------- */
   if (submitted && (hasPending || submissions[0])) {
