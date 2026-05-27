@@ -11,6 +11,7 @@ export type PaymentMethodRow = {
   address: string;
   min_amount: number;
   max_amount: number;
+  txn_id_length: number;
   is_active: boolean;
   sort_order: number;
   created_at: string;
