@@ -1,8 +1,10 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
+import { listActivePaymentMethods, type PaymentMethodRow } from "@/lib/payment-methods.functions";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -48,9 +50,12 @@ const PAYMENT_METHODS = [
 
 function Verify() {
   const navigate = useNavigate();
+  const fetchMethods = useServerFn(listActivePaymentMethods);
   const [step, setStep] = useState<Step>("benefits");
   const [agreed, setAgreed] = useState(false);
-  const [method, setMethod] = useState<string>("bkash");
+  const [methods, setMethods] = useState<PaymentMethodRow[]>([]);
+  const [method, setMethod] = useState<string>("");
+  const [methodsLoading, setMethodsLoading] = useState(false);
   const [txnId, setTxnId] = useState("");
   const [senderNumber, setSenderNumber] = useState("");
 
@@ -58,7 +63,19 @@ function Verify() {
     if (localStorage.getItem("nessVerified") === "1") setStep("verified");
   }, []);
 
-  const canPay = txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
+  useEffect(() => {
+    if (step !== "payment" || methods.length > 0) return;
+    setMethodsLoading(true);
+    fetchMethods()
+      .then((rows) => {
+        setMethods(rows);
+        if (rows.length > 0) setMethod((curr) => curr || rows[0].id);
+      })
+      .catch(() => setMethods([]))
+      .finally(() => setMethodsLoading(false));
+  }, [step]);
+
+  const canPay = !!method && txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
 
   const submitPayment = (e: React.FormEvent) => {
     e.preventDefault();
@@ -115,7 +132,7 @@ function Verify() {
   }
 
   if (step === "payment" || step === "processing") {
-    const selected = PAYMENT_METHODS.find((m) => m.id === method)!;
+    const selected = methods.find((m) => m.id === method);
     return (
       <div>
         <ScreenHeader title="Payment" />
@@ -138,59 +155,69 @@ function Verify() {
             <Heading variant="cardTitle" case="sentence" className="text-foreground">
               Select payment method
             </Heading>
-            <div className="grid grid-cols-3 gap-2">
-              {PAYMENT_METHODS.map((m) => {
-                const active = method === m.id;
-                return (
-                  <button
-                    key={m.id}
-                    type="button"
-                    onClick={() => setMethod(m.id)}
-                    className={`relative rounded-lg p-3 flex flex-col items-center gap-1.5 transition-all active:scale-95 ${
-                      active
-                        ? "ring-2 ring-[color:var(--accent)] bg-background"
-                        : "bg-muted/60"
-                    }`}
-                  >
-                    <span
-                      className="h-9 w-9 rounded-full flex items-center justify-center text-white font-bold text-xs"
-                      style={{ background: m.color }}
+            {methodsLoading ? (
+              <div className="flex items-center justify-center py-6 text-muted-foreground">
+                <Loader2 className="h-4 w-4 animate-spin" />
+              </div>
+            ) : methods.length === 0 ? (
+              <Text variant="caption" className="text-muted-foreground text-center py-3">
+                No payment methods available yet. Please try again later.
+              </Text>
+            ) : (
+              <div className="grid grid-cols-3 gap-2">
+                {methods.map((m) => {
+                  const active = method === m.id;
+                  return (
+                    <button
+                      key={m.id}
+                      type="button"
+                      onClick={() => setMethod(m.id)}
+                      className={`relative rounded-lg p-3 flex flex-col items-center gap-1.5 transition-all active:scale-95 ${
+                        active ? "ring-2 ring-[color:var(--accent)] bg-background" : "bg-muted/60"
+                      }`}
                     >
-                      {m.name[0]}
-                    </span>
-                    <Text variant="label" className="text-foreground leading-none">
-                      {m.name}
-                    </Text>
-                    {active && (
-                      <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center">
-                        <Check className="h-2.5 w-2.5 text-accent-foreground" />
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+                      <img
+                        src={m.logo_url}
+                        alt={m.name}
+                        className="h-9 w-9 rounded-full object-cover bg-background"
+                      />
+                      <Text variant="label" className="text-foreground leading-none text-center line-clamp-1">
+                        {m.name}
+                      </Text>
+                      {active && (
+                        <span className="absolute top-1.5 right-1.5 h-4 w-4 rounded-full bg-[color:var(--accent)] flex items-center justify-center">
+                          <Check className="h-2.5 w-2.5 text-accent-foreground" />
+                        </span>
+                      )}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </Card>
 
           {/* Send instructions */}
+          {selected && (
           <Card className="p-card border-0 bg-muted/40 space-y-2">
             <Text variant="label" className="text-foreground">
               Send ৳{VERIFY_FEE} to this {selected.name} number:
             </Text>
             <div className="flex items-center justify-between rounded-lg bg-background px-3 py-2.5">
               <Text variant="cardTitle" className="tabular-nums text-foreground">
-                {selected.number}
+                {selected.address}
               </Text>
               <Text variant="caption" case="upper" className="text-[color:var(--accent)] font-semibold">
                 Personal
               </Text>
             </div>
             <Text variant="caption" className="text-muted-foreground">
-              After sending, enter the Transaction ID below.
+              Limits: ৳{selected.min_amount} – ৳{selected.max_amount}. After sending, enter the Transaction ID below.
             </Text>
           </Card>
+          )}
 
           {/* Transaction details */}
+          {selected && (
           <Card className="p-card border-0 space-y-3">
             <label className="block">
               <Text variant="label" as="span" className="block mb-1.5 text-foreground">
@@ -216,6 +243,7 @@ function Verify() {
               />
             </label>
           </Card>
+          )}
 
           <div className="grid grid-cols-[auto_1fr] gap-2">
             <button
