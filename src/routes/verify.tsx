@@ -152,21 +152,21 @@ function Verify() {
       <div>
         <ScreenHeader title="Verification" />
         <div className="px-4">
-          <Card className="p-card text-center border-0 bg-gradient-soft">
-            <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--success)]/15 flex items-center justify-center mb-4">
-              <CheckCircle2 className="h-9 w-9 text-[color:var(--success)]" />
+          <Card className="p-card text-center border-0 bg-gradient-soft elevation-2">
+            <div className="mx-auto h-20 w-20 rounded-full bg-[color:var(--success)]/12 flex items-center justify-center mb-4 ring-8 ring-[color:var(--success)]/5">
+              <CheckCircle2 className="h-10 w-10 text-[color:var(--success)]" />
             </div>
             <Heading variant="sectionTitle" case="sentence" className="flex items-center justify-center gap-1.5">
               You're verified
               <ShieldCheck className="h-5 w-5 text-[color:var(--accent)]" />
             </Heading>
-            <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+            <Text variant="bodySecondary" className="mt-1.5 text-muted-foreground">
               Your account is now verified. Enjoy all premium features.
             </Text>
-            <div className="mt-5 grid gap-2">
+            <div className="mt-6 grid gap-2">
               <button
                 onClick={() => navigate({ to: "/profile" })}
-                className="text-button h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition"
+                className="text-button h-12 rounded-lg bg-primary text-primary-foreground elevation-2 hover:elevation-3 active:scale-[0.98] transition-all"
               >
                 Back to profile
               </button>
@@ -179,7 +179,7 @@ function Verify() {
                   setTxnId("");
                   setSenderNumber("");
                 }}
-                className="text-caption h-10 rounded-lg text-muted-foreground"
+                className="text-caption h-10 rounded-lg text-muted-foreground hover:text-foreground transition-colors"
               >
                 Reset (testing)
               </button>
@@ -189,6 +189,7 @@ function Verify() {
       </div>
     );
   }
+
 
   if (step === "payment" || step === "processing") {
     const selected = methods.find((m) => m.id === method);
