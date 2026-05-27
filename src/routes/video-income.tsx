@@ -764,6 +764,7 @@ function FileField({
   file,
   onChange,
   disabled,
+  error,
 }: {
   label: string;
   hint?: string;
@@ -771,6 +772,7 @@ function FileField({
   file: File | null;
   onChange: (f: File | null) => void;
   disabled?: boolean;
+  error?: string;
 }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const preview = file && file.type.startsWith("image/") ? URL.createObjectURL(file) : null;
