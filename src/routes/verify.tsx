@@ -344,12 +344,8 @@ function Verify() {
                         );
                       }}
                       maxLength={selected.txn_id_length}
+                      placeholder="Transaction ID লিখুন"
                       error={txnError || undefined}
-                      hint={
-                        !txnError
-                          ? `${selected.name}-এর Transaction ID ${selected.txn_id_length} ক্যারেক্টারের হবে`
-                          : undefined
-                      }
                       className="tracking-wider"
                     />
                   </div>
