@@ -54,6 +54,7 @@ const PAYMENT_METHODS = [
 function Verify() {
   const navigate = useNavigate();
   const fetchMethods = useServerFn(listActivePaymentMethods);
+  const submitPaymentFn = useServerFn(submitVerificationPayment);
   const [step, setStep] = useState<Step>("benefits");
   const [agreed, setAgreed] = useState(false);
   const [methods, setMethods] = useState<PaymentMethodRow[]>([]);
@@ -61,6 +62,7 @@ function Verify() {
   const [methodsLoading, setMethodsLoading] = useState(false);
   const [txnId, setTxnId] = useState("");
   const [senderNumber, setSenderNumber] = useState("");
+  const [serverTxnError, setServerTxnError] = useState<string>("");
 
   useEffect(() => {
     if (localStorage.getItem("nessVerified") === "1") setStep("verified");
