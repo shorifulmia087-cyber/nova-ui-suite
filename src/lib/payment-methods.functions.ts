@@ -207,6 +207,7 @@ export const adminCreatePaymentMethod = createServerFn({ method: "POST" })
         address: parsed.data.address,
         min_amount: parsed.data.min_amount,
         max_amount: parsed.data.max_amount,
+        txn_id_length: parsed.data.txn_id_length,
         is_active: parsed.data.is_active ?? true,
         sort_order: parsed.data.sort_order ?? 0,
         created_by: userId,
