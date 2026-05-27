@@ -4,7 +4,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
-import { listActivePaymentMethods, type PaymentMethodRow } from "@/lib/payment-methods.functions";
+import { listActivePaymentMethods, submitVerificationPayment, type PaymentMethodRow } from "@/lib/payment-methods.functions";
 import { AppInput } from "@/components/mobile/AppInput";
 import { toast } from "sonner";
 import {
@@ -54,6 +54,7 @@ const PAYMENT_METHODS = [
 function Verify() {
   const navigate = useNavigate();
   const fetchMethods = useServerFn(listActivePaymentMethods);
+  const submitPaymentFn = useServerFn(submitVerificationPayment);
   const [step, setStep] = useState<Step>("benefits");
   const [agreed, setAgreed] = useState(false);
   const [methods, setMethods] = useState<PaymentMethodRow[]>([]);
@@ -61,6 +62,7 @@ function Verify() {
   const [methodsLoading, setMethodsLoading] = useState(false);
   const [txnId, setTxnId] = useState("");
   const [senderNumber, setSenderNumber] = useState("");
+  const [serverTxnError, setServerTxnError] = useState<string>("");
 
   useEffect(() => {
     if (localStorage.getItem("nessVerified") === "1") setStep("verified");
@@ -78,21 +80,31 @@ function Verify() {
       .finally(() => setMethodsLoading(false));
   }, [step]);
 
+  const selectedMethod = methods.find((m) => m.id === method);
+  const requiredLen = selectedMethod?.txn_id_length ?? 0;
+
   const trimmedTxn = txnId.trim();
   const trimmedSender = senderNumber.trim();
-  const txnError = !trimmedTxn
+  const txnFormatError = !trimmedTxn
     ? ""
-    : !/^[A-Z0-9]{8,20}$/.test(trimmedTxn)
-    ? "Transaction ID ৮-২০ অক্ষরের (A-Z, 0-9) হতে হবে"
+    : !selectedMethod
+    ? ""
+    : trimmedTxn.length !== requiredLen
+    ? `${selectedMethod.name}-এর Transaction ID ঠিক ${requiredLen} ক্যারেক্টারের হতে হবে`
+    : !/^[A-Z0-9]+$/.test(trimmedTxn)
+    ? "শুধু A-Z ও 0-9 ব্যবহার করুন"
     : "";
+  const txnError = serverTxnError || txnFormatError;
   const senderError = !trimmedSender
     ? ""
     : !/^01[3-9]\d{8}$/.test(trimmedSender)
     ? "১১ ডিজিটের বৈধ মোবাইল নাম্বার দিন (01XXXXXXXXX)"
     : "";
   const canPay =
-    !!method &&
-    /^[A-Z0-9]{8,20}$/.test(trimmedTxn) &&
+    !!selectedMethod &&
+    requiredLen > 0 &&
+    trimmedTxn.length === requiredLen &&
+    /^[A-Z0-9]+$/.test(trimmedTxn) &&
     /^01[3-9]\d{8}$/.test(trimmedSender);
 
   const copy = (text: string, label: string) => {
@@ -102,15 +114,37 @@ function Verify() {
     );
   };
 
-  const submitPayment = (e: React.FormEvent) => {
+  const submitPayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!canPay) return;
+    if (!canPay || !selectedMethod) return;
+    setServerTxnError("");
     setStep("processing");
-    setTimeout(() => {
+    try {
+      const res = await submitPaymentFn({
+        data: {
+          payment_method_id: selectedMethod.id,
+          txn_id: trimmedTxn,
+          sender_number: trimmedSender,
+          amount: VERIFY_FEE,
+        },
+      });
+      if (!res.success) {
+        if ("field" in res && res.field === "txn_id") {
+          setServerTxnError(res.error);
+          toast.error(res.error);
+        } else {
+          toast.error(("error" in res && res.error) || "ভেরিফিকেশন সম্পূর্ণ করা যায়নি");
+        }
+        setStep("payment");
+        return;
+      }
       localStorage.setItem("nessVerified", "1");
       window.dispatchEvent(new Event("ness:verified"));
       setStep("verified");
-    }, 1400);
+    } catch (err: any) {
+      toast.error(err?.message ?? "সার্ভার এরর। আবার চেষ্টা করুন।");
+      setStep("payment");
+    }
   };
 
   if (step === "verified") {
@@ -300,10 +334,22 @@ function Verify() {
                     <AppInput
                       label="Transaction ID"
                       value={txnId}
-                      onChange={(e) => setTxnId(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20))}
-                      placeholder="যেমন: 9F3A1B2C7D"
+                      onChange={(e) => {
+                        setServerTxnError("");
+                        setTxnId(
+                          e.target.value
+                            .toUpperCase()
+                            .replace(/[^A-Z0-9]/g, "")
+                            .slice(0, selected.txn_id_length),
+                        );
+                      }}
+                      maxLength={selected.txn_id_length}
                       error={txnError || undefined}
-                      hint={!txnError ? `লিমিট: ৳${selected.min_amount} – ৳${selected.max_amount}` : undefined}
+                      hint={
+                        !txnError
+                          ? `${selected.name}-এর Transaction ID ${selected.txn_id_length} ক্যারেক্টারের হবে`
+                          : undefined
+                      }
                       className="tracking-wider"
                     />
                   </div>
