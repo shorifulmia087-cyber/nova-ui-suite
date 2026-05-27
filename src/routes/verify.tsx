@@ -384,28 +384,28 @@ function Verify() {
       <ScreenHeader title="Verification" />
       <div className="px-4 pb-8 space-y-4">
         {/* Hero */}
-        <Card className="p-card text-center border-0 bg-gradient-soft">
-          <div className="mx-auto h-16 w-16 rounded-full bg-[color:var(--accent)]/15 flex items-center justify-center mb-3">
-            <ShieldCheck className="h-9 w-9 text-[color:var(--accent)]" />
+        <Card className="p-card text-center border-0 bg-gradient-soft elevation-2">
+          <div className="mx-auto h-20 w-20 rounded-full bg-[color:var(--accent)]/12 flex items-center justify-center mb-4 ring-8 ring-[color:var(--accent)]/5">
+            <ShieldCheck className="h-10 w-10 text-[color:var(--accent)]" />
           </div>
           <Heading variant="sectionTitle" case="sentence" className="text-foreground">
             Verify your account
           </Heading>
-          <Text variant="bodySecondary" className="mt-1 text-muted-foreground">
+          <Text variant="bodySecondary" className="mt-1.5 text-muted-foreground max-w-xs mx-auto">
             Unlock the full power of Ness with a verified account.
           </Text>
         </Card>
 
         {/* Benefits list */}
-        <Card className="p-card border-0 space-y-1">
-          <Heading variant="cardTitle" case="sentence" className="text-foreground mb-2">
+        <Card className="p-card border-0 space-y-1 elevation-1">
+          <Heading variant="cardTitle" case="sentence" className="text-foreground mb-3">
             What you'll get
           </Heading>
-          <div className="space-y-2.5">
+          <div className="space-y-3">
             {BENEFITS.map(({ title }) => (
               <div key={title} className="flex items-center gap-3">
-                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/15 text-[color:var(--success)] flex items-center justify-center">
-                  <Check className="h-4 w-4" strokeWidth={2} />
+                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/12 text-[color:var(--success)] flex items-center justify-center">
+                  <Check className="h-4 w-4" />
                 </div>
                 <Text variant="label" className="text-foreground leading-tight flex-1">
                   {title}
@@ -413,16 +413,15 @@ function Verify() {
               </div>
             ))}
           </div>
-
         </Card>
 
         {/* Fee notice */}
-        <Card className="p-card border-0 bg-muted/40 flex items-center justify-between">
+        <Card className="p-card border-0 bg-gradient-soft elevation-1 flex items-center justify-between">
           <div>
-            <Text variant="caption" case="upper" className="text-muted-foreground">
+            <Text variant="caption" case="upper" className="text-muted-foreground tracking-widest">
               One-time fee
             </Text>
-            <Heading variant="cardTitle" className="text-foreground">
+            <Heading variant="cardTitle" className="text-foreground tabular-nums mt-0.5">
               ৳{VERIFY_FEE}
             </Heading>
           </div>
@@ -448,8 +447,7 @@ function Verify() {
           type="button"
           onClick={() => setStep("payment")}
           disabled={!agreed}
-          style={agreed ? { animation: "attention-wiggle 1.8s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite, attention-pulse 1.8s ease-in-out infinite" } : undefined}
-          className="text-button w-full h-12 rounded-lg bg-gradient-brand text-primary-foreground shadow-glow active:scale-[0.98] transition disabled:opacity-50 disabled:shadow-none disabled:animate-none inline-flex items-center justify-center gap-2"
+          className="text-button w-full h-12 rounded-lg bg-primary text-primary-foreground elevation-2 hover:elevation-3 active:scale-[0.98] transition-all disabled:opacity-40 disabled:elevation-0 inline-flex items-center justify-center gap-2"
         >
           Continue to payment
           <ArrowRight className="h-4 w-4" />
@@ -458,3 +456,4 @@ function Verify() {
     </div>
   );
 }
+
