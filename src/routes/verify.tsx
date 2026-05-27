@@ -50,15 +50,30 @@ const PAYMENT_METHODS = [
 
 function Verify() {
   const navigate = useNavigate();
+  const fetchMethods = useServerFn(listActivePaymentMethods);
   const [step, setStep] = useState<Step>("benefits");
   const [agreed, setAgreed] = useState(false);
-  const [method, setMethod] = useState<string>("bkash");
+  const [methods, setMethods] = useState<PaymentMethodRow[]>([]);
+  const [method, setMethod] = useState<string>("");
+  const [methodsLoading, setMethodsLoading] = useState(false);
   const [txnId, setTxnId] = useState("");
   const [senderNumber, setSenderNumber] = useState("");
 
   useEffect(() => {
     if (localStorage.getItem("nessVerified") === "1") setStep("verified");
   }, []);
+
+  useEffect(() => {
+    if (step !== "payment" || methods.length > 0) return;
+    setMethodsLoading(true);
+    fetchMethods()
+      .then((rows) => {
+        setMethods(rows);
+        if (rows.length > 0) setMethod((curr) => curr || rows[0].id);
+      })
+      .catch(() => setMethods([]))
+      .finally(() => setMethodsLoading(false));
+  }, [step]);
 
   const canPay = txnId.trim().length >= 6 && senderNumber.trim().length >= 9;
 
