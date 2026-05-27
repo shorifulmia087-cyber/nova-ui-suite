@@ -282,54 +282,30 @@ function Verify() {
                   </li>
                 </ol>
 
-                <div className="pt-1 space-y-3">
                   <div>
-                    <Text variant="label" as="span" className="block mb-1.5 text-foreground">
-                      Sender Number
-                    </Text>
-                    <input
+                    <AppInput
+                      label="Sender Number"
                       value={senderNumber}
                       onChange={(e) => setSenderNumber(e.target.value.replace(/\D/g, "").slice(0, 11))}
                       inputMode="numeric"
                       placeholder="01XXXXXXXXX"
-                      aria-invalid={!!senderError}
-                      className={`text-input w-full h-12 rounded-lg bg-card border border-border px-3 tracking-wider outline-none text-foreground placeholder:text-muted-foreground focus:ring-2 ${
-                        senderError ? "ring-2 ring-[color:var(--destructive)]" : "focus:ring-[color:var(--accent)]"
-                      }`}
+                      error={senderError || undefined}
+                      hint={!senderError ? "যে নাম্বার থেকে পাঠাচ্ছেন সেটি দিন" : undefined}
+                      className="tracking-wider"
                     />
-                    {senderError ? (
-                      <Text variant="caption" className="text-[color:var(--destructive)] mt-1.5 block">
-                        {senderError}
-                      </Text>
-                    ) : (
-                      <Text variant="caption" className="text-muted-foreground mt-1.5 block">
-                        যে নাম্বার থেকে পাঠাচ্ছেন সেটি দিন
-                      </Text>
-                    )}
                   </div>
 
                   <div>
-                    <Text variant="label" as="span" className="block mb-1.5 text-foreground">
-                      Transaction ID
-                    </Text>
-                    <input
+                    <AppInput
+                      label="Transaction ID"
                       value={txnId}
                       onChange={(e) => setTxnId(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20))}
                       placeholder="যেমন: 9F3A1B2C7D"
-                      aria-invalid={!!txnError}
-                      className={`text-input w-full h-12 rounded-lg bg-card border border-border px-3 tracking-wider outline-none text-foreground placeholder:text-muted-foreground focus:ring-2 ${
-                        txnError ? "ring-2 ring-[color:var(--destructive)]" : "focus:ring-[color:var(--accent)]"
-                      }`}
+                      error={txnError || undefined}
+                      hint={!txnError ? `লিমিট: ৳${selected.min_amount} – ৳${selected.max_amount}` : undefined}
+                      className="tracking-wider"
                     />
-                    {txnError ? (
-                      <Text variant="caption" className="text-[color:var(--destructive)] mt-1.5 block">
-                        {txnError}
-                      </Text>
-                    ) : (
-                      <Text variant="caption" className="text-muted-foreground mt-1.5 block">
-                        লিমিট: ৳{selected.min_amount} – ৳{selected.max_amount}
-                      </Text>
-                    )}
+                  </div>
                   </div>
                 </div>
               </Card>
