@@ -77,7 +77,22 @@ function Verify() {
       .finally(() => setMethodsLoading(false));
   }, [step]);
 
-  const canPay = !!method && txnId.trim().length >= 6;
+  const trimmedTxn = txnId.trim();
+  const trimmedSender = senderNumber.trim();
+  const txnError = !trimmedTxn
+    ? ""
+    : !/^[A-Z0-9]{8,20}$/.test(trimmedTxn)
+    ? "Transaction ID ৮-২০ অক্ষরের (A-Z, 0-9) হতে হবে"
+    : "";
+  const senderError = !trimmedSender
+    ? ""
+    : !/^01[3-9]\d{8}$/.test(trimmedSender)
+    ? "১১ ডিজিটের বৈধ মোবাইল নাম্বার দিন (01XXXXXXXXX)"
+    : "";
+  const canPay =
+    !!method &&
+    /^[A-Z0-9]{8,20}$/.test(trimmedTxn) &&
+    /^01[3-9]\d{8}$/.test(trimmedSender);
 
   const copy = (text: string, label: string) => {
     navigator.clipboard?.writeText(text).then(
