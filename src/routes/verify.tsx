@@ -292,7 +292,7 @@ function Verify() {
                       inputMode="numeric"
                       placeholder="01XXXXXXXXX"
                       aria-invalid={!!senderError}
-                      className={`text-input w-full h-12 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 ${
+                      className={`text-input w-full h-12 rounded-lg bg-card border border-border px-3 tracking-wider outline-none text-foreground placeholder:text-muted-foreground focus:ring-2 ${
                         senderError ? "ring-2 ring-[color:var(--destructive)]" : "focus:ring-[color:var(--accent)]"
                       }`}
                     />
@@ -316,7 +316,7 @@ function Verify() {
                       onChange={(e) => setTxnId(e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 20))}
                       placeholder="যেমন: 9F3A1B2C7D"
                       aria-invalid={!!txnError}
-                      className={`text-input w-full h-12 rounded-lg bg-muted px-3 tracking-wider outline-none focus:ring-2 ${
+                      className={`text-input w-full h-12 rounded-lg bg-card border border-border px-3 tracking-wider outline-none text-foreground placeholder:text-muted-foreground focus:ring-2 ${
                         txnError ? "ring-2 ring-[color:var(--destructive)]" : "focus:ring-[color:var(--accent)]"
                       }`}
                     />
