@@ -27,7 +27,7 @@ export const Route = createFileRoute("/admin/payment-methods")({
 const ACCEPTED = ["image/png", "image/jpeg", "image/webp"];
 const MAX_LOGO = 2 * 1024 * 1024; // 2MB
 
-type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max", string>>;
+type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max" | "txnLen", string>>;
 
 function AdminPaymentMethods() {
   const { user, loading: authLoading } = useAuth();
