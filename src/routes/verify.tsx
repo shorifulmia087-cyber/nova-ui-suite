@@ -196,14 +196,6 @@ function Verify() {
 
           {selected && (
             <>
-              {/* Big logo */}
-              <Card className="p-card border-0 bg-gradient-soft flex items-center justify-center py-6">
-                <img
-                  src={selected.logo_url}
-                  alt={selected.name}
-                  className="h-16 object-contain"
-                />
-              </Card>
 
               {/* Amount */}
               <Card className="p-card border-0 text-center">
