@@ -216,14 +216,9 @@ function Verify() {
         <form onSubmit={submitPayment} className="px-4 pb-8 space-y-4">
           {/* Method selection */}
           <Card className="p-card border-0 space-y-3 elevation-1">
-            <div className="flex items-center justify-between">
-              <Heading variant="cardTitle" case="sentence" className="text-foreground">
-                পেমেন্ট মেথড
-              </Heading>
-              <Text variant="caption" className="text-muted-foreground">
-                একটি বেছে নিন
-              </Text>
-            </div>
+            <Heading variant="cardTitle" case="sentence" className="text-foreground">
+              পেমেন্ট মেথড
+            </Heading>
             {methodsLoading ? (
               <div className="flex items-center justify-center py-6 text-muted-foreground">
                 <Loader2 className="h-4 w-4 animate-spin" />
