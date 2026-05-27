@@ -5,6 +5,7 @@ import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
 import { listActivePaymentMethods, type PaymentMethodRow } from "@/lib/payment-methods.functions";
+import { AppInput } from "@/components/mobile/AppInput";
 import { toast } from "sonner";
 import {
   ShieldCheck,
