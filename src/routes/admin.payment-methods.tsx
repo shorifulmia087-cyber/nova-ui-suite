@@ -7,12 +7,12 @@ import { Card, ActionButton } from "@/components/mobile/Primitives";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
-import { supabase } from "@/integrations/supabase/client";
 import {
   adminListPaymentMethods,
   adminCreatePaymentMethod,
   adminUpdatePaymentMethod,
   adminDeletePaymentMethod,
+  adminUploadPaymentLogo,
   type PaymentMethodRow,
 } from "@/lib/payment-methods.functions";
 import { isCurrentUserAdmin } from "@/lib/tasks.functions";
@@ -24,7 +24,7 @@ export const Route = createFileRoute("/admin/payment-methods")({
   component: AdminPaymentMethods,
 });
 
-const ACCEPTED = ["image/png", "image/jpeg", "image/webp", "image/svg+xml"];
+const ACCEPTED = ["image/png", "image/jpeg", "image/webp"];
 const MAX_LOGO = 2 * 1024 * 1024; // 2MB
 
 type FormErrors = Partial<Record<"name" | "logo" | "address" | "min" | "max", string>>;
