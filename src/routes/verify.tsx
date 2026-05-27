@@ -172,11 +172,13 @@ function Verify() {
                         active ? "ring-2 ring-[color:var(--accent)] bg-background" : "bg-muted/60"
                       }`}
                     >
-                      <img
-                        src={m.logo_url}
-                        alt={m.name}
-                        className="h-9 w-9 rounded-full object-cover bg-background"
-                      />
+                      <div className="h-10 w-10 rounded-full bg-white flex items-center justify-center p-1.5 overflow-hidden">
+                        <img
+                          src={m.logo_url}
+                          alt={m.name}
+                          className="max-h-full max-w-full object-contain"
+                        />
+                      </div>
                       <Text variant="label" className="text-foreground leading-none text-center line-clamp-1">
                         {m.name}
                       </Text>
