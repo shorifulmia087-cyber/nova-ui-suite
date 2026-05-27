@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
+import { AppInput } from "@/components/mobile/AppInput";
 import { transactions, type Tx } from "@/lib/mock";
 import { ArrowDownToLine, ArrowUpFromLine, ListChecks, Gift, Sparkles, Search } from "lucide-react";
 import { useMemo, useState } from "react";
