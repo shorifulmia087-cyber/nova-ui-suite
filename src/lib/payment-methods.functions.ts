@@ -64,7 +64,7 @@ const upsertSchema = baseSchema.refine((d) => d.max_amount >= d.min_amount, {
 });
 
 export type PaymentMethodFieldErrors = Partial<
-  Record<"name" | "logo_url" | "address" | "min_amount" | "max_amount", string>
+  Record<"name" | "logo_url" | "address" | "min_amount" | "max_amount" | "txn_id_length", string>
 >;
 
 function flattenFieldErrors(err: z.ZodError): PaymentMethodFieldErrors {
