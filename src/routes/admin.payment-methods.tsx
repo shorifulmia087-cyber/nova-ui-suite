@@ -168,6 +168,7 @@ function AdminPaymentMethods() {
       setAddress("");
       setMinAmt("");
       setMaxAmt("");
+      setTxnLen("10");
       setLogoFile(null);
       setLogoPreview("");
       setErrors({});
