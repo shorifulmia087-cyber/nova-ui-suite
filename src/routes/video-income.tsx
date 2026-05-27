@@ -783,11 +783,13 @@ function FileField({
         type="button"
         onClick={() => !disabled && inputRef.current?.click()}
         disabled={disabled}
+        aria-invalid={!!error}
         className={cn(
           "relative w-full aspect-square rounded-lg overflow-hidden transition-all active:scale-[0.98] text-left group",
           file
             ? "ring-2 ring-accent shadow-glow"
             : "ring-1 ring-dashed ring-slate-300 hover:ring-accent/60 bg-slate-50",
+          error && "ring-2 ring-destructive",
           disabled && "opacity-60 cursor-not-allowed",
         )}
       >
