@@ -230,6 +230,7 @@ export const adminUpdatePaymentMethod = createServerFn({ method: "POST" })
       address: z.string().trim().min(1).max(200).optional(),
       min_amount: z.number().min(0).max(10_000_000).optional(),
       max_amount: z.number().min(0).max(10_000_000).optional(),
+      txn_id_length: z.number().int().min(4).max(32).optional(),
       is_active: z.boolean().optional(),
       sort_order: z.number().int().min(0).max(10_000).optional(),
     }).parse(input),
