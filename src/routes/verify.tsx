@@ -83,7 +83,7 @@ function Verify() {
   const selectedMethod = methods.find((m) => m.id === method);
   const requiredLen = selectedMethod?.txn_id_length ?? 0;
 
-  const trimmedTxn = txnId.trim();
+  const trimmedTxn = txnId.trim().toUpperCase();
   const trimmedSender = senderNumber.trim();
   const txnFormatError = !trimmedTxn
     ? ""
