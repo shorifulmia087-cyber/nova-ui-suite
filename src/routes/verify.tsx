@@ -5,6 +5,7 @@ import { ScreenHeader } from "@/components/mobile/ScreenHeader";
 import { Card } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
 import { listActivePaymentMethods, type PaymentMethodRow } from "@/lib/payment-methods.functions";
+import { toast } from "sonner";
 import {
   ShieldCheck,
   CheckCircle2,
@@ -17,6 +18,7 @@ import {
   Zap,
   Crown,
   Check,
+  Copy,
 } from "lucide-react";
 
 export const Route = createFileRoute("/verify")({
