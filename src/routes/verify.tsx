@@ -404,7 +404,7 @@ function Verify() {
           <div className="space-y-3">
             {BENEFITS.map(({ title }) => (
               <div key={title} className="flex items-center gap-3">
-                <div className="h-7 w-7 shrink-0 rounded-full bg-[color:var(--success)]/12 text-[color:var(--success)] flex items-center justify-center">
+                <div className="relative h-7 w-7 shrink-0 rounded-full bg-gradient-to-br from-[color:var(--success)] to-[color:color-mix(in_oklab,var(--success)_70%,#000)] text-white flex items-center justify-center elevation-1 ring-4 ring-[color:var(--success)]/10">
                   <Check className="h-4 w-4" />
                 </div>
                 <Text variant="label" className="text-foreground leading-tight flex-1">
@@ -412,6 +412,7 @@ function Verify() {
                 </Text>
               </div>
             ))}
+
           </div>
         </Card>
 
