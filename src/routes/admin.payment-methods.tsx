@@ -305,6 +305,18 @@ function AdminPaymentMethods() {
               </div>
             </div>
 
+            <div>
+              <Label>Transaction ID length (characters)</Label>
+              <Input
+                type="number" min="4" max="32" step="1"
+                value={txnLen}
+                onChange={(e) => { setTxnLen(e.target.value); setErrors((p) => ({ ...p, txnLen: undefined })); }}
+                placeholder="e.g. 10 for bKash, 8 for Nagad"
+                className={errors.txnLen ? "ring-1 ring-destructive" : ""}
+              />
+              {errors.txnLen && <p className="text-caption text-destructive mt-1">{errors.txnLen}</p>}
+            </div>
+
             <ActionButton variant="brand" disabled={creating}>
               {creating ? (
                 <span className="inline-flex items-center gap-2">
