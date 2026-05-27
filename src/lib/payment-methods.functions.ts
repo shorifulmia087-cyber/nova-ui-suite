@@ -85,7 +85,7 @@ export const listActivePaymentMethods = createServerFn({ method: "GET" })
     const { supabase } = context;
     const { data, error } = await supabase
       .from("payment_methods")
-      .select("id,name,logo_url,address,min_amount,max_amount,is_active,sort_order,created_at")
+      .select("id,name,logo_url,address,min_amount,max_amount,txn_id_length,is_active,sort_order,created_at")
       .eq("is_active", true)
       .order("sort_order", { ascending: true })
       .order("created_at", { ascending: true });
@@ -94,6 +94,7 @@ export const listActivePaymentMethods = createServerFn({ method: "GET" })
       ...m,
       min_amount: Number(m.min_amount),
       max_amount: Number(m.max_amount),
+      txn_id_length: Number(m.txn_id_length),
     })) as PaymentMethodRow[];
   });
 
