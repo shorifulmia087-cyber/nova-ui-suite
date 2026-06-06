@@ -145,7 +145,7 @@ function Home() {
           ].map(({ to, img, label }) => (
             <Link key={label} to={to} className="group">
               <div className="w-full rounded-lg flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
-                <img src={img} alt={label} className="h-9 w-9 object-contain" />
+                <img src={img} alt={label} className="h-14 w-14 object-contain" />
                 <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
               </div>
             </Link>
