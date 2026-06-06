@@ -157,13 +157,12 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card shadow-none">
+        <div className="liquid-glass rounded-lg p-card [border:none] [box-shadow:none]">
 
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
             </Heading>
-            <div className="mt-2 h-px bg-border/70" />
           </div>
           <div className="mt-3 grid grid-cols-2 gap-2">
             {[
@@ -183,7 +182,7 @@ function Home() {
                 to={to}
                 className="bg-background rounded-lg p-card flex flex-col gap-2 active:scale-[0.98] transition-transform [box-shadow:none] [border:none]"
               >
-                <div className="h-9 w-9 rounded-xl liquid-glass-tile text-[color:var(--accent)] flex items-center justify-center">
+                <div className="h-9 w-9 rounded-xl easy-earning-tile bg-[color:var(--accent)]/10 text-[color:var(--accent)] flex items-center justify-center">
                   <I className="h-[18px] w-[18px]" strokeWidth={2} />
                 </div>
                 <Text variant="button" case="title" className="text-foreground leading-tight">
