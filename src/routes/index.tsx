@@ -130,7 +130,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card border-0 [box-shadow:none]">
+        <div className="liquid-glass rounded-lg p-card [border:none] [box-shadow:none]">
 
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
