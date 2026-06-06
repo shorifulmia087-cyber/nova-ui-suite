@@ -130,12 +130,13 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card shadow-none border-0">
+        <div className="liquid-glass rounded-lg p-card border-0 [box-shadow:none]">
 
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
             </Heading>
+            <div className="mt-2 h-px bg-border/70" />
           </div>
           <div className="mt-3 grid grid-cols-4 gap-2">
           {[
