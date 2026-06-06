@@ -132,7 +132,7 @@ function Home() {
       <div className="px-4 mt-section">
         <div className="bg-white rounded-lg p-card">
 
-          <div>
+          <div className="border-b border-border pb-2">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
             </Heading>
@@ -159,7 +159,7 @@ function Home() {
       <div className="px-4 mt-section">
         <div className="bg-card rounded-lg p-card">
 
-          <div>
+          <div className="border-b border-border pb-2">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Special Income
             </Heading>
