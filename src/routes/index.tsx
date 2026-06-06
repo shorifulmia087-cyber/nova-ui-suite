@@ -128,28 +128,31 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-section">
-        <div>
-          <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
-            Easy Earning
-          </Heading>
+        <div className="liquid-glass rounded-lg p-card shadow-none">
+
+          <div>
+            <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
+              Easy Earning
+            </Heading>
+            <div className="mt-2 h-px bg-border/70" />
+          </div>
           <div className="mt-3 grid grid-cols-4 gap-2">
-            {[
-              { to: "/withdraw", img: iconWithdraw.url, label: "Withdraw" },
-              { to: "/refer", img: iconRefer.url, label: "Refer" },
-              { to: "/tasks", img: iconTask.url, label: "Task" },
-              { to: "/transactions", img: iconHistory.url, label: "History" },
-            ].map(({ to, img, label }) => (
-              <Link key={label} to={to} className="group">
-                <div className="w-full flex flex-col items-center justify-center gap-1.5 py-3 rounded-lg bg-background transition-all active:scale-95 text-foreground">
-                  <img src={img} alt={label} className="h-12 w-12 object-contain" />
-                  <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
-                </div>
-              </Link>
-            ))}
+          {[
+            { to: "/withdraw", img: iconWithdraw.url, label: "Withdraw" },
+            { to: "/refer", img: iconRefer.url, label: "Refer" },
+            { to: "/tasks", img: iconTask.url, label: "Task" },
+            { to: "/transactions", img: iconHistory.url, label: "History" },
+          ].map(({ to, img, label }) => (
+            <Link key={label} to={to} className="group">
+              <div className="w-full rounded-lg flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
+                <img src={img} alt={label} className="h-9 w-9 object-contain" />
+                <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
+              </div>
+            </Link>
+          ))}
           </div>
         </div>
       </div>
-
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-section">
