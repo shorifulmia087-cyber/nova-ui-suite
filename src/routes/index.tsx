@@ -157,7 +157,7 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-section">
-        <div className="liquid-glass rounded-lg p-card [border:none] [box-shadow:none]">
+        <div className="bg-card rounded-lg p-card">
 
           <div>
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
