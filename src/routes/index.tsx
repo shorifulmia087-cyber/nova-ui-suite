@@ -136,7 +136,6 @@ function Home() {
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
               Easy Earning
             </Heading>
-            <div className="mt-2 h-px bg-border/70" />
           </div>
           <div className="mt-3 grid grid-cols-4 gap-2">
           {[
