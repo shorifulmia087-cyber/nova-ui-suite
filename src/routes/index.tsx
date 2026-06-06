@@ -130,7 +130,7 @@ function Home() {
 
       {/* Quick actions — refined card */}
       <div className="px-4 mt-section">
-        <div className="bg-white rounded-lg p-card border border-border shadow-sm">
+        <div className="bg-white rounded-lg p-card shadow-sm">
 
           <div className="border-b border-border pb-2">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
@@ -157,7 +157,7 @@ function Home() {
 
       {/* Earning options — single section, 2 columns */}
       <div className="px-4 mt-section">
-        <div className="bg-card rounded-lg p-card border border-border shadow-sm">
+        <div className="bg-card rounded-lg p-card shadow-sm">
 
           <div className="border-b border-border pb-2">
             <Heading variant="sectionTitle" case="sentence" className="text-foreground leading-tight">
