@@ -284,6 +284,11 @@
     box-shadow: 0 4px 16px -8px rgba(31, 38, 135, 0.12);
   }
 
+  .easy-earning-tile {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
   .liquid-bg {
     background:
       radial-gradient(circle at 18% 12%, rgba(167, 139, 250, 0.55) 0%, transparent 50%),
