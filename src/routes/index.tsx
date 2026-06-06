@@ -140,8 +140,8 @@ function Home() {
               { to: "/transactions", img: iconHistory.url, label: "History" },
             ].map(({ to, img, label }) => (
               <Link key={label} to={to} className="group">
-                <div className="w-full flex flex-col items-center justify-center gap-1.5 py-2 transition-all active:scale-95 text-foreground">
-                  <img src={img} alt={label} className="h-14 w-14 object-contain" />
+                <div className="w-full flex flex-col items-center justify-center gap-1.5 py-3 rounded-lg bg-background transition-all active:scale-95 text-foreground">
+                  <img src={img} alt={label} className="h-12 w-12 object-contain" />
                   <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
                 </div>
               </Link>
