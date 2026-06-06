@@ -204,7 +204,7 @@
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     min-height: 100vh;
-    background: #f8f8f8;
+    background: #ffffff;
     background-attachment: fixed;
   }
   h1, h2, h3, h4, h5, h6 {
