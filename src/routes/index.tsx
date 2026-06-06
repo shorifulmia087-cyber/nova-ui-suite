@@ -4,13 +4,11 @@ import {
   ClipboardList, Gift, ChevronRight, ChevronDown, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight, Plus, Minus, ArrowRight, MoreHorizontal,
 } from "lucide-react";
-import {
-  IconCashBanknote,
-  IconUsersGroup,
-  IconChecklist,
-  IconHistory,
-  IconWallet,
-} from "@tabler/icons-react";
+import { IconWallet } from "@tabler/icons-react";
+import iconWithdraw from "@/assets/icon-withdraw.png.asset.json";
+import iconRefer from "@/assets/icon-refer.png.asset.json";
+import iconTask from "@/assets/icon-task.png.asset.json";
+import iconHistory from "@/assets/icon-history.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
