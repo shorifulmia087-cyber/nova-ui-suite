@@ -4,13 +4,11 @@ import {
   ClipboardList, Gift, ChevronRight, ChevronDown, Eye, EyeOff, TrendingUp, Sparkles,
   PlusCircle, ArrowUpRight, Plus, Minus, ArrowRight, MoreHorizontal,
 } from "lucide-react";
-import {
-  IconCashBanknote,
-  IconUsersGroup,
-  IconChecklist,
-  IconHistory,
-  IconWallet,
-} from "@tabler/icons-react";
+import { IconWallet } from "@tabler/icons-react";
+import iconWithdraw from "@/assets/icon-withdraw.png.asset.json";
+import iconRefer from "@/assets/icon-refer.png.asset.json";
+import iconTask from "@/assets/icon-task.png.asset.json";
+import iconHistory from "@/assets/icon-history.png.asset.json";
 import { useEffect, useRef, useState } from "react";
 import { Card, SectionLabel } from "@/components/mobile/Primitives";
 import { Heading, Text } from "@/lib/typography";
@@ -140,14 +138,14 @@ function Home() {
           </div>
           <div className="mt-3 grid grid-cols-4 gap-2">
           {[
-            { to: "/withdraw", icon: IconCashBanknote, label: "Withdraw" },
-            { to: "/refer", icon: IconUsersGroup, label: "Refer" },
-            { to: "/tasks", icon: IconChecklist, label: "Task" },
-            { to: "/transactions", icon: IconHistory, label: "History" },
-          ].map(({ to, icon: I, label }) => (
+            { to: "/withdraw", img: iconWithdraw.url, label: "Withdraw" },
+            { to: "/refer", img: iconRefer.url, label: "Refer" },
+            { to: "/tasks", img: iconTask.url, label: "Task" },
+            { to: "/transactions", img: iconHistory.url, label: "History" },
+          ].map(({ to, img, label }) => (
             <Link key={label} to={to} className="group">
               <div className="w-full rounded-lg flex flex-col items-center justify-center gap-1.5 py-3 transition-all active:scale-95 liquid-glass-tile text-foreground group-active:brightness-95">
-                <I className="h-[28px] w-[28px] text-primary" stroke={2} />
+                <img src={img} alt={label} className="h-9 w-9 object-contain" />
                 <Text variant="caption" className="text-foreground font-semibold leading-none">{label}</Text>
               </div>
             </Link>
